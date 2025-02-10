@@ -2,14 +2,16 @@ import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
 import 'package:seatsio/seatsio.dart';
 
-class SeatsioDemoPage extends StatefulWidget {
-  SeatsioDemoPage({Key? key}) : super(key: key);
+class SmallTheatrePlayground extends StatefulWidget {
+  final title;
+
+  SmallTheatrePlayground({Key? key, required this.title}) : super(key: key);
 
   @override
-  _SeatsioDemoPageState createState() => _SeatsioDemoPageState();
+  _SmallTheatrePlaygroundState createState() => _SmallTheatrePlaygroundState();
 }
 
-class _SeatsioDemoPageState extends State<SeatsioDemoPage> {
+class _SmallTheatrePlaygroundState extends State<SmallTheatrePlayground> {
   SeatsioWebViewController? _seatsioController;
   final List<String> selectedObjectLabels = ['Try to click a seat'];
 
@@ -42,7 +44,7 @@ class _SeatsioDemoPageState extends State<SeatsioDemoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Seats.io Demo"),
+        title: Text(widget.title),
       ),
       body: Column(
         children: <Widget>[
