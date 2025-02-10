@@ -13,11 +13,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Seatsio Demo',
+      title: 'Seats.io Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Assign Seats Page'),
+      home: MyHomePage(title: 'Seats.io Demo'),
     );
   }
 }
@@ -32,7 +32,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   SeatsioWebViewController? _seatsioController;
-  final List<String> selectedObjectLabels = ['Try to click a seat object'];
+  final List<String> selectedObjectLabels = ['Try to click a seat'];
 
   late final SeatingChartConfig _chartConfig;
 
