@@ -130,3 +130,11 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 ```
+
+## Running the example on macOs
+```
+cd example
+open -a Simulator
+flutter pub get
+flutter run
+```
