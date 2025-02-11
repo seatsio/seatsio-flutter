@@ -38,107 +38,44 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
   String get event;
   SeatsioRegion get region;
 
-  /// Sets the [language] of the designer.
-  /// Currently supported languages are:
-  /// English ('en')
-  /// Spanish ('es')
-  /// French ('fr')
-  /// Portuguese ('pt')
-  /// German ('de').
-  /// For the list of supported languages, check this page.
-  /// https://support.seats.io/en/articles/2074430-translating-embedded-floor-plans-i18n
   String? get language;
-
-  /// Seats supports two types of pricing: simple pricing and multi-level pricing.
-  /// Both are defined using the pricing configuration parameter
-  /// Detail: https://docs.seats.io/docs/renderer/config-pricing/
   BuiltList<PricingForCategory>? get pricing;
 
   @BuiltValueField(wireName: 'priceFormatter', serialize: false)
   Function(num price)? get priceFormatter;
 
-  /// Activates one-click selection mode.
-  /// If you pass in numberOfPlacesToSelect: 3,
-  /// the ticket buyer only needs to click once to select 3 places.
-  /// Previously selected places are deselected automatically.
   int? get numberOfPlacesToSelect;
-
-  /// If set to false,
-  /// objects that don't have pricing information will be rendered as not selectable (i.e. greyed out).
-  /// Defaults to true.
   bool? get objectWithoutPricingSelectable;
-
-  /// If set to false,
-  /// objects that don't have a category will be rendered as not selectable (i.e. greyed out).
-  /// Defaults to true.
   bool? get objectWithoutCategorySelectable;
 
-  /// Render the chart with the specified objects selected (if they are still free).
-  /// Detail: https://docs.seats.io/docs/renderer/config-selectedobjects/
   BuiltList<SelectedObject>? get selectedObjects;
 
-  /// Allows to toggle on or off some features of the cursor tooltip,
-  /// displayed when hovering objects on mouse-input devices like laptops and desktop computers.
-  /// Detail: https://docs.seats.io/docs/renderer/config-objecttooltip/
   ObjectTooltip? get objectTooltip;
 
-  /// https://docs.seats.io/docs/renderer/stylepreset/
-  /// Possible values: 'balance', 'bubblegum', 'flathead', 'bezels', 'leaf'
   String? get themePreset;
 
-  /// https://docs.seats.io/docs/renderer/colorscheme/
-  /// Possible values: 'light', 'dark',
   String? get themeColor;
 
   BuiltMap<String, String>? get messages;
 
   String? get priceLevelsTooltipMessage;
 
-  /// See more: https://docs.seats.io/docs/renderer/config-maxselectedobjects/
   int? get maxSelectedObjects;
-
-  /// If [maxSelectedObjectList] is not null, it replaces [maxSelectedObjectList].
   List<Map<String, dynamic>>? get maxSelectedObjectList;
 
-  /// See more: https://docs.seats.io/docs/renderer/availablecategories/
   BuiltList<String>? get availableCategories;
-
   BuiltList<String>? get unavailableCategories;
-
   BestAvailable? get selectBestAvailable;
-
   bool? get alwaysShowSectionContents;
-
   String? get showSectionContents;
-
-  /// If true, a legend with the category names and colors is rendered at the top of the chart.
-  /// https://docs.seats.io/docs/renderer/config-legend
   bool? get showLegend;
-
   LegendForCategory? get legend;
-
-  /// When zoomed in on a chart with sections,
-  /// a minimap is shown so ticket buyers have a better sense which seats they're looking at.
-  /// You can hide this minimap by passing showMinimap: false.
-  /// https://docs.seats.io/docs/renderer/config-showminimap
   bool? get showMinimap;
-
-  /// Specifies the type of input device to optimize the user interface for. These can either be:
-  /// 'auto': Default. Automatically detects the device main input type
-  /// 'cursor': UI is optimized for a cursor, and touch gestures are mostly ignored.
-  /// 'touch': UI is optimized for touch, with larger buttons and full gesture support.
-  /// https://docs.seats.io/docs/renderer/inputdevice
   String? get inputDevice;
 
-  /// On mobile, when displaying a chart with sections,
-  /// a tooltip is shown at the bottom of the screen with the section name and pricing.
-  /// You can hide this tooltip on mobile by passing showActiveSectionTooltipOnMobile: false.
   @BuiltValueField(wireName: 'showActiveSectionTooltipOnMobile')
   bool? get showActiveSectionTooltip;
 
-  /// On mobile, a view from seat thumbnail is displayed on the top left of the screen.
-  /// Tapping this image will expand the thumbnail.
-  /// You can hide this thumbnail on mobile by passing showViewFromYourSeatOnMobile: false.
   @BuiltValueField(wireName: 'showViewFromYourSeatOnMobile')
   bool? get showViewFromYourSeat;
 
@@ -148,40 +85,22 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
 
   BuiltMap<String, String>? get objectCategories;
 
-  /// This parameter supports three values:
-  /// normal: the default setting. Objects are selectable, and zooming and panning are enabled
-  /// static: objects are not selectable, but zooming and panning is enabled
-  /// print: objects are not selectable and zooming and panning is disabled
-  /// spotlight: shows selected objects while dimming all others. Navigation controls are enabled but interaction is disabled.
-  /// To use spotlight mode, you should set [session] to 'none' and set [holdToken] to null.
-  /// https://docs.seats.io/docs/renderer/config-mode
   String? get mode;
 
-  /// This parameter allows you to override the default seats.io spinner
-  /// that is shown while the floor plan is being loaded.
-  ///  The value can contain (valid) html, like so: "<div class='loader'>Loading...</div>"
-  /// https://docs.seats.io/docs/renderer/config-loading/
   String? get loading;
 
-  /// If [showLoadingAnimation] is false,
-  /// will set [loading] is "<div class='loader'></div>"
   bool get showLoadingAnimation;
 
-  /// https://docs.seats.io/docs/renderer/config-ticketlistings/
   List<TicketListing>? get ticketListings;
 
   bool? get holdOnSelectForGAs;
 
-  /// https://docs.seats.io/docs/renderer/config-holdtoken
   String? get holdToken;
 
-  /// https://docs.seats.io/docs/renderer/config-session
-  /// Possible values: 'continue', 'start', 'manual', 'none' Default: 'none'
   String? get session;
 
   String? get objectLabel;
 
-  /// [objectIcon] must be used with [extraConfig], otherwise it will not take effect.
   String? get objectIcon;
 
   String? get isObjectVisible;
@@ -192,7 +111,6 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
 
   String? get sectionColor;
 
-  /// https://docs.seats.io/docs/renderer/config-extraconfig
   BuiltMap<String, String>? get extraConfig;
 
   bool? get showFullScreenButton;
@@ -256,8 +174,6 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
       ..enableSelectedObjectBookedCallback = false);
   }
 
-  // todo: Miss some key-values
-  /// Convert chart config info to a map
   Map<String, Object?> toMap() {
     final configMap = {
       "workspaceKey": workspaceKey,
