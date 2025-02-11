@@ -41,10 +41,6 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
   @BuiltValueField(wireName: 'event')
   String get eventKey;
 
-  /// I can't find accurate documentation for [chart]
-  /// Maybe this, https://docs.seats.io/docs/embedded-designer/configuration-chartkey/
-  String? get chart;
-
   /// The [region] need to be specified, have four region options:
   /// [region] = 'eu'
   /// [region] = 'na'

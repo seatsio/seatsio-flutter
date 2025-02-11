@@ -92,13 +92,6 @@ class _$SeatingChartConfigSerializer
           specifiedType: const FullType(bool)),
     ];
     Object? value;
-    value = object.chart;
-    if (value != null) {
-      result
-        ..add('chart')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
-    }
     value = object.region;
     if (value != null) {
       result
@@ -434,10 +427,6 @@ class _$SeatingChartConfigSerializer
         case 'event':
           result.eventKey = serializers.deserialize(value,
               specifiedType: const FullType(String))! as String;
-          break;
-        case 'chart':
-          result.chart = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String?;
           break;
         case 'region':
           result.region = serializers.deserialize(value,
@@ -1079,8 +1068,6 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   final String eventKey;
   @override
-  final String? chart;
-  @override
   final String? region;
   @override
   final String? language;
@@ -1210,7 +1197,6 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   _$SeatingChartConfig._(
       {required this.workspaceKey,
       required this.eventKey,
-      this.chart,
       this.region,
       this.language,
       this.pricing,
@@ -1331,7 +1317,6 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     return other is SeatingChartConfig &&
         workspaceKey == other.workspaceKey &&
         eventKey == other.eventKey &&
-        chart == other.chart &&
         region == other.region &&
         language == other.language &&
         pricing == other.pricing &&
@@ -1412,7 +1397,6 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     var _$hash = 0;
     _$hash = $jc(_$hash, workspaceKey.hashCode);
     _$hash = $jc(_$hash, eventKey.hashCode);
-    _$hash = $jc(_$hash, chart.hashCode);
     _$hash = $jc(_$hash, region.hashCode);
     _$hash = $jc(_$hash, language.hashCode);
     _$hash = $jc(_$hash, pricing.hashCode);
@@ -1483,7 +1467,6 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     return (newBuiltValueToStringHelper(r'SeatingChartConfig')
           ..add('workspaceKey', workspaceKey)
           ..add('eventKey', eventKey)
-          ..add('chart', chart)
           ..add('region', region)
           ..add('language', language)
           ..add('pricing', pricing)
@@ -1572,10 +1555,6 @@ class SeatingChartConfigBuilder
   String? _eventKey;
   String? get eventKey => _$this._eventKey;
   set eventKey(String? eventKey) => _$this._eventKey = eventKey;
-
-  String? _chart;
-  String? get chart => _$this._chart;
-  set chart(String? chart) => _$this._chart = chart;
 
   String? _region;
   String? get region => _$this._region;
@@ -1914,7 +1893,6 @@ class SeatingChartConfigBuilder
     if ($v != null) {
       _workspaceKey = $v.workspaceKey;
       _eventKey = $v.eventKey;
-      _chart = $v.chart;
       _region = $v.region;
       _language = $v.language;
       _pricing = $v.pricing?.toBuilder();
@@ -2009,7 +1987,6 @@ class SeatingChartConfigBuilder
                 workspaceKey, r'SeatingChartConfig', 'workspaceKey'),
             eventKey: BuiltValueNullFieldError.checkNotNull(
                 eventKey, r'SeatingChartConfig', 'eventKey'),
-            chart: chart,
             region: region,
             language: language,
             pricing: _pricing?.build(),
