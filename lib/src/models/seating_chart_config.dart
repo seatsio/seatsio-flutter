@@ -60,7 +60,6 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
 
   BuiltList<String>? get availableCategories;
   BuiltList<String>? get unavailableCategories;
-  bool? get alwaysShowSectionContents;
   String? get showSectionContents; // TODO enum this
   bool? get showLegend;
   LegendForCategory? get legend;

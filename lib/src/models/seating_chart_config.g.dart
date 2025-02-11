@@ -180,13 +180,6 @@ class _$SeatingChartConfigSerializer
             specifiedType:
                 const FullType(BuiltList, const [const FullType(String)])));
     }
-    value = object.alwaysShowSectionContents;
-    if (value != null) {
-      result
-        ..add('alwaysShowSectionContents')
-        ..add(
-            serializers.serialize(value, specifiedType: const FullType(bool)));
-    }
     value = object.showSectionContents;
     if (value != null) {
       result
@@ -416,10 +409,6 @@ class _$SeatingChartConfigSerializer
                   specifiedType: const FullType(
                       BuiltList, const [const FullType(String)]))!
               as BuiltList<Object?>);
-          break;
-        case 'alwaysShowSectionContents':
-          result.alwaysShowSectionContents = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool?;
           break;
         case 'showSectionContents':
           result.showSectionContents = serializers.deserialize(value,
@@ -921,8 +910,6 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   final BuiltList<String>? unavailableCategories;
   @override
-  final bool? alwaysShowSectionContents;
-  @override
   final String? showSectionContents;
   @override
   final bool? showLegend;
@@ -1016,7 +1003,6 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       this.maxSelectedObjectList,
       this.availableCategories,
       this.unavailableCategories,
-      this.alwaysShowSectionContents,
       this.showSectionContents,
       this.showLegend,
       this.legend,
@@ -1127,7 +1113,6 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         maxSelectedObjectList == other.maxSelectedObjectList &&
         availableCategories == other.availableCategories &&
         unavailableCategories == other.unavailableCategories &&
-        alwaysShowSectionContents == other.alwaysShowSectionContents &&
         showSectionContents == other.showSectionContents &&
         showLegend == other.showLegend &&
         legend == other.legend &&
@@ -1196,7 +1181,6 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     _$hash = $jc(_$hash, maxSelectedObjectList.hashCode);
     _$hash = $jc(_$hash, availableCategories.hashCode);
     _$hash = $jc(_$hash, unavailableCategories.hashCode);
-    _$hash = $jc(_$hash, alwaysShowSectionContents.hashCode);
     _$hash = $jc(_$hash, showSectionContents.hashCode);
     _$hash = $jc(_$hash, showLegend.hashCode);
     _$hash = $jc(_$hash, legend.hashCode);
@@ -1257,7 +1241,6 @@ class _$SeatingChartConfig extends SeatingChartConfig {
           ..add('maxSelectedObjectList', maxSelectedObjectList)
           ..add('availableCategories', availableCategories)
           ..add('unavailableCategories', unavailableCategories)
-          ..add('alwaysShowSectionContents', alwaysShowSectionContents)
           ..add('showSectionContents', showSectionContents)
           ..add('showLegend', showLegend)
           ..add('legend', legend)
@@ -1397,11 +1380,6 @@ class SeatingChartConfigBuilder
       _$this._unavailableCategories ??= new ListBuilder<String>();
   set unavailableCategories(ListBuilder<String>? unavailableCategories) =>
       _$this._unavailableCategories = unavailableCategories;
-
-  bool? _alwaysShowSectionContents;
-  bool? get alwaysShowSectionContents => _$this._alwaysShowSectionContents;
-  set alwaysShowSectionContents(bool? alwaysShowSectionContents) =>
-      _$this._alwaysShowSectionContents = alwaysShowSectionContents;
 
   String? _showSectionContents;
   String? get showSectionContents => _$this._showSectionContents;
@@ -1624,7 +1602,6 @@ class SeatingChartConfigBuilder
       _maxSelectedObjectList = $v.maxSelectedObjectList;
       _availableCategories = $v.availableCategories?.toBuilder();
       _unavailableCategories = $v.unavailableCategories?.toBuilder();
-      _alwaysShowSectionContents = $v.alwaysShowSectionContents;
       _showSectionContents = $v.showSectionContents;
       _showLegend = $v.showLegend;
       _legend = $v.legend?.toBuilder();
@@ -1709,7 +1686,6 @@ class SeatingChartConfigBuilder
             maxSelectedObjectList: maxSelectedObjectList,
             availableCategories: _availableCategories?.build(),
             unavailableCategories: _unavailableCategories?.build(),
-            alwaysShowSectionContents: alwaysShowSectionContents,
             showSectionContents: showSectionContents,
             showLegend: showLegend,
             legend: _legend?.build(),
