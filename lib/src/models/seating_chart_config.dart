@@ -34,12 +34,7 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
   factory SeatingChartConfig([updates(SeatingChartConfigBuilder b)]) = _$SeatingChartConfig;
 
   String get workspaceKey;
-
-  /// The key of the event for which you want to render the seating chart.
-  /// Either [events] or [event] must be passed in, but not both.
-  /// Currently the Channels functionality is not supported when using multiple events.
-  @BuiltValueField(wireName: 'event')
-  String get eventKey;
+  String get event;
 
   /// The [region] need to be specified, have four region options:
   /// [region] = 'eu'
@@ -245,7 +240,7 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
   factory SeatingChartConfig.init() {
     return SeatingChartConfig((b) => b
       ..workspaceKey = ""
-      ..eventKey = ""
+      ..event = ""
       ..region = 'eu'
       ..language = 'en'
       ..showLoadingAnimation = true
@@ -272,7 +267,7 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
   Map<String, Object?> toMap() {
     final configMap = {
       "workspaceKey": workspaceKey,
-      "event": eventKey,
+      "event": event,
       "region": region ?? "eu",
       "language": language ?? "en",
       "holdToken": holdToken ?? "",

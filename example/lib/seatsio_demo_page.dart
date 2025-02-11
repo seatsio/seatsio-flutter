@@ -23,7 +23,7 @@ class _SmallTheatrePlaygroundState extends State<SmallTheatrePlayground> {
 
     _chartConfig = SeatingChartConfig.init().rebuild((b) => b
       ..workspaceKey = "publicDemoKey"
-      ..eventKey = "smallTheatreEvent2"
+      ..event = "smallTheatreEvent2"
       ..pricing = ListBuilder<PricingForCategory>([
         PricingForCategory(
               (b) => b
