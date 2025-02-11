@@ -33,7 +33,7 @@ class _$SeatingChartConfigSerializer
       Serializers serializers, SeatingChartConfig object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
-      'publicKey',
+      'workspaceKey',
       serializers.serialize(object.workspaceKey,
           specifiedType: const FullType(String)),
       'event',
@@ -427,7 +427,7 @@ class _$SeatingChartConfigSerializer
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
-        case 'publicKey':
+        case 'workspaceKey':
           result.workspaceKey = serializers.deserialize(value,
               specifiedType: const FullType(String))! as String;
           break;

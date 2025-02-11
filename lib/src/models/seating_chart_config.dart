@@ -33,10 +33,6 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
 
   factory SeatingChartConfig([updates(SeatingChartConfigBuilder b)]) = _$SeatingChartConfig;
 
-  /// The workspace key for the workspace in which the chart was created.
-  /// You can find it on your workspace settings page.
-  /// This parameter used to be called [publicKey]
-  @BuiltValueField(wireName: 'publicKey')
   String get workspaceKey;
 
   /// The key of the event for which you want to render the seating chart.
