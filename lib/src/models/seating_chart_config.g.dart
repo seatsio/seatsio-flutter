@@ -18,8 +18,6 @@ Serializer<BestAvailable> _$bestAvailableSerializer =
     new _$BestAvailableSerializer();
 Serializer<SelectionValidator> _$selectionValidatorSerializer =
     new _$SelectionValidatorSerializer();
-Serializer<TicketListing> _$ticketListingSerializer =
-    new _$TicketListingSerializer();
 
 class _$SeatingChartConfigSerializer
     implements StructuredSerializer<SeatingChartConfig> {
@@ -42,9 +40,6 @@ class _$SeatingChartConfigSerializer
       'region',
       serializers.serialize(object.region,
           specifiedType: const FullType(SeatsioRegion)),
-      'showLoadingAnimation',
-      serializers.serialize(object.showLoadingAnimation,
-          specifiedType: const FullType(bool)),
       'enableChartRenderedCallback',
       serializers.serialize(object.enableChartRenderedCallback,
           specifiedType: const FullType(bool)),
@@ -102,6 +97,14 @@ class _$SeatingChartConfigSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.messages;
+    if (value != null) {
+      result
+        ..add('messages')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(BuiltMap,
+                const [const FullType(String), const FullType(String)])));
+    }
     value = object.pricing;
     if (value != null) {
       result
@@ -123,13 +126,6 @@ class _$SeatingChartConfigSerializer
         ..add(
             serializers.serialize(value, specifiedType: const FullType(bool)));
     }
-    value = object.objectWithoutCategorySelectable;
-    if (value != null) {
-      result
-        ..add('objectWithoutCategorySelectable')
-        ..add(
-            serializers.serialize(value, specifiedType: const FullType(bool)));
-    }
     value = object.selectedObjects;
     if (value != null) {
       result
@@ -144,28 +140,6 @@ class _$SeatingChartConfigSerializer
         ..add('objectTooltip')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(ObjectTooltip)));
-    }
-    value = object.themePreset;
-    if (value != null) {
-      result
-        ..add('themePreset')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
-    }
-    value = object.themeColor;
-    if (value != null) {
-      result
-        ..add('themeColor')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
-    }
-    value = object.messages;
-    if (value != null) {
-      result
-        ..add('messages')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(BuiltMap,
-                const [const FullType(String), const FullType(String)])));
     }
     value = object.priceLevelsTooltipMessage;
     if (value != null) {
@@ -205,13 +179,6 @@ class _$SeatingChartConfigSerializer
         ..add(serializers.serialize(value,
             specifiedType:
                 const FullType(BuiltList, const [const FullType(String)])));
-    }
-    value = object.selectBestAvailable;
-    if (value != null) {
-      result
-        ..add('selectBestAvailable')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(BestAvailable)));
     }
     value = object.alwaysShowSectionContents;
     if (value != null) {
@@ -255,17 +222,10 @@ class _$SeatingChartConfigSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    value = object.showActiveSectionTooltip;
+    value = object.showActiveSectionTooltipOnMobile;
     if (value != null) {
       result
         ..add('showActiveSectionTooltipOnMobile')
-        ..add(
-            serializers.serialize(value, specifiedType: const FullType(bool)));
-    }
-    value = object.showViewFromYourSeat;
-    if (value != null) {
-      result
-        ..add('showViewFromYourSeatOnMobile')
         ..add(
             serializers.serialize(value, specifiedType: const FullType(bool)));
     }
@@ -277,43 +237,12 @@ class _$SeatingChartConfigSerializer
             specifiedType: const FullType(
                 BuiltList, const [const FullType(SelectionValidator)])));
     }
-    value = object.categories;
-    if (value != null) {
-      result
-        ..add('categories')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(
-                BuiltList, const [const FullType(SeatsioCategory)])));
-    }
-    value = object.objectCategories;
-    if (value != null) {
-      result
-        ..add('objectCategories')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(BuiltMap,
-                const [const FullType(String), const FullType(String)])));
-    }
     value = object.mode;
     if (value != null) {
       result
         ..add('mode')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
-    }
-    value = object.loading;
-    if (value != null) {
-      result
-        ..add('loading')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
-    }
-    value = object.ticketListings;
-    if (value != null) {
-      result
-        ..add('ticketListings')
-        ..add(serializers.serialize(value,
-            specifiedType:
-                const FullType(List, const [const FullType(TicketListing)])));
     }
     value = object.holdOnSelectForGAs;
     if (value != null) {
@@ -432,6 +361,11 @@ class _$SeatingChartConfigSerializer
           result.language = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
+        case 'messages':
+          result.messages.replace(serializers.deserialize(value,
+              specifiedType: const FullType(BuiltMap,
+                  const [const FullType(String), const FullType(String)]))!);
+          break;
         case 'pricing':
           result.pricing.replace(serializers.deserialize(value,
                   specifiedType: const FullType(
@@ -446,10 +380,6 @@ class _$SeatingChartConfigSerializer
           result.objectWithoutPricingSelectable = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool?;
           break;
-        case 'objectWithoutCategorySelectable':
-          result.objectWithoutCategorySelectable = serializers
-              .deserialize(value, specifiedType: const FullType(bool)) as bool?;
-          break;
         case 'selectedObjects':
           result.selectedObjects.replace(serializers.deserialize(value,
                   specifiedType: const FullType(
@@ -459,19 +389,6 @@ class _$SeatingChartConfigSerializer
         case 'objectTooltip':
           result.objectTooltip.replace(serializers.deserialize(value,
               specifiedType: const FullType(ObjectTooltip))! as ObjectTooltip);
-          break;
-        case 'themePreset':
-          result.themePreset = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String?;
-          break;
-        case 'themeColor':
-          result.themeColor = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String?;
-          break;
-        case 'messages':
-          result.messages.replace(serializers.deserialize(value,
-              specifiedType: const FullType(BuiltMap,
-                  const [const FullType(String), const FullType(String)]))!);
           break;
         case 'priceLevelsTooltipMessage':
           result.priceLevelsTooltipMessage = serializers.deserialize(value,
@@ -500,10 +417,6 @@ class _$SeatingChartConfigSerializer
                       BuiltList, const [const FullType(String)]))!
               as BuiltList<Object?>);
           break;
-        case 'selectBestAvailable':
-          result.selectBestAvailable.replace(serializers.deserialize(value,
-              specifiedType: const FullType(BestAvailable))! as BestAvailable);
-          break;
         case 'alwaysShowSectionContents':
           result.alwaysShowSectionContents = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool?;
@@ -530,12 +443,8 @@ class _$SeatingChartConfigSerializer
               specifiedType: const FullType(String)) as String?;
           break;
         case 'showActiveSectionTooltipOnMobile':
-          result.showActiveSectionTooltip = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool?;
-          break;
-        case 'showViewFromYourSeatOnMobile':
-          result.showViewFromYourSeat = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool?;
+          result.showActiveSectionTooltipOnMobile = serializers
+              .deserialize(value, specifiedType: const FullType(bool)) as bool?;
           break;
         case 'selectionValidators':
           result.selectionValidators.replace(serializers.deserialize(value,
@@ -543,34 +452,9 @@ class _$SeatingChartConfigSerializer
                       BuiltList, const [const FullType(SelectionValidator)]))!
               as BuiltList<Object?>);
           break;
-        case 'categories':
-          result.categories.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      BuiltList, const [const FullType(SeatsioCategory)]))!
-              as BuiltList<Object?>);
-          break;
-        case 'objectCategories':
-          result.objectCategories.replace(serializers.deserialize(value,
-              specifiedType: const FullType(BuiltMap,
-                  const [const FullType(String), const FullType(String)]))!);
-          break;
         case 'mode':
           result.mode = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
-          break;
-        case 'loading':
-          result.loading = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String?;
-          break;
-        case 'showLoadingAnimation':
-          result.showLoadingAnimation = serializers.deserialize(value,
-              specifiedType: const FullType(bool))! as bool;
-          break;
-        case 'ticketListings':
-          result.ticketListings = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      List, const [const FullType(TicketListing)]))
-              as List<TicketListing>?;
           break;
         case 'holdOnSelectForGAs':
           result.holdOnSelectForGAs = serializers.deserialize(value,
@@ -1003,61 +887,6 @@ class _$SelectionValidatorSerializer
   }
 }
 
-class _$TicketListingSerializer implements StructuredSerializer<TicketListing> {
-  @override
-  final Iterable<Type> types = const [TicketListing, _$TicketListing];
-  @override
-  final String wireName = 'TicketListing';
-
-  @override
-  Iterable<Object?> serialize(Serializers serializers, TicketListing object,
-      {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object?>[
-      'section',
-      serializers.serialize(object.section,
-          specifiedType: const FullType(String)),
-      'quantity',
-      serializers.serialize(object.quantity,
-          specifiedType: const FullType(int)),
-      'price',
-      serializers.serialize(object.price,
-          specifiedType: const FullType(double)),
-    ];
-
-    return result;
-  }
-
-  @override
-  TicketListing deserialize(
-      Serializers serializers, Iterable<Object?> serialized,
-      {FullType specifiedType = FullType.unspecified}) {
-    final result = new TicketListingBuilder();
-
-    final iterator = serialized.iterator;
-    while (iterator.moveNext()) {
-      final key = iterator.current! as String;
-      iterator.moveNext();
-      final Object? value = iterator.current;
-      switch (key) {
-        case 'section':
-          result.section = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
-          break;
-        case 'quantity':
-          result.quantity = serializers.deserialize(value,
-              specifiedType: const FullType(int))! as int;
-          break;
-        case 'price':
-          result.price = serializers.deserialize(value,
-              specifiedType: const FullType(double))! as double;
-          break;
-      }
-    }
-
-    return result.build();
-  }
-}
-
 class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   final String workspaceKey;
@@ -1068,6 +897,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   final String? language;
   @override
+  final BuiltMap<String, String>? messages;
+  @override
   final BuiltList<PricingForCategory>? pricing;
   @override
   final Function(num price)? priceFormatter;
@@ -1076,17 +907,9 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   final bool? objectWithoutPricingSelectable;
   @override
-  final bool? objectWithoutCategorySelectable;
-  @override
   final BuiltList<SelectedObject>? selectedObjects;
   @override
   final ObjectTooltip? objectTooltip;
-  @override
-  final String? themePreset;
-  @override
-  final String? themeColor;
-  @override
-  final BuiltMap<String, String>? messages;
   @override
   final String? priceLevelsTooltipMessage;
   @override
@@ -1097,8 +920,6 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   final BuiltList<String>? availableCategories;
   @override
   final BuiltList<String>? unavailableCategories;
-  @override
-  final BestAvailable? selectBestAvailable;
   @override
   final bool? alwaysShowSectionContents;
   @override
@@ -1112,23 +933,11 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   final String? inputDevice;
   @override
-  final bool? showActiveSectionTooltip;
-  @override
-  final bool? showViewFromYourSeat;
+  final bool? showActiveSectionTooltipOnMobile;
   @override
   final BuiltList<SelectionValidator>? selectionValidators;
   @override
-  final BuiltList<SeatsioCategory>? categories;
-  @override
-  final BuiltMap<String, String>? objectCategories;
-  @override
   final String? mode;
-  @override
-  final String? loading;
-  @override
-  final bool showLoadingAnimation;
-  @override
-  final List<TicketListing>? ticketListings;
   @override
   final bool? holdOnSelectForGAs;
   @override
@@ -1195,37 +1004,27 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       required this.event,
       required this.region,
       this.language,
+      this.messages,
       this.pricing,
       this.priceFormatter,
       this.numberOfPlacesToSelect,
       this.objectWithoutPricingSelectable,
-      this.objectWithoutCategorySelectable,
       this.selectedObjects,
       this.objectTooltip,
-      this.themePreset,
-      this.themeColor,
-      this.messages,
       this.priceLevelsTooltipMessage,
       this.maxSelectedObjects,
       this.maxSelectedObjectList,
       this.availableCategories,
       this.unavailableCategories,
-      this.selectBestAvailable,
       this.alwaysShowSectionContents,
       this.showSectionContents,
       this.showLegend,
       this.legend,
       this.showMinimap,
       this.inputDevice,
-      this.showActiveSectionTooltip,
-      this.showViewFromYourSeat,
+      this.showActiveSectionTooltipOnMobile,
       this.selectionValidators,
-      this.categories,
-      this.objectCategories,
       this.mode,
-      this.loading,
-      required this.showLoadingAnimation,
-      this.ticketListings,
       this.holdOnSelectForGAs,
       this.holdToken,
       this.session,
@@ -1261,8 +1060,6 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         event, r'SeatingChartConfig', 'event');
     BuiltValueNullFieldError.checkNotNull(
         region, r'SeatingChartConfig', 'region');
-    BuiltValueNullFieldError.checkNotNull(
-        showLoadingAnimation, r'SeatingChartConfig', 'showLoadingAnimation');
     BuiltValueNullFieldError.checkNotNull(enableChartRenderedCallback,
         r'SeatingChartConfig', 'enableChartRenderedCallback');
     BuiltValueNullFieldError.checkNotNull(enableChartRenderingFailedCallback,
@@ -1317,39 +1114,29 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         event == other.event &&
         region == other.region &&
         language == other.language &&
+        messages == other.messages &&
         pricing == other.pricing &&
         priceFormatter == _$dynamicOther.priceFormatter &&
         numberOfPlacesToSelect == other.numberOfPlacesToSelect &&
         objectWithoutPricingSelectable ==
             other.objectWithoutPricingSelectable &&
-        objectWithoutCategorySelectable ==
-            other.objectWithoutCategorySelectable &&
         selectedObjects == other.selectedObjects &&
         objectTooltip == other.objectTooltip &&
-        themePreset == other.themePreset &&
-        themeColor == other.themeColor &&
-        messages == other.messages &&
         priceLevelsTooltipMessage == other.priceLevelsTooltipMessage &&
         maxSelectedObjects == other.maxSelectedObjects &&
         maxSelectedObjectList == other.maxSelectedObjectList &&
         availableCategories == other.availableCategories &&
         unavailableCategories == other.unavailableCategories &&
-        selectBestAvailable == other.selectBestAvailable &&
         alwaysShowSectionContents == other.alwaysShowSectionContents &&
         showSectionContents == other.showSectionContents &&
         showLegend == other.showLegend &&
         legend == other.legend &&
         showMinimap == other.showMinimap &&
         inputDevice == other.inputDevice &&
-        showActiveSectionTooltip == other.showActiveSectionTooltip &&
-        showViewFromYourSeat == other.showViewFromYourSeat &&
+        showActiveSectionTooltipOnMobile ==
+            other.showActiveSectionTooltipOnMobile &&
         selectionValidators == other.selectionValidators &&
-        categories == other.categories &&
-        objectCategories == other.objectCategories &&
         mode == other.mode &&
-        loading == other.loading &&
-        showLoadingAnimation == other.showLoadingAnimation &&
-        ticketListings == other.ticketListings &&
         holdOnSelectForGAs == other.holdOnSelectForGAs &&
         holdToken == other.holdToken &&
         session == other.session &&
@@ -1397,37 +1184,27 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     _$hash = $jc(_$hash, event.hashCode);
     _$hash = $jc(_$hash, region.hashCode);
     _$hash = $jc(_$hash, language.hashCode);
+    _$hash = $jc(_$hash, messages.hashCode);
     _$hash = $jc(_$hash, pricing.hashCode);
     _$hash = $jc(_$hash, priceFormatter.hashCode);
     _$hash = $jc(_$hash, numberOfPlacesToSelect.hashCode);
     _$hash = $jc(_$hash, objectWithoutPricingSelectable.hashCode);
-    _$hash = $jc(_$hash, objectWithoutCategorySelectable.hashCode);
     _$hash = $jc(_$hash, selectedObjects.hashCode);
     _$hash = $jc(_$hash, objectTooltip.hashCode);
-    _$hash = $jc(_$hash, themePreset.hashCode);
-    _$hash = $jc(_$hash, themeColor.hashCode);
-    _$hash = $jc(_$hash, messages.hashCode);
     _$hash = $jc(_$hash, priceLevelsTooltipMessage.hashCode);
     _$hash = $jc(_$hash, maxSelectedObjects.hashCode);
     _$hash = $jc(_$hash, maxSelectedObjectList.hashCode);
     _$hash = $jc(_$hash, availableCategories.hashCode);
     _$hash = $jc(_$hash, unavailableCategories.hashCode);
-    _$hash = $jc(_$hash, selectBestAvailable.hashCode);
     _$hash = $jc(_$hash, alwaysShowSectionContents.hashCode);
     _$hash = $jc(_$hash, showSectionContents.hashCode);
     _$hash = $jc(_$hash, showLegend.hashCode);
     _$hash = $jc(_$hash, legend.hashCode);
     _$hash = $jc(_$hash, showMinimap.hashCode);
     _$hash = $jc(_$hash, inputDevice.hashCode);
-    _$hash = $jc(_$hash, showActiveSectionTooltip.hashCode);
-    _$hash = $jc(_$hash, showViewFromYourSeat.hashCode);
+    _$hash = $jc(_$hash, showActiveSectionTooltipOnMobile.hashCode);
     _$hash = $jc(_$hash, selectionValidators.hashCode);
-    _$hash = $jc(_$hash, categories.hashCode);
-    _$hash = $jc(_$hash, objectCategories.hashCode);
     _$hash = $jc(_$hash, mode.hashCode);
-    _$hash = $jc(_$hash, loading.hashCode);
-    _$hash = $jc(_$hash, showLoadingAnimation.hashCode);
-    _$hash = $jc(_$hash, ticketListings.hashCode);
     _$hash = $jc(_$hash, holdOnSelectForGAs.hashCode);
     _$hash = $jc(_$hash, holdToken.hashCode);
     _$hash = $jc(_$hash, session.hashCode);
@@ -1467,39 +1244,29 @@ class _$SeatingChartConfig extends SeatingChartConfig {
           ..add('event', event)
           ..add('region', region)
           ..add('language', language)
+          ..add('messages', messages)
           ..add('pricing', pricing)
           ..add('priceFormatter', priceFormatter)
           ..add('numberOfPlacesToSelect', numberOfPlacesToSelect)
           ..add(
               'objectWithoutPricingSelectable', objectWithoutPricingSelectable)
-          ..add('objectWithoutCategorySelectable',
-              objectWithoutCategorySelectable)
           ..add('selectedObjects', selectedObjects)
           ..add('objectTooltip', objectTooltip)
-          ..add('themePreset', themePreset)
-          ..add('themeColor', themeColor)
-          ..add('messages', messages)
           ..add('priceLevelsTooltipMessage', priceLevelsTooltipMessage)
           ..add('maxSelectedObjects', maxSelectedObjects)
           ..add('maxSelectedObjectList', maxSelectedObjectList)
           ..add('availableCategories', availableCategories)
           ..add('unavailableCategories', unavailableCategories)
-          ..add('selectBestAvailable', selectBestAvailable)
           ..add('alwaysShowSectionContents', alwaysShowSectionContents)
           ..add('showSectionContents', showSectionContents)
           ..add('showLegend', showLegend)
           ..add('legend', legend)
           ..add('showMinimap', showMinimap)
           ..add('inputDevice', inputDevice)
-          ..add('showActiveSectionTooltip', showActiveSectionTooltip)
-          ..add('showViewFromYourSeat', showViewFromYourSeat)
+          ..add('showActiveSectionTooltipOnMobile',
+              showActiveSectionTooltipOnMobile)
           ..add('selectionValidators', selectionValidators)
-          ..add('categories', categories)
-          ..add('objectCategories', objectCategories)
           ..add('mode', mode)
-          ..add('loading', loading)
-          ..add('showLoadingAnimation', showLoadingAnimation)
-          ..add('ticketListings', ticketListings)
           ..add('holdOnSelectForGAs', holdOnSelectForGAs)
           ..add('holdToken', holdToken)
           ..add('session', session)
@@ -1562,6 +1329,12 @@ class SeatingChartConfigBuilder
   String? get language => _$this._language;
   set language(String? language) => _$this._language = language;
 
+  MapBuilder<String, String>? _messages;
+  MapBuilder<String, String> get messages =>
+      _$this._messages ??= new MapBuilder<String, String>();
+  set messages(MapBuilder<String, String>? messages) =>
+      _$this._messages = messages;
+
   ListBuilder<PricingForCategory>? _pricing;
   ListBuilder<PricingForCategory> get pricing =>
       _$this._pricing ??= new ListBuilder<PricingForCategory>();
@@ -1584,12 +1357,6 @@ class SeatingChartConfigBuilder
   set objectWithoutPricingSelectable(bool? objectWithoutPricingSelectable) =>
       _$this._objectWithoutPricingSelectable = objectWithoutPricingSelectable;
 
-  bool? _objectWithoutCategorySelectable;
-  bool? get objectWithoutCategorySelectable =>
-      _$this._objectWithoutCategorySelectable;
-  set objectWithoutCategorySelectable(bool? objectWithoutCategorySelectable) =>
-      _$this._objectWithoutCategorySelectable = objectWithoutCategorySelectable;
-
   ListBuilder<SelectedObject>? _selectedObjects;
   ListBuilder<SelectedObject> get selectedObjects =>
       _$this._selectedObjects ??= new ListBuilder<SelectedObject>();
@@ -1601,20 +1368,6 @@ class SeatingChartConfigBuilder
       _$this._objectTooltip ??= new ObjectTooltipBuilder();
   set objectTooltip(ObjectTooltipBuilder? objectTooltip) =>
       _$this._objectTooltip = objectTooltip;
-
-  String? _themePreset;
-  String? get themePreset => _$this._themePreset;
-  set themePreset(String? themePreset) => _$this._themePreset = themePreset;
-
-  String? _themeColor;
-  String? get themeColor => _$this._themeColor;
-  set themeColor(String? themeColor) => _$this._themeColor = themeColor;
-
-  MapBuilder<String, String>? _messages;
-  MapBuilder<String, String> get messages =>
-      _$this._messages ??= new MapBuilder<String, String>();
-  set messages(MapBuilder<String, String>? messages) =>
-      _$this._messages = messages;
 
   String? _priceLevelsTooltipMessage;
   String? get priceLevelsTooltipMessage => _$this._priceLevelsTooltipMessage;
@@ -1645,12 +1398,6 @@ class SeatingChartConfigBuilder
   set unavailableCategories(ListBuilder<String>? unavailableCategories) =>
       _$this._unavailableCategories = unavailableCategories;
 
-  BestAvailableBuilder? _selectBestAvailable;
-  BestAvailableBuilder get selectBestAvailable =>
-      _$this._selectBestAvailable ??= new BestAvailableBuilder();
-  set selectBestAvailable(BestAvailableBuilder? selectBestAvailable) =>
-      _$this._selectBestAvailable = selectBestAvailable;
-
   bool? _alwaysShowSectionContents;
   bool? get alwaysShowSectionContents => _$this._alwaysShowSectionContents;
   set alwaysShowSectionContents(bool? alwaysShowSectionContents) =>
@@ -1678,15 +1425,13 @@ class SeatingChartConfigBuilder
   String? get inputDevice => _$this._inputDevice;
   set inputDevice(String? inputDevice) => _$this._inputDevice = inputDevice;
 
-  bool? _showActiveSectionTooltip;
-  bool? get showActiveSectionTooltip => _$this._showActiveSectionTooltip;
-  set showActiveSectionTooltip(bool? showActiveSectionTooltip) =>
-      _$this._showActiveSectionTooltip = showActiveSectionTooltip;
-
-  bool? _showViewFromYourSeat;
-  bool? get showViewFromYourSeat => _$this._showViewFromYourSeat;
-  set showViewFromYourSeat(bool? showViewFromYourSeat) =>
-      _$this._showViewFromYourSeat = showViewFromYourSeat;
+  bool? _showActiveSectionTooltipOnMobile;
+  bool? get showActiveSectionTooltipOnMobile =>
+      _$this._showActiveSectionTooltipOnMobile;
+  set showActiveSectionTooltipOnMobile(
+          bool? showActiveSectionTooltipOnMobile) =>
+      _$this._showActiveSectionTooltipOnMobile =
+          showActiveSectionTooltipOnMobile;
 
   ListBuilder<SelectionValidator>? _selectionValidators;
   ListBuilder<SelectionValidator> get selectionValidators =>
@@ -1695,35 +1440,9 @@ class SeatingChartConfigBuilder
           ListBuilder<SelectionValidator>? selectionValidators) =>
       _$this._selectionValidators = selectionValidators;
 
-  ListBuilder<SeatsioCategory>? _categories;
-  ListBuilder<SeatsioCategory> get categories =>
-      _$this._categories ??= new ListBuilder<SeatsioCategory>();
-  set categories(ListBuilder<SeatsioCategory>? categories) =>
-      _$this._categories = categories;
-
-  MapBuilder<String, String>? _objectCategories;
-  MapBuilder<String, String> get objectCategories =>
-      _$this._objectCategories ??= new MapBuilder<String, String>();
-  set objectCategories(MapBuilder<String, String>? objectCategories) =>
-      _$this._objectCategories = objectCategories;
-
   String? _mode;
   String? get mode => _$this._mode;
   set mode(String? mode) => _$this._mode = mode;
-
-  String? _loading;
-  String? get loading => _$this._loading;
-  set loading(String? loading) => _$this._loading = loading;
-
-  bool? _showLoadingAnimation;
-  bool? get showLoadingAnimation => _$this._showLoadingAnimation;
-  set showLoadingAnimation(bool? showLoadingAnimation) =>
-      _$this._showLoadingAnimation = showLoadingAnimation;
-
-  List<TicketListing>? _ticketListings;
-  List<TicketListing>? get ticketListings => _$this._ticketListings;
-  set ticketListings(List<TicketListing>? ticketListings) =>
-      _$this._ticketListings = ticketListings;
 
   bool? _holdOnSelectForGAs;
   bool? get holdOnSelectForGAs => _$this._holdOnSelectForGAs;
@@ -1893,37 +1612,27 @@ class SeatingChartConfigBuilder
       _event = $v.event;
       _region = $v.region;
       _language = $v.language;
+      _messages = $v.messages?.toBuilder();
       _pricing = $v.pricing?.toBuilder();
       _priceFormatter = $v.priceFormatter;
       _numberOfPlacesToSelect = $v.numberOfPlacesToSelect;
       _objectWithoutPricingSelectable = $v.objectWithoutPricingSelectable;
-      _objectWithoutCategorySelectable = $v.objectWithoutCategorySelectable;
       _selectedObjects = $v.selectedObjects?.toBuilder();
       _objectTooltip = $v.objectTooltip?.toBuilder();
-      _themePreset = $v.themePreset;
-      _themeColor = $v.themeColor;
-      _messages = $v.messages?.toBuilder();
       _priceLevelsTooltipMessage = $v.priceLevelsTooltipMessage;
       _maxSelectedObjects = $v.maxSelectedObjects;
       _maxSelectedObjectList = $v.maxSelectedObjectList;
       _availableCategories = $v.availableCategories?.toBuilder();
       _unavailableCategories = $v.unavailableCategories?.toBuilder();
-      _selectBestAvailable = $v.selectBestAvailable?.toBuilder();
       _alwaysShowSectionContents = $v.alwaysShowSectionContents;
       _showSectionContents = $v.showSectionContents;
       _showLegend = $v.showLegend;
       _legend = $v.legend?.toBuilder();
       _showMinimap = $v.showMinimap;
       _inputDevice = $v.inputDevice;
-      _showActiveSectionTooltip = $v.showActiveSectionTooltip;
-      _showViewFromYourSeat = $v.showViewFromYourSeat;
+      _showActiveSectionTooltipOnMobile = $v.showActiveSectionTooltipOnMobile;
       _selectionValidators = $v.selectionValidators?.toBuilder();
-      _categories = $v.categories?.toBuilder();
-      _objectCategories = $v.objectCategories?.toBuilder();
       _mode = $v.mode;
-      _loading = $v.loading;
-      _showLoadingAnimation = $v.showLoadingAnimation;
-      _ticketListings = $v.ticketListings;
       _holdOnSelectForGAs = $v.holdOnSelectForGAs;
       _holdToken = $v.holdToken;
       _session = $v.session;
@@ -1988,40 +1697,27 @@ class SeatingChartConfigBuilder
             region: BuiltValueNullFieldError.checkNotNull(
                 region, r'SeatingChartConfig', 'region'),
             language: language,
+            messages: _messages?.build(),
             pricing: _pricing?.build(),
             priceFormatter: priceFormatter,
             numberOfPlacesToSelect: numberOfPlacesToSelect,
             objectWithoutPricingSelectable: objectWithoutPricingSelectable,
-            objectWithoutCategorySelectable: objectWithoutCategorySelectable,
             selectedObjects: _selectedObjects?.build(),
             objectTooltip: _objectTooltip?.build(),
-            themePreset: themePreset,
-            themeColor: themeColor,
-            messages: _messages?.build(),
             priceLevelsTooltipMessage: priceLevelsTooltipMessage,
             maxSelectedObjects: maxSelectedObjects,
             maxSelectedObjectList: maxSelectedObjectList,
             availableCategories: _availableCategories?.build(),
             unavailableCategories: _unavailableCategories?.build(),
-            selectBestAvailable: _selectBestAvailable?.build(),
             alwaysShowSectionContents: alwaysShowSectionContents,
             showSectionContents: showSectionContents,
             showLegend: showLegend,
             legend: _legend?.build(),
             showMinimap: showMinimap,
             inputDevice: inputDevice,
-            showActiveSectionTooltip: showActiveSectionTooltip,
-            showViewFromYourSeat: showViewFromYourSeat,
+            showActiveSectionTooltipOnMobile: showActiveSectionTooltipOnMobile,
             selectionValidators: _selectionValidators?.build(),
-            categories: _categories?.build(),
-            objectCategories: _objectCategories?.build(),
             mode: mode,
-            loading: loading,
-            showLoadingAnimation: BuiltValueNullFieldError.checkNotNull(
-                showLoadingAnimation,
-                r'SeatingChartConfig',
-                'showLoadingAnimation'),
-            ticketListings: ticketListings,
             holdOnSelectForGAs: holdOnSelectForGAs,
             holdToken: holdToken,
             session: session,
@@ -2112,6 +1808,8 @@ class SeatingChartConfigBuilder
     } catch (_) {
       late String _$failedField;
       try {
+        _$failedField = 'messages';
+        _messages?.build();
         _$failedField = 'pricing';
         _pricing?.build();
 
@@ -2120,25 +1818,16 @@ class SeatingChartConfigBuilder
         _$failedField = 'objectTooltip';
         _objectTooltip?.build();
 
-        _$failedField = 'messages';
-        _messages?.build();
-
         _$failedField = 'availableCategories';
         _availableCategories?.build();
         _$failedField = 'unavailableCategories';
         _unavailableCategories?.build();
-        _$failedField = 'selectBestAvailable';
-        _selectBestAvailable?.build();
 
         _$failedField = 'legend';
         _legend?.build();
 
         _$failedField = 'selectionValidators';
         _selectionValidators?.build();
-        _$failedField = 'categories';
-        _categories?.build();
-        _$failedField = 'objectCategories';
-        _objectCategories?.build();
 
         _$failedField = 'extraConfig';
         _extraConfig?.build();
@@ -2793,120 +2482,6 @@ class SelectionValidatorBuilder
         new _$SelectionValidator._(
           type: BuiltValueNullFieldError.checkNotNull(
               type, r'SelectionValidator', 'type'),
-        );
-    replace(_$result);
-    return _$result;
-  }
-}
-
-class _$TicketListing extends TicketListing {
-  @override
-  final String section;
-  @override
-  final int quantity;
-  @override
-  final double price;
-
-  factory _$TicketListing([void Function(TicketListingBuilder)? updates]) =>
-      (new TicketListingBuilder()..update(updates))._build();
-
-  _$TicketListing._(
-      {required this.section, required this.quantity, required this.price})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(section, r'TicketListing', 'section');
-    BuiltValueNullFieldError.checkNotNull(
-        quantity, r'TicketListing', 'quantity');
-    BuiltValueNullFieldError.checkNotNull(price, r'TicketListing', 'price');
-  }
-
-  @override
-  TicketListing rebuild(void Function(TicketListingBuilder) updates) =>
-      (toBuilder()..update(updates)).build();
-
-  @override
-  TicketListingBuilder toBuilder() => new TicketListingBuilder()..replace(this);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(other, this)) return true;
-    return other is TicketListing &&
-        section == other.section &&
-        quantity == other.quantity &&
-        price == other.price;
-  }
-
-  @override
-  int get hashCode {
-    var _$hash = 0;
-    _$hash = $jc(_$hash, section.hashCode);
-    _$hash = $jc(_$hash, quantity.hashCode);
-    _$hash = $jc(_$hash, price.hashCode);
-    _$hash = $jf(_$hash);
-    return _$hash;
-  }
-
-  @override
-  String toString() {
-    return (newBuiltValueToStringHelper(r'TicketListing')
-          ..add('section', section)
-          ..add('quantity', quantity)
-          ..add('price', price))
-        .toString();
-  }
-}
-
-class TicketListingBuilder
-    implements Builder<TicketListing, TicketListingBuilder> {
-  _$TicketListing? _$v;
-
-  String? _section;
-  String? get section => _$this._section;
-  set section(String? section) => _$this._section = section;
-
-  int? _quantity;
-  int? get quantity => _$this._quantity;
-  set quantity(int? quantity) => _$this._quantity = quantity;
-
-  double? _price;
-  double? get price => _$this._price;
-  set price(double? price) => _$this._price = price;
-
-  TicketListingBuilder();
-
-  TicketListingBuilder get _$this {
-    final $v = _$v;
-    if ($v != null) {
-      _section = $v.section;
-      _quantity = $v.quantity;
-      _price = $v.price;
-      _$v = null;
-    }
-    return this;
-  }
-
-  @override
-  void replace(TicketListing other) {
-    ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$TicketListing;
-  }
-
-  @override
-  void update(void Function(TicketListingBuilder)? updates) {
-    if (updates != null) updates(this);
-  }
-
-  @override
-  TicketListing build() => _build();
-
-  _$TicketListing _build() {
-    final _$result = _$v ??
-        new _$TicketListing._(
-          section: BuiltValueNullFieldError.checkNotNull(
-              section, r'TicketListing', 'section'),
-          quantity: BuiltValueNullFieldError.checkNotNull(
-              quantity, r'TicketListing', 'quantity'),
-          price: BuiltValueNullFieldError.checkNotNull(
-              price, r'TicketListing', 'price'),
         );
     replace(_$result);
     return _$result;

@@ -39,6 +39,8 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
   SeatsioRegion get region;
 
   String? get language;
+  BuiltMap<String, String>? get messages; // TODO does not seem to be passed to the chart
+
   BuiltList<PricingForCategory>? get pricing;
 
   @BuiltValueField(wireName: 'priceFormatter', serialize: false)
@@ -46,17 +48,10 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
 
   int? get numberOfPlacesToSelect;
   bool? get objectWithoutPricingSelectable;
-  bool? get objectWithoutCategorySelectable;
 
   BuiltList<SelectedObject>? get selectedObjects;
 
-  ObjectTooltip? get objectTooltip;
-
-  String? get themePreset;
-
-  String? get themeColor;
-
-  BuiltMap<String, String>? get messages;
+  ObjectTooltip? get objectTooltip; // TODO deprecated replace with objectPopover
 
   String? get priceLevelsTooltipMessage;
 
@@ -65,33 +60,19 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
 
   BuiltList<String>? get availableCategories;
   BuiltList<String>? get unavailableCategories;
-  BestAvailable? get selectBestAvailable;
   bool? get alwaysShowSectionContents;
-  String? get showSectionContents;
+  String? get showSectionContents; // TODO enum this
   bool? get showLegend;
   LegendForCategory? get legend;
   bool? get showMinimap;
-  String? get inputDevice;
+  String? get inputDevice; // TODO enum this
 
-  @BuiltValueField(wireName: 'showActiveSectionTooltipOnMobile')
-  bool? get showActiveSectionTooltip;
+  bool? get showActiveSectionTooltipOnMobile;
 
-  @BuiltValueField(wireName: 'showViewFromYourSeatOnMobile')
-  bool? get showViewFromYourSeat;
 
   BuiltList<SelectionValidator>? get selectionValidators;
 
-  BuiltList<SeatsioCategory>? get categories;
-
-  BuiltMap<String, String>? get objectCategories;
-
-  String? get mode;
-
-  String? get loading;
-
-  bool get showLoadingAnimation;
-
-  List<TicketListing>? get ticketListings;
+  String? get mode; // TODO enum this
 
   bool? get holdOnSelectForGAs;
 
@@ -155,7 +136,6 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
       ..event = ""
       ..region = SeatsioRegion.eu
       ..language = 'en'
-      ..showLoadingAnimation = true
       ..enableChartRenderedCallback = true
       ..enableChartRenderingFailedCallback = true
       ..enableObjectClickedCallback = true
@@ -187,22 +167,12 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
       "showFullScreenButton": showFullScreenButton ?? true,
       "showMinimap": showMinimap ?? true,
       "inputDevice": inputDevice ?? 'auto',
-      "showActiveSectionTooltipOnMobile": showActiveSectionTooltip ?? true,
-      "showViewFromYourSeatOnMobile": showViewFromYourSeat ?? true,
       "showSectionContents": showSectionContents ?? "auto",
       "priceFormatter": priceFormatter,
     };
 
     if (pricing != null) {
       configMap["pricing"] = pricing?.toList();
-    }
-
-    if (loading != null) {
-      configMap["loading"] = loading;
-    }
-
-    if (!showLoadingAnimation) {
-      configMap["loading"] = "<div class='loader'></div>";
     }
 
     if (objectIcon != null) {
@@ -346,18 +316,4 @@ abstract class SelectionValidator implements Built<SelectionValidator, Selection
   String get type;
 
   static Serializer<SelectionValidator> get serializer => _$selectionValidatorSerializer;
-}
-
-abstract class TicketListing implements Built<TicketListing, TicketListingBuilder> {
-  TicketListing._();
-
-  factory TicketListing([updates(TicketListingBuilder b)]) = _$TicketListing;
-
-  String get section;
-
-  int get quantity;
-
-  double get price;
-
-  static Serializer<TicketListing> get serializer => _$ticketListingSerializer;
 }
