@@ -39,6 +39,9 @@ class _$SeatingChartConfigSerializer
       'event',
       serializers.serialize(object.event,
           specifiedType: const FullType(String)),
+      'region',
+      serializers.serialize(object.region,
+          specifiedType: const FullType(SeatsioRegion)),
       'showLoadingAnimation',
       serializers.serialize(object.showLoadingAnimation,
           specifiedType: const FullType(bool)),
@@ -92,13 +95,6 @@ class _$SeatingChartConfigSerializer
           specifiedType: const FullType(bool)),
     ];
     Object? value;
-    value = object.region;
-    if (value != null) {
-      result
-        ..add('region')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
-    }
     value = object.language;
     if (value != null) {
       result
@@ -430,7 +426,7 @@ class _$SeatingChartConfigSerializer
           break;
         case 'region':
           result.region = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String?;
+              specifiedType: const FullType(SeatsioRegion))! as SeatsioRegion;
           break;
         case 'language':
           result.language = serializers.deserialize(value,
@@ -1068,7 +1064,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   final String event;
   @override
-  final String? region;
+  final SeatsioRegion region;
   @override
   final String? language;
   @override
@@ -1197,7 +1193,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   _$SeatingChartConfig._(
       {required this.workspaceKey,
       required this.event,
-      this.region,
+      required this.region,
       this.language,
       this.pricing,
       this.priceFormatter,
@@ -1263,6 +1259,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         workspaceKey, r'SeatingChartConfig', 'workspaceKey');
     BuiltValueNullFieldError.checkNotNull(
         event, r'SeatingChartConfig', 'event');
+    BuiltValueNullFieldError.checkNotNull(
+        region, r'SeatingChartConfig', 'region');
     BuiltValueNullFieldError.checkNotNull(
         showLoadingAnimation, r'SeatingChartConfig', 'showLoadingAnimation');
     BuiltValueNullFieldError.checkNotNull(enableChartRenderedCallback,
@@ -1556,9 +1554,9 @@ class SeatingChartConfigBuilder
   String? get event => _$this._event;
   set event(String? event) => _$this._event = event;
 
-  String? _region;
-  String? get region => _$this._region;
-  set region(String? region) => _$this._region = region;
+  SeatsioRegion? _region;
+  SeatsioRegion? get region => _$this._region;
+  set region(SeatsioRegion? region) => _$this._region = region;
 
   String? _language;
   String? get language => _$this._language;
@@ -1987,7 +1985,8 @@ class SeatingChartConfigBuilder
                 workspaceKey, r'SeatingChartConfig', 'workspaceKey'),
             event: BuiltValueNullFieldError.checkNotNull(
                 event, r'SeatingChartConfig', 'event'),
-            region: region,
+            region: BuiltValueNullFieldError.checkNotNull(
+                region, r'SeatingChartConfig', 'region'),
             language: language,
             pricing: _pricing?.build(),
             priceFormatter: priceFormatter,

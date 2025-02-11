@@ -61,7 +61,7 @@ class SeatsioWebViewController {
 
     // Insert json string of chart config to the seatsio HTML template.
     final htmlString =
-        seatsioHTML.replaceFirst("%region%", chartConfig.region ?? "eu").replaceFirst("%configAsJs%", chartConfigJson);
+        seatsioHTML.replaceFirst("%region%", chartConfig.region.name).replaceFirst("%configAsJs%", chartConfigJson);
 
     debugPrint("[Seatsio]-> _generateHtmlContent: $htmlString");
 

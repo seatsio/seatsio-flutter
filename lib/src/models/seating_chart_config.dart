@@ -4,6 +4,7 @@ import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:seatsio/src/models/hold_token.dart';
+import 'package:seatsio/src/models/seatsio_region.dart';
 
 import 'pricing_for_category.dart';
 import 'seating_chart.dart';
@@ -35,14 +36,7 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
 
   String get workspaceKey;
   String get event;
-
-  /// The [region] need to be specified, have four region options:
-  /// [region] = 'eu'
-  /// [region] = 'na'
-  /// [region] = 'sa'
-  /// [region] = 'oc'
-  /// Maybe this, https://docs.seats.io/docs/embedded-designer/introduction
-  String? get region;
+  SeatsioRegion get region;
 
   /// Sets the [language] of the designer.
   /// Currently supported languages are:
@@ -241,7 +235,7 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
     return SeatingChartConfig((b) => b
       ..workspaceKey = ""
       ..event = ""
-      ..region = 'eu'
+      ..region = SeatsioRegion.eu
       ..language = 'en'
       ..showLoadingAnimation = true
       ..enableChartRenderedCallback = true
@@ -268,7 +262,7 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
     final configMap = {
       "workspaceKey": workspaceKey,
       "event": event,
-      "region": region ?? "eu",
+      "region": region,
       "language": language ?? "en",
       "holdToken": holdToken ?? "",
       "session": session ?? "none",
