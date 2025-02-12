@@ -10,6 +10,10 @@ abstract class SeatingChartConfig
 
   factory SeatingChartConfig([void Function(SeatingChartConfigBuilder) updates]) = _$SeatingChartConfig;
 
+  static void _initializeBuilder(SeatingChartConfigBuilder b) {
+    b.region = SeatsioRegion.eu;
+  }
+
   String get workspaceKey;
   String get event;
   SeatsioRegion get region;

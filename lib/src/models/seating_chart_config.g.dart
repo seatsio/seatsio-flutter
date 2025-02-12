@@ -143,7 +143,9 @@ class SeatingChartConfigBuilder
   SeatsioRegion? get region => _$this._region;
   set region(SeatsioRegion? region) => _$this._region = region;
 
-  SeatingChartConfigBuilder();
+  SeatingChartConfigBuilder() {
+    SeatingChartConfig._initializeBuilder(this);
+  }
 
   SeatingChartConfigBuilder get _$this {
     final $v = _$v;
