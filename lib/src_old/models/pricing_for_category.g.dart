@@ -271,10 +271,11 @@ class PricingForCategoryBuilder
     try {
       _$result = _$v ??
           new _$PricingForCategory._(
-              categoryKey: categoryKey,
-              category: category,
-              price: price,
-              ticketTypes: _ticketTypes?.build());
+            categoryKey: categoryKey,
+            category: category,
+            price: price,
+            ticketTypes: _ticketTypes?.build(),
+          );
     } catch (_) {
       late String _$failedField;
       try {
@@ -388,7 +389,10 @@ class TicketTypePricingBuilder
   _$TicketTypePricing _build() {
     final _$result = _$v ??
         new _$TicketTypePricing._(
-            ticketType: ticketType, price: price, label: label);
+          ticketType: ticketType,
+          price: price,
+          label: label,
+        );
     replace(_$result);
     return _$result;
   }

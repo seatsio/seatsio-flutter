@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
-import 'package:seatsio/src/models/hold_token.dart';
-import 'package:seatsio/src/models/seatsio_region.dart';
+import 'package:seatsio/src_old/models/hold_token.dart';
+import 'package:seatsio/src_old/models/seatsio_region.dart';
 
 import 'pricing_for_category.dart';
 import 'seating_chart.dart';

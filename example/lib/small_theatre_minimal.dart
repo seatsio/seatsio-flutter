@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:seatsio/seatsio.dart';
+import 'package:seatsio/seatsio_old.dart';
 
 class SmallTheatreMinimal extends StatelessWidget {
   @override

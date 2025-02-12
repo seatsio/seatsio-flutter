@@ -1,7 +1,7 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/serializer.dart';
 
-import '../../seatsio.dart';
+import '../../seatsio_old.dart';
 
 part 'seatsio_serializers.g.dart';
 

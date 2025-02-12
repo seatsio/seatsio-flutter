@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:seatsio/src/models/hold_token.dart';
+import 'package:seatsio/src_old/models/hold_token.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../models/seating_chart.dart';
