@@ -29,7 +29,7 @@ class _$SeatingChartConfigSerializer
           specifiedType: const FullType(String)),
       'region',
       serializers.serialize(object.region,
-          specifiedType: const FullType(SeatsioRegion)),
+          specifiedType: const FullType(Region)),
     ];
 
     return result;
@@ -57,7 +57,7 @@ class _$SeatingChartConfigSerializer
           break;
         case 'region':
           result.region = serializers.deserialize(value,
-              specifiedType: const FullType(SeatsioRegion))! as SeatsioRegion;
+              specifiedType: const FullType(Region))! as Region;
           break;
       }
     }
@@ -72,7 +72,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   final String event;
   @override
-  final SeatsioRegion region;
+  final Region region;
 
   factory _$SeatingChartConfig(
           [void Function(SeatingChartConfigBuilder)? updates]) =>
@@ -139,9 +139,9 @@ class SeatingChartConfigBuilder
   String? get event => _$this._event;
   set event(String? event) => _$this._event = event;
 
-  SeatsioRegion? _region;
-  SeatsioRegion? get region => _$this._region;
-  set region(SeatsioRegion? region) => _$this._region = region;
+  Region? _region;
+  Region? get region => _$this._region;
+  set region(Region? region) => _$this._region = region;
 
   SeatingChartConfigBuilder() {
     SeatingChartConfig._initializeBuilder(this);
