@@ -14,6 +14,9 @@ abstract class PricingForCategory
   double? get originalPrice;
   BuiltList<TicketType>? get ticketTypes;
 
+  // TODO add support for pricing per channel
+  // TODO add support for pricing per object
+
   PricingForCategory._();
 
   factory PricingForCategory({
