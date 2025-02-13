@@ -7,20 +7,15 @@ import 'package:webview_flutter/webview_flutter.dart';
 typedef void SeatsioWebViewCreatedCallback(SeatsioWebViewController controller);
 
 class SeatsioWebView extends StatefulWidget {
+  final SeatsioWebViewCreatedCallback? _onWebViewCreated;
+  final Set<Factory<OneSequenceGestureRecognizer>> _gestureRecognizers;
+
   const SeatsioWebView({
     super.key,
-    String? initialUrl,
     SeatsioWebViewCreatedCallback? onWebViewCreated,
     Set<Factory<OneSequenceGestureRecognizer>> gestureRecognizers = const <Factory<OneSequenceGestureRecognizer>>{},
-  })  : this._initialUrl = initialUrl,
-        this._onWebViewCreated = onWebViewCreated,
+  })  : this._onWebViewCreated = onWebViewCreated,
         this._gestureRecognizers = gestureRecognizers;
-
-  final String? _initialUrl;
-
-  final SeatsioWebViewCreatedCallback? _onWebViewCreated;
-
-  final Set<Factory<OneSequenceGestureRecognizer>> _gestureRecognizers;
 
   @override
   State<StatefulWidget> createState() => _SeatsioWebViewState();
@@ -33,12 +28,7 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
   @override
   void initState() {
     super.initState();
-    _webViewController = WebViewController()
-      ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..addJavaScriptChannel('FlutterJsBridge', onMessageReceived: flutterJsBridge);
-    if (widget._initialUrl != null) {
-      _webViewController.loadRequest(Uri.parse(widget._initialUrl!));
-    }
+    _webViewController = WebViewController()..setJavaScriptMode(JavaScriptMode.unrestricted);
     _seatsioController = SeatsioWebViewController(webViewController: _webViewController);
     widget._onWebViewCreated?.call(_seatsioController);
   }
@@ -49,9 +39,5 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
       controller: _webViewController,
       gestureRecognizers: widget._gestureRecognizers,
     );
-  }
-
-  void flutterJsBridge(JavaScriptMessage message) {
-    // TODO ??
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:seatsio/seatsio.dart';
+import 'package:seatsio/seatsio_old.dart';
 
 void main() {
   test('seating chart config', (){
