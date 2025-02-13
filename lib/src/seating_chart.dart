@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:seatsio/seatsio.dart';
-import 'package:seatsio/src/ui/seatsio_web_view_controller.dart';
 import 'package:seatsio/src/ui/seatsio_webview.dart';
 
 class SeatsioSeatingChart extends StatefulWidget {
@@ -17,19 +16,12 @@ class SeatsioSeatingChart extends StatefulWidget {
 
 class _SeatsioSeatingChartState extends State<SeatsioSeatingChart> {
 
-  SeatsioWebViewController? _seatsioController;
-
   @override
   Widget build(BuildContext context) {
     return SeatsioWebView(
       onWebViewCreated: (controller) {
-        _seatsioController = controller;
-        _loadSeatsio();
+        controller.reload(widget.config);
       },
     );
-  }
-
-  void _loadSeatsio() {
-    _seatsioController?.reload(widget.config);
   }
 }
