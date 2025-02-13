@@ -11,6 +11,7 @@ abstract class PricingForCategory
     implements Built<PricingForCategory, PricingForCategoryBuilder> {
   CategoryKey get category;
   double? get price;
+  double? get originalPrice;
   BuiltList<TicketType>? get ticketTypes;
 
   PricingForCategory._();
@@ -18,11 +19,13 @@ abstract class PricingForCategory
   factory PricingForCategory({
     required dynamic category,
     double? price,
+    double? originalPrice,
     List<TicketType>? ticketTypes,
   }) {
     return _$PricingForCategory._(
       category: CategoryKey.from(category),
       price: price,
+      originalPrice: originalPrice,
       ticketTypes: ticketTypes != null ? BuiltList(ticketTypes) : null,
     );
   }
