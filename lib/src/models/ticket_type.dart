@@ -6,7 +6,7 @@ part 'ticket_type.g.dart';
 abstract class TicketType implements Built<TicketType, TicketTypeBuilder> {
   String get ticketType;
   double get price;
-  String get label;
+  String? get label;
   String? get description;
 
   TicketType._();
@@ -14,7 +14,7 @@ abstract class TicketType implements Built<TicketType, TicketTypeBuilder> {
   factory TicketType({
     required String ticketType,
     required double price,
-    required String label,
+    String? label,
     String? description,
   }) {
     return _$TicketType._(

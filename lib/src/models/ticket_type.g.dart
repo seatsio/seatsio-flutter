@@ -24,11 +24,15 @@ class _$TicketTypeSerializer implements StructuredSerializer<TicketType> {
       'price',
       serializers.serialize(object.price,
           specifiedType: const FullType(double)),
-      'label',
-      serializers.serialize(object.label,
-          specifiedType: const FullType(String)),
     ];
     Object? value;
+    value = object.label;
+    if (value != null) {
+      result
+        ..add('label')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     value = object.description;
     if (value != null) {
       result
@@ -60,7 +64,7 @@ class _$TicketTypeSerializer implements StructuredSerializer<TicketType> {
           break;
         case 'label':
           result.label = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'description':
           result.description = serializers.deserialize(value,
@@ -79,7 +83,7 @@ class _$TicketType extends TicketType {
   @override
   final double price;
   @override
-  final String label;
+  final String? label;
   @override
   final String? description;
 
@@ -89,13 +93,12 @@ class _$TicketType extends TicketType {
   _$TicketType._(
       {required this.ticketType,
       required this.price,
-      required this.label,
+      this.label,
       this.description})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         ticketType, r'TicketType', 'ticketType');
     BuiltValueNullFieldError.checkNotNull(price, r'TicketType', 'price');
-    BuiltValueNullFieldError.checkNotNull(label, r'TicketType', 'label');
   }
 
   @override
@@ -191,8 +194,7 @@ class TicketTypeBuilder implements Builder<TicketType, TicketTypeBuilder> {
               ticketType, r'TicketType', 'ticketType'),
           price: BuiltValueNullFieldError.checkNotNull(
               price, r'TicketType', 'price'),
-          label: BuiltValueNullFieldError.checkNotNull(
-              label, r'TicketType', 'label'),
+          label: label,
           description: description,
         );
     replace(_$result);
