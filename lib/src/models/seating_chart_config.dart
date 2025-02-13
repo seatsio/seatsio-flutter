@@ -14,6 +14,9 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
 
   Region get region;
 
+  // TODO mode
+  // TODO extraConfig
+
   SeatingChartConfig._();
 
   factory SeatingChartConfig([void Function(SeatingChartConfigBuilder)? updates]) {
