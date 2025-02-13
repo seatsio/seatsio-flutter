@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../assets/seatsio_html.dart';
@@ -10,55 +9,42 @@ import '../util/seatsio_js_bridge.dart';
 typedef void SeatsioWebViewCreatedCallback(SeatsioWebViewController controller);
 
 class SeatsioWebViewController {
+  WebViewController _webViewController;
+
   SeatsioWebViewController({
     required WebViewController webViewController,
   }) : this._webViewController = webViewController;
 
-  WebViewController _webViewController;
-
-  SeatingChartConfig? _chartConfig;
-
-  void reload(SeatingChartConfig? newChartConfig) {
-    if (newChartConfig != null) {
-      _chartConfig = newChartConfig;
-    }
-
-    if (_chartConfig != null) {
-      final url = _generateHtmlContent(_chartConfig!);
-      _webViewController.loadRequest(Uri.parse(url));
-    } else {
-      debugPrint("[Seatsio]-> Not found seatsio chart config info.");
-    }
+  void reload(SeatingChartConfig newChartConfig) {
+    final dataUri = _generateHtmlContentAsDataUri(newChartConfig);
+    _webViewController.loadRequest(Uri.parse(dataUri));
   }
 
-  String _generateHtmlContent(SeatingChartConfig chartConfig) {
-    final chartConfigMap = chartConfig.toMap();
+  String _generateHtmlContentAsDataUri(SeatingChartConfig chartConfig) {
+    final String configJson = jsonEncode(chartConfig.toMap());
+    final List<String> callbackEntries = SeatsioJsBridge.buildCallbacksConfiguration(chartConfig);
+    final String callbacksJson = callbackEntries.isNotEmpty ? ', ${callbackEntries.join(", ")}' : '';
+    final String fullConfigJson = _injectCallbacksJsonIntoConfigJson(configJson, callbacksJson);
+    final String htmlString = _injectConfigInHtml(chartConfig, fullConfigJson);
+    return _convertToDataUri(htmlString);
+  }
 
-    String chartConfigJson = jsonEncode(chartConfigMap);
-    chartConfigJson = '$chartConfigJson';
+  String _injectCallbacksJsonIntoConfigJson(String configJson, String callbacksJson) {
+    var configWithoutLastCurlyBrace = configJson.substring(0, configJson.length - 1);
+    final fullConfigJson = configWithoutLastCurlyBrace + callbacksJson + "}";
+    return fullConfigJson;
+  }
 
-    final callbacks = SeatsioJsBridge.buildCallbacksConfiguration(chartConfig);
-    chartConfigJson = chartConfigJson.substring(0, chartConfigJson.length - 1);
-    callbacks.forEach((e) {
-      chartConfigJson = "$chartConfigJson, $e";
-    });
-    chartConfigJson = "$chartConfigJson}";
-
-    final htmlString = replaceConfigInHtml(chartConfig, chartConfigJson);
-
-    final url = Uri.dataFromString(
+  String _convertToDataUri(String htmlString) {
+    return Uri.dataFromString(
       htmlString,
       mimeType: "text/html",
       encoding: utf8,
-    );
-
-    return url.toString();
+    ).toString();
   }
 
-  String replaceConfigInHtml(SeatingChartConfig chartConfig, String chartConfigJson) {
-    return seatsioHTML
-        .replaceFirst("%region%", chartConfig.region.name)
-        .replaceFirst("%configAsJs%", chartConfigJson);
+  String _injectConfigInHtml(SeatingChartConfig chartConfig, String chartConfigJson) {
+    return seatsioHTML.replaceFirst("%region%", chartConfig.region.name).replaceFirst("%configAsJs%", chartConfigJson);
   }
 
   Future<void> evaluateJavascript(String javascriptString) => _webViewController.runJavaScript(javascriptString);
