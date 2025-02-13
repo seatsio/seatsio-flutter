@@ -4,19 +4,36 @@ import 'package:seatsio/src/models/region.dart';
 
 part 'seating_chart_config.g.dart';
 
-abstract class SeatingChartConfig
-    implements Built<SeatingChartConfig, SeatingChartConfigBuilder> {
+abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingChartConfigBuilder> {
+  String get workspaceKey;
+
+  String? get event;
+
+  List<String>? get events;
+
+  Region get region;
+
   SeatingChartConfig._();
 
-  factory SeatingChartConfig([void Function(SeatingChartConfigBuilder) updates]) = _$SeatingChartConfig;
+  factory SeatingChartConfig([void Function(SeatingChartConfigBuilder)? updates]) {
+    final instance = _$SeatingChartConfig(updates ?? (b) {});
+
+    if (instance.workspaceKey.isEmpty) {
+      throw ArgumentError('workspaceKey is required and cannot be empty.');
+    }
+    if ((instance.event?.isEmpty ?? true) == (instance.events?.isEmpty ?? true)) {
+      throw ArgumentError(
+        'Either "event" or "events" must be provided, but not both.',
+      );
+    }
+
+
+    return instance;
+  }
 
   static void _initializeBuilder(SeatingChartConfigBuilder b) {
     b.region = Region.eu;
   }
-
-  String get workspaceKey;
-  String get event;
-  Region get region;
 
   static Serializer<SeatingChartConfig> get serializer => _$seatingChartConfigSerializer;
 

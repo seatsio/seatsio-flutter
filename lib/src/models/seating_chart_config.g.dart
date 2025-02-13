@@ -24,14 +24,26 @@ class _$SeatingChartConfigSerializer
       'workspaceKey',
       serializers.serialize(object.workspaceKey,
           specifiedType: const FullType(String)),
-      'event',
-      serializers.serialize(object.event,
-          specifiedType: const FullType(String)),
       'region',
       serializers.serialize(object.region,
           specifiedType: const FullType(Region)),
     ];
-
+    Object? value;
+    value = object.event;
+    if (value != null) {
+      result
+        ..add('event')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.events;
+    if (value != null) {
+      result
+        ..add('events')
+        ..add(serializers.serialize(value,
+            specifiedType:
+                const FullType(List, const [const FullType(String)])));
+    }
     return result;
   }
 
@@ -53,7 +65,13 @@ class _$SeatingChartConfigSerializer
           break;
         case 'event':
           result.event = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+              specifiedType: const FullType(String)) as String?;
+          break;
+        case 'events':
+          result.events = serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(List, const [const FullType(String)]))
+              as List<String>?;
           break;
         case 'region':
           result.region = serializers.deserialize(value,
@@ -70,7 +88,9 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   final String workspaceKey;
   @override
-  final String event;
+  final String? event;
+  @override
+  final List<String>? events;
   @override
   final Region region;
 
@@ -79,12 +99,13 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       (new SeatingChartConfigBuilder()..update(updates))._build();
 
   _$SeatingChartConfig._(
-      {required this.workspaceKey, required this.event, required this.region})
+      {required this.workspaceKey,
+      this.event,
+      this.events,
+      required this.region})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         workspaceKey, r'SeatingChartConfig', 'workspaceKey');
-    BuiltValueNullFieldError.checkNotNull(
-        event, r'SeatingChartConfig', 'event');
     BuiltValueNullFieldError.checkNotNull(
         region, r'SeatingChartConfig', 'region');
   }
@@ -104,6 +125,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     return other is SeatingChartConfig &&
         workspaceKey == other.workspaceKey &&
         event == other.event &&
+        events == other.events &&
         region == other.region;
   }
 
@@ -112,6 +134,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     var _$hash = 0;
     _$hash = $jc(_$hash, workspaceKey.hashCode);
     _$hash = $jc(_$hash, event.hashCode);
+    _$hash = $jc(_$hash, events.hashCode);
     _$hash = $jc(_$hash, region.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -122,6 +145,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     return (newBuiltValueToStringHelper(r'SeatingChartConfig')
           ..add('workspaceKey', workspaceKey)
           ..add('event', event)
+          ..add('events', events)
           ..add('region', region))
         .toString();
   }
@@ -139,6 +163,10 @@ class SeatingChartConfigBuilder
   String? get event => _$this._event;
   set event(String? event) => _$this._event = event;
 
+  List<String>? _events;
+  List<String>? get events => _$this._events;
+  set events(List<String>? events) => _$this._events = events;
+
   Region? _region;
   Region? get region => _$this._region;
   set region(Region? region) => _$this._region = region;
@@ -152,6 +180,7 @@ class SeatingChartConfigBuilder
     if ($v != null) {
       _workspaceKey = $v.workspaceKey;
       _event = $v.event;
+      _events = $v.events;
       _region = $v.region;
       _$v = null;
     }
@@ -177,8 +206,8 @@ class SeatingChartConfigBuilder
         new _$SeatingChartConfig._(
           workspaceKey: BuiltValueNullFieldError.checkNotNull(
               workspaceKey, r'SeatingChartConfig', 'workspaceKey'),
-          event: BuiltValueNullFieldError.checkNotNull(
-              event, r'SeatingChartConfig', 'event'),
+          event: event,
+          events: events,
           region: BuiltValueNullFieldError.checkNotNull(
               region, r'SeatingChartConfig', 'region'),
         );

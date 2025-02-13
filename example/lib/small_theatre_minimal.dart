@@ -9,7 +9,7 @@ class SmallTheatreMinimal extends StatelessWidget {
         body: SeatsioSeatingChart(
           config: SeatingChartConfig((b) => b
             ..workspaceKey = "publicDemoKey"
-            ..event = "smallTheatreEvent2"
+            ..events = ["smallTheatreEvent2"]
           ),
         ));
   }
