@@ -7,6 +7,7 @@ part of 'serializers.dart';
 // **************************************************************************
 
 Serializers _$serializers = (new Serializers().toBuilder()
+      ..add(CategoryKey.serializer)
       ..add(PricingForCategory.serializer)
       ..add(Region.serializer)
       ..add(SeatingChartConfig.serializer)

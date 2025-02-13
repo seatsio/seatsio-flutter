@@ -23,7 +23,7 @@ class _$PricingForCategorySerializer
     final result = <Object?>[
       'category',
       serializers.serialize(object.category,
-          specifiedType: const FullType(String)),
+          specifiedType: const FullType(CategoryKey)),
     ];
     Object? value;
     value = object.price;
@@ -57,8 +57,8 @@ class _$PricingForCategorySerializer
       final Object? value = iterator.current;
       switch (key) {
         case 'category':
-          result.category = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+          result.category.replace(serializers.deserialize(value,
+              specifiedType: const FullType(CategoryKey))! as CategoryKey);
           break;
         case 'price':
           result.price = serializers.deserialize(value,
@@ -79,7 +79,7 @@ class _$PricingForCategorySerializer
 
 class _$PricingForCategory extends PricingForCategory {
   @override
-  final String category;
+  final CategoryKey category;
   @override
   final double? price;
   @override
@@ -137,9 +137,10 @@ class PricingForCategoryBuilder
     implements Builder<PricingForCategory, PricingForCategoryBuilder> {
   _$PricingForCategory? _$v;
 
-  String? _category;
-  String? get category => _$this._category;
-  set category(String? category) => _$this._category = category;
+  CategoryKeyBuilder? _category;
+  CategoryKeyBuilder get category =>
+      _$this._category ??= new CategoryKeyBuilder();
+  set category(CategoryKeyBuilder? category) => _$this._category = category;
 
   double? _price;
   double? get price => _$this._price;
@@ -156,7 +157,7 @@ class PricingForCategoryBuilder
   PricingForCategoryBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      _category = $v.category;
+      _category = $v.category.toBuilder();
       _price = $v.price;
       _ticketTypes = $v.ticketTypes?.toBuilder();
       _$v = null;
@@ -183,14 +184,16 @@ class PricingForCategoryBuilder
     try {
       _$result = _$v ??
           new _$PricingForCategory._(
-            category: BuiltValueNullFieldError.checkNotNull(
-                category, r'PricingForCategory', 'category'),
+            category: category.build(),
             price: price,
             ticketTypes: _ticketTypes?.build(),
           );
     } catch (_) {
       late String _$failedField;
       try {
+        _$failedField = 'category';
+        category.build();
+
         _$failedField = 'ticketTypes';
         _ticketTypes?.build();
       } catch (e) {

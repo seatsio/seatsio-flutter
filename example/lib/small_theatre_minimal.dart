@@ -8,14 +8,14 @@ class SmallTheatreMinimal extends StatelessWidget {
       PricingForCategory(
         category: "1",
         ticketTypes: [
-          TicketType(ticketType: "adult", price: 30, label: "For adults"),
+          TicketType(ticketType: "adult", price: 30),
           TicketType(ticketType: "child", price: 20, label: "For children"),
         ],
       ),
       PricingForCategory(
         category: "2",
         ticketTypes: [
-          TicketType(ticketType: "adult", price: 40, label: "For adults"),
+          TicketType(ticketType: "adult", price: 40),
           TicketType(ticketType: "child", price: 30, label: "For children"),
           TicketType(ticketType: "65+", price: 25, label: "For senior citizens"),
         ],
@@ -24,7 +24,7 @@ class SmallTheatreMinimal extends StatelessWidget {
     ];
 
     final simplePricing = [
-      PricingForCategory(category: "1", price: 30),
+      PricingForCategory(category: 1, price: 30),
       PricingForCategory(category: "2", price: 40),
       PricingForCategory(category: "3", price: 50),
     ];

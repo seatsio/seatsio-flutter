@@ -3,6 +3,7 @@ import 'package:built_value/serializer.dart';
 import 'package:built_value/standard_json_plugin.dart';
 
 import '../../seatsio.dart';
+import '../models/category_key.dart';
 
 part 'serializers.g.dart';
 
@@ -10,8 +11,10 @@ part 'serializers.g.dart';
   SeatingChartConfig,
   Region,
   PricingForCategory,
-  TicketType
+  TicketType,
+  CategoryKey,
 ])
 final Serializers serializers = (_$serializers.toBuilder()
-  ..addPlugin(StandardJsonPlugin())
-).build();
+      ..add(CategoryKeySerializer())
+      ..addPlugin(StandardJsonPlugin()))
+    .build();

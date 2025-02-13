@@ -47,7 +47,7 @@ void main() {
         () => SeatingChartConfig((b) => b
           ..workspaceKey = "aKey"
           ..event = "anEvent"
-          ..events = ["event1", "event2"]),
+          ..events.replace(["event1", "event2"])),
         throwsA(
           predicate(
               (e) => e is ArgumentError && e.message == 'Either "event" or "events" must be provided, but not both.'),
