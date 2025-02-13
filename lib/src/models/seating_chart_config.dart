@@ -28,7 +28,6 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
       );
     }
 
-
     return instance;
   }
 
@@ -37,5 +36,4 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
   }
 
   static Serializer<SeatingChartConfig> get serializer => _$seatingChartConfigSerializer;
-
 }
