@@ -42,7 +42,7 @@ class _$SeatingChartConfigSerializer
         ..add('events')
         ..add(serializers.serialize(value,
             specifiedType:
-                const FullType(List, const [const FullType(String)])));
+                const FullType(BuiltList, const [const FullType(String)])));
     }
     return result;
   }
@@ -68,10 +68,10 @@ class _$SeatingChartConfigSerializer
               specifiedType: const FullType(String)) as String?;
           break;
         case 'events':
-          result.events = serializers.deserialize(value,
-                  specifiedType:
-                      const FullType(List, const [const FullType(String)]))
-              as List<String>?;
+          result.events.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType(String)]))!
+              as BuiltList<Object?>);
           break;
         case 'region':
           result.region = serializers.deserialize(value,
@@ -90,7 +90,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   final String? event;
   @override
-  final List<String>? events;
+  final BuiltList<String>? events;
   @override
   final Region region;
 
@@ -163,9 +163,10 @@ class SeatingChartConfigBuilder
   String? get event => _$this._event;
   set event(String? event) => _$this._event = event;
 
-  List<String>? _events;
-  List<String>? get events => _$this._events;
-  set events(List<String>? events) => _$this._events = events;
+  ListBuilder<String>? _events;
+  ListBuilder<String> get events =>
+      _$this._events ??= new ListBuilder<String>();
+  set events(ListBuilder<String>? events) => _$this._events = events;
 
   Region? _region;
   Region? get region => _$this._region;
@@ -180,7 +181,7 @@ class SeatingChartConfigBuilder
     if ($v != null) {
       _workspaceKey = $v.workspaceKey;
       _event = $v.event;
-      _events = $v.events;
+      _events = $v.events?.toBuilder();
       _region = $v.region;
       _$v = null;
     }
@@ -202,15 +203,28 @@ class SeatingChartConfigBuilder
   SeatingChartConfig build() => _build();
 
   _$SeatingChartConfig _build() {
-    final _$result = _$v ??
-        new _$SeatingChartConfig._(
-          workspaceKey: BuiltValueNullFieldError.checkNotNull(
-              workspaceKey, r'SeatingChartConfig', 'workspaceKey'),
-          event: event,
-          events: events,
-          region: BuiltValueNullFieldError.checkNotNull(
-              region, r'SeatingChartConfig', 'region'),
-        );
+    _$SeatingChartConfig _$result;
+    try {
+      _$result = _$v ??
+          new _$SeatingChartConfig._(
+            workspaceKey: BuiltValueNullFieldError.checkNotNull(
+                workspaceKey, r'SeatingChartConfig', 'workspaceKey'),
+            event: event,
+            events: _events?.build(),
+            region: BuiltValueNullFieldError.checkNotNull(
+                region, r'SeatingChartConfig', 'region'),
+          );
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'events';
+        _events?.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            r'SeatingChartConfig', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

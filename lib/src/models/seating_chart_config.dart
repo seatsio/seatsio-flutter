@@ -1,3 +1,4 @@
+import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:seatsio/src/models/region.dart';
@@ -9,7 +10,7 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
 
   String? get event;
 
-  List<String>? get events;
+  BuiltList<String>? get events;
 
   Region get region;
 
@@ -37,12 +38,4 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
 
   static Serializer<SeatingChartConfig> get serializer => _$seatingChartConfigSerializer;
 
-  toMap() {
-    return {
-      'workspaceKey': workspaceKey,
-      'event': event,
-      'events': events,
-      'region': region.name,
-    };
-  }
 }

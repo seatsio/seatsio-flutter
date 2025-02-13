@@ -5,6 +5,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 import '../assets/seatsio_html.dart';
 import '../models/seating_chart_config.dart';
 import '../util/seatsio_js_bridge.dart';
+import '../util/serializers.dart';
 
 typedef void SeatsioWebViewCreatedCallback(SeatsioWebViewController controller);
 
@@ -21,7 +22,7 @@ class SeatsioWebViewController {
   }
 
   String _generateHtmlContentAsDataUri(SeatingChartConfig chartConfig) {
-    final String configJson = jsonEncode(chartConfig.toMap());
+    final String configJson = jsonEncode(serializers.serialize(chartConfig));
     final List<String> callbackEntries = SeatsioJsBridge.buildCallbacksConfiguration(chartConfig);
     final String callbacksJson = callbackEntries.isNotEmpty ? ', ${callbackEntries.join(", ")}' : '';
     final String fullConfigJson = _injectCallbacksJsonIntoConfigJson(configJson, callbacksJson);
