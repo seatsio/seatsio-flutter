@@ -41,6 +41,7 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
     return {
       'workspaceKey': workspaceKey,
       'event': event,
+      'events': events,
       'region': region.name,
     };
   }
