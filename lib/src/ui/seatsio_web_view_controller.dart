@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../assets/seatsio_html.dart';
@@ -26,6 +27,7 @@ class SeatsioWebViewController {
     final List<String> callbackEntries = SeatsioJsBridge.buildCallbacksConfiguration(chartConfig);
     final String callbacksJson = callbackEntries.isNotEmpty ? ', ${callbackEntries.join(", ")}' : '';
     final String fullConfigJson = _injectCallbacksJsonIntoConfigJson(configJson, callbacksJson);
+    debugPrint(fullConfigJson); // TODO make this configurable
     final String htmlString = _injectConfigInHtml(chartConfig, fullConfigJson);
     return _convertToDataUri(htmlString);
   }

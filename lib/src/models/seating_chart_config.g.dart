@@ -44,6 +44,14 @@ class _$SeatingChartConfigSerializer
             specifiedType:
                 const FullType(BuiltList, const [const FullType(String)])));
     }
+    value = object.pricing;
+    if (value != null) {
+      result
+        ..add('pricing')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(
+                BuiltList, const [const FullType(PricingForCategory)])));
+    }
     return result;
   }
 
@@ -77,6 +85,12 @@ class _$SeatingChartConfigSerializer
           result.region = serializers.deserialize(value,
               specifiedType: const FullType(Region))! as Region;
           break;
+        case 'pricing':
+          result.pricing.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType(PricingForCategory)]))!
+              as BuiltList<Object?>);
+          break;
       }
     }
 
@@ -93,6 +107,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   final BuiltList<String>? events;
   @override
   final Region region;
+  @override
+  final BuiltList<PricingForCategory>? pricing;
 
   factory _$SeatingChartConfig(
           [void Function(SeatingChartConfigBuilder)? updates]) =>
@@ -102,7 +118,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       {required this.workspaceKey,
       this.event,
       this.events,
-      required this.region})
+      required this.region,
+      this.pricing})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         workspaceKey, r'SeatingChartConfig', 'workspaceKey');
@@ -126,7 +143,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         workspaceKey == other.workspaceKey &&
         event == other.event &&
         events == other.events &&
-        region == other.region;
+        region == other.region &&
+        pricing == other.pricing;
   }
 
   @override
@@ -136,6 +154,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     _$hash = $jc(_$hash, event.hashCode);
     _$hash = $jc(_$hash, events.hashCode);
     _$hash = $jc(_$hash, region.hashCode);
+    _$hash = $jc(_$hash, pricing.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -146,7 +165,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
           ..add('workspaceKey', workspaceKey)
           ..add('event', event)
           ..add('events', events)
-          ..add('region', region))
+          ..add('region', region)
+          ..add('pricing', pricing))
         .toString();
   }
 }
@@ -172,6 +192,12 @@ class SeatingChartConfigBuilder
   Region? get region => _$this._region;
   set region(Region? region) => _$this._region = region;
 
+  ListBuilder<PricingForCategory>? _pricing;
+  ListBuilder<PricingForCategory> get pricing =>
+      _$this._pricing ??= new ListBuilder<PricingForCategory>();
+  set pricing(ListBuilder<PricingForCategory>? pricing) =>
+      _$this._pricing = pricing;
+
   SeatingChartConfigBuilder() {
     SeatingChartConfig._initializeBuilder(this);
   }
@@ -183,6 +209,7 @@ class SeatingChartConfigBuilder
       _event = $v.event;
       _events = $v.events?.toBuilder();
       _region = $v.region;
+      _pricing = $v.pricing?.toBuilder();
       _$v = null;
     }
     return this;
@@ -213,12 +240,16 @@ class SeatingChartConfigBuilder
             events: _events?.build(),
             region: BuiltValueNullFieldError.checkNotNull(
                 region, r'SeatingChartConfig', 'region'),
+            pricing: _pricing?.build(),
           );
     } catch (_) {
       late String _$failedField;
       try {
         _$failedField = 'events';
         _events?.build();
+
+        _$failedField = 'pricing';
+        _pricing?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             r'SeatingChartConfig', _$failedField, e.toString());

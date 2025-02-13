@@ -1,7 +1,8 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
-import 'package:seatsio/src/models/region.dart';
+
+import '../../seatsio.dart';
 
 part 'seating_chart_config.g.dart';
 
@@ -16,6 +17,8 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
 
   // TODO mode
   // TODO extraConfig
+
+  BuiltList<PricingForCategory>? get pricing;
 
   SeatingChartConfig._();
 

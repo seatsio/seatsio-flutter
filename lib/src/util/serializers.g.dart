@@ -7,11 +7,19 @@ part of 'serializers.dart';
 // **************************************************************************
 
 Serializers _$serializers = (new Serializers().toBuilder()
+      ..add(PricingForCategory.serializer)
       ..add(Region.serializer)
       ..add(SeatingChartConfig.serializer)
+      ..add(TicketType.serializer)
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(String)]),
-          () => new ListBuilder<String>()))
+          () => new ListBuilder<String>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(PricingForCategory)]),
+          () => new ListBuilder<PricingForCategory>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(TicketType)]),
+          () => new ListBuilder<TicketType>()))
     .build();
 
 // ignore_for_file: deprecated_member_use_from_same_package,type=lint
