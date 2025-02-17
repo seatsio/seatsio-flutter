@@ -12,8 +12,4 @@ class SeatsioJsBridge {
   static String buildCallbackConfigAsJS(String name) {
     return '$name: object => $name.postMessage(JSON.stringify(object))';
   }
-
-  static String seatsioInjectString(String selectedFeature) {
-    return "(object, dfValue, extraConfig) => {if(extraConfig[object.label] == 'true') {return '$selectedFeature'} else {return dfValue}}";
-  }
 }

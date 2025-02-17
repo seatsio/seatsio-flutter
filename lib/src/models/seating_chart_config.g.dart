@@ -109,6 +109,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   final Region region;
   @override
   final BuiltList<PricingForCategory>? pricing;
+  @override
+  final Function(num price)? priceFormatter;
 
   factory _$SeatingChartConfig(
           [void Function(SeatingChartConfigBuilder)? updates]) =>
@@ -119,7 +121,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       this.event,
       this.events,
       required this.region,
-      this.pricing})
+      this.pricing,
+      this.priceFormatter})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         workspaceKey, r'SeatingChartConfig', 'workspaceKey');
@@ -139,12 +142,14 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
+    final dynamic _$dynamicOther = other;
     return other is SeatingChartConfig &&
         workspaceKey == other.workspaceKey &&
         event == other.event &&
         events == other.events &&
         region == other.region &&
-        pricing == other.pricing;
+        pricing == other.pricing &&
+        priceFormatter == _$dynamicOther.priceFormatter;
   }
 
   @override
@@ -155,6 +160,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     _$hash = $jc(_$hash, events.hashCode);
     _$hash = $jc(_$hash, region.hashCode);
     _$hash = $jc(_$hash, pricing.hashCode);
+    _$hash = $jc(_$hash, priceFormatter.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -166,7 +172,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
           ..add('event', event)
           ..add('events', events)
           ..add('region', region)
-          ..add('pricing', pricing))
+          ..add('pricing', pricing)
+          ..add('priceFormatter', priceFormatter))
         .toString();
   }
 }
@@ -198,6 +205,11 @@ class SeatingChartConfigBuilder
   set pricing(ListBuilder<PricingForCategory>? pricing) =>
       _$this._pricing = pricing;
 
+  Function(num price)? _priceFormatter;
+  Function(num price)? get priceFormatter => _$this._priceFormatter;
+  set priceFormatter(Function(num price)? priceFormatter) =>
+      _$this._priceFormatter = priceFormatter;
+
   SeatingChartConfigBuilder() {
     SeatingChartConfig._initializeBuilder(this);
   }
@@ -210,6 +222,7 @@ class SeatingChartConfigBuilder
       _events = $v.events?.toBuilder();
       _region = $v.region;
       _pricing = $v.pricing?.toBuilder();
+      _priceFormatter = $v.priceFormatter;
       _$v = null;
     }
     return this;
@@ -241,6 +254,7 @@ class SeatingChartConfigBuilder
             region: BuiltValueNullFieldError.checkNotNull(
                 region, r'SeatingChartConfig', 'region'),
             pricing: _pricing?.build(),
+            priceFormatter: priceFormatter,
           );
     } catch (_) {
       late String _$failedField;

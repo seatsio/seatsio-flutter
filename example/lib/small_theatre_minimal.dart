@@ -36,7 +36,8 @@ class SmallTheatreMinimal extends StatelessWidget {
             (b) => b
               ..workspaceKey = "publicDemoKey"
               ..events.replace(["smallTheatreEvent2"])
-              ..pricing.replace(simplePricing),
+              ..pricing.replace(simplePricing)
+              ..priceFormatter = (num price) => "\$${price.toStringAsFixed(2)}",
           ),
         ));
   }

@@ -20,6 +20,9 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
 
   BuiltList<PricingForCategory>? get pricing;
 
+  @BuiltValueField(serialize: false)
+  Function(num price)? get priceFormatter;
+
   SeatingChartConfig._();
 
   factory SeatingChartConfig([void Function(SeatingChartConfigBuilder)? updates]) {
