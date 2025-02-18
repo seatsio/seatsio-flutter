@@ -35,7 +35,7 @@ class SmallTheatreMinimal extends StatelessWidget {
           config: SeatingChartConfig(
             (b) => b
               ..workspaceKey = "publicDemoKey"
-              ..events.replace(["smallTheatreEvent2Whatevah"])
+              ..events.replace(["smallTheatreEvent2"])
               ..pricing.replace(simplePricing)
               ..priceFormatter = (num price) => "\$${price.toStringAsFixed(2)}",
           ),
