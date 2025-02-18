@@ -31,11 +31,24 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
     _webViewController = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..addJavaScriptChannel(
+        'FlutterErrorLogger',
+        onMessageReceived: (JavaScriptMessage message) {
+          debugPrint("[WebView error] ${message.message}");
+        },
+      )
+      ..addJavaScriptChannel(
+        'FlutterWarningLogger',
+        onMessageReceived: (JavaScriptMessage message) {
+          debugPrint("[WebView warning] ${message.message}");
+        },
+      )
+      ..addJavaScriptChannel(
         'FlutterLogger',
         onMessageReceived: (JavaScriptMessage message) {
           debugPrint("[WebView] ${message.message}");
         },
       );
+
     _seatsioController = SeatsioWebViewController(webViewController: _webViewController);
     widget._onWebViewCreated?.call(_seatsioController);
   }

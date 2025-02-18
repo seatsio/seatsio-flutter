@@ -5,17 +5,17 @@ final String seatsioHTML = """
     <script>
         (function() {
           console.log = message => window.FlutterLogger.postMessage(message); 
-          console.warn = console.log;
-          console.error = console.log;
+          console.warn = message => window.FlutterWarningLogger.postMessage(message);
+          console.error = message => window.FlutterErrorLogger.postMessage(message);
           window.onerror = function(message, source, lineno, colno, error) {
-            window.FlutterLogger.postMessage(
+            window.FlutterErrorLogger.postMessage(
               "JS Error: " + message + " at " + source + ":" + lineno + ":" + colno
             );
           };
           window.addEventListener("message", function(event) {
             if (event.origin.includes("seatsio.net")) {
               if (typeof event.data === "string" && event.data.includes("error")) {
-                window.FlutterLogger.postMessage(event.data);
+                window.FlutterErrorLogger.postMessage(event.data);
               }
             }
           }, false);
