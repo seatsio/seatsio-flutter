@@ -2,6 +2,25 @@ final String seatsioHTML = """
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+        (function() {
+          console.log = message => window.FlutterLogger.postMessage(message); 
+          console.warn = console.log;
+          console.error = console.log;
+          window.onerror = function(message, source, lineno, colno, error) {
+            window.FlutterLogger.postMessage(
+              "JS Error: " + message + " at " + source + ":" + lineno + ":" + colno
+            );
+          };
+          window.addEventListener("message", function(event) {
+            if (event.origin.includes("seatsio.net")) {
+              if (typeof event.data === "string" && event.data.includes("error")) {
+                window.FlutterLogger.postMessage(event.data);
+              }
+            }
+          }, false);
+        })();
+        </script>
     <script src="https://cdn-%region%.seatsio.net/chart.js" type="text/javascript"></script>
   </head>
     <body style="margin: 0; padding: 0">

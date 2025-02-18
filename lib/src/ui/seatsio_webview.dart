@@ -28,7 +28,14 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
   @override
   void initState() {
     super.initState();
-    _webViewController = WebViewController()..setJavaScriptMode(JavaScriptMode.unrestricted);
+    _webViewController = WebViewController()
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..addJavaScriptChannel(
+        'FlutterLogger',
+        onMessageReceived: (JavaScriptMessage message) {
+          debugPrint("[WebView] ${message.message}");
+        },
+      );
     _seatsioController = SeatsioWebViewController(webViewController: _webViewController);
     widget._onWebViewCreated?.call(_seatsioController);
   }
