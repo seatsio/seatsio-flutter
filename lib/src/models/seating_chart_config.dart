@@ -22,12 +22,40 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
 
   @BuiltValueField(serialize: false)
   Function(num price)? get priceFormatter;
-è
+
   // TODO showsectionpricingoverlay
   // TODO everything under SELECTION https://docs.seats.io/docs/renderer/config-selectedobjects
   // TODO everything under popovers and tooltips https://docs.seats.io/docs/renderer/config-objectPopover
 
   String? get language;
+
+  // TODO messages https://docs.seats.io/docs/renderer/config-messages
+
+  // TODO everything under Categories https://docs.seats.io/docs/renderer/categoryfilter
+
+  // TODO channels https://docs.seats.io/docs/renderer/config-channels
+
+  // TODO everything under Object overrides https://docs.seats.io/docs/renderer/config-objectcolor
+
+  // TODO everything under Visibility https://docs.seats.io/docs/renderer/config-showsectioncontents
+
+  // TODO everything under Session https://docs.seats.io/docs/renderer/config-session
+
+  // TODO everything under UI Customization https://docs.seats.io/docs/renderer/config-showminimap
+
+  // TODO everything under Styling https://docs.seats.io/docs/renderer/colorscheme
+
+  // TODO everything under Floors https://docs.seats.io/docs/renderer/activeFloor
+
+  // TODO everything under Prompts API https://docs.seats.io/docs/renderer/prompts-api/onPlacesPrompt
+
+  // TODO everything under Advanced https://docs.seats.io/docs/renderer/config-fitto
+
+  // TODO everything under React To Events https://docs.seats.io/docs/renderer/events-onchartrendered
+
+  // TODO everything under Renderer Properties https://docs.seats.io/docs/renderer/chart-properties-chartselectedobjects
+
+  // TODO everything under Renderer Methods https://docs.seats.io/docs/renderer/chart-properties-chartrender
 
   SeatingChartConfig._();
 
