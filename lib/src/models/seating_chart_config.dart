@@ -22,6 +22,12 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
 
   @BuiltValueField(serialize: false)
   Function(num price)? get priceFormatter;
+è
+  // TODO showsectionpricingoverlay
+  // TODO everything under SELECTION https://docs.seats.io/docs/renderer/config-selectedobjects
+  // TODO everything under popovers and tooltips https://docs.seats.io/docs/renderer/config-objectPopover
+
+  String? get language;
 
   SeatingChartConfig._();
 

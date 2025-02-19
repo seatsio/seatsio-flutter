@@ -52,6 +52,13 @@ class _$SeatingChartConfigSerializer
             specifiedType: const FullType(
                 BuiltList, const [const FullType(PricingForCategory)])));
     }
+    value = object.language;
+    if (value != null) {
+      result
+        ..add('language')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     return result;
   }
 
@@ -91,6 +98,10 @@ class _$SeatingChartConfigSerializer
                       BuiltList, const [const FullType(PricingForCategory)]))!
               as BuiltList<Object?>);
           break;
+        case 'language':
+          result.language = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
       }
     }
 
@@ -111,6 +122,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   final BuiltList<PricingForCategory>? pricing;
   @override
   final Function(num price)? priceFormatter;
+  @override
+  final String? language;
 
   factory _$SeatingChartConfig(
           [void Function(SeatingChartConfigBuilder)? updates]) =>
@@ -122,7 +135,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       this.events,
       required this.region,
       this.pricing,
-      this.priceFormatter})
+      this.priceFormatter,
+      this.language})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         workspaceKey, r'SeatingChartConfig', 'workspaceKey');
@@ -149,7 +163,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         events == other.events &&
         region == other.region &&
         pricing == other.pricing &&
-        priceFormatter == _$dynamicOther.priceFormatter;
+        priceFormatter == _$dynamicOther.priceFormatter &&
+        language == other.language;
   }
 
   @override
@@ -161,6 +176,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     _$hash = $jc(_$hash, region.hashCode);
     _$hash = $jc(_$hash, pricing.hashCode);
     _$hash = $jc(_$hash, priceFormatter.hashCode);
+    _$hash = $jc(_$hash, language.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -173,7 +189,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
           ..add('events', events)
           ..add('region', region)
           ..add('pricing', pricing)
-          ..add('priceFormatter', priceFormatter))
+          ..add('priceFormatter', priceFormatter)
+          ..add('language', language))
         .toString();
   }
 }
@@ -210,6 +227,10 @@ class SeatingChartConfigBuilder
   set priceFormatter(Function(num price)? priceFormatter) =>
       _$this._priceFormatter = priceFormatter;
 
+  String? _language;
+  String? get language => _$this._language;
+  set language(String? language) => _$this._language = language;
+
   SeatingChartConfigBuilder() {
     SeatingChartConfig._initializeBuilder(this);
   }
@@ -223,6 +244,7 @@ class SeatingChartConfigBuilder
       _region = $v.region;
       _pricing = $v.pricing?.toBuilder();
       _priceFormatter = $v.priceFormatter;
+      _language = $v.language;
       _$v = null;
     }
     return this;
@@ -255,6 +277,7 @@ class SeatingChartConfigBuilder
                 region, r'SeatingChartConfig', 'region'),
             pricing: _pricing?.build(),
             priceFormatter: priceFormatter,
+            language: language,
           );
     } catch (_) {
       late String _$failedField;

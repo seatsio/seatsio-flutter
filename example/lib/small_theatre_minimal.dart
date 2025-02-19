@@ -29,15 +29,17 @@ class SmallTheatreMinimal extends StatelessWidget {
       PricingForCategory(category: "3", price: 50),
     ];
 
+    final priceFormatter = (num price) => "€${price.toStringAsFixed(2)}";
+
     return Scaffold(
         appBar: AppBar(title: Text("Small Theatre - Minimal Config")),
         body: SeatsioSeatingChart(
-          config: SeatingChartConfig(
-            (b) => b
-              ..workspaceKey = "publicDemoKey"
-              ..events.replace(["smallTheatreEvent2"])
-              ..pricing.replace(simplePricing)
-              ..priceFormatter = (num price) => "€${price.toStringAsFixed(2)}",
+          config: SeatingChartConfig((b) => b
+            ..workspaceKey = "publicDemoKey"
+            ..events.replace(["smallTheatreEvent2"])
+            ..pricing.replace(simplePricing)
+            ..priceFormatter = priceFormatter
+            ..language = 'nl'
           ),
         ));
   }
