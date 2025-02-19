@@ -22,6 +22,7 @@ class _SeatsioSeatingChartState extends State<SeatsioSeatingChart> {
       onWebViewCreated: (controller) {
         controller.reload(widget.config);
       },
+      config: widget.config,
     );
   }
 }

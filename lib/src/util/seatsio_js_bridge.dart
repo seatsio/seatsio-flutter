@@ -4,12 +4,24 @@ class SeatsioJsBridge {
   static List<String> buildCallbacksConfiguration(SeatingChartConfig chartConfig) {
     final List<String> callbacks = [];
 
-    // TODO implement
+    if (chartConfig.priceFormatter != null) {
+      callbacks.add("""
+        "priceFormatter": (price) => {
+          promiseCounter++;
+          window.FlutterCallback.postMessage(JSON.stringify({
+            type: "priceFormatterRequested",
+            data: {
+              promiseId: promiseCounter,
+              price: price
+            }
+          }));
+          return new Promise((resolve) => {
+            promises[promiseCounter] = resolve;
+          });
+        }        
+      """);
+    }
 
     return callbacks;
-  }
-
-  static String buildCallbackConfigAsJS(String name) {
-    return '$name: object => $name.postMessage(JSON.stringify(object))';
   }
 }

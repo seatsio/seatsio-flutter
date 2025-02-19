@@ -26,6 +26,12 @@ final String seatsioHTML = """
     <body style="margin: 0; padding: 0">
       <div id="chart" style="width: 100%; height: 100%;"></div>
       <script>
+        let promises = [];
+        let promiseCounter = 0;
+
+        const resolvePromise = (promiseId, data) => {
+            promises[promiseId](data)
+        }
         let chart = new seatsio.SeatingChart(%configAsJs%).render()
       </script>
   </body>
