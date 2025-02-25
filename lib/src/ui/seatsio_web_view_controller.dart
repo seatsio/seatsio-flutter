@@ -12,6 +12,7 @@ typedef void SeatsioWebViewCreatedCallback(SeatsioWebViewController controller);
 
 class SeatsioWebViewController {
   WebViewController _webViewController;
+  bool _debug = false;
 
   SeatsioWebViewController({
     required WebViewController webViewController,
@@ -27,7 +28,9 @@ class SeatsioWebViewController {
     final List<String> callbackEntries = SeatsioJsBridge.buildCallbacksConfiguration(chartConfig);
     final String callbacksJson = callbackEntries.isNotEmpty ? ', ${callbackEntries.join(", ")}' : '';
     final String fullConfigJson = _injectCallbacksJsonIntoConfigJson(configJson, callbacksJson);
-    debugPrint(fullConfigJson); // TODO make this configurable
+    if (_debug) {
+      debugPrint(fullConfigJson);
+    }
     final String htmlString = _injectConfigInHtml(chartConfig, fullConfigJson);
     return _convertToDataUri(htmlString);
   }
