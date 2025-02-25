@@ -12,13 +12,6 @@ final String seatsioHTML = """
               "JS Error: " + message + " at " + source + ":" + lineno + ":" + colno
             );
           };
-          window.addEventListener("message", function(event) {
-            if (event.origin.includes("seatsio.net")) {
-              if (typeof event.data === "string" && event.data.includes("error")) {
-                window.FlutterErrorLogger.postMessage(event.data);
-              }
-            }
-          }, false);
         })();
         </script>
     <script src="https://cdn-%region%.seatsio.net/chart.js" type="text/javascript"></script>
