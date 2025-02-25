@@ -37,6 +37,10 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
 
   // TODO everything under Object overrides https://docs.seats.io/docs/renderer/config-objectcolor
 
+  @BuiltValueField(serialize: false)
+  String? get objectColor;
+
+
   // TODO everything under Visibility https://docs.seats.io/docs/renderer/config-showsectioncontents
 
   // TODO everything under Session https://docs.seats.io/docs/renderer/config-session

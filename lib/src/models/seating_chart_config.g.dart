@@ -124,6 +124,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   final Function(num price)? priceFormatter;
   @override
   final String? language;
+  @override
+  final String? objectColor;
 
   factory _$SeatingChartConfig(
           [void Function(SeatingChartConfigBuilder)? updates]) =>
@@ -136,7 +138,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       required this.region,
       this.pricing,
       this.priceFormatter,
-      this.language})
+      this.language,
+      this.objectColor})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         workspaceKey, r'SeatingChartConfig', 'workspaceKey');
@@ -164,7 +167,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         region == other.region &&
         pricing == other.pricing &&
         priceFormatter == _$dynamicOther.priceFormatter &&
-        language == other.language;
+        language == other.language &&
+        objectColor == other.objectColor;
   }
 
   @override
@@ -177,6 +181,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     _$hash = $jc(_$hash, pricing.hashCode);
     _$hash = $jc(_$hash, priceFormatter.hashCode);
     _$hash = $jc(_$hash, language.hashCode);
+    _$hash = $jc(_$hash, objectColor.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -190,7 +195,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
           ..add('region', region)
           ..add('pricing', pricing)
           ..add('priceFormatter', priceFormatter)
-          ..add('language', language))
+          ..add('language', language)
+          ..add('objectColor', objectColor))
         .toString();
   }
 }
@@ -231,6 +237,10 @@ class SeatingChartConfigBuilder
   String? get language => _$this._language;
   set language(String? language) => _$this._language = language;
 
+  String? _objectColor;
+  String? get objectColor => _$this._objectColor;
+  set objectColor(String? objectColor) => _$this._objectColor = objectColor;
+
   SeatingChartConfigBuilder() {
     SeatingChartConfig._initializeBuilder(this);
   }
@@ -245,6 +255,7 @@ class SeatingChartConfigBuilder
       _pricing = $v.pricing?.toBuilder();
       _priceFormatter = $v.priceFormatter;
       _language = $v.language;
+      _objectColor = $v.objectColor;
       _$v = null;
     }
     return this;
@@ -278,6 +289,7 @@ class SeatingChartConfigBuilder
             pricing: _pricing?.build(),
             priceFormatter: priceFormatter,
             language: language,
+            objectColor: objectColor,
           );
     } catch (_) {
       late String _$failedField;

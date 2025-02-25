@@ -40,7 +40,7 @@ class SmallTheatreMinimal extends StatelessWidget {
             ..pricing.replace(simplePricing)
             ..priceFormatter = priceFormatter
             ..language = 'nl'
-          ),
+            ..objectColor = "function(object, defaultColor) { return object.id.startsWith('A') ? 'red' : 'blue'; }"),
         ));
   }
 }
