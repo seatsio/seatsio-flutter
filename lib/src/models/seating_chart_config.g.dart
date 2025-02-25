@@ -21,12 +21,12 @@ class _$SeatingChartConfigSerializer
       Serializers serializers, SeatingChartConfig object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
-      'workspaceKey',
-      serializers.serialize(object.workspaceKey,
-          specifiedType: const FullType(String)),
       'region',
       serializers.serialize(object.region,
           specifiedType: const FullType(Region)),
+      'workspaceKey',
+      serializers.serialize(object.workspaceKey,
+          specifiedType: const FullType(String)),
     ];
     Object? value;
     value = object.event;
@@ -43,6 +43,13 @@ class _$SeatingChartConfigSerializer
         ..add(serializers.serialize(value,
             specifiedType:
                 const FullType(BuiltList, const [const FullType(String)])));
+    }
+    value = object.mode;
+    if (value != null) {
+      result
+        ..add('mode')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
     }
     value = object.pricing;
     if (value != null) {
@@ -74,9 +81,9 @@ class _$SeatingChartConfigSerializer
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
-        case 'workspaceKey':
-          result.workspaceKey = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+        case 'region':
+          result.region = serializers.deserialize(value,
+              specifiedType: const FullType(Region))! as Region;
           break;
         case 'event':
           result.event = serializers.deserialize(value,
@@ -88,9 +95,13 @@ class _$SeatingChartConfigSerializer
                       BuiltList, const [const FullType(String)]))!
               as BuiltList<Object?>);
           break;
-        case 'region':
-          result.region = serializers.deserialize(value,
-              specifiedType: const FullType(Region))! as Region;
+        case 'workspaceKey':
+          result.workspaceKey = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+        case 'mode':
+          result.mode = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'pricing':
           result.pricing.replace(serializers.deserialize(value,
@@ -111,13 +122,15 @@ class _$SeatingChartConfigSerializer
 
 class _$SeatingChartConfig extends SeatingChartConfig {
   @override
-  final String workspaceKey;
+  final Region region;
   @override
   final String? event;
   @override
   final BuiltList<String>? events;
   @override
-  final Region region;
+  final String workspaceKey;
+  @override
+  final String? mode;
   @override
   final BuiltList<PricingForCategory>? pricing;
   @override
@@ -132,19 +145,20 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       (new SeatingChartConfigBuilder()..update(updates))._build();
 
   _$SeatingChartConfig._(
-      {required this.workspaceKey,
+      {required this.region,
       this.event,
       this.events,
-      required this.region,
+      required this.workspaceKey,
+      this.mode,
       this.pricing,
       this.priceFormatter,
       this.language,
       this.objectColor})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        workspaceKey, r'SeatingChartConfig', 'workspaceKey');
-    BuiltValueNullFieldError.checkNotNull(
         region, r'SeatingChartConfig', 'region');
+    BuiltValueNullFieldError.checkNotNull(
+        workspaceKey, r'SeatingChartConfig', 'workspaceKey');
   }
 
   @override
@@ -161,10 +175,11 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     if (identical(other, this)) return true;
     final dynamic _$dynamicOther = other;
     return other is SeatingChartConfig &&
-        workspaceKey == other.workspaceKey &&
+        region == other.region &&
         event == other.event &&
         events == other.events &&
-        region == other.region &&
+        workspaceKey == other.workspaceKey &&
+        mode == other.mode &&
         pricing == other.pricing &&
         priceFormatter == _$dynamicOther.priceFormatter &&
         language == other.language &&
@@ -174,10 +189,11 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   int get hashCode {
     var _$hash = 0;
-    _$hash = $jc(_$hash, workspaceKey.hashCode);
+    _$hash = $jc(_$hash, region.hashCode);
     _$hash = $jc(_$hash, event.hashCode);
     _$hash = $jc(_$hash, events.hashCode);
-    _$hash = $jc(_$hash, region.hashCode);
+    _$hash = $jc(_$hash, workspaceKey.hashCode);
+    _$hash = $jc(_$hash, mode.hashCode);
     _$hash = $jc(_$hash, pricing.hashCode);
     _$hash = $jc(_$hash, priceFormatter.hashCode);
     _$hash = $jc(_$hash, language.hashCode);
@@ -189,10 +205,11 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   String toString() {
     return (newBuiltValueToStringHelper(r'SeatingChartConfig')
-          ..add('workspaceKey', workspaceKey)
+          ..add('region', region)
           ..add('event', event)
           ..add('events', events)
-          ..add('region', region)
+          ..add('workspaceKey', workspaceKey)
+          ..add('mode', mode)
           ..add('pricing', pricing)
           ..add('priceFormatter', priceFormatter)
           ..add('language', language)
@@ -205,9 +222,9 @@ class SeatingChartConfigBuilder
     implements Builder<SeatingChartConfig, SeatingChartConfigBuilder> {
   _$SeatingChartConfig? _$v;
 
-  String? _workspaceKey;
-  String? get workspaceKey => _$this._workspaceKey;
-  set workspaceKey(String? workspaceKey) => _$this._workspaceKey = workspaceKey;
+  Region? _region;
+  Region? get region => _$this._region;
+  set region(Region? region) => _$this._region = region;
 
   String? _event;
   String? get event => _$this._event;
@@ -218,9 +235,13 @@ class SeatingChartConfigBuilder
       _$this._events ??= new ListBuilder<String>();
   set events(ListBuilder<String>? events) => _$this._events = events;
 
-  Region? _region;
-  Region? get region => _$this._region;
-  set region(Region? region) => _$this._region = region;
+  String? _workspaceKey;
+  String? get workspaceKey => _$this._workspaceKey;
+  set workspaceKey(String? workspaceKey) => _$this._workspaceKey = workspaceKey;
+
+  String? _mode;
+  String? get mode => _$this._mode;
+  set mode(String? mode) => _$this._mode = mode;
 
   ListBuilder<PricingForCategory>? _pricing;
   ListBuilder<PricingForCategory> get pricing =>
@@ -248,10 +269,11 @@ class SeatingChartConfigBuilder
   SeatingChartConfigBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      _workspaceKey = $v.workspaceKey;
+      _region = $v.region;
       _event = $v.event;
       _events = $v.events?.toBuilder();
-      _region = $v.region;
+      _workspaceKey = $v.workspaceKey;
+      _mode = $v.mode;
       _pricing = $v.pricing?.toBuilder();
       _priceFormatter = $v.priceFormatter;
       _language = $v.language;
@@ -280,12 +302,13 @@ class SeatingChartConfigBuilder
     try {
       _$result = _$v ??
           new _$SeatingChartConfig._(
-            workspaceKey: BuiltValueNullFieldError.checkNotNull(
-                workspaceKey, r'SeatingChartConfig', 'workspaceKey'),
-            event: event,
-            events: _events?.build(),
             region: BuiltValueNullFieldError.checkNotNull(
                 region, r'SeatingChartConfig', 'region'),
+            event: event,
+            events: _events?.build(),
+            workspaceKey: BuiltValueNullFieldError.checkNotNull(
+                workspaceKey, r'SeatingChartConfig', 'workspaceKey'),
+            mode: mode,
             pricing: _pricing?.build(),
             priceFormatter: priceFormatter,
             language: language,

@@ -7,15 +7,14 @@ import '../../seatsio.dart';
 part 'seating_chart_config.g.dart';
 
 abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingChartConfigBuilder> {
-  String get workspaceKey;
 
-  String? get event;
-
-  BuiltList<String>? get events;
-
+  // Fundamentals & General Purpose
   Region get region;
+  String? get event;
+  BuiltList<String>? get events;
+  String get workspaceKey;
+  String? get mode;
 
-  // TODO mode
   // TODO extraConfig
 
   BuiltList<PricingForCategory>? get pricing;
@@ -39,7 +38,6 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
 
   @BuiltValueField(serialize: false)
   String? get objectColor;
-
 
   // TODO everything under Visibility https://docs.seats.io/docs/renderer/config-showsectioncontents
 
