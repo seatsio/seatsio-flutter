@@ -42,7 +42,7 @@ class _$SeatingChartConfigSerializer
         ..add('events')
         ..add(serializers.serialize(value,
             specifiedType:
-                const FullType(BuiltList, const [const FullType(String)])));
+                const FullType(List, const [const FullType(String)])));
     }
     value = object.mode;
     if (value != null) {
@@ -90,10 +90,10 @@ class _$SeatingChartConfigSerializer
               specifiedType: const FullType(String)) as String?;
           break;
         case 'events':
-          result.events.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      BuiltList, const [const FullType(String)]))!
-              as BuiltList<Object?>);
+          result.events = serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(List, const [const FullType(String)]))
+              as List<String>?;
           break;
         case 'workspaceKey':
           result.workspaceKey = serializers.deserialize(value,
@@ -126,7 +126,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   final String? event;
   @override
-  final BuiltList<String>? events;
+  final List<String>? events;
   @override
   final String workspaceKey;
   @override
@@ -230,10 +230,9 @@ class SeatingChartConfigBuilder
   String? get event => _$this._event;
   set event(String? event) => _$this._event = event;
 
-  ListBuilder<String>? _events;
-  ListBuilder<String> get events =>
-      _$this._events ??= new ListBuilder<String>();
-  set events(ListBuilder<String>? events) => _$this._events = events;
+  List<String>? _events;
+  List<String>? get events => _$this._events;
+  set events(List<String>? events) => _$this._events = events;
 
   String? _workspaceKey;
   String? get workspaceKey => _$this._workspaceKey;
@@ -271,7 +270,7 @@ class SeatingChartConfigBuilder
     if ($v != null) {
       _region = $v.region;
       _event = $v.event;
-      _events = $v.events?.toBuilder();
+      _events = $v.events;
       _workspaceKey = $v.workspaceKey;
       _mode = $v.mode;
       _pricing = $v.pricing?.toBuilder();
@@ -305,7 +304,7 @@ class SeatingChartConfigBuilder
             region: BuiltValueNullFieldError.checkNotNull(
                 region, r'SeatingChartConfig', 'region'),
             event: event,
-            events: _events?.build(),
+            events: events,
             workspaceKey: BuiltValueNullFieldError.checkNotNull(
                 workspaceKey, r'SeatingChartConfig', 'workspaceKey'),
             mode: mode,
@@ -317,9 +316,6 @@ class SeatingChartConfigBuilder
     } catch (_) {
       late String _$failedField;
       try {
-        _$failedField = 'events';
-        _events?.build();
-
         _$failedField = 'pricing';
         _pricing?.build();
       } catch (e) {

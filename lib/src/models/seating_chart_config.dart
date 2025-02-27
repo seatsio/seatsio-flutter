@@ -9,14 +9,14 @@ part 'seating_chart_config.g.dart';
 abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingChartConfigBuilder> {
 
   // Fundamentals & General Purpose
+  String get workspaceKey;
   Region get region;
   String? get event;
-  BuiltList<String>? get events;
-  String get workspaceKey;
+  List<String>? get events;
   String? get mode;
-
   // TODO extraConfig
 
+  // Pricing
   BuiltList<PricingForCategory>? get pricing;
 
   @BuiltValueField(serialize: false)
@@ -81,4 +81,15 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
   }
 
   static Serializer<SeatingChartConfig> get serializer => _$seatingChartConfigSerializer;
+
+  Map<String, dynamic> toJson() {
+    return {
+      "workspaceKey": workspaceKey,
+      if (event != null) "event": event,
+      if (events != null) "events": events,
+      if (mode != null) "mode": mode,
+      if (language != null) "language": language,
+      if (objectColor != null) "objectColor": objectColor,
+    };
+  }
 }

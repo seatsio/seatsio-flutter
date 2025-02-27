@@ -36,11 +36,13 @@ class SmallTheatreMaximal extends StatelessWidget {
         body: SeatsioSeatingChart(
           config: SeatingChartConfig((b) => b
             ..workspaceKey = "publicDemoKey"
-            ..events.replace(["smallTheatreEvent2"])
-            ..pricing.replace(simplePricing)
+            ..events = ["smallTheatreEvent2"]
+            ..pricing.replace(multiLevelPricing)
             ..priceFormatter = priceFormatter
-            ..language = 'nl'
-            ..objectColor = "function(object, defaultColor) { return object.id.startsWith('A') ? 'red' : 'blue'; }"),
+            // ..language = 'nl'
+            // ..objectColor = "function(object, defaultColor) { return object.id.startsWith('A') ? 'red' : 'blue'; }"
+            //
+          ),
         ));
   }
 }

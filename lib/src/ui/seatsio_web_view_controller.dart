@@ -24,7 +24,7 @@ class SeatsioWebViewController {
   }
 
   String _generateHtmlContentAsDataUri(SeatingChartConfig chartConfig) {
-    final String configJson = jsonEncode(serializers.serialize(chartConfig));
+    final String configJson = jsonEncode(chartConfig.toJson()); // TODO move everything below this to chartConfig.toJson()
     final List<String> callbackEntries = SeatsioJsBridge.buildCallbacksConfiguration(chartConfig);
     final String callbacksJson = callbackEntries.isNotEmpty ? ', ${callbackEntries.join(", ")}' : '';
     final String fullConfigJson = _injectCallbacksJsonIntoConfigJson(configJson, callbacksJson);
