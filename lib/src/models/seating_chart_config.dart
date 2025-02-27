@@ -32,6 +32,8 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
 
   List<String>? get selectableObjects;
 
+  List<SelectionValidator>? get selectionValidators;
+
   // TODO everything under SELECTION https://docs.seats.io/docs/renderer/config-selectedobjects
 
   // TODO everything under popovers and tooltips https://docs.seats.io/docs/renderer/config-objectPopover
@@ -106,6 +108,7 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
       // selection
       if (selectedObjects != null) "selectedObjects": selectedObjects,
       if (selectableObjects != null) "selectableObjects": selectableObjects,
+      if (selectionValidators != null) "selectionValidators": selectionValidators!.map((v) => v.toJson()).toList(),
       // rest
       if (language != null) "language": language,
       if (objectColor != null) "objectColor": objectColor,

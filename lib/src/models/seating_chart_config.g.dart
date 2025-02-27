@@ -82,6 +82,14 @@ class _$SeatingChartConfigSerializer
             specifiedType:
                 const FullType(List, const [const FullType(String)])));
     }
+    value = object.selectionValidators;
+    if (value != null) {
+      result
+        ..add('selectionValidators')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(
+                List, const [const FullType(SelectionValidator)])));
+    }
     value = object.language;
     if (value != null) {
       result
@@ -148,6 +156,12 @@ class _$SeatingChartConfigSerializer
                       const FullType(List, const [const FullType(String)]))
               as List<String>?;
           break;
+        case 'selectionValidators':
+          result.selectionValidators = serializers.deserialize(value,
+                  specifiedType: const FullType(
+                      List, const [const FullType(SelectionValidator)]))
+              as List<SelectionValidator>?;
+          break;
         case 'language':
           result.language = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
@@ -181,6 +195,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   final List<String>? selectableObjects;
   @override
+  final List<SelectionValidator>? selectionValidators;
+  @override
   final String? language;
   @override
   final String? objectColor;
@@ -200,6 +216,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       this.showSectionPricingOverlay,
       this.selectedObjects,
       this.selectableObjects,
+      this.selectionValidators,
       this.language,
       this.objectColor})
       : super._() {
@@ -233,6 +250,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         showSectionPricingOverlay == other.showSectionPricingOverlay &&
         selectedObjects == other.selectedObjects &&
         selectableObjects == other.selectableObjects &&
+        selectionValidators == other.selectionValidators &&
         language == other.language &&
         objectColor == other.objectColor;
   }
@@ -250,6 +268,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     _$hash = $jc(_$hash, showSectionPricingOverlay.hashCode);
     _$hash = $jc(_$hash, selectedObjects.hashCode);
     _$hash = $jc(_$hash, selectableObjects.hashCode);
+    _$hash = $jc(_$hash, selectionValidators.hashCode);
     _$hash = $jc(_$hash, language.hashCode);
     _$hash = $jc(_$hash, objectColor.hashCode);
     _$hash = $jf(_$hash);
@@ -269,6 +288,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
           ..add('showSectionPricingOverlay', showSectionPricingOverlay)
           ..add('selectedObjects', selectedObjects)
           ..add('selectableObjects', selectableObjects)
+          ..add('selectionValidators', selectionValidators)
           ..add('language', language)
           ..add('objectColor', objectColor))
         .toString();
@@ -323,6 +343,12 @@ class SeatingChartConfigBuilder
   set selectableObjects(List<String>? selectableObjects) =>
       _$this._selectableObjects = selectableObjects;
 
+  List<SelectionValidator>? _selectionValidators;
+  List<SelectionValidator>? get selectionValidators =>
+      _$this._selectionValidators;
+  set selectionValidators(List<SelectionValidator>? selectionValidators) =>
+      _$this._selectionValidators = selectionValidators;
+
   String? _language;
   String? get language => _$this._language;
   set language(String? language) => _$this._language = language;
@@ -348,6 +374,7 @@ class SeatingChartConfigBuilder
       _showSectionPricingOverlay = $v.showSectionPricingOverlay;
       _selectedObjects = $v.selectedObjects;
       _selectableObjects = $v.selectableObjects;
+      _selectionValidators = $v.selectionValidators;
       _language = $v.language;
       _objectColor = $v.objectColor;
       _$v = null;
@@ -384,6 +411,7 @@ class SeatingChartConfigBuilder
           showSectionPricingOverlay: showSectionPricingOverlay,
           selectedObjects: selectedObjects,
           selectableObjects: selectableObjects,
+          selectionValidators: selectionValidators,
           language: language,
           objectColor: objectColor,
         );
