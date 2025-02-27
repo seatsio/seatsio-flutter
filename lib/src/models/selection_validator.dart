@@ -41,3 +41,14 @@ abstract class NoOrphanSeats implements Built<NoOrphanSeats, NoOrphanSeatsBuilde
     };
   }
 }
+
+abstract class ConsecutiveSeats implements Built<ConsecutiveSeats, ConsecutiveSeatsBuilder>, SelectionValidator {
+  ConsecutiveSeats._();
+
+  factory ConsecutiveSeats() => _$ConsecutiveSeats._();
+
+  @override
+  Map<String, dynamic> toJson() {
+    return {'type': 'consecutiveSeats'};
+  }
+}

@@ -112,4 +112,63 @@ class NoOrphanSeatsBuilder
   }
 }
 
+class _$ConsecutiveSeats extends ConsecutiveSeats {
+  factory _$ConsecutiveSeats(
+          [void Function(ConsecutiveSeatsBuilder)? updates]) =>
+      (new ConsecutiveSeatsBuilder()..update(updates))._build();
+
+  _$ConsecutiveSeats._() : super._();
+
+  @override
+  ConsecutiveSeats rebuild(void Function(ConsecutiveSeatsBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  ConsecutiveSeatsBuilder toBuilder() =>
+      new ConsecutiveSeatsBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is ConsecutiveSeats;
+  }
+
+  @override
+  int get hashCode {
+    return 1070419616;
+  }
+
+  @override
+  String toString() {
+    return newBuiltValueToStringHelper(r'ConsecutiveSeats').toString();
+  }
+}
+
+class ConsecutiveSeatsBuilder
+    implements Builder<ConsecutiveSeats, ConsecutiveSeatsBuilder> {
+  _$ConsecutiveSeats? _$v;
+
+  ConsecutiveSeatsBuilder();
+
+  @override
+  void replace(ConsecutiveSeats other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$ConsecutiveSeats;
+  }
+
+  @override
+  void update(void Function(ConsecutiveSeatsBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  ConsecutiveSeats build() => _build();
+
+  _$ConsecutiveSeats _build() {
+    final _$result = _$v ?? new _$ConsecutiveSeats._();
+    replace(_$result);
+    return _$result;
+  }
+}
+
 // ignore_for_file: deprecated_member_use_from_same_package,type=lint

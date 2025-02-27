@@ -43,7 +43,7 @@ class LargeTheatreMaximal extends StatelessWidget {
                 ..selectedObjects = ['Circle P-1-12', 'Circle P-1-11', 'Circle P-1-10']
                 ..selectionValidators = [
                   NoOrphanSeats(ignoreCategories: true, mode: NoOrphanSeatsMode.strict, highlight: true),
-                  //  ConsecutiveSeats(),
+                  ConsecutiveSeats(),
 //                  MinimumSelectedPlaces(4)
                 ]
               // ..language = 'nl'
