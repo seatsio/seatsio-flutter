@@ -66,6 +66,14 @@ class _$SeatingChartConfigSerializer
         ..add(
             serializers.serialize(value, specifiedType: const FullType(bool)));
     }
+    value = object.selectedObjects;
+    if (value != null) {
+      result
+        ..add('selectedObjects')
+        ..add(serializers.serialize(value,
+            specifiedType:
+                const FullType(List, const [const FullType(String)])));
+    }
     value = object.language;
     if (value != null) {
       result
@@ -120,6 +128,12 @@ class _$SeatingChartConfigSerializer
           result.showSectionPricingOverlay = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool?;
           break;
+        case 'selectedObjects':
+          result.selectedObjects = serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(List, const [const FullType(String)]))
+              as List<String>?;
+          break;
         case 'language':
           result.language = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
@@ -149,6 +163,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   final bool? showSectionPricingOverlay;
   @override
+  final List<String>? selectedObjects;
+  @override
   final String? language;
   @override
   final String? objectColor;
@@ -166,6 +182,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       this.pricing,
       this.priceFormatter,
       this.showSectionPricingOverlay,
+      this.selectedObjects,
       this.language,
       this.objectColor})
       : super._() {
@@ -197,6 +214,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         pricing == other.pricing &&
         priceFormatter == _$dynamicOther.priceFormatter &&
         showSectionPricingOverlay == other.showSectionPricingOverlay &&
+        selectedObjects == other.selectedObjects &&
         language == other.language &&
         objectColor == other.objectColor;
   }
@@ -212,6 +230,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     _$hash = $jc(_$hash, pricing.hashCode);
     _$hash = $jc(_$hash, priceFormatter.hashCode);
     _$hash = $jc(_$hash, showSectionPricingOverlay.hashCode);
+    _$hash = $jc(_$hash, selectedObjects.hashCode);
     _$hash = $jc(_$hash, language.hashCode);
     _$hash = $jc(_$hash, objectColor.hashCode);
     _$hash = $jf(_$hash);
@@ -229,6 +248,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
           ..add('pricing', pricing)
           ..add('priceFormatter', priceFormatter)
           ..add('showSectionPricingOverlay', showSectionPricingOverlay)
+          ..add('selectedObjects', selectedObjects)
           ..add('language', language)
           ..add('objectColor', objectColor))
         .toString();
@@ -273,6 +293,11 @@ class SeatingChartConfigBuilder
   set showSectionPricingOverlay(bool? showSectionPricingOverlay) =>
       _$this._showSectionPricingOverlay = showSectionPricingOverlay;
 
+  List<String>? _selectedObjects;
+  List<String>? get selectedObjects => _$this._selectedObjects;
+  set selectedObjects(List<String>? selectedObjects) =>
+      _$this._selectedObjects = selectedObjects;
+
   String? _language;
   String? get language => _$this._language;
   set language(String? language) => _$this._language = language;
@@ -296,6 +321,7 @@ class SeatingChartConfigBuilder
       _pricing = $v.pricing;
       _priceFormatter = $v.priceFormatter;
       _showSectionPricingOverlay = $v.showSectionPricingOverlay;
+      _selectedObjects = $v.selectedObjects;
       _language = $v.language;
       _objectColor = $v.objectColor;
       _$v = null;
@@ -330,6 +356,7 @@ class SeatingChartConfigBuilder
           pricing: pricing,
           priceFormatter: priceFormatter,
           showSectionPricingOverlay: showSectionPricingOverlay,
+          selectedObjects: selectedObjects,
           language: language,
           objectColor: objectColor,
         );

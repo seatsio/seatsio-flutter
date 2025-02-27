@@ -40,6 +40,7 @@ class LargeTheatreMaximal extends StatelessWidget {
                 ..pricing = multiLevelPricing
                 ..priceFormatter = priceFormatter
                 ..showSectionPricingOverlay = true
+              ..selectedObjects = ['Circle P-1-12', 'Circle P-1-11', 'Circle P-1-10']
               // ..language = 'nl'
               // ..objectColor = "function(object, defaultColor) { return object.id.startsWith('A') ? 'red' : 'blue'; }"
               //
