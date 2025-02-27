@@ -171,4 +171,92 @@ class ConsecutiveSeatsBuilder
   }
 }
 
+class _$MinimumSelectedPlaces extends MinimumSelectedPlaces {
+  @override
+  final int minimum;
+
+  factory _$MinimumSelectedPlaces(
+          [void Function(MinimumSelectedPlacesBuilder)? updates]) =>
+      (new MinimumSelectedPlacesBuilder()..update(updates))._build();
+
+  _$MinimumSelectedPlaces._({required this.minimum}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        minimum, r'MinimumSelectedPlaces', 'minimum');
+  }
+
+  @override
+  MinimumSelectedPlaces rebuild(
+          void Function(MinimumSelectedPlacesBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  MinimumSelectedPlacesBuilder toBuilder() =>
+      new MinimumSelectedPlacesBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is MinimumSelectedPlaces && minimum == other.minimum;
+  }
+
+  @override
+  int get hashCode {
+    var _$hash = 0;
+    _$hash = $jc(_$hash, minimum.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(r'MinimumSelectedPlaces')
+          ..add('minimum', minimum))
+        .toString();
+  }
+}
+
+class MinimumSelectedPlacesBuilder
+    implements Builder<MinimumSelectedPlaces, MinimumSelectedPlacesBuilder> {
+  _$MinimumSelectedPlaces? _$v;
+
+  int? _minimum;
+  int? get minimum => _$this._minimum;
+  set minimum(int? minimum) => _$this._minimum = minimum;
+
+  MinimumSelectedPlacesBuilder();
+
+  MinimumSelectedPlacesBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _minimum = $v.minimum;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(MinimumSelectedPlaces other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$MinimumSelectedPlaces;
+  }
+
+  @override
+  void update(void Function(MinimumSelectedPlacesBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  MinimumSelectedPlaces build() => _build();
+
+  _$MinimumSelectedPlaces _build() {
+    final _$result = _$v ??
+        new _$MinimumSelectedPlaces._(
+          minimum: BuiltValueNullFieldError.checkNotNull(
+              minimum, r'MinimumSelectedPlaces', 'minimum'),
+        );
+    replace(_$result);
+    return _$result;
+  }
+}
+
 // ignore_for_file: deprecated_member_use_from_same_package,type=lint

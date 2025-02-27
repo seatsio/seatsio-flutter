@@ -52,3 +52,17 @@ abstract class ConsecutiveSeats implements Built<ConsecutiveSeats, ConsecutiveSe
     return {'type': 'consecutiveSeats'};
   }
 }
+
+abstract class MinimumSelectedPlaces
+    implements Built<MinimumSelectedPlaces, MinimumSelectedPlacesBuilder>, SelectionValidator {
+  int get minimum;
+
+  MinimumSelectedPlaces._();
+
+  factory MinimumSelectedPlaces(int minimum) => _$MinimumSelectedPlaces._(minimum: minimum);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return {'type': 'minimumSelectedPlaces', 'minimum': minimum};
+  }
+}

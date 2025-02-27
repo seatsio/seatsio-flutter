@@ -44,7 +44,7 @@ class LargeTheatreMaximal extends StatelessWidget {
                 ..selectionValidators = [
                   NoOrphanSeats(ignoreCategories: true, mode: NoOrphanSeatsMode.strict, highlight: true),
                   ConsecutiveSeats(),
-//                  MinimumSelectedPlaces(4)
+                  MinimumSelectedPlaces(4)
                 ]
               // ..language = 'nl'
               // ..objectColor = "function(object, defaultColor) { return object.id.startsWith('A') ? 'red' : 'blue'; }"
