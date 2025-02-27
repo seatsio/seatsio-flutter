@@ -59,6 +59,13 @@ class _$SeatingChartConfigSerializer
             specifiedType: const FullType(
                 List, const [const FullType(PricingForCategory)])));
     }
+    value = object.showSectionPricingOverlay;
+    if (value != null) {
+      result
+        ..add('showSectionPricingOverlay')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(bool)));
+    }
     value = object.language;
     if (value != null) {
       result
@@ -109,6 +116,10 @@ class _$SeatingChartConfigSerializer
                       List, const [const FullType(PricingForCategory)]))
               as List<PricingForCategory>?;
           break;
+        case 'showSectionPricingOverlay':
+          result.showSectionPricingOverlay = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool?;
+          break;
         case 'language':
           result.language = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
@@ -136,6 +147,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   final Function(num price)? priceFormatter;
   @override
+  final bool? showSectionPricingOverlay;
+  @override
   final String? language;
   @override
   final String? objectColor;
@@ -152,6 +165,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       this.mode,
       this.pricing,
       this.priceFormatter,
+      this.showSectionPricingOverlay,
       this.language,
       this.objectColor})
       : super._() {
@@ -182,6 +196,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         mode == other.mode &&
         pricing == other.pricing &&
         priceFormatter == _$dynamicOther.priceFormatter &&
+        showSectionPricingOverlay == other.showSectionPricingOverlay &&
         language == other.language &&
         objectColor == other.objectColor;
   }
@@ -196,6 +211,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     _$hash = $jc(_$hash, mode.hashCode);
     _$hash = $jc(_$hash, pricing.hashCode);
     _$hash = $jc(_$hash, priceFormatter.hashCode);
+    _$hash = $jc(_$hash, showSectionPricingOverlay.hashCode);
     _$hash = $jc(_$hash, language.hashCode);
     _$hash = $jc(_$hash, objectColor.hashCode);
     _$hash = $jf(_$hash);
@@ -212,6 +228,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
           ..add('mode', mode)
           ..add('pricing', pricing)
           ..add('priceFormatter', priceFormatter)
+          ..add('showSectionPricingOverlay', showSectionPricingOverlay)
           ..add('language', language)
           ..add('objectColor', objectColor))
         .toString();
@@ -251,6 +268,11 @@ class SeatingChartConfigBuilder
   set priceFormatter(Function(num price)? priceFormatter) =>
       _$this._priceFormatter = priceFormatter;
 
+  bool? _showSectionPricingOverlay;
+  bool? get showSectionPricingOverlay => _$this._showSectionPricingOverlay;
+  set showSectionPricingOverlay(bool? showSectionPricingOverlay) =>
+      _$this._showSectionPricingOverlay = showSectionPricingOverlay;
+
   String? _language;
   String? get language => _$this._language;
   set language(String? language) => _$this._language = language;
@@ -273,6 +295,7 @@ class SeatingChartConfigBuilder
       _mode = $v.mode;
       _pricing = $v.pricing;
       _priceFormatter = $v.priceFormatter;
+      _showSectionPricingOverlay = $v.showSectionPricingOverlay;
       _language = $v.language;
       _objectColor = $v.objectColor;
       _$v = null;
@@ -306,6 +329,7 @@ class SeatingChartConfigBuilder
           mode: mode,
           pricing: pricing,
           priceFormatter: priceFormatter,
+          showSectionPricingOverlay: showSectionPricingOverlay,
           language: language,
           objectColor: objectColor,
         );

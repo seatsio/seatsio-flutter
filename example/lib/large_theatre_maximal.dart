@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:seatsio/seatsio.dart';
 
-class SmallTheatreMaximal extends StatelessWidget {
+class LargeTheatreMaximal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final multiLevelPricing = [
       PricingForCategory(
-        category: "1",
+        category: "Arena",
         ticketTypes: [
           TicketType(ticketType: "adult", price: 30, originalPrice: 50),
           TicketType(ticketType: "child", price: 20, label: "For children"),
         ],
       ),
       PricingForCategory(
-        category: "2",
+        category: "Stalls",
         ticketTypes: [
           TicketType(ticketType: "adult", price: 40),
           TicketType(ticketType: "child", price: 30, label: "For children"),
@@ -35,14 +35,15 @@ class SmallTheatreMaximal extends StatelessWidget {
         appBar: AppBar(title: Text("Small Theatre - Minimal Config")),
         body: SeatsioSeatingChart(
           config: SeatingChartConfig((b) => b
-            ..workspaceKey = "publicDemoKey"
-            ..events = ["smallTheatreEvent2"]
-            ..pricing = multiLevelPricing
-            ..priceFormatter = priceFormatter
-            // ..language = 'nl'
-            // ..objectColor = "function(object, defaultColor) { return object.id.startsWith('A') ? 'red' : 'blue'; }"
-            //
-          ),
+                ..workspaceKey = "publicDemoKey"
+                ..events = ["largeTheatreEvent"]
+                ..pricing = multiLevelPricing
+                ..priceFormatter = priceFormatter
+                ..showSectionPricingOverlay = true
+              // ..language = 'nl'
+              // ..objectColor = "function(object, defaultColor) { return object.id.startsWith('A') ? 'red' : 'blue'; }"
+              //
+              ),
         ));
   }
 }

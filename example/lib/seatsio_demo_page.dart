@@ -2,16 +2,16 @@ import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
 import 'package:seatsio/seatsio_old.dart';
 
-class SmallTheatrePlayground extends StatefulWidget {
+class OldLibraryCodePlayground extends StatefulWidget {
   final title;
 
-  SmallTheatrePlayground({Key? key, required this.title}) : super(key: key);
+  OldLibraryCodePlayground({Key? key, required this.title}) : super(key: key);
 
   @override
-  _SmallTheatrePlaygroundState createState() => _SmallTheatrePlaygroundState();
+  _OldLibraryCodePlaygroundState createState() => _OldLibraryCodePlaygroundState();
 }
 
-class _SmallTheatrePlaygroundState extends State<SmallTheatrePlayground> {
+class _OldLibraryCodePlaygroundState extends State<OldLibraryCodePlayground> {
   SeatsioWebViewController? _seatsioController;
   final List<String> selectedObjectLabels = ['Try to click a seat'];
 

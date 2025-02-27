@@ -1,4 +1,3 @@
-import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
@@ -7,13 +6,17 @@ import '../../seatsio.dart';
 part 'seating_chart_config.g.dart';
 
 abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingChartConfigBuilder> {
-
   // Fundamentals & General Purpose
   String get workspaceKey;
+
   Region get region;
+
   String? get event;
+
   List<String>? get events;
+
   String? get mode;
+
   // TODO extraConfig
 
   // Pricing
@@ -22,7 +25,8 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
   @BuiltValueField(serialize: false)
   Function(num price)? get priceFormatter;
 
-  // TODO showsectionpricingoverlay
+  bool? get showSectionPricingOverlay;
+
   // TODO everything under SELECTION https://docs.seats.io/docs/renderer/config-selectedobjects
   // TODO everything under popovers and tooltips https://docs.seats.io/docs/renderer/config-objectPopover
 
@@ -92,6 +96,7 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
       // pricing
       if (pricing != null) "pricing": pricing!.map((p) => p.toJson()).toList(),
       // TODO add priceFormatter here ?
+      if (showSectionPricingOverlay != null) "showSectionPricingOverlay": showSectionPricingOverlay,
       // rest
       if (language != null) "language": language,
       if (objectColor != null) "objectColor": objectColor,
