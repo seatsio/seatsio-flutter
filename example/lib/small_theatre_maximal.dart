@@ -37,7 +37,7 @@ class SmallTheatreMaximal extends StatelessWidget {
           config: SeatingChartConfig((b) => b
             ..workspaceKey = "publicDemoKey"
             ..events = ["smallTheatreEvent2"]
-            ..pricing.replace(multiLevelPricing)
+            ..pricing = multiLevelPricing
             ..priceFormatter = priceFormatter
             // ..language = 'nl'
             // ..objectColor = "function(object, defaultColor) { return object.id.startsWith('A') ? 'red' : 'blue'; }"

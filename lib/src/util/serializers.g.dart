@@ -13,9 +13,6 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(SeatingChartConfig.serializer)
       ..add(TicketType.serializer)
       ..addBuilderFactory(
-          const FullType(BuiltList, const [const FullType(PricingForCategory)]),
-          () => new ListBuilder<PricingForCategory>())
-      ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(TicketType)]),
           () => new ListBuilder<TicketType>()))
     .build();
