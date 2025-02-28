@@ -46,6 +46,7 @@ class LargeTheatreMaximal extends StatelessWidget {
                   ConsecutiveSeats(),
                   MinimumSelectedPlaces(4)
                 ]
+                ..maxSelectedObjects = 5
               // ..language = 'nl'
               // ..objectColor = "function(object, defaultColor) { return object.id.startsWith('A') ? 'red' : 'blue'; }"
               //

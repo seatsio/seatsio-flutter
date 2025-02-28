@@ -90,6 +90,12 @@ class _$SeatingChartConfigSerializer
             specifiedType: const FullType(
                 List, const [const FullType(SelectionValidator)])));
     }
+    value = object.maxSelectedObjects;
+    if (value != null) {
+      result
+        ..add('maxSelectedObjects')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
     value = object.language;
     if (value != null) {
       result
@@ -162,6 +168,10 @@ class _$SeatingChartConfigSerializer
                       List, const [const FullType(SelectionValidator)]))
               as List<SelectionValidator>?;
           break;
+        case 'maxSelectedObjects':
+          result.maxSelectedObjects = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int?;
+          break;
         case 'language':
           result.language = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
@@ -197,6 +207,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   final List<SelectionValidator>? selectionValidators;
   @override
+  final int? maxSelectedObjects;
+  @override
   final String? language;
   @override
   final String? objectColor;
@@ -217,6 +229,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       this.selectedObjects,
       this.selectableObjects,
       this.selectionValidators,
+      this.maxSelectedObjects,
       this.language,
       this.objectColor})
       : super._() {
@@ -251,6 +264,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         selectedObjects == other.selectedObjects &&
         selectableObjects == other.selectableObjects &&
         selectionValidators == other.selectionValidators &&
+        maxSelectedObjects == other.maxSelectedObjects &&
         language == other.language &&
         objectColor == other.objectColor;
   }
@@ -269,6 +283,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     _$hash = $jc(_$hash, selectedObjects.hashCode);
     _$hash = $jc(_$hash, selectableObjects.hashCode);
     _$hash = $jc(_$hash, selectionValidators.hashCode);
+    _$hash = $jc(_$hash, maxSelectedObjects.hashCode);
     _$hash = $jc(_$hash, language.hashCode);
     _$hash = $jc(_$hash, objectColor.hashCode);
     _$hash = $jf(_$hash);
@@ -289,6 +304,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
           ..add('selectedObjects', selectedObjects)
           ..add('selectableObjects', selectableObjects)
           ..add('selectionValidators', selectionValidators)
+          ..add('maxSelectedObjects', maxSelectedObjects)
           ..add('language', language)
           ..add('objectColor', objectColor))
         .toString();
@@ -349,6 +365,11 @@ class SeatingChartConfigBuilder
   set selectionValidators(List<SelectionValidator>? selectionValidators) =>
       _$this._selectionValidators = selectionValidators;
 
+  int? _maxSelectedObjects;
+  int? get maxSelectedObjects => _$this._maxSelectedObjects;
+  set maxSelectedObjects(int? maxSelectedObjects) =>
+      _$this._maxSelectedObjects = maxSelectedObjects;
+
   String? _language;
   String? get language => _$this._language;
   set language(String? language) => _$this._language = language;
@@ -375,6 +396,7 @@ class SeatingChartConfigBuilder
       _selectedObjects = $v.selectedObjects;
       _selectableObjects = $v.selectableObjects;
       _selectionValidators = $v.selectionValidators;
+      _maxSelectedObjects = $v.maxSelectedObjects;
       _language = $v.language;
       _objectColor = $v.objectColor;
       _$v = null;
@@ -412,6 +434,7 @@ class SeatingChartConfigBuilder
           selectedObjects: selectedObjects,
           selectableObjects: selectableObjects,
           selectionValidators: selectionValidators,
+          maxSelectedObjects: maxSelectedObjects,
           language: language,
           objectColor: objectColor,
         );
