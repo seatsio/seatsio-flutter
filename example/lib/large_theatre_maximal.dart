@@ -46,11 +46,18 @@ class LargeTheatreMaximal extends StatelessWidget {
                   // ConsecutiveSeats(),
                   // MinimumSelectedPlaces(4)
                 ]
-                // ..maxSelectedObjects = MaxSelectedObjectsNumber(2)
-                ..maxSelectedObjects = MaxSelectedObjectsPerTicketType([
-                  MaxSelectedObjectsRule(ticketType: "adult", quantity: 2),
-                  MaxSelectedObjectsRule(ticketType: "child", quantity: 2)
-                ])
+              //..maxSelectedObjects = MaxSelectedObjects.total(4)
+              //..maxSelectedObjects = MaxSelectedObjects.rules([
+              //  MaxSelectedObjectsRule.perTicketType(ticketType: "adult", quantity: 2),
+              // MaxSelectedObjectsRule.perTicketType(ticketType: "child", quantity: 2),
+              // MaxSelectedObjectsRule.total(3)
+              // ])
+            ..maxSelectedObjects = MaxSelectedObjects.rules([
+              MaxSelectedObjectsRule.perTicketType(ticketType: "1", quantity: 2),
+              MaxSelectedObjectsRule.perTicketType(ticketType: "child", quantity: 2),
+              MaxSelectedObjectsRule.total(3)
+            ])
+
               // ..language = 'nl'
               // ..objectColor = "function(object, defaultColor) { return object.id.startsWith('A') ? 'red' : 'blue'; }"
               //
