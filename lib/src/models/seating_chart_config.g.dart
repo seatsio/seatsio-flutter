@@ -94,7 +94,8 @@ class _$SeatingChartConfigSerializer
     if (value != null) {
       result
         ..add('maxSelectedObjects')
-        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(MaxSelectedObjects)));
     }
     value = object.language;
     if (value != null) {
@@ -170,7 +171,8 @@ class _$SeatingChartConfigSerializer
           break;
         case 'maxSelectedObjects':
           result.maxSelectedObjects = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int?;
+                  specifiedType: const FullType(MaxSelectedObjects))
+              as MaxSelectedObjects?;
           break;
         case 'language':
           result.language = serializers.deserialize(value,
@@ -207,7 +209,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   final List<SelectionValidator>? selectionValidators;
   @override
-  final int? maxSelectedObjects;
+  final MaxSelectedObjects? maxSelectedObjects;
   @override
   final String? language;
   @override
@@ -365,9 +367,9 @@ class SeatingChartConfigBuilder
   set selectionValidators(List<SelectionValidator>? selectionValidators) =>
       _$this._selectionValidators = selectionValidators;
 
-  int? _maxSelectedObjects;
-  int? get maxSelectedObjects => _$this._maxSelectedObjects;
-  set maxSelectedObjects(int? maxSelectedObjects) =>
+  MaxSelectedObjects? _maxSelectedObjects;
+  MaxSelectedObjects? get maxSelectedObjects => _$this._maxSelectedObjects;
+  set maxSelectedObjects(MaxSelectedObjects? maxSelectedObjects) =>
       _$this._maxSelectedObjects = maxSelectedObjects;
 
   String? _language;

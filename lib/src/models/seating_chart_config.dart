@@ -34,7 +34,7 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
 
   List<SelectionValidator>? get selectionValidators;
 
-  int? get maxSelectedObjects;
+  MaxSelectedObjects? get maxSelectedObjects;
 
   // TODO everything under SELECTION https://docs.seats.io/docs/renderer/config-selectedobjects
 
@@ -111,7 +111,7 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
       if (selectedObjects != null) "selectedObjects": selectedObjects,
       if (selectableObjects != null) "selectableObjects": selectableObjects,
       if (selectionValidators != null) "selectionValidators": selectionValidators!.map((v) => v.toJson()).toList(),
-      if (maxSelectedObjects != null) "maxSelectedObjects": maxSelectedObjects,
+      if (maxSelectedObjects != null) "maxSelectedObjects": maxSelectedObjects!.toJson(),
       // rest
       if (language != null) "language": language,
       if (objectColor != null) "objectColor": objectColor,
