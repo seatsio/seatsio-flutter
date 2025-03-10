@@ -117,6 +117,13 @@ class _$SeatingChartConfigSerializer
         ..add(
             serializers.serialize(value, specifiedType: const FullType(bool)));
     }
+    value = object.objectPopover;
+    if (value != null) {
+      result
+        ..add('objectPopover')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(ObjectPopover)));
+    }
     value = object.language;
     if (value != null) {
       result
@@ -206,6 +213,10 @@ class _$SeatingChartConfigSerializer
           result.objectsWithoutPricingSelectable = serializers
               .deserialize(value, specifiedType: const FullType(bool)) as bool?;
           break;
+        case 'objectPopover':
+          result.objectPopover.replace(serializers.deserialize(value,
+              specifiedType: const FullType(ObjectPopover))! as ObjectPopover);
+          break;
         case 'language':
           result.language = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
@@ -249,6 +260,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   final bool? objectsWithoutPricingSelectable;
   @override
+  final ObjectPopover? objectPopover;
+  @override
   final String? language;
   @override
   final String? objectColor;
@@ -273,6 +286,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       this.numberOfPlacesToSelect,
       this.multiSelectEnabled,
       this.objectsWithoutPricingSelectable,
+      this.objectPopover,
       this.language,
       this.objectColor})
       : super._() {
@@ -312,6 +326,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         multiSelectEnabled == other.multiSelectEnabled &&
         objectsWithoutPricingSelectable ==
             other.objectsWithoutPricingSelectable &&
+        objectPopover == other.objectPopover &&
         language == other.language &&
         objectColor == other.objectColor;
   }
@@ -334,6 +349,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     _$hash = $jc(_$hash, numberOfPlacesToSelect.hashCode);
     _$hash = $jc(_$hash, multiSelectEnabled.hashCode);
     _$hash = $jc(_$hash, objectsWithoutPricingSelectable.hashCode);
+    _$hash = $jc(_$hash, objectPopover.hashCode);
     _$hash = $jc(_$hash, language.hashCode);
     _$hash = $jc(_$hash, objectColor.hashCode);
     _$hash = $jf(_$hash);
@@ -359,6 +375,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
           ..add('multiSelectEnabled', multiSelectEnabled)
           ..add('objectsWithoutPricingSelectable',
               objectsWithoutPricingSelectable)
+          ..add('objectPopover', objectPopover)
           ..add('language', language)
           ..add('objectColor', objectColor))
         .toString();
@@ -440,6 +457,12 @@ class SeatingChartConfigBuilder
   set objectsWithoutPricingSelectable(bool? objectsWithoutPricingSelectable) =>
       _$this._objectsWithoutPricingSelectable = objectsWithoutPricingSelectable;
 
+  ObjectPopoverBuilder? _objectPopover;
+  ObjectPopoverBuilder get objectPopover =>
+      _$this._objectPopover ??= new ObjectPopoverBuilder();
+  set objectPopover(ObjectPopoverBuilder? objectPopover) =>
+      _$this._objectPopover = objectPopover;
+
   String? _language;
   String? get language => _$this._language;
   set language(String? language) => _$this._language = language;
@@ -470,6 +493,7 @@ class SeatingChartConfigBuilder
       _numberOfPlacesToSelect = $v.numberOfPlacesToSelect;
       _multiSelectEnabled = $v.multiSelectEnabled;
       _objectsWithoutPricingSelectable = $v.objectsWithoutPricingSelectable;
+      _objectPopover = $v.objectPopover?.toBuilder();
       _language = $v.language;
       _objectColor = $v.objectColor;
       _$v = null;
@@ -492,28 +516,42 @@ class SeatingChartConfigBuilder
   SeatingChartConfig build() => _build();
 
   _$SeatingChartConfig _build() {
-    final _$result = _$v ??
-        new _$SeatingChartConfig._(
-          workspaceKey: BuiltValueNullFieldError.checkNotNull(
-              workspaceKey, r'SeatingChartConfig', 'workspaceKey'),
-          region: BuiltValueNullFieldError.checkNotNull(
-              region, r'SeatingChartConfig', 'region'),
-          event: event,
-          events: events,
-          mode: mode,
-          pricing: pricing,
-          priceFormatter: priceFormatter,
-          showSectionPricingOverlay: showSectionPricingOverlay,
-          selectedObjects: selectedObjects,
-          selectableObjects: selectableObjects,
-          selectionValidators: selectionValidators,
-          maxSelectedObjects: maxSelectedObjects,
-          numberOfPlacesToSelect: numberOfPlacesToSelect,
-          multiSelectEnabled: multiSelectEnabled,
-          objectsWithoutPricingSelectable: objectsWithoutPricingSelectable,
-          language: language,
-          objectColor: objectColor,
-        );
+    _$SeatingChartConfig _$result;
+    try {
+      _$result = _$v ??
+          new _$SeatingChartConfig._(
+            workspaceKey: BuiltValueNullFieldError.checkNotNull(
+                workspaceKey, r'SeatingChartConfig', 'workspaceKey'),
+            region: BuiltValueNullFieldError.checkNotNull(
+                region, r'SeatingChartConfig', 'region'),
+            event: event,
+            events: events,
+            mode: mode,
+            pricing: pricing,
+            priceFormatter: priceFormatter,
+            showSectionPricingOverlay: showSectionPricingOverlay,
+            selectedObjects: selectedObjects,
+            selectableObjects: selectableObjects,
+            selectionValidators: selectionValidators,
+            maxSelectedObjects: maxSelectedObjects,
+            numberOfPlacesToSelect: numberOfPlacesToSelect,
+            multiSelectEnabled: multiSelectEnabled,
+            objectsWithoutPricingSelectable: objectsWithoutPricingSelectable,
+            objectPopover: _objectPopover?.build(),
+            language: language,
+            objectColor: objectColor,
+          );
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'objectPopover';
+        _objectPopover?.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            r'SeatingChartConfig', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

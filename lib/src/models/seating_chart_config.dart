@@ -44,6 +44,10 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
 
   bool? get objectsWithoutPricingSelectable;
 
+  // Popovers and Tooltips
+  @BuiltValueField(wireName: 'objectPopover')
+  ObjectPopover? get objectPopover;
+
   // TODO everything under popovers and tooltips https://docs.seats.io/docs/renderer/config-objectPopover
 
   String? get language;
@@ -121,6 +125,8 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
       if (numberOfPlacesToSelect != null) "numberOfPlacesToSelect": numberOfPlacesToSelect,
       if (multiSelectEnabled != null) "multiSelectEnabled": multiSelectEnabled,
       if (objectsWithoutPricingSelectable != null) "objectsWithoutPricingSelectable": objectsWithoutPricingSelectable,
+      // popovers and tooltips
+      if (objectPopover != null) "objectPopover": objectPopover!.toJson(),
       // rest
       if (language != null) "language": language,
       if (objectColor != null) "objectColor": objectColor,
