@@ -36,6 +36,8 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
 
   MaxSelectedObjects? get maxSelectedObjects;
 
+  int? get numberOfPlacesToSelect;
+
   // TODO everything under SELECTION https://docs.seats.io/docs/renderer/config-selectedobjects
 
   // TODO everything under popovers and tooltips https://docs.seats.io/docs/renderer/config-objectPopover
@@ -112,6 +114,7 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
       if (selectableObjects != null) "selectableObjects": selectableObjects,
       if (selectionValidators != null) "selectionValidators": selectionValidators!.map((v) => v.toJson()).toList(),
       if (maxSelectedObjects != null) "maxSelectedObjects": maxSelectedObjects!.toJson(),
+      if (numberOfPlacesToSelect != null) "numberOfPlacesToSelect": numberOfPlacesToSelect,
       // rest
       if (language != null) "language": language,
       if (objectColor != null) "objectColor": objectColor,

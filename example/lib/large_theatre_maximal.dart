@@ -52,11 +52,8 @@ class LargeTheatreMaximal extends StatelessWidget {
               // MaxSelectedObjectsRule.perTicketType(ticketType: "child", quantity: 2),
               // MaxSelectedObjectsRule.total(3)
               // ])
-            ..maxSelectedObjects = MaxSelectedObjects.rules([
-              MaxSelectedObjectsRule.perTicketType(ticketType: "1", quantity: 2),
-              MaxSelectedObjectsRule.perTicketType(ticketType: "child", quantity: 2),
-              MaxSelectedObjectsRule.total(3)
-            ])
+
+              ..numberOfPlacesToSelect = 2
 
               // ..language = 'nl'
               // ..objectColor = "function(object, defaultColor) { return object.id.startsWith('A') ? 'red' : 'blue'; }"
