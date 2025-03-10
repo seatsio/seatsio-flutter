@@ -103,6 +103,20 @@ class _$SeatingChartConfigSerializer
         ..add('numberOfPlacesToSelect')
         ..add(serializers.serialize(value, specifiedType: const FullType(int)));
     }
+    value = object.multiSelectEnabled;
+    if (value != null) {
+      result
+        ..add('multiSelectEnabled')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(bool)));
+    }
+    value = object.objectsWithoutPricingSelectable;
+    if (value != null) {
+      result
+        ..add('objectsWithoutPricingSelectable')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(bool)));
+    }
     value = object.language;
     if (value != null) {
       result
@@ -184,6 +198,14 @@ class _$SeatingChartConfigSerializer
           result.numberOfPlacesToSelect = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int?;
           break;
+        case 'multiSelectEnabled':
+          result.multiSelectEnabled = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool?;
+          break;
+        case 'objectsWithoutPricingSelectable':
+          result.objectsWithoutPricingSelectable = serializers
+              .deserialize(value, specifiedType: const FullType(bool)) as bool?;
+          break;
         case 'language':
           result.language = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
@@ -223,6 +245,10 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   final int? numberOfPlacesToSelect;
   @override
+  final bool? multiSelectEnabled;
+  @override
+  final bool? objectsWithoutPricingSelectable;
+  @override
   final String? language;
   @override
   final String? objectColor;
@@ -245,6 +271,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       this.selectionValidators,
       this.maxSelectedObjects,
       this.numberOfPlacesToSelect,
+      this.multiSelectEnabled,
+      this.objectsWithoutPricingSelectable,
       this.language,
       this.objectColor})
       : super._() {
@@ -281,6 +309,9 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         selectionValidators == other.selectionValidators &&
         maxSelectedObjects == other.maxSelectedObjects &&
         numberOfPlacesToSelect == other.numberOfPlacesToSelect &&
+        multiSelectEnabled == other.multiSelectEnabled &&
+        objectsWithoutPricingSelectable ==
+            other.objectsWithoutPricingSelectable &&
         language == other.language &&
         objectColor == other.objectColor;
   }
@@ -301,6 +332,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     _$hash = $jc(_$hash, selectionValidators.hashCode);
     _$hash = $jc(_$hash, maxSelectedObjects.hashCode);
     _$hash = $jc(_$hash, numberOfPlacesToSelect.hashCode);
+    _$hash = $jc(_$hash, multiSelectEnabled.hashCode);
+    _$hash = $jc(_$hash, objectsWithoutPricingSelectable.hashCode);
     _$hash = $jc(_$hash, language.hashCode);
     _$hash = $jc(_$hash, objectColor.hashCode);
     _$hash = $jf(_$hash);
@@ -323,6 +356,9 @@ class _$SeatingChartConfig extends SeatingChartConfig {
           ..add('selectionValidators', selectionValidators)
           ..add('maxSelectedObjects', maxSelectedObjects)
           ..add('numberOfPlacesToSelect', numberOfPlacesToSelect)
+          ..add('multiSelectEnabled', multiSelectEnabled)
+          ..add('objectsWithoutPricingSelectable',
+              objectsWithoutPricingSelectable)
           ..add('language', language)
           ..add('objectColor', objectColor))
         .toString();
@@ -393,6 +429,17 @@ class SeatingChartConfigBuilder
   set numberOfPlacesToSelect(int? numberOfPlacesToSelect) =>
       _$this._numberOfPlacesToSelect = numberOfPlacesToSelect;
 
+  bool? _multiSelectEnabled;
+  bool? get multiSelectEnabled => _$this._multiSelectEnabled;
+  set multiSelectEnabled(bool? multiSelectEnabled) =>
+      _$this._multiSelectEnabled = multiSelectEnabled;
+
+  bool? _objectsWithoutPricingSelectable;
+  bool? get objectsWithoutPricingSelectable =>
+      _$this._objectsWithoutPricingSelectable;
+  set objectsWithoutPricingSelectable(bool? objectsWithoutPricingSelectable) =>
+      _$this._objectsWithoutPricingSelectable = objectsWithoutPricingSelectable;
+
   String? _language;
   String? get language => _$this._language;
   set language(String? language) => _$this._language = language;
@@ -421,6 +468,8 @@ class SeatingChartConfigBuilder
       _selectionValidators = $v.selectionValidators;
       _maxSelectedObjects = $v.maxSelectedObjects;
       _numberOfPlacesToSelect = $v.numberOfPlacesToSelect;
+      _multiSelectEnabled = $v.multiSelectEnabled;
+      _objectsWithoutPricingSelectable = $v.objectsWithoutPricingSelectable;
       _language = $v.language;
       _objectColor = $v.objectColor;
       _$v = null;
@@ -460,6 +509,8 @@ class SeatingChartConfigBuilder
           selectionValidators: selectionValidators,
           maxSelectedObjects: maxSelectedObjects,
           numberOfPlacesToSelect: numberOfPlacesToSelect,
+          multiSelectEnabled: multiSelectEnabled,
+          objectsWithoutPricingSelectable: objectsWithoutPricingSelectable,
           language: language,
           objectColor: objectColor,
         );

@@ -54,7 +54,7 @@ class LargeTheatreMaximal extends StatelessWidget {
               // ])
 
               ..numberOfPlacesToSelect = 2
-
+              ..multiSelectEnabled = true
               // ..language = 'nl'
               // ..objectColor = "function(object, defaultColor) { return object.id.startsWith('A') ? 'red' : 'blue'; }"
               //

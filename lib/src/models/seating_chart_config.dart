@@ -38,7 +38,11 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
 
   int? get numberOfPlacesToSelect;
 
-  // TODO everything under SELECTION https://docs.seats.io/docs/renderer/config-selectedobjects
+  bool? get multiSelectEnabled;
+
+  // TODO canGASelectionBeIncreased ?
+
+  bool? get objectsWithoutPricingSelectable;
 
   // TODO everything under popovers and tooltips https://docs.seats.io/docs/renderer/config-objectPopover
 
@@ -115,6 +119,8 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
       if (selectionValidators != null) "selectionValidators": selectionValidators!.map((v) => v.toJson()).toList(),
       if (maxSelectedObjects != null) "maxSelectedObjects": maxSelectedObjects!.toJson(),
       if (numberOfPlacesToSelect != null) "numberOfPlacesToSelect": numberOfPlacesToSelect,
+      if (multiSelectEnabled != null) "multiSelectEnabled": multiSelectEnabled,
+      if (objectsWithoutPricingSelectable != null) "objectsWithoutPricingSelectable": objectsWithoutPricingSelectable,
       // rest
       if (language != null) "language": language,
       if (objectColor != null) "objectColor": objectColor,
