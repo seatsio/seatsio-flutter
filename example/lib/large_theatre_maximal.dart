@@ -81,6 +81,8 @@ class LargeTheatreMaximal extends StatelessWidget {
               // ..channels = ["channel1", "channel2"]
               // ..objectColor = "function(object, defaultColor) { return object.label.startsWith('A') ? 'green' : 'blue'; }"
               // ..sectionColor = "function(object, defaultColor) { return 'red' ; }"
+              // ..objectLabel = "function(object) { return object.label + ' (' + object.status + ')'; }"
+              ..objectIcon = "function(object) { return 'star' }"
               ),
         ));
   }

@@ -373,6 +373,10 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   final String? objectColor;
   @override
   final String? sectionColor;
+  @override
+  final String? objectLabel;
+  @override
+  final String? objectIcon;
 
   factory _$SeatingChartConfig(
           [void Function(SeatingChartConfigBuilder)? updates]) =>
@@ -405,7 +409,9 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       this.filteredCategories,
       this.channels,
       this.objectColor,
-      this.sectionColor})
+      this.sectionColor,
+      this.objectLabel,
+      this.objectIcon})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         workspaceKey, r'SeatingChartConfig', 'workspaceKey');
@@ -457,7 +463,9 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         filteredCategories == other.filteredCategories &&
         channels == other.channels &&
         objectColor == other.objectColor &&
-        sectionColor == other.sectionColor;
+        sectionColor == other.sectionColor &&
+        objectLabel == other.objectLabel &&
+        objectIcon == other.objectIcon;
   }
 
   @override
@@ -490,6 +498,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     _$hash = $jc(_$hash, channels.hashCode);
     _$hash = $jc(_$hash, objectColor.hashCode);
     _$hash = $jc(_$hash, sectionColor.hashCode);
+    _$hash = $jc(_$hash, objectLabel.hashCode);
+    _$hash = $jc(_$hash, objectIcon.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -525,7 +535,9 @@ class _$SeatingChartConfig extends SeatingChartConfig {
           ..add('filteredCategories', filteredCategories)
           ..add('channels', channels)
           ..add('objectColor', objectColor)
-          ..add('sectionColor', sectionColor))
+          ..add('sectionColor', sectionColor)
+          ..add('objectLabel', objectLabel)
+          ..add('objectIcon', objectIcon))
         .toString();
   }
 }
@@ -665,6 +677,14 @@ class SeatingChartConfigBuilder
   String? get sectionColor => _$this._sectionColor;
   set sectionColor(String? sectionColor) => _$this._sectionColor = sectionColor;
 
+  String? _objectLabel;
+  String? get objectLabel => _$this._objectLabel;
+  set objectLabel(String? objectLabel) => _$this._objectLabel = objectLabel;
+
+  String? _objectIcon;
+  String? get objectIcon => _$this._objectIcon;
+  set objectIcon(String? objectIcon) => _$this._objectIcon = objectIcon;
+
   SeatingChartConfigBuilder() {
     SeatingChartConfig._initializeBuilder(this);
   }
@@ -699,6 +719,8 @@ class SeatingChartConfigBuilder
       _channels = $v.channels;
       _objectColor = $v.objectColor;
       _sectionColor = $v.sectionColor;
+      _objectLabel = $v.objectLabel;
+      _objectIcon = $v.objectIcon;
       _$v = null;
     }
     return this;
@@ -753,6 +775,8 @@ class SeatingChartConfigBuilder
             channels: channels,
             objectColor: objectColor,
             sectionColor: sectionColor,
+            objectLabel: objectLabel,
+            objectIcon: objectIcon,
           );
     } catch (_) {
       late String _$failedField;
