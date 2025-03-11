@@ -75,6 +75,7 @@ class LargeTheatreMaximal extends StatelessWidget {
                   ..enabled = true
                   ..multiSelect = true
                   ..sortBy = CategoryFilterSortBy.price))
+                ..availableCategories = ["Stalls"]
 
               // ..objectColor = "function(object, defaultColor) { return object.id.startsWith('A') ? 'red' : 'blue'; }"
               ),

@@ -149,6 +149,14 @@ class _$SeatingChartConfigSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(CategoryFilter)));
     }
+    value = object.availableCategories;
+    if (value != null) {
+      result
+        ..add('availableCategories')
+        ..add(serializers.serialize(value,
+            specifiedType:
+                const FullType(List, const [const FullType(String)])));
+    }
     return result;
   }
 
@@ -255,6 +263,12 @@ class _$SeatingChartConfigSerializer
                   specifiedType: const FullType(CategoryFilter))!
               as CategoryFilter);
           break;
+        case 'availableCategories':
+          result.availableCategories = serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(List, const [const FullType(String)]))
+              as List<String>?;
+          break;
       }
     }
 
@@ -306,6 +320,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   final CategoryFilter? categoryFilter;
   @override
+  final List<String>? availableCategories;
+  @override
   final String? objectColor;
 
   factory _$SeatingChartConfig(
@@ -334,6 +350,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       this.language,
       required this.messages,
       this.categoryFilter,
+      this.availableCategories,
       this.objectColor})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
@@ -381,6 +398,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         language == other.language &&
         messages == other.messages &&
         categoryFilter == other.categoryFilter &&
+        availableCategories == other.availableCategories &&
         objectColor == other.objectColor;
   }
 
@@ -408,6 +426,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     _$hash = $jc(_$hash, language.hashCode);
     _$hash = $jc(_$hash, messages.hashCode);
     _$hash = $jc(_$hash, categoryFilter.hashCode);
+    _$hash = $jc(_$hash, availableCategories.hashCode);
     _$hash = $jc(_$hash, objectColor.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -439,6 +458,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
           ..add('language', language)
           ..add('messages', messages)
           ..add('categoryFilter', categoryFilter)
+          ..add('availableCategories', availableCategories)
           ..add('objectColor', objectColor))
         .toString();
   }
@@ -552,6 +572,11 @@ class SeatingChartConfigBuilder
   set categoryFilter(CategoryFilterBuilder? categoryFilter) =>
       _$this._categoryFilter = categoryFilter;
 
+  List<String>? _availableCategories;
+  List<String>? get availableCategories => _$this._availableCategories;
+  set availableCategories(List<String>? availableCategories) =>
+      _$this._availableCategories = availableCategories;
+
   String? _objectColor;
   String? get objectColor => _$this._objectColor;
   set objectColor(String? objectColor) => _$this._objectColor = objectColor;
@@ -584,6 +609,7 @@ class SeatingChartConfigBuilder
       _language = $v.language;
       _messages = $v.messages;
       _categoryFilter = $v.categoryFilter?.toBuilder();
+      _availableCategories = $v.availableCategories;
       _objectColor = $v.objectColor;
       _$v = null;
     }
@@ -633,6 +659,7 @@ class SeatingChartConfigBuilder
             messages: BuiltValueNullFieldError.checkNotNull(
                 messages, r'SeatingChartConfig', 'messages'),
             categoryFilter: _categoryFilter?.build(),
+            availableCategories: availableCategories,
             objectColor: objectColor,
           );
     } catch (_) {

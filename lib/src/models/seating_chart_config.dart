@@ -61,6 +61,8 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
   // Categories
   CategoryFilter? get categoryFilter;
 
+  List<String>? get availableCategories;
+
   // TODO everything under Categories https://docs.seats.io/docs/renderer/categoryfilter
 
   // TODO channels https://docs.seats.io/docs/renderer/config-channels
@@ -141,6 +143,7 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
       if (messages.isNotEmpty) "messages": messages,
       // categories
       if (categoryFilter != null) "categoryFilter": categoryFilter!.toJson(),
+      if (availableCategories != null) "availableCategories": availableCategories,
       // rest
 
       if (objectColor != null) "objectColor": objectColor,
