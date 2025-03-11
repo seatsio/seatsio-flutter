@@ -53,9 +53,8 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
 
   bool? get showActiveSectionTooltipOnMobile;
 
-  // TODO everything under popovers and tooltips https://docs.seats.io/docs/renderer/config-objectPopover
-
-  String? get language;
+  // Language and Text
+  String? get language; // TODO make this an enum
 
   // TODO messages https://docs.seats.io/docs/renderer/config-messages
 
@@ -131,9 +130,12 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
       if (objectsWithoutPricingSelectable != null) "objectsWithoutPricingSelectable": objectsWithoutPricingSelectable,
       // popovers and tooltips
       if (objectPopover != null) "objectPopover": objectPopover!.toJson(),
-      if (showActiveSectionTooltipOnMobile != null) "showActiveSectionTooltipOnMobile": showActiveSectionTooltipOnMobile,
-      // rest
+      if (showActiveSectionTooltipOnMobile != null)
+        "showActiveSectionTooltipOnMobile": showActiveSectionTooltipOnMobile,
+      // language and text
       if (language != null) "language": language,
+      // rest
+
       if (objectColor != null) "objectColor": objectColor,
     };
   }
