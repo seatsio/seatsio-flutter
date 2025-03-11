@@ -188,6 +188,20 @@ class _$SeatingChartConfigSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(ShowSectionContents)));
     }
+    value = object.hideSectionsNotForSale;
+    if (value != null) {
+      result
+        ..add('hideSectionsNotForSale')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(bool)));
+    }
+    value = object.showSeatLabels;
+    if (value != null) {
+      result
+        ..add('showSeatLabels')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(bool)));
+    }
     return result;
   }
 
@@ -323,6 +337,14 @@ class _$SeatingChartConfigSerializer
                   specifiedType: const FullType(ShowSectionContents))
               as ShowSectionContents?;
           break;
+        case 'hideSectionsNotForSale':
+          result.hideSectionsNotForSale = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool?;
+          break;
+        case 'showSeatLabels':
+          result.showSeatLabels = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool?;
+          break;
       }
     }
 
@@ -391,6 +413,12 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   final String? objectIcon;
   @override
   final ShowSectionContents? showSectionContents;
+  @override
+  final bool? hideSectionsNotForSale;
+  @override
+  final String? isObjectVisible;
+  @override
+  final bool? showSeatLabels;
 
   factory _$SeatingChartConfig(
           [void Function(SeatingChartConfigBuilder)? updates]) =>
@@ -426,7 +454,10 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       this.sectionColor,
       this.objectLabel,
       this.objectIcon,
-      this.showSectionContents})
+      this.showSectionContents,
+      this.hideSectionsNotForSale,
+      this.isObjectVisible,
+      this.showSeatLabels})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         workspaceKey, r'SeatingChartConfig', 'workspaceKey');
@@ -481,7 +512,10 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         sectionColor == other.sectionColor &&
         objectLabel == other.objectLabel &&
         objectIcon == other.objectIcon &&
-        showSectionContents == other.showSectionContents;
+        showSectionContents == other.showSectionContents &&
+        hideSectionsNotForSale == other.hideSectionsNotForSale &&
+        isObjectVisible == other.isObjectVisible &&
+        showSeatLabels == other.showSeatLabels;
   }
 
   @override
@@ -517,6 +551,9 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     _$hash = $jc(_$hash, objectLabel.hashCode);
     _$hash = $jc(_$hash, objectIcon.hashCode);
     _$hash = $jc(_$hash, showSectionContents.hashCode);
+    _$hash = $jc(_$hash, hideSectionsNotForSale.hashCode);
+    _$hash = $jc(_$hash, isObjectVisible.hashCode);
+    _$hash = $jc(_$hash, showSeatLabels.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -555,7 +592,10 @@ class _$SeatingChartConfig extends SeatingChartConfig {
           ..add('sectionColor', sectionColor)
           ..add('objectLabel', objectLabel)
           ..add('objectIcon', objectIcon)
-          ..add('showSectionContents', showSectionContents))
+          ..add('showSectionContents', showSectionContents)
+          ..add('hideSectionsNotForSale', hideSectionsNotForSale)
+          ..add('isObjectVisible', isObjectVisible)
+          ..add('showSeatLabels', showSeatLabels))
         .toString();
   }
 }
@@ -708,6 +748,21 @@ class SeatingChartConfigBuilder
   set showSectionContents(ShowSectionContents? showSectionContents) =>
       _$this._showSectionContents = showSectionContents;
 
+  bool? _hideSectionsNotForSale;
+  bool? get hideSectionsNotForSale => _$this._hideSectionsNotForSale;
+  set hideSectionsNotForSale(bool? hideSectionsNotForSale) =>
+      _$this._hideSectionsNotForSale = hideSectionsNotForSale;
+
+  String? _isObjectVisible;
+  String? get isObjectVisible => _$this._isObjectVisible;
+  set isObjectVisible(String? isObjectVisible) =>
+      _$this._isObjectVisible = isObjectVisible;
+
+  bool? _showSeatLabels;
+  bool? get showSeatLabels => _$this._showSeatLabels;
+  set showSeatLabels(bool? showSeatLabels) =>
+      _$this._showSeatLabels = showSeatLabels;
+
   SeatingChartConfigBuilder() {
     SeatingChartConfig._initializeBuilder(this);
   }
@@ -745,6 +800,9 @@ class SeatingChartConfigBuilder
       _objectLabel = $v.objectLabel;
       _objectIcon = $v.objectIcon;
       _showSectionContents = $v.showSectionContents;
+      _hideSectionsNotForSale = $v.hideSectionsNotForSale;
+      _isObjectVisible = $v.isObjectVisible;
+      _showSeatLabels = $v.showSeatLabels;
       _$v = null;
     }
     return this;
@@ -802,6 +860,9 @@ class SeatingChartConfigBuilder
             objectLabel: objectLabel,
             objectIcon: objectIcon,
             showSectionContents: showSectionContents,
+            hideSectionsNotForSale: hideSectionsNotForSale,
+            isObjectVisible: isObjectVisible,
+            showSeatLabels: showSeatLabels,
           );
     } catch (_) {
       late String _$failedField;

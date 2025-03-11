@@ -82,8 +82,10 @@ class LargeTheatreMaximal extends StatelessWidget {
               // ..objectColor = "function(object, defaultColor) { return object.label.startsWith('A') ? 'green' : 'blue'; }"
               // ..sectionColor = "function(object, defaultColor) { return 'red' ; }"
               // ..objectLabel = "function(object) { return object.label + ' (' + object.status + ')'; }"
-              ..objectIcon = "function(object) { return 'star' }"
+              // ..objectIcon = "function(object) { return 'star' }"
               ..showSectionContents = ShowSectionContents.onlyAfterZoom
+              ..isObjectVisible = "function() { return true }"
+              ..showSeatLabels = true
               ),
         ));
   }

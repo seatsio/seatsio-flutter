@@ -91,6 +91,13 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
   // Visibility
   ShowSectionContents? get showSectionContents;
 
+  bool? get hideSectionsNotForSale;
+
+  @BuiltValueField(serialize: false)
+  String? get isObjectVisible;
+
+  bool? get showSeatLabels;
+
 
   // TODO everything under Session https://docs.seats.io/docs/renderer/config-session
 
@@ -173,6 +180,9 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
       if (objectIcon != null) "objectIcon": objectIcon,
       // visibility
       if (showSectionContents != null) "showSectionContents": showSectionContents!.toJson(),
+      if (hideSectionsNotForSale != null) "hideSectionsNotForSale": hideSectionsNotForSale,
+      if (isObjectVisible != null) "isObjectVisible": isObjectVisible,
+      if (showSeatLabels != null) "showSeatLabels": showSeatLabels,
     };
   }
 }
