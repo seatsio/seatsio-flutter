@@ -40,10 +40,6 @@ class SeatsioJsBridge {
       """);
     }
 
-    if (chartConfig.objectColor != null) {
-      callbacks.add('"objectColor": ${chartConfig.objectColor}');
-    }
-
     return callbacks;
   }
 }
