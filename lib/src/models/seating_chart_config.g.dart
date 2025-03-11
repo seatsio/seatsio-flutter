@@ -27,6 +27,10 @@ class _$SeatingChartConfigSerializer
       'region',
       serializers.serialize(object.region,
           specifiedType: const FullType(Region)),
+      'messages',
+      serializers.serialize(object.messages,
+          specifiedType: const FullType(
+              Map, const [const FullType(String), const FullType(String)])),
     ];
     Object? value;
     value = object.event;
@@ -232,6 +236,13 @@ class _$SeatingChartConfigSerializer
           result.language = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
+        case 'messages':
+          result.messages = serializers.deserialize(value,
+              specifiedType: const FullType(Map, const [
+                const FullType(String),
+                const FullType(String)
+              ]))! as Map<String, String>;
+          break;
       }
     }
 
@@ -279,6 +290,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   final String? language;
   @override
+  final Map<String, String> messages;
+  @override
   final String? objectColor;
 
   factory _$SeatingChartConfig(
@@ -305,12 +318,15 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       this.popoverInfo,
       this.showActiveSectionTooltipOnMobile,
       this.language,
+      required this.messages,
       this.objectColor})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         workspaceKey, r'SeatingChartConfig', 'workspaceKey');
     BuiltValueNullFieldError.checkNotNull(
         region, r'SeatingChartConfig', 'region');
+    BuiltValueNullFieldError.checkNotNull(
+        messages, r'SeatingChartConfig', 'messages');
   }
 
   @override
@@ -348,6 +364,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         showActiveSectionTooltipOnMobile ==
             other.showActiveSectionTooltipOnMobile &&
         language == other.language &&
+        messages == other.messages &&
         objectColor == other.objectColor;
   }
 
@@ -373,6 +390,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     _$hash = $jc(_$hash, popoverInfo.hashCode);
     _$hash = $jc(_$hash, showActiveSectionTooltipOnMobile.hashCode);
     _$hash = $jc(_$hash, language.hashCode);
+    _$hash = $jc(_$hash, messages.hashCode);
     _$hash = $jc(_$hash, objectColor.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -402,6 +420,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
           ..add('showActiveSectionTooltipOnMobile',
               showActiveSectionTooltipOnMobile)
           ..add('language', language)
+          ..add('messages', messages)
           ..add('objectColor', objectColor))
         .toString();
   }
@@ -505,6 +524,10 @@ class SeatingChartConfigBuilder
   String? get language => _$this._language;
   set language(String? language) => _$this._language = language;
 
+  Map<String, String>? _messages;
+  Map<String, String>? get messages => _$this._messages;
+  set messages(Map<String, String>? messages) => _$this._messages = messages;
+
   String? _objectColor;
   String? get objectColor => _$this._objectColor;
   set objectColor(String? objectColor) => _$this._objectColor = objectColor;
@@ -535,6 +558,7 @@ class SeatingChartConfigBuilder
       _popoverInfo = $v.popoverInfo;
       _showActiveSectionTooltipOnMobile = $v.showActiveSectionTooltipOnMobile;
       _language = $v.language;
+      _messages = $v.messages;
       _objectColor = $v.objectColor;
       _$v = null;
     }
@@ -581,6 +605,8 @@ class SeatingChartConfigBuilder
             popoverInfo: popoverInfo,
             showActiveSectionTooltipOnMobile: showActiveSectionTooltipOnMobile,
             language: language,
+            messages: BuiltValueNullFieldError.checkNotNull(
+                messages, r'SeatingChartConfig', 'messages'),
             objectColor: objectColor,
           );
     } catch (_) {

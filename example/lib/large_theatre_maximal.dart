@@ -67,6 +67,9 @@ class LargeTheatreMaximal extends StatelessWidget {
                   ..confirmSelection = 'auto'
                   ..confirmTicketTypeSelection = false))
                 ..popoverInfo = popoverInfo
+                ..messages = {
+                  "STAGE": "Stage",
+                }
               // ..language = 'nl'
               // ..objectColor = "function(object, defaultColor) { return object.id.startsWith('A') ? 'red' : 'blue'; }"
               //

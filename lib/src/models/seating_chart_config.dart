@@ -56,6 +56,8 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
   // Language and Text
   String? get language; // TODO make this an enum
 
+  Map<String, String> get messages;
+
   // TODO messages https://docs.seats.io/docs/renderer/config-messages
 
   // TODO everything under Categories https://docs.seats.io/docs/renderer/categoryfilter
@@ -106,6 +108,7 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
 
   static void _initializeBuilder(SeatingChartConfigBuilder b) {
     b.region = Region.eu;
+    b.messages = {};
   }
 
   static Serializer<SeatingChartConfig> get serializer => _$seatingChartConfigSerializer;
@@ -134,6 +137,7 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
         "showActiveSectionTooltipOnMobile": showActiveSectionTooltipOnMobile,
       // language and text
       if (language != null) "language": language,
+      if (messages.isNotEmpty) "messages": messages,
       // rest
 
       if (objectColor != null) "objectColor": objectColor,
