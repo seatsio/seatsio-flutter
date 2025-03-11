@@ -6,7 +6,6 @@ import 'package:webview_flutter/webview_flutter.dart';
 import '../assets/seatsio_html.dart';
 import '../models/seating_chart_config.dart';
 import '../util/seatsio_js_bridge.dart';
-import '../util/serializers.dart';
 
 typedef void SeatsioWebViewCreatedCallback(SeatsioWebViewController controller);
 

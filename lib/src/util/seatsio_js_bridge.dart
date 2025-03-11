@@ -22,6 +22,24 @@ class SeatsioJsBridge {
       """);
     }
 
+    if (chartConfig.popoverInfo != null) {
+      callbacks.add("""
+        "popoverInfo": (object) => {
+          promiseCounter++;
+          window.FlutterCallback.postMessage(JSON.stringify({
+            type: "popoverInfoRequested",
+            data: {
+              promiseId: promiseCounter,
+              object: object
+            }
+          }));
+          return new Promise((resolve) => {
+            promises[promiseCounter] = resolve;
+          });
+        }
+      """);
+    }
+
     if (chartConfig.objectColor != null) {
       callbacks.add('"objectColor": ${chartConfig.objectColor}');
     }

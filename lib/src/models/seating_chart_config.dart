@@ -48,6 +48,9 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
   @BuiltValueField(wireName: 'objectPopover')
   ObjectPopover? get objectPopover;
 
+  @BuiltValueField(serialize: false)
+  Function(SeatsioObject price)? get popoverInfo;
+
   // TODO everything under popovers and tooltips https://docs.seats.io/docs/renderer/config-objectPopover
 
   String? get language;
@@ -115,7 +118,6 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
       if (mode != null) "mode": mode,
       // pricing
       if (pricing != null) "pricing": pricing!.map((p) => p.toJson()).toList(),
-      // TODO add priceFormatter here ?
       if (showSectionPricingOverlay != null) "showSectionPricingOverlay": showSectionPricingOverlay,
       // selection
       if (selectedObjects != null) "selectedObjects": selectedObjects,

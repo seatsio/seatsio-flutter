@@ -262,6 +262,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   final ObjectPopover? objectPopover;
   @override
+  final Function(SeatsioObject price)? popoverInfo;
+  @override
   final String? language;
   @override
   final String? objectColor;
@@ -287,6 +289,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       this.multiSelectEnabled,
       this.objectsWithoutPricingSelectable,
       this.objectPopover,
+      this.popoverInfo,
       this.language,
       this.objectColor})
       : super._() {
@@ -327,6 +330,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         objectsWithoutPricingSelectable ==
             other.objectsWithoutPricingSelectable &&
         objectPopover == other.objectPopover &&
+        popoverInfo == _$dynamicOther.popoverInfo &&
         language == other.language &&
         objectColor == other.objectColor;
   }
@@ -350,6 +354,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     _$hash = $jc(_$hash, multiSelectEnabled.hashCode);
     _$hash = $jc(_$hash, objectsWithoutPricingSelectable.hashCode);
     _$hash = $jc(_$hash, objectPopover.hashCode);
+    _$hash = $jc(_$hash, popoverInfo.hashCode);
     _$hash = $jc(_$hash, language.hashCode);
     _$hash = $jc(_$hash, objectColor.hashCode);
     _$hash = $jf(_$hash);
@@ -376,6 +381,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
           ..add('objectsWithoutPricingSelectable',
               objectsWithoutPricingSelectable)
           ..add('objectPopover', objectPopover)
+          ..add('popoverInfo', popoverInfo)
           ..add('language', language)
           ..add('objectColor', objectColor))
         .toString();
@@ -463,6 +469,11 @@ class SeatingChartConfigBuilder
   set objectPopover(ObjectPopoverBuilder? objectPopover) =>
       _$this._objectPopover = objectPopover;
 
+  Function(SeatsioObject price)? _popoverInfo;
+  Function(SeatsioObject price)? get popoverInfo => _$this._popoverInfo;
+  set popoverInfo(Function(SeatsioObject price)? popoverInfo) =>
+      _$this._popoverInfo = popoverInfo;
+
   String? _language;
   String? get language => _$this._language;
   set language(String? language) => _$this._language = language;
@@ -494,6 +505,7 @@ class SeatingChartConfigBuilder
       _multiSelectEnabled = $v.multiSelectEnabled;
       _objectsWithoutPricingSelectable = $v.objectsWithoutPricingSelectable;
       _objectPopover = $v.objectPopover?.toBuilder();
+      _popoverInfo = $v.popoverInfo;
       _language = $v.language;
       _objectColor = $v.objectColor;
       _$v = null;
@@ -538,6 +550,7 @@ class SeatingChartConfigBuilder
             multiSelectEnabled: multiSelectEnabled,
             objectsWithoutPricingSelectable: objectsWithoutPricingSelectable,
             objectPopover: _objectPopover?.build(),
+            popoverInfo: popoverInfo,
             language: language,
             objectColor: objectColor,
           );

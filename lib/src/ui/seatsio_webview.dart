@@ -59,9 +59,15 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
           onMessageReceived: (JavaScriptMessage message) {
             try {
               Map<String, dynamic> parsedMessage = jsonDecode(message.message);
-              if (this.widget._config.priceFormatter != null) {
+              var messageType = parsedMessage["type"];
+              if (messageType == "priceFormatterRequested" && this.widget._config.priceFormatter != null) {
                 var formattedPrice = this.widget._config.priceFormatter?.call(parsedMessage["data"]["price"]);
                 this._seatsioController.evaluateJavascript('resolvePromise(${parsedMessage["data"]["promiseId"]}, "${formattedPrice}")');
+              }
+              if (messageType == "popoverInfoRequested" && this.widget._config.popoverInfo != null)  {
+                var object = SeatsioObject.fromJson(parsedMessage["data"]["object"]);
+                var popoverInfo = this.widget._config.popoverInfo?.call(object);
+                this._seatsioController.evaluateJavascript('resolvePromise(${parsedMessage["data"]["promiseId"]}, "${popoverInfo}")');
               }
             } catch (e) {
               debugPrint("Error while processing message from WebView: $e");

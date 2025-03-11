@@ -31,13 +31,15 @@ class LargeTheatreMaximal extends StatelessWidget {
 
     final priceFormatter = (num price) => "€${price.toStringAsFixed(2)}";
 
+    final popoverInfo = (SeatsioObject object) => "something [b]something[/b] ${object.label}";
+
     return Scaffold(
         appBar: AppBar(title: Text("Small Theatre - Minimal Config")),
         body: SeatsioSeatingChart(
           config: SeatingChartConfig((b) => b
                 ..workspaceKey = "publicDemoKey"
                 ..events = ["largeTheatreEvent"]
-                ..pricing = multiLevelPricing
+                ..pricing = simplePricing
                 ..priceFormatter = priceFormatter
                 ..showSectionPricingOverlay = true
                 // ..selectedObjects = ['Circle P-1-12', 'Circle P-1-11', 'Circle P-1-10']
@@ -64,7 +66,7 @@ class LargeTheatreMaximal extends StatelessWidget {
                   ..stylizedLabel = true
                   ..confirmSelection = 'auto'
                   ..confirmTicketTypeSelection = false))
-
+                ..popoverInfo = popoverInfo
               // ..language = 'nl'
               // ..objectColor = "function(object, defaultColor) { return object.id.startsWith('A') ? 'red' : 'blue'; }"
               //
