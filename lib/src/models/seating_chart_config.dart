@@ -88,7 +88,9 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
   @BuiltValueField(serialize: false)
   String? get objectIcon;
 
-  // TODO everything under Visibility https://docs.seats.io/docs/renderer/config-showsectioncontents
+  // Visibility
+  ShowSectionContents? get showSectionContents;
+
 
   // TODO everything under Session https://docs.seats.io/docs/renderer/config-session
 
@@ -169,6 +171,8 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
       if (sectionColor != null) "sectionColor": sectionColor,
       if (objectLabel != null) "objectLabel": objectLabel,
       if (objectIcon != null) "objectIcon": objectIcon,
+      // visibility
+      if (showSectionContents != null) "showSectionContents": showSectionContents!.toJson(),
     };
   }
 }

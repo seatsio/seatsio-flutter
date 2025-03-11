@@ -10,3 +10,4 @@ export 'src/models/max_selected_objects.dart';
 export 'src/models/object_popover.dart';
 export 'src/models/seatsio_object.dart';
 export 'src/models/category_filter.dart';
+export 'src/models/show_section_contents.dart';

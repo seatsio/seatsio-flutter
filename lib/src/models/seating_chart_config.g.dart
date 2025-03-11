@@ -181,6 +181,13 @@ class _$SeatingChartConfigSerializer
             specifiedType:
                 const FullType(List, const [const FullType(String)])));
     }
+    value = object.showSectionContents;
+    if (value != null) {
+      result
+        ..add('showSectionContents')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(ShowSectionContents)));
+    }
     return result;
   }
 
@@ -311,6 +318,11 @@ class _$SeatingChartConfigSerializer
                       const FullType(List, const [const FullType(String)]))
               as List<String>?;
           break;
+        case 'showSectionContents':
+          result.showSectionContents = serializers.deserialize(value,
+                  specifiedType: const FullType(ShowSectionContents))
+              as ShowSectionContents?;
+          break;
       }
     }
 
@@ -377,6 +389,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   final String? objectLabel;
   @override
   final String? objectIcon;
+  @override
+  final ShowSectionContents? showSectionContents;
 
   factory _$SeatingChartConfig(
           [void Function(SeatingChartConfigBuilder)? updates]) =>
@@ -411,7 +425,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       this.objectColor,
       this.sectionColor,
       this.objectLabel,
-      this.objectIcon})
+      this.objectIcon,
+      this.showSectionContents})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         workspaceKey, r'SeatingChartConfig', 'workspaceKey');
@@ -465,7 +480,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         objectColor == other.objectColor &&
         sectionColor == other.sectionColor &&
         objectLabel == other.objectLabel &&
-        objectIcon == other.objectIcon;
+        objectIcon == other.objectIcon &&
+        showSectionContents == other.showSectionContents;
   }
 
   @override
@@ -500,6 +516,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     _$hash = $jc(_$hash, sectionColor.hashCode);
     _$hash = $jc(_$hash, objectLabel.hashCode);
     _$hash = $jc(_$hash, objectIcon.hashCode);
+    _$hash = $jc(_$hash, showSectionContents.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -537,7 +554,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
           ..add('objectColor', objectColor)
           ..add('sectionColor', sectionColor)
           ..add('objectLabel', objectLabel)
-          ..add('objectIcon', objectIcon))
+          ..add('objectIcon', objectIcon)
+          ..add('showSectionContents', showSectionContents))
         .toString();
   }
 }
@@ -685,6 +703,11 @@ class SeatingChartConfigBuilder
   String? get objectIcon => _$this._objectIcon;
   set objectIcon(String? objectIcon) => _$this._objectIcon = objectIcon;
 
+  ShowSectionContents? _showSectionContents;
+  ShowSectionContents? get showSectionContents => _$this._showSectionContents;
+  set showSectionContents(ShowSectionContents? showSectionContents) =>
+      _$this._showSectionContents = showSectionContents;
+
   SeatingChartConfigBuilder() {
     SeatingChartConfig._initializeBuilder(this);
   }
@@ -721,6 +744,7 @@ class SeatingChartConfigBuilder
       _sectionColor = $v.sectionColor;
       _objectLabel = $v.objectLabel;
       _objectIcon = $v.objectIcon;
+      _showSectionContents = $v.showSectionContents;
       _$v = null;
     }
     return this;
@@ -777,6 +801,7 @@ class SeatingChartConfigBuilder
             sectionColor: sectionColor,
             objectLabel: objectLabel,
             objectIcon: objectIcon,
+            showSectionContents: showSectionContents,
           );
     } catch (_) {
       late String _$failedField;
