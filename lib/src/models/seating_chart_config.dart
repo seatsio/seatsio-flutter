@@ -58,7 +58,8 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
 
   Map<String, String> get messages;
 
-  // TODO messages https://docs.seats.io/docs/renderer/config-messages
+  // Categories
+  CategoryFilter? get categoryFilter;
 
   // TODO everything under Categories https://docs.seats.io/docs/renderer/categoryfilter
 
@@ -138,6 +139,8 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
       // language and text
       if (language != null) "language": language,
       if (messages.isNotEmpty) "messages": messages,
+      // categories
+      if (categoryFilter != null) "categoryFilter": categoryFilter!.toJson(),
       // rest
 
       if (objectColor != null) "objectColor": objectColor,

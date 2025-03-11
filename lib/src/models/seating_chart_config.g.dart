@@ -142,6 +142,13 @@ class _$SeatingChartConfigSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.categoryFilter;
+    if (value != null) {
+      result
+        ..add('categoryFilter')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(CategoryFilter)));
+    }
     return result;
   }
 
@@ -243,6 +250,11 @@ class _$SeatingChartConfigSerializer
                 const FullType(String)
               ]))! as Map<String, String>;
           break;
+        case 'categoryFilter':
+          result.categoryFilter.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(CategoryFilter))!
+              as CategoryFilter);
+          break;
       }
     }
 
@@ -292,6 +304,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   final Map<String, String> messages;
   @override
+  final CategoryFilter? categoryFilter;
+  @override
   final String? objectColor;
 
   factory _$SeatingChartConfig(
@@ -319,6 +333,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       this.showActiveSectionTooltipOnMobile,
       this.language,
       required this.messages,
+      this.categoryFilter,
       this.objectColor})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
@@ -365,6 +380,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
             other.showActiveSectionTooltipOnMobile &&
         language == other.language &&
         messages == other.messages &&
+        categoryFilter == other.categoryFilter &&
         objectColor == other.objectColor;
   }
 
@@ -391,6 +407,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     _$hash = $jc(_$hash, showActiveSectionTooltipOnMobile.hashCode);
     _$hash = $jc(_$hash, language.hashCode);
     _$hash = $jc(_$hash, messages.hashCode);
+    _$hash = $jc(_$hash, categoryFilter.hashCode);
     _$hash = $jc(_$hash, objectColor.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -421,6 +438,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
               showActiveSectionTooltipOnMobile)
           ..add('language', language)
           ..add('messages', messages)
+          ..add('categoryFilter', categoryFilter)
           ..add('objectColor', objectColor))
         .toString();
   }
@@ -528,6 +546,12 @@ class SeatingChartConfigBuilder
   Map<String, String>? get messages => _$this._messages;
   set messages(Map<String, String>? messages) => _$this._messages = messages;
 
+  CategoryFilterBuilder? _categoryFilter;
+  CategoryFilterBuilder get categoryFilter =>
+      _$this._categoryFilter ??= new CategoryFilterBuilder();
+  set categoryFilter(CategoryFilterBuilder? categoryFilter) =>
+      _$this._categoryFilter = categoryFilter;
+
   String? _objectColor;
   String? get objectColor => _$this._objectColor;
   set objectColor(String? objectColor) => _$this._objectColor = objectColor;
@@ -559,6 +583,7 @@ class SeatingChartConfigBuilder
       _showActiveSectionTooltipOnMobile = $v.showActiveSectionTooltipOnMobile;
       _language = $v.language;
       _messages = $v.messages;
+      _categoryFilter = $v.categoryFilter?.toBuilder();
       _objectColor = $v.objectColor;
       _$v = null;
     }
@@ -607,6 +632,7 @@ class SeatingChartConfigBuilder
             language: language,
             messages: BuiltValueNullFieldError.checkNotNull(
                 messages, r'SeatingChartConfig', 'messages'),
+            categoryFilter: _categoryFilter?.build(),
             objectColor: objectColor,
           );
     } catch (_) {
@@ -614,6 +640,9 @@ class SeatingChartConfigBuilder
       try {
         _$failedField = 'objectPopover';
         _objectPopover?.build();
+
+        _$failedField = 'categoryFilter';
+        _categoryFilter?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             r'SeatingChartConfig', _$failedField, e.toString());

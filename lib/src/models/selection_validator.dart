@@ -1,5 +1,4 @@
 import 'package:built_value/built_value.dart';
-import 'package:flutter/foundation.dart';
 
 part 'selection_validator.g.dart';
 

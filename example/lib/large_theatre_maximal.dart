@@ -67,12 +67,16 @@ class LargeTheatreMaximal extends StatelessWidget {
                   ..confirmSelection = 'auto'
                   ..confirmTicketTypeSelection = false))
                 ..popoverInfo = popoverInfo
+                // ..language = 'nl'
                 ..messages = {
                   "STAGE": "Stage",
                 }
-              // ..language = 'nl'
+                ..categoryFilter.replace(CategoryFilter((b) => b
+                  ..enabled = true
+                  ..multiSelect = true
+                  ..sortBy = CategoryFilterSortBy.price))
+
               // ..objectColor = "function(object, defaultColor) { return object.id.startsWith('A') ? 'red' : 'blue'; }"
-              //
               ),
         ));
   }
