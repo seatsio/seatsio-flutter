@@ -157,6 +157,14 @@ class _$SeatingChartConfigSerializer
             specifiedType:
                 const FullType(List, const [const FullType(String)])));
     }
+    value = object.unavailableCategories;
+    if (value != null) {
+      result
+        ..add('unavailableCategories')
+        ..add(serializers.serialize(value,
+            specifiedType:
+                const FullType(List, const [const FullType(String)])));
+    }
     return result;
   }
 
@@ -269,6 +277,12 @@ class _$SeatingChartConfigSerializer
                       const FullType(List, const [const FullType(String)]))
               as List<String>?;
           break;
+        case 'unavailableCategories':
+          result.unavailableCategories = serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(List, const [const FullType(String)]))
+              as List<String>?;
+          break;
       }
     }
 
@@ -322,6 +336,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   final List<String>? availableCategories;
   @override
+  final List<String>? unavailableCategories;
+  @override
   final String? objectColor;
 
   factory _$SeatingChartConfig(
@@ -351,6 +367,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       required this.messages,
       this.categoryFilter,
       this.availableCategories,
+      this.unavailableCategories,
       this.objectColor})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
@@ -399,6 +416,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         messages == other.messages &&
         categoryFilter == other.categoryFilter &&
         availableCategories == other.availableCategories &&
+        unavailableCategories == other.unavailableCategories &&
         objectColor == other.objectColor;
   }
 
@@ -427,6 +445,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     _$hash = $jc(_$hash, messages.hashCode);
     _$hash = $jc(_$hash, categoryFilter.hashCode);
     _$hash = $jc(_$hash, availableCategories.hashCode);
+    _$hash = $jc(_$hash, unavailableCategories.hashCode);
     _$hash = $jc(_$hash, objectColor.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -459,6 +478,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
           ..add('messages', messages)
           ..add('categoryFilter', categoryFilter)
           ..add('availableCategories', availableCategories)
+          ..add('unavailableCategories', unavailableCategories)
           ..add('objectColor', objectColor))
         .toString();
   }
@@ -577,6 +597,11 @@ class SeatingChartConfigBuilder
   set availableCategories(List<String>? availableCategories) =>
       _$this._availableCategories = availableCategories;
 
+  List<String>? _unavailableCategories;
+  List<String>? get unavailableCategories => _$this._unavailableCategories;
+  set unavailableCategories(List<String>? unavailableCategories) =>
+      _$this._unavailableCategories = unavailableCategories;
+
   String? _objectColor;
   String? get objectColor => _$this._objectColor;
   set objectColor(String? objectColor) => _$this._objectColor = objectColor;
@@ -610,6 +635,7 @@ class SeatingChartConfigBuilder
       _messages = $v.messages;
       _categoryFilter = $v.categoryFilter?.toBuilder();
       _availableCategories = $v.availableCategories;
+      _unavailableCategories = $v.unavailableCategories;
       _objectColor = $v.objectColor;
       _$v = null;
     }
@@ -660,6 +686,7 @@ class SeatingChartConfigBuilder
                 messages, r'SeatingChartConfig', 'messages'),
             categoryFilter: _categoryFilter?.build(),
             availableCategories: availableCategories,
+            unavailableCategories: unavailableCategories,
             objectColor: objectColor,
           );
     } catch (_) {
