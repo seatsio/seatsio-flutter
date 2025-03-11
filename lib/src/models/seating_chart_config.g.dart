@@ -165,6 +165,22 @@ class _$SeatingChartConfigSerializer
             specifiedType:
                 const FullType(List, const [const FullType(String)])));
     }
+    value = object.filteredCategories;
+    if (value != null) {
+      result
+        ..add('filteredCategories')
+        ..add(serializers.serialize(value,
+            specifiedType:
+                const FullType(List, const [const FullType(String)])));
+    }
+    value = object.channels;
+    if (value != null) {
+      result
+        ..add('channels')
+        ..add(serializers.serialize(value,
+            specifiedType:
+                const FullType(List, const [const FullType(String)])));
+    }
     return result;
   }
 
@@ -283,6 +299,18 @@ class _$SeatingChartConfigSerializer
                       const FullType(List, const [const FullType(String)]))
               as List<String>?;
           break;
+        case 'filteredCategories':
+          result.filteredCategories = serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(List, const [const FullType(String)]))
+              as List<String>?;
+          break;
+        case 'channels':
+          result.channels = serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(List, const [const FullType(String)]))
+              as List<String>?;
+          break;
       }
     }
 
@@ -338,6 +366,10 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   final List<String>? unavailableCategories;
   @override
+  final List<String>? filteredCategories;
+  @override
+  final List<String>? channels;
+  @override
   final String? objectColor;
 
   factory _$SeatingChartConfig(
@@ -368,6 +400,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       this.categoryFilter,
       this.availableCategories,
       this.unavailableCategories,
+      this.filteredCategories,
+      this.channels,
       this.objectColor})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
@@ -417,6 +451,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         categoryFilter == other.categoryFilter &&
         availableCategories == other.availableCategories &&
         unavailableCategories == other.unavailableCategories &&
+        filteredCategories == other.filteredCategories &&
+        channels == other.channels &&
         objectColor == other.objectColor;
   }
 
@@ -446,6 +482,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     _$hash = $jc(_$hash, categoryFilter.hashCode);
     _$hash = $jc(_$hash, availableCategories.hashCode);
     _$hash = $jc(_$hash, unavailableCategories.hashCode);
+    _$hash = $jc(_$hash, filteredCategories.hashCode);
+    _$hash = $jc(_$hash, channels.hashCode);
     _$hash = $jc(_$hash, objectColor.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -479,6 +517,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
           ..add('categoryFilter', categoryFilter)
           ..add('availableCategories', availableCategories)
           ..add('unavailableCategories', unavailableCategories)
+          ..add('filteredCategories', filteredCategories)
+          ..add('channels', channels)
           ..add('objectColor', objectColor))
         .toString();
   }
@@ -602,6 +642,15 @@ class SeatingChartConfigBuilder
   set unavailableCategories(List<String>? unavailableCategories) =>
       _$this._unavailableCategories = unavailableCategories;
 
+  List<String>? _filteredCategories;
+  List<String>? get filteredCategories => _$this._filteredCategories;
+  set filteredCategories(List<String>? filteredCategories) =>
+      _$this._filteredCategories = filteredCategories;
+
+  List<String>? _channels;
+  List<String>? get channels => _$this._channels;
+  set channels(List<String>? channels) => _$this._channels = channels;
+
   String? _objectColor;
   String? get objectColor => _$this._objectColor;
   set objectColor(String? objectColor) => _$this._objectColor = objectColor;
@@ -636,6 +685,8 @@ class SeatingChartConfigBuilder
       _categoryFilter = $v.categoryFilter?.toBuilder();
       _availableCategories = $v.availableCategories;
       _unavailableCategories = $v.unavailableCategories;
+      _filteredCategories = $v.filteredCategories;
+      _channels = $v.channels;
       _objectColor = $v.objectColor;
       _$v = null;
     }
@@ -687,6 +738,8 @@ class SeatingChartConfigBuilder
             categoryFilter: _categoryFilter?.build(),
             availableCategories: availableCategories,
             unavailableCategories: unavailableCategories,
+            filteredCategories: filteredCategories,
+            channels: channels,
             objectColor: objectColor,
           );
     } catch (_) {

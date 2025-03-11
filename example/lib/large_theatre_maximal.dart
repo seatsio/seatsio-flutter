@@ -77,8 +77,10 @@ class LargeTheatreMaximal extends StatelessWidget {
                   ..sortBy = CategoryFilterSortBy.price))
                 ..availableCategories = ["Stalls"]
                 ..unavailableCategories = ["Stalls"]
-
+                ..filteredCategories = ["Stalls"]
+              // ..channels = ["channel1", "channel2"]
               // ..objectColor = "function(object, defaultColor) { return object.id.startsWith('A') ? 'red' : 'blue'; }"
+
               ),
         ));
   }
