@@ -371,6 +371,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   final List<String>? channels;
   @override
   final String? objectColor;
+  @override
+  final String? sectionColor;
 
   factory _$SeatingChartConfig(
           [void Function(SeatingChartConfigBuilder)? updates]) =>
@@ -402,7 +404,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       this.unavailableCategories,
       this.filteredCategories,
       this.channels,
-      this.objectColor})
+      this.objectColor,
+      this.sectionColor})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         workspaceKey, r'SeatingChartConfig', 'workspaceKey');
@@ -453,7 +456,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         unavailableCategories == other.unavailableCategories &&
         filteredCategories == other.filteredCategories &&
         channels == other.channels &&
-        objectColor == other.objectColor;
+        objectColor == other.objectColor &&
+        sectionColor == other.sectionColor;
   }
 
   @override
@@ -485,6 +489,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     _$hash = $jc(_$hash, filteredCategories.hashCode);
     _$hash = $jc(_$hash, channels.hashCode);
     _$hash = $jc(_$hash, objectColor.hashCode);
+    _$hash = $jc(_$hash, sectionColor.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -519,7 +524,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
           ..add('unavailableCategories', unavailableCategories)
           ..add('filteredCategories', filteredCategories)
           ..add('channels', channels)
-          ..add('objectColor', objectColor))
+          ..add('objectColor', objectColor)
+          ..add('sectionColor', sectionColor))
         .toString();
   }
 }
@@ -655,6 +661,10 @@ class SeatingChartConfigBuilder
   String? get objectColor => _$this._objectColor;
   set objectColor(String? objectColor) => _$this._objectColor = objectColor;
 
+  String? _sectionColor;
+  String? get sectionColor => _$this._sectionColor;
+  set sectionColor(String? sectionColor) => _$this._sectionColor = sectionColor;
+
   SeatingChartConfigBuilder() {
     SeatingChartConfig._initializeBuilder(this);
   }
@@ -688,6 +698,7 @@ class SeatingChartConfigBuilder
       _filteredCategories = $v.filteredCategories;
       _channels = $v.channels;
       _objectColor = $v.objectColor;
+      _sectionColor = $v.sectionColor;
       _$v = null;
     }
     return this;
@@ -741,6 +752,7 @@ class SeatingChartConfigBuilder
             filteredCategories: filteredCategories,
             channels: channels,
             objectColor: objectColor,
+            sectionColor: sectionColor,
           );
     } catch (_) {
       late String _$failedField;
