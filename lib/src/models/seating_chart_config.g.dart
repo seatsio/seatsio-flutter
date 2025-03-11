@@ -124,6 +124,13 @@ class _$SeatingChartConfigSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(ObjectPopover)));
     }
+    value = object.showActiveSectionTooltipOnMobile;
+    if (value != null) {
+      result
+        ..add('showActiveSectionTooltipOnMobile')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(bool)));
+    }
     value = object.language;
     if (value != null) {
       result
@@ -217,6 +224,10 @@ class _$SeatingChartConfigSerializer
           result.objectPopover.replace(serializers.deserialize(value,
               specifiedType: const FullType(ObjectPopover))! as ObjectPopover);
           break;
+        case 'showActiveSectionTooltipOnMobile':
+          result.showActiveSectionTooltipOnMobile = serializers
+              .deserialize(value, specifiedType: const FullType(bool)) as bool?;
+          break;
         case 'language':
           result.language = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
@@ -264,6 +275,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   final Function(SeatsioObject price)? popoverInfo;
   @override
+  final bool? showActiveSectionTooltipOnMobile;
+  @override
   final String? language;
   @override
   final String? objectColor;
@@ -290,6 +303,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       this.objectsWithoutPricingSelectable,
       this.objectPopover,
       this.popoverInfo,
+      this.showActiveSectionTooltipOnMobile,
       this.language,
       this.objectColor})
       : super._() {
@@ -331,6 +345,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
             other.objectsWithoutPricingSelectable &&
         objectPopover == other.objectPopover &&
         popoverInfo == _$dynamicOther.popoverInfo &&
+        showActiveSectionTooltipOnMobile ==
+            other.showActiveSectionTooltipOnMobile &&
         language == other.language &&
         objectColor == other.objectColor;
   }
@@ -355,6 +371,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     _$hash = $jc(_$hash, objectsWithoutPricingSelectable.hashCode);
     _$hash = $jc(_$hash, objectPopover.hashCode);
     _$hash = $jc(_$hash, popoverInfo.hashCode);
+    _$hash = $jc(_$hash, showActiveSectionTooltipOnMobile.hashCode);
     _$hash = $jc(_$hash, language.hashCode);
     _$hash = $jc(_$hash, objectColor.hashCode);
     _$hash = $jf(_$hash);
@@ -382,6 +399,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
               objectsWithoutPricingSelectable)
           ..add('objectPopover', objectPopover)
           ..add('popoverInfo', popoverInfo)
+          ..add('showActiveSectionTooltipOnMobile',
+              showActiveSectionTooltipOnMobile)
           ..add('language', language)
           ..add('objectColor', objectColor))
         .toString();
@@ -474,6 +493,14 @@ class SeatingChartConfigBuilder
   set popoverInfo(Function(SeatsioObject price)? popoverInfo) =>
       _$this._popoverInfo = popoverInfo;
 
+  bool? _showActiveSectionTooltipOnMobile;
+  bool? get showActiveSectionTooltipOnMobile =>
+      _$this._showActiveSectionTooltipOnMobile;
+  set showActiveSectionTooltipOnMobile(
+          bool? showActiveSectionTooltipOnMobile) =>
+      _$this._showActiveSectionTooltipOnMobile =
+          showActiveSectionTooltipOnMobile;
+
   String? _language;
   String? get language => _$this._language;
   set language(String? language) => _$this._language = language;
@@ -506,6 +533,7 @@ class SeatingChartConfigBuilder
       _objectsWithoutPricingSelectable = $v.objectsWithoutPricingSelectable;
       _objectPopover = $v.objectPopover?.toBuilder();
       _popoverInfo = $v.popoverInfo;
+      _showActiveSectionTooltipOnMobile = $v.showActiveSectionTooltipOnMobile;
       _language = $v.language;
       _objectColor = $v.objectColor;
       _$v = null;
@@ -551,6 +579,7 @@ class SeatingChartConfigBuilder
             objectsWithoutPricingSelectable: objectsWithoutPricingSelectable,
             objectPopover: _objectPopover?.build(),
             popoverInfo: popoverInfo,
+            showActiveSectionTooltipOnMobile: showActiveSectionTooltipOnMobile,
             language: language,
             objectColor: objectColor,
           );
