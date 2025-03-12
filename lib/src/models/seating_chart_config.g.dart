@@ -251,6 +251,27 @@ class _$SeatingChartConfigSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(LegendConfig)));
     }
+    value = object.showZoomOutButtonOnMobile;
+    if (value != null) {
+      result
+        ..add('showZoomOutButtonOnMobile')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(bool)));
+    }
+    value = object.colorScheme;
+    if (value != null) {
+      result
+        ..add('colorScheme')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(SeatsioColorScheme)));
+    }
+    value = object.colors;
+    if (value != null) {
+      result
+        ..add('colors')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(SeatsioColors)));
+    }
     return result;
   }
 
@@ -422,6 +443,19 @@ class _$SeatingChartConfigSerializer
           result.legendConfig.replace(serializers.deserialize(value,
               specifiedType: const FullType(LegendConfig))! as LegendConfig);
           break;
+        case 'showZoomOutButtonOnMobile':
+          result.showZoomOutButtonOnMobile = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool?;
+          break;
+        case 'colorScheme':
+          result.colorScheme = serializers.deserialize(value,
+                  specifiedType: const FullType(SeatsioColorScheme))
+              as SeatsioColorScheme?;
+          break;
+        case 'colors':
+          result.colors.replace(serializers.deserialize(value,
+              specifiedType: const FullType(SeatsioColors))! as SeatsioColors);
+          break;
       }
     }
 
@@ -510,6 +544,12 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   final bool? showLegend;
   @override
   final LegendConfig? legendConfig;
+  @override
+  final bool? showZoomOutButtonOnMobile;
+  @override
+  final SeatsioColorScheme? colorScheme;
+  @override
+  final SeatsioColors? colors;
 
   factory _$SeatingChartConfig(
           [void Function(SeatingChartConfigBuilder)? updates]) =>
@@ -555,7 +595,10 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       this.showMinimap,
       this.showFullScreenButton,
       this.showLegend,
-      this.legendConfig})
+      this.legendConfig,
+      this.showZoomOutButtonOnMobile,
+      this.colorScheme,
+      this.colors})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         workspaceKey, r'SeatingChartConfig', 'workspaceKey');
@@ -620,7 +663,10 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         showMinimap == other.showMinimap &&
         showFullScreenButton == other.showFullScreenButton &&
         showLegend == other.showLegend &&
-        legendConfig == other.legendConfig;
+        legendConfig == other.legendConfig &&
+        showZoomOutButtonOnMobile == other.showZoomOutButtonOnMobile &&
+        colorScheme == other.colorScheme &&
+        colors == other.colors;
   }
 
   @override
@@ -666,6 +712,9 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     _$hash = $jc(_$hash, showFullScreenButton.hashCode);
     _$hash = $jc(_$hash, showLegend.hashCode);
     _$hash = $jc(_$hash, legendConfig.hashCode);
+    _$hash = $jc(_$hash, showZoomOutButtonOnMobile.hashCode);
+    _$hash = $jc(_$hash, colorScheme.hashCode);
+    _$hash = $jc(_$hash, colors.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -714,7 +763,10 @@ class _$SeatingChartConfig extends SeatingChartConfig {
           ..add('showMinimap', showMinimap)
           ..add('showFullScreenButton', showFullScreenButton)
           ..add('showLegend', showLegend)
-          ..add('legendConfig', legendConfig))
+          ..add('legendConfig', legendConfig)
+          ..add('showZoomOutButtonOnMobile', showZoomOutButtonOnMobile)
+          ..add('colorScheme', colorScheme)
+          ..add('colors', colors))
         .toString();
   }
 }
@@ -914,6 +966,21 @@ class SeatingChartConfigBuilder
   set legendConfig(LegendConfigBuilder? legendConfig) =>
       _$this._legendConfig = legendConfig;
 
+  bool? _showZoomOutButtonOnMobile;
+  bool? get showZoomOutButtonOnMobile => _$this._showZoomOutButtonOnMobile;
+  set showZoomOutButtonOnMobile(bool? showZoomOutButtonOnMobile) =>
+      _$this._showZoomOutButtonOnMobile = showZoomOutButtonOnMobile;
+
+  SeatsioColorScheme? _colorScheme;
+  SeatsioColorScheme? get colorScheme => _$this._colorScheme;
+  set colorScheme(SeatsioColorScheme? colorScheme) =>
+      _$this._colorScheme = colorScheme;
+
+  SeatsioColorsBuilder? _colors;
+  SeatsioColorsBuilder get colors =>
+      _$this._colors ??= new SeatsioColorsBuilder();
+  set colors(SeatsioColorsBuilder? colors) => _$this._colors = colors;
+
   SeatingChartConfigBuilder() {
     SeatingChartConfig._initializeBuilder(this);
   }
@@ -961,6 +1028,9 @@ class SeatingChartConfigBuilder
       _showFullScreenButton = $v.showFullScreenButton;
       _showLegend = $v.showLegend;
       _legendConfig = $v.legendConfig?.toBuilder();
+      _showZoomOutButtonOnMobile = $v.showZoomOutButtonOnMobile;
+      _colorScheme = $v.colorScheme;
+      _colors = $v.colors?.toBuilder();
       _$v = null;
     }
     return this;
@@ -1028,6 +1098,9 @@ class SeatingChartConfigBuilder
             showFullScreenButton: showFullScreenButton,
             showLegend: showLegend,
             legendConfig: _legendConfig?.build(),
+            showZoomOutButtonOnMobile: showZoomOutButtonOnMobile,
+            colorScheme: colorScheme,
+            colors: _colors?.build(),
           );
     } catch (_) {
       late String _$failedField;
@@ -1040,6 +1113,9 @@ class SeatingChartConfigBuilder
 
         _$failedField = 'legendConfig';
         _legendConfig?.build();
+
+        _$failedField = 'colors';
+        _colors?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             r'SeatingChartConfig', _$failedField, e.toString());

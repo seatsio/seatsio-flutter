@@ -13,3 +13,5 @@ export 'src/models/category_filter.dart';
 export 'src/models/show_section_contents.dart';
 export 'src/models/session.dart';
 export 'src/models/legend_config.dart';
+export 'src/models/color_scheme.dart';
+export 'src/models/colors.dart';

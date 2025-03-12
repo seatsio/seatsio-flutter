@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:seatsio/seatsio.dart';
+import 'package:flutter/material.dart';
+
 
 class LargeTheatreMaximal extends StatelessWidget {
   @override
@@ -36,68 +37,70 @@ class LargeTheatreMaximal extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(title: Text("Small Theatre - Minimal Config")),
         body: SeatsioSeatingChart(
-          config: SeatingChartConfig((b) => b
-                ..workspaceKey = "publicDemoKey"
-                ..events = ["largeTheatreEvent"]
-                ..pricing = simplePricing
-                ..priceFormatter = priceFormatter
-                ..showSectionPricingOverlay = true
-                // ..selectedObjects = ['Circle P-1-12', 'Circle P-1-11', 'Circle P-1-10']
-                ..selectionValidators = [
-                  // NoOrphanSeats(ignoreCategories: true, mode: NoOrphanSeatsMode.strict, highlight: true),
-                  // ConsecutiveSeats(),
-                  // MinimumSelectedPlaces(4)
-                ]
-                //..maxSelectedObjects = MaxSelectedObjects.total(4)
-                //..maxSelectedObjects = MaxSelectedObjects.rules([
-                //  MaxSelectedObjectsRule.perTicketType(ticketType: "adult", quantity: 2),
-                // MaxSelectedObjectsRule.perTicketType(ticketType: "child", quantity: 2),
-                // MaxSelectedObjectsRule.total(3)
-                // ])
+          config: SeatingChartConfig(
+            (b) => b
+              ..workspaceKey = "publicDemoKey"
+              ..events = ["largeTheatreEvent"]
+              ..pricing = simplePricing
+              ..priceFormatter = priceFormatter
+              ..showSectionPricingOverlay = true
+              // ..selectedObjects = ['Circle P-1-12', 'Circle P-1-11', 'Circle P-1-10']
+              ..selectionValidators = [
+                // NoOrphanSeats(ignoreCategories: true, mode: NoOrphanSeatsMode.strict, highlight: true),
+                // ConsecutiveSeats(),
+                // MinimumSelectedPlaces(4)
+              ]
+              //..maxSelectedObjects = MaxSelectedObjects.total(4)
+              //..maxSelectedObjects = MaxSelectedObjects.rules([
+              //  MaxSelectedObjectsRule.perTicketType(ticketType: "adult", quantity: 2),
+              // MaxSelectedObjectsRule.perTicketType(ticketType: "child", quantity: 2),
+              // MaxSelectedObjectsRule.total(3)
+              // ])
 
-                ..numberOfPlacesToSelect = 2
-                ..multiSelectEnabled = true
-                ..objectPopover.replace(ObjectPopover((b) => b
-                  ..showAvailability = false
-                  ..showCategory = false
-                  ..showLabel = false
-                  ..showPricing = false
-                  ..showUnavailableNotice = true
-                  ..stylizedLabel = true
-                  ..confirmSelection = 'auto'
-                  ..confirmTicketTypeSelection = false))
-                ..popoverInfo = popoverInfo
-                // ..language = 'nl'
-                ..messages = {
-                  "STAGE": "Stage",
-                }
-                ..categoryFilter.replace(CategoryFilter((b) => b
-                  ..enabled = true
-                  ..multiSelect = true
-                  ..sortBy = CategoryFilterSortBy.price))
-                //..availableCategories = ["Stalls"]
-                //..unavailableCategories = ["Stalls"]
-                //..filteredCategories = ["Stalls"]
-                // ..channels = ["channel1", "channel2"]
-                // ..objectColor = "function(object, defaultColor) { return object.label.startsWith('A') ? 'green' : 'blue'; }"
-                // ..sectionColor = "function(object, defaultColor) { return 'red' ; }"
-                // ..objectLabel = "function(object) { return object.label + ' (' + object.status + ')'; }"
-                // ..objectIcon = "function(object) { return 'star' }"
-                ..showSectionContents = ShowSectionContents.onlyAfterZoom
-                ..isObjectVisible = "function() { return true }"
-                ..showSeatLabels = true
-                ..session = Session.cont
-                // ..holdToken = "someHoldToken"
-                //..holdOnSelectForGAs = true
-                // ..showMinimap = false
-                // ..showFullScreenButton = false
-                ..showLegend = true
-                ..legendConfig.replace(LegendConfig((b) => b
-                  ..hideNonSelectableCategories = true
-                  ..hideUnavailableLegendItems = true
-                  ..hidePricing = false
-                  ..hideCategoryName = true)),
-              ),
+              ..numberOfPlacesToSelect = 2
+              ..multiSelectEnabled = true
+              ..objectPopover.replace(ObjectPopover((b) => b
+                ..showAvailability = false
+                ..showCategory = false
+                ..showLabel = false
+                ..showPricing = false
+                ..showUnavailableNotice = true
+                ..stylizedLabel = true
+                ..confirmSelection = 'auto'
+                ..confirmTicketTypeSelection = false))
+              ..popoverInfo = popoverInfo
+              // ..language = 'nl'
+              ..messages = {
+                "STAGE": "Stage",
+              }
+              ..categoryFilter.replace(CategoryFilter((b) => b
+                ..enabled = true
+                ..multiSelect = true
+                ..sortBy = CategoryFilterSortBy.price))
+              //..availableCategories = ["Stalls"]
+              //..unavailableCategories = ["Stalls"]
+              //..filteredCategories = ["Stalls"]
+              // ..channels = ["channel1", "channel2"]
+              // ..objectColor = "function(object, defaultColor) { return object.label.startsWith('A') ? 'green' : 'blue'; }"
+              // ..sectionColor = "function(object, defaultColor) { return 'red' ; }"
+              // ..objectLabel = "function(object) { return object.label + ' (' + object.status + ')'; }"
+              // ..objectIcon = "function(object) { return 'star' }"
+              ..showSectionContents = ShowSectionContents.onlyAfterZoom
+              ..isObjectVisible = "function() { return true }"
+              ..showSeatLabels = true
+              ..session = Session.cont
+              // ..holdToken = "someHoldToken"
+              //..holdOnSelectForGAs = true
+              // ..showMinimap = false
+              // ..showFullScreenButton = false
+              ..showLegend = true
+              ..colorScheme = SeatsioColorScheme.dark
+              ..legendConfig.replace(LegendConfig((b) => b
+                ..hideNonSelectableCategories = true
+                ..hideUnavailableLegendItems = true
+                ..hidePricing = false
+                ..hideCategoryName = true)),
+          ),
         ));
   }
 }

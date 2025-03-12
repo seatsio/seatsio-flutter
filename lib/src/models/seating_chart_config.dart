@@ -1,7 +1,6 @@
+import '../../seatsio.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
-
-import '../../seatsio.dart';
 
 part 'seating_chart_config.g.dart';
 
@@ -116,11 +115,24 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
 
   bool? get showZoomOutButtonOnMobile;
 
-  // TODO everything under UI Customization https://docs.seats.io/docs/renderer/config-showminimap
+  // styling
+  SeatsioColorScheme? get colorScheme;
 
-  // TODO everything under Styling https://docs.seats.io/docs/renderer/colorscheme
+  SeatsioColors? get colors;
 
-  // TODO everything under Floors https://docs.seats.io/docs/renderer/activeFloor
+  // TODO what with StylePreset and Style?
+
+  // Floors
+  String? get activeFloor;
+
+  bool? get lockActiveFloor;
+
+  bool? get showFloorElevator;
+
+  // TODO chart.goToFloor(): https://docs.seats.io/docs/renderer/chart-gotofloor
+  // TODO chart.goToAllFloorsView() https://docs.seats.io/docs/renderer/chart-gotoallfloorsview
+
+
 
   // TODO everything under Prompts API https://docs.seats.io/docs/renderer/prompts-api/onPlacesPrompt
 
@@ -208,6 +220,13 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
       if (showLegend != null) "showLegend": showLegend,
       if (legendConfig != null) "legendConfig": legendConfig!.toJson(),
       if (showZoomOutButtonOnMobile != null) "showZoomOutButtonOnMobile": showZoomOutButtonOnMobile,
+      // styling
+      if (colorScheme != null) "colorScheme": colorScheme!.toJson(),
+      if (colors != null) "colors": colors!.toJson(),
+      // floors
+      if (activeFloor != null) "activeFloor": activeFloor,
+      if (lockActiveFloor != null) "lockActiveFloor": lockActiveFloor,
+      if (showFloorElevator != null) "showFloorElevator": showFloorElevator,
     };
   }
 }
