@@ -132,9 +132,8 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
   // TODO chart.goToFloor(): https://docs.seats.io/docs/renderer/chart-gotofloor
   // TODO chart.goToAllFloorsView() https://docs.seats.io/docs/renderer/chart-gotoallfloorsview
 
-
-
   // TODO everything under Prompts API https://docs.seats.io/docs/renderer/prompts-api/onPlacesPrompt
+  // TODO everything under Spotlight https://docs.seats.io/docs/renderer/spotlight
 
   // TODO everything under Advanced https://docs.seats.io/docs/renderer/config-fitto
 

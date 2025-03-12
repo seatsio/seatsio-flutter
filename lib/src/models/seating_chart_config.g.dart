@@ -272,6 +272,27 @@ class _$SeatingChartConfigSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(SeatsioColors)));
     }
+    value = object.activeFloor;
+    if (value != null) {
+      result
+        ..add('activeFloor')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.lockActiveFloor;
+    if (value != null) {
+      result
+        ..add('lockActiveFloor')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(bool)));
+    }
+    value = object.showFloorElevator;
+    if (value != null) {
+      result
+        ..add('showFloorElevator')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(bool)));
+    }
     return result;
   }
 
@@ -456,6 +477,18 @@ class _$SeatingChartConfigSerializer
           result.colors.replace(serializers.deserialize(value,
               specifiedType: const FullType(SeatsioColors))! as SeatsioColors);
           break;
+        case 'activeFloor':
+          result.activeFloor = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
+        case 'lockActiveFloor':
+          result.lockActiveFloor = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool?;
+          break;
+        case 'showFloorElevator':
+          result.showFloorElevator = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool?;
+          break;
       }
     }
 
@@ -550,6 +583,12 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   final SeatsioColorScheme? colorScheme;
   @override
   final SeatsioColors? colors;
+  @override
+  final String? activeFloor;
+  @override
+  final bool? lockActiveFloor;
+  @override
+  final bool? showFloorElevator;
 
   factory _$SeatingChartConfig(
           [void Function(SeatingChartConfigBuilder)? updates]) =>
@@ -598,7 +637,10 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       this.legendConfig,
       this.showZoomOutButtonOnMobile,
       this.colorScheme,
-      this.colors})
+      this.colors,
+      this.activeFloor,
+      this.lockActiveFloor,
+      this.showFloorElevator})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         workspaceKey, r'SeatingChartConfig', 'workspaceKey');
@@ -666,7 +708,10 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         legendConfig == other.legendConfig &&
         showZoomOutButtonOnMobile == other.showZoomOutButtonOnMobile &&
         colorScheme == other.colorScheme &&
-        colors == other.colors;
+        colors == other.colors &&
+        activeFloor == other.activeFloor &&
+        lockActiveFloor == other.lockActiveFloor &&
+        showFloorElevator == other.showFloorElevator;
   }
 
   @override
@@ -715,6 +760,9 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     _$hash = $jc(_$hash, showZoomOutButtonOnMobile.hashCode);
     _$hash = $jc(_$hash, colorScheme.hashCode);
     _$hash = $jc(_$hash, colors.hashCode);
+    _$hash = $jc(_$hash, activeFloor.hashCode);
+    _$hash = $jc(_$hash, lockActiveFloor.hashCode);
+    _$hash = $jc(_$hash, showFloorElevator.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -766,7 +814,10 @@ class _$SeatingChartConfig extends SeatingChartConfig {
           ..add('legendConfig', legendConfig)
           ..add('showZoomOutButtonOnMobile', showZoomOutButtonOnMobile)
           ..add('colorScheme', colorScheme)
-          ..add('colors', colors))
+          ..add('colors', colors)
+          ..add('activeFloor', activeFloor)
+          ..add('lockActiveFloor', lockActiveFloor)
+          ..add('showFloorElevator', showFloorElevator))
         .toString();
   }
 }
@@ -981,6 +1032,20 @@ class SeatingChartConfigBuilder
       _$this._colors ??= new SeatsioColorsBuilder();
   set colors(SeatsioColorsBuilder? colors) => _$this._colors = colors;
 
+  String? _activeFloor;
+  String? get activeFloor => _$this._activeFloor;
+  set activeFloor(String? activeFloor) => _$this._activeFloor = activeFloor;
+
+  bool? _lockActiveFloor;
+  bool? get lockActiveFloor => _$this._lockActiveFloor;
+  set lockActiveFloor(bool? lockActiveFloor) =>
+      _$this._lockActiveFloor = lockActiveFloor;
+
+  bool? _showFloorElevator;
+  bool? get showFloorElevator => _$this._showFloorElevator;
+  set showFloorElevator(bool? showFloorElevator) =>
+      _$this._showFloorElevator = showFloorElevator;
+
   SeatingChartConfigBuilder() {
     SeatingChartConfig._initializeBuilder(this);
   }
@@ -1031,6 +1096,9 @@ class SeatingChartConfigBuilder
       _showZoomOutButtonOnMobile = $v.showZoomOutButtonOnMobile;
       _colorScheme = $v.colorScheme;
       _colors = $v.colors?.toBuilder();
+      _activeFloor = $v.activeFloor;
+      _lockActiveFloor = $v.lockActiveFloor;
+      _showFloorElevator = $v.showFloorElevator;
       _$v = null;
     }
     return this;
@@ -1101,6 +1169,9 @@ class SeatingChartConfigBuilder
             showZoomOutButtonOnMobile: showZoomOutButtonOnMobile,
             colorScheme: colorScheme,
             colors: _colors?.build(),
+            activeFloor: activeFloor,
+            lockActiveFloor: lockActiveFloor,
+            showFloorElevator: showFloorElevator,
           );
     } catch (_) {
       late String _$failedField;
