@@ -112,6 +112,10 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
 
   bool? get showLegend;
 
+  LegendConfig? get legendConfig;
+
+  bool? get showZoomOutButtonOnMobile;
+
   // TODO everything under UI Customization https://docs.seats.io/docs/renderer/config-showminimap
 
   // TODO everything under Styling https://docs.seats.io/docs/renderer/colorscheme
@@ -202,6 +206,8 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
       if (showMinimap != null) "showMinimap": showMinimap,
       if (showFullScreenButton != null) "showFullScreenButton": showFullScreenButton,
       if (showLegend != null) "showLegend": showLegend,
+      if (legendConfig != null) "legendConfig": legendConfig!.toJson(),
+      if (showZoomOutButtonOnMobile != null) "showZoomOutButtonOnMobile": showZoomOutButtonOnMobile,
     };
   }
 }

@@ -91,7 +91,12 @@ class LargeTheatreMaximal extends StatelessWidget {
                 //..holdOnSelectForGAs = true
                 // ..showMinimap = false
                 // ..showFullScreenButton = false
-                // ..showLegend = false
+                ..showLegend = true
+                ..legendConfig.replace(LegendConfig((b) => b
+                  ..hideNonSelectableCategories = true
+                  ..hideUnavailableLegendItems = true
+                  ..hidePricing = false
+                  ..hideCategoryName = true)),
               ),
         ));
   }

@@ -244,6 +244,13 @@ class _$SeatingChartConfigSerializer
         ..add(
             serializers.serialize(value, specifiedType: const FullType(bool)));
     }
+    value = object.legendConfig;
+    if (value != null) {
+      result
+        ..add('legendConfig')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(LegendConfig)));
+    }
     return result;
   }
 
@@ -411,6 +418,10 @@ class _$SeatingChartConfigSerializer
           result.showLegend = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool?;
           break;
+        case 'legendConfig':
+          result.legendConfig.replace(serializers.deserialize(value,
+              specifiedType: const FullType(LegendConfig))! as LegendConfig);
+          break;
       }
     }
 
@@ -497,6 +508,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   final bool? showFullScreenButton;
   @override
   final bool? showLegend;
+  @override
+  final LegendConfig? legendConfig;
 
   factory _$SeatingChartConfig(
           [void Function(SeatingChartConfigBuilder)? updates]) =>
@@ -541,7 +554,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       this.holdOnSelectForGAs,
       this.showMinimap,
       this.showFullScreenButton,
-      this.showLegend})
+      this.showLegend,
+      this.legendConfig})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         workspaceKey, r'SeatingChartConfig', 'workspaceKey');
@@ -605,7 +619,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         holdOnSelectForGAs == other.holdOnSelectForGAs &&
         showMinimap == other.showMinimap &&
         showFullScreenButton == other.showFullScreenButton &&
-        showLegend == other.showLegend;
+        showLegend == other.showLegend &&
+        legendConfig == other.legendConfig;
   }
 
   @override
@@ -650,6 +665,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     _$hash = $jc(_$hash, showMinimap.hashCode);
     _$hash = $jc(_$hash, showFullScreenButton.hashCode);
     _$hash = $jc(_$hash, showLegend.hashCode);
+    _$hash = $jc(_$hash, legendConfig.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -697,7 +713,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
           ..add('holdOnSelectForGAs', holdOnSelectForGAs)
           ..add('showMinimap', showMinimap)
           ..add('showFullScreenButton', showFullScreenButton)
-          ..add('showLegend', showLegend))
+          ..add('showLegend', showLegend)
+          ..add('legendConfig', legendConfig))
         .toString();
   }
 }
@@ -891,6 +908,12 @@ class SeatingChartConfigBuilder
   bool? get showLegend => _$this._showLegend;
   set showLegend(bool? showLegend) => _$this._showLegend = showLegend;
 
+  LegendConfigBuilder? _legendConfig;
+  LegendConfigBuilder get legendConfig =>
+      _$this._legendConfig ??= new LegendConfigBuilder();
+  set legendConfig(LegendConfigBuilder? legendConfig) =>
+      _$this._legendConfig = legendConfig;
+
   SeatingChartConfigBuilder() {
     SeatingChartConfig._initializeBuilder(this);
   }
@@ -937,6 +960,7 @@ class SeatingChartConfigBuilder
       _showMinimap = $v.showMinimap;
       _showFullScreenButton = $v.showFullScreenButton;
       _showLegend = $v.showLegend;
+      _legendConfig = $v.legendConfig?.toBuilder();
       _$v = null;
     }
     return this;
@@ -1003,6 +1027,7 @@ class SeatingChartConfigBuilder
             showMinimap: showMinimap,
             showFullScreenButton: showFullScreenButton,
             showLegend: showLegend,
+            legendConfig: _legendConfig?.build(),
           );
     } catch (_) {
       late String _$failedField;
@@ -1012,6 +1037,9 @@ class SeatingChartConfigBuilder
 
         _$failedField = 'categoryFilter';
         _categoryFilter?.build();
+
+        _$failedField = 'legendConfig';
+        _legendConfig?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             r'SeatingChartConfig', _$failedField, e.toString());
