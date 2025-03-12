@@ -202,6 +202,48 @@ class _$SeatingChartConfigSerializer
         ..add(
             serializers.serialize(value, specifiedType: const FullType(bool)));
     }
+    value = object.session;
+    if (value != null) {
+      result
+        ..add('session')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(Session)));
+    }
+    value = object.holdToken;
+    if (value != null) {
+      result
+        ..add('holdToken')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.holdOnSelectForGAs;
+    if (value != null) {
+      result
+        ..add('holdOnSelectForGAs')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(bool)));
+    }
+    value = object.showMinimap;
+    if (value != null) {
+      result
+        ..add('showMinimap')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(bool)));
+    }
+    value = object.showFullScreenButton;
+    if (value != null) {
+      result
+        ..add('showFullScreenButton')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(bool)));
+    }
+    value = object.showLegend;
+    if (value != null) {
+      result
+        ..add('showLegend')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(bool)));
+    }
     return result;
   }
 
@@ -345,6 +387,30 @@ class _$SeatingChartConfigSerializer
           result.showSeatLabels = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool?;
           break;
+        case 'session':
+          result.session = serializers.deserialize(value,
+              specifiedType: const FullType(Session)) as Session?;
+          break;
+        case 'holdToken':
+          result.holdToken = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
+        case 'holdOnSelectForGAs':
+          result.holdOnSelectForGAs = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool?;
+          break;
+        case 'showMinimap':
+          result.showMinimap = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool?;
+          break;
+        case 'showFullScreenButton':
+          result.showFullScreenButton = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool?;
+          break;
+        case 'showLegend':
+          result.showLegend = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool?;
+          break;
       }
     }
 
@@ -419,6 +485,18 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   final String? isObjectVisible;
   @override
   final bool? showSeatLabels;
+  @override
+  final Session? session;
+  @override
+  final String? holdToken;
+  @override
+  final bool? holdOnSelectForGAs;
+  @override
+  final bool? showMinimap;
+  @override
+  final bool? showFullScreenButton;
+  @override
+  final bool? showLegend;
 
   factory _$SeatingChartConfig(
           [void Function(SeatingChartConfigBuilder)? updates]) =>
@@ -457,7 +535,13 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       this.showSectionContents,
       this.hideSectionsNotForSale,
       this.isObjectVisible,
-      this.showSeatLabels})
+      this.showSeatLabels,
+      this.session,
+      this.holdToken,
+      this.holdOnSelectForGAs,
+      this.showMinimap,
+      this.showFullScreenButton,
+      this.showLegend})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         workspaceKey, r'SeatingChartConfig', 'workspaceKey');
@@ -515,7 +599,13 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         showSectionContents == other.showSectionContents &&
         hideSectionsNotForSale == other.hideSectionsNotForSale &&
         isObjectVisible == other.isObjectVisible &&
-        showSeatLabels == other.showSeatLabels;
+        showSeatLabels == other.showSeatLabels &&
+        session == other.session &&
+        holdToken == other.holdToken &&
+        holdOnSelectForGAs == other.holdOnSelectForGAs &&
+        showMinimap == other.showMinimap &&
+        showFullScreenButton == other.showFullScreenButton &&
+        showLegend == other.showLegend;
   }
 
   @override
@@ -554,6 +644,12 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     _$hash = $jc(_$hash, hideSectionsNotForSale.hashCode);
     _$hash = $jc(_$hash, isObjectVisible.hashCode);
     _$hash = $jc(_$hash, showSeatLabels.hashCode);
+    _$hash = $jc(_$hash, session.hashCode);
+    _$hash = $jc(_$hash, holdToken.hashCode);
+    _$hash = $jc(_$hash, holdOnSelectForGAs.hashCode);
+    _$hash = $jc(_$hash, showMinimap.hashCode);
+    _$hash = $jc(_$hash, showFullScreenButton.hashCode);
+    _$hash = $jc(_$hash, showLegend.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -595,7 +691,13 @@ class _$SeatingChartConfig extends SeatingChartConfig {
           ..add('showSectionContents', showSectionContents)
           ..add('hideSectionsNotForSale', hideSectionsNotForSale)
           ..add('isObjectVisible', isObjectVisible)
-          ..add('showSeatLabels', showSeatLabels))
+          ..add('showSeatLabels', showSeatLabels)
+          ..add('session', session)
+          ..add('holdToken', holdToken)
+          ..add('holdOnSelectForGAs', holdOnSelectForGAs)
+          ..add('showMinimap', showMinimap)
+          ..add('showFullScreenButton', showFullScreenButton)
+          ..add('showLegend', showLegend))
         .toString();
   }
 }
@@ -763,6 +865,32 @@ class SeatingChartConfigBuilder
   set showSeatLabels(bool? showSeatLabels) =>
       _$this._showSeatLabels = showSeatLabels;
 
+  Session? _session;
+  Session? get session => _$this._session;
+  set session(Session? session) => _$this._session = session;
+
+  String? _holdToken;
+  String? get holdToken => _$this._holdToken;
+  set holdToken(String? holdToken) => _$this._holdToken = holdToken;
+
+  bool? _holdOnSelectForGAs;
+  bool? get holdOnSelectForGAs => _$this._holdOnSelectForGAs;
+  set holdOnSelectForGAs(bool? holdOnSelectForGAs) =>
+      _$this._holdOnSelectForGAs = holdOnSelectForGAs;
+
+  bool? _showMinimap;
+  bool? get showMinimap => _$this._showMinimap;
+  set showMinimap(bool? showMinimap) => _$this._showMinimap = showMinimap;
+
+  bool? _showFullScreenButton;
+  bool? get showFullScreenButton => _$this._showFullScreenButton;
+  set showFullScreenButton(bool? showFullScreenButton) =>
+      _$this._showFullScreenButton = showFullScreenButton;
+
+  bool? _showLegend;
+  bool? get showLegend => _$this._showLegend;
+  set showLegend(bool? showLegend) => _$this._showLegend = showLegend;
+
   SeatingChartConfigBuilder() {
     SeatingChartConfig._initializeBuilder(this);
   }
@@ -803,6 +931,12 @@ class SeatingChartConfigBuilder
       _hideSectionsNotForSale = $v.hideSectionsNotForSale;
       _isObjectVisible = $v.isObjectVisible;
       _showSeatLabels = $v.showSeatLabels;
+      _session = $v.session;
+      _holdToken = $v.holdToken;
+      _holdOnSelectForGAs = $v.holdOnSelectForGAs;
+      _showMinimap = $v.showMinimap;
+      _showFullScreenButton = $v.showFullScreenButton;
+      _showLegend = $v.showLegend;
       _$v = null;
     }
     return this;
@@ -863,6 +997,12 @@ class SeatingChartConfigBuilder
             hideSectionsNotForSale: hideSectionsNotForSale,
             isObjectVisible: isObjectVisible,
             showSeatLabels: showSeatLabels,
+            session: session,
+            holdToken: holdToken,
+            holdOnSelectForGAs: holdOnSelectForGAs,
+            showMinimap: showMinimap,
+            showFullScreenButton: showFullScreenButton,
+            showLegend: showLegend,
           );
     } catch (_) {
       late String _$failedField;

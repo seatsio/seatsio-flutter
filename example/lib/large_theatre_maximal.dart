@@ -78,14 +78,20 @@ class LargeTheatreMaximal extends StatelessWidget {
                 //..availableCategories = ["Stalls"]
                 //..unavailableCategories = ["Stalls"]
                 //..filteredCategories = ["Stalls"]
-              // ..channels = ["channel1", "channel2"]
-              // ..objectColor = "function(object, defaultColor) { return object.label.startsWith('A') ? 'green' : 'blue'; }"
-              // ..sectionColor = "function(object, defaultColor) { return 'red' ; }"
-              // ..objectLabel = "function(object) { return object.label + ' (' + object.status + ')'; }"
-              // ..objectIcon = "function(object) { return 'star' }"
-              ..showSectionContents = ShowSectionContents.onlyAfterZoom
-              ..isObjectVisible = "function() { return true }"
-              ..showSeatLabels = true
+                // ..channels = ["channel1", "channel2"]
+                // ..objectColor = "function(object, defaultColor) { return object.label.startsWith('A') ? 'green' : 'blue'; }"
+                // ..sectionColor = "function(object, defaultColor) { return 'red' ; }"
+                // ..objectLabel = "function(object) { return object.label + ' (' + object.status + ')'; }"
+                // ..objectIcon = "function(object) { return 'star' }"
+                ..showSectionContents = ShowSectionContents.onlyAfterZoom
+                ..isObjectVisible = "function() { return true }"
+                ..showSeatLabels = true
+                ..session = Session.cont
+                // ..holdToken = "someHoldToken"
+                //..holdOnSelectForGAs = true
+                // ..showMinimap = false
+                // ..showFullScreenButton = false
+                // ..showLegend = false
               ),
         ));
   }

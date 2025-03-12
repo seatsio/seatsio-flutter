@@ -98,8 +98,19 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
 
   bool? get showSeatLabels;
 
+  // Session
+  Session? get session;
 
-  // TODO everything under Session https://docs.seats.io/docs/renderer/config-session
+  String? get holdToken;
+
+  bool? get holdOnSelectForGAs;
+
+  //Customization
+  bool? get showMinimap;
+
+  bool? get showFullScreenButton;
+
+  bool? get showLegend;
 
   // TODO everything under UI Customization https://docs.seats.io/docs/renderer/config-showminimap
 
@@ -183,6 +194,14 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
       if (hideSectionsNotForSale != null) "hideSectionsNotForSale": hideSectionsNotForSale,
       if (isObjectVisible != null) "isObjectVisible": isObjectVisible,
       if (showSeatLabels != null) "showSeatLabels": showSeatLabels,
+      // session
+      if (session != null) "session": session!.toJson(),
+      if (holdToken != null) "holdToken": holdToken,
+      if (holdOnSelectForGAs != null) "holdOnSelectForGAs": holdOnSelectForGAs,
+      // customization
+      if (showMinimap != null) "showMinimap": showMinimap,
+      if (showFullScreenButton != null) "showFullScreenButton": showFullScreenButton,
+      if (showLegend != null) "showLegend": showLegend,
     };
   }
 }
