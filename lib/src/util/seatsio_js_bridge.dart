@@ -43,7 +43,7 @@ class SeatsioJsBridge {
     if (chartConfig.onObjectSelected != null) {
       callbacks.add("""
         "onObjectSelected": (object, ticketType) => {
-          window.FlutterOnObjectSelected.postMessage(JSON.stringify({
+          window.onObjectSelectedJsChannel.postMessage(JSON.stringify({
             object: object,
             ticketType: ticketType
           }));

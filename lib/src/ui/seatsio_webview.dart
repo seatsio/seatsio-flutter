@@ -75,24 +75,19 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
           debugPrint("Error while processing message from WebView: $e");
         }
       })
-      ..addJavaScriptChannel(
-        'FlutterOnObjectSelected',
-        onMessageReceived: (JavaScriptMessage message) {
-          try {
-            if (widget._config.onObjectSelected != null) {
-              final Map<String, dynamic> data = jsonDecode(message.message);
-              final SeatsioObject object = SeatsioObject(label: data["object"]["label"]);
-              final SelectedTicketType? ticketType = SelectedTicketType.fromJson(data["ticketType"]);
-              widget._config.onObjectSelected!(object, ticketType);
-            }
-          } catch (e) {
-            debugPrint("Error processing onObjectSelected: $e");
-          }
-        },
-      );
+      ..addJavaScriptChannel('onObjectSelectedJsChannel', onMessageReceived: onObjectSelected);
 
     _seatsioController = SeatsioWebViewController(webViewController: _webViewController);
     widget._onWebViewCreated?.call(_seatsioController);
+  }
+
+  void onObjectSelected(JavaScriptMessage message) {
+    if (widget._config.onObjectSelected != null) {
+      final Map<String, dynamic> data = jsonDecode(message.message);
+      final SeatsioObject object = SeatsioObject(label: data["object"]["label"]);
+      final SelectedTicketType? ticketType = SelectedTicketType.fromJson(data["ticketType"]);
+      widget._config.onObjectSelected!(object, ticketType);
+    }
   }
 
   @override
