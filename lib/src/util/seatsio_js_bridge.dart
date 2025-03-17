@@ -49,7 +49,6 @@ class SeatsioJsBridge {
         }
       """);
     }
-
     if (chartConfig.onChartRenderingFailed != null) {
       callbacks.add("""
         "onChartRenderingFailed": (chart) => {
@@ -59,8 +58,16 @@ class SeatsioJsBridge {
         }
       """);
     }
+    if (chartConfig.onChartRerenderingStarted != null) {
+      callbacks.add("""
+        "onChartRerenderingStarted": (chart) => {
+          window.onChartRerenderingStartedJsChannel.postMessage(JSON.stringify({
+            chart: chart
+          }));
+        }
+      """);
+    }
 
-    // onChartRerenderingStarted
     // onObjectClicked
     if (chartConfig.onObjectSelected != null) {
       callbacks.add("""

@@ -594,6 +594,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   final Function()? onChartRenderingFailed;
   @override
+  final Function()? onChartRerenderingStarted;
+  @override
   final Function(SeatsioObject object, SelectedTicketType? ticketType)?
       onObjectSelected;
 
@@ -650,6 +652,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       this.showFloorElevator,
       this.onChartRendered,
       this.onChartRenderingFailed,
+      this.onChartRerenderingStarted,
       this.onObjectSelected})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
@@ -724,6 +727,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         showFloorElevator == other.showFloorElevator &&
         onChartRendered == _$dynamicOther.onChartRendered &&
         onChartRenderingFailed == _$dynamicOther.onChartRenderingFailed &&
+        onChartRerenderingStarted == _$dynamicOther.onChartRerenderingStarted &&
         onObjectSelected == _$dynamicOther.onObjectSelected;
   }
 
@@ -778,6 +782,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     _$hash = $jc(_$hash, showFloorElevator.hashCode);
     _$hash = $jc(_$hash, onChartRendered.hashCode);
     _$hash = $jc(_$hash, onChartRenderingFailed.hashCode);
+    _$hash = $jc(_$hash, onChartRerenderingStarted.hashCode);
     _$hash = $jc(_$hash, onObjectSelected.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -836,6 +841,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
           ..add('showFloorElevator', showFloorElevator)
           ..add('onChartRendered', onChartRendered)
           ..add('onChartRenderingFailed', onChartRenderingFailed)
+          ..add('onChartRerenderingStarted', onChartRerenderingStarted)
           ..add('onObjectSelected', onObjectSelected))
         .toString();
   }
@@ -1075,6 +1081,12 @@ class SeatingChartConfigBuilder
   set onChartRenderingFailed(Function()? onChartRenderingFailed) =>
       _$this._onChartRenderingFailed = onChartRenderingFailed;
 
+  Function()? _onChartRerenderingStarted;
+  Function()? get onChartRerenderingStarted =>
+      _$this._onChartRerenderingStarted;
+  set onChartRerenderingStarted(Function()? onChartRerenderingStarted) =>
+      _$this._onChartRerenderingStarted = onChartRerenderingStarted;
+
   Function(SeatsioObject object, SelectedTicketType? ticketType)?
       _onObjectSelected;
   Function(SeatsioObject object, SelectedTicketType? ticketType)?
@@ -1139,6 +1151,7 @@ class SeatingChartConfigBuilder
       _showFloorElevator = $v.showFloorElevator;
       _onChartRendered = $v.onChartRendered;
       _onChartRenderingFailed = $v.onChartRenderingFailed;
+      _onChartRerenderingStarted = $v.onChartRerenderingStarted;
       _onObjectSelected = $v.onObjectSelected;
       _$v = null;
     }
@@ -1215,6 +1228,7 @@ class SeatingChartConfigBuilder
             showFloorElevator: showFloorElevator,
             onChartRendered: onChartRendered,
             onChartRenderingFailed: onChartRenderingFailed,
+            onChartRerenderingStarted: onChartRerenderingStarted,
             onObjectSelected: onObjectSelected,
           );
     } catch (_) {

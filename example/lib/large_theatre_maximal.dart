@@ -39,6 +39,7 @@ class LargeTheatreMaximal extends StatelessWidget {
 
     final onChartRendered = () => print("Chart rendered");
     final onChartRenderingFailed = () => print("Chart rendering failed");
+    final onChartRerenderingStarted = () => print("Chart rerendering started");
 
     return Scaffold(
         appBar: AppBar(title: Text("Small Theatre - Minimal Config")),
@@ -107,7 +108,9 @@ class LargeTheatreMaximal extends StatelessWidget {
               ..hideCategoryName = true))
             ..onObjectSelected = onObjectSelected
             ..onChartRendered = onChartRendered
-            ..onChartRenderingFailed = onChartRenderingFailed),
+            ..onChartRenderingFailed = onChartRenderingFailed
+              ..onChartRerenderingStarted = onChartRerenderingStarted
+          ),
         ));
   }
 }

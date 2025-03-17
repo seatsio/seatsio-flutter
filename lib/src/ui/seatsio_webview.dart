@@ -77,6 +77,7 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
       })
       ..addJavaScriptChannel('onChartRenderedJsChannel', onMessageReceived: onChartRendered)
       ..addJavaScriptChannel('onChartRenderingFailedJsChannel', onMessageReceived: onChartRenderingFailed)
+      ..addJavaScriptChannel('onChartRerenderingStartedJsChannel', onMessageReceived: onChartRerenderingStarted)
       ..addJavaScriptChannel('onObjectSelectedJsChannel', onMessageReceived: onObjectSelected);
 
     _seatsioController = SeatsioWebViewController(webViewController: _webViewController);
@@ -92,6 +93,12 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
   void onChartRenderingFailed(JavaScriptMessage message) {
     if (widget._config.onChartRenderingFailed != null) {
       widget._config.onChartRenderingFailed!();
+    }
+  }
+
+  void onChartRerenderingStarted(JavaScriptMessage message) {
+    if (widget._config.onChartRerenderingStarted != null) {
+      widget._config.onChartRerenderingStarted!();
     }
   }
 
