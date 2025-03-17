@@ -133,11 +133,12 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
   // TODO chart.goToAllFloorsView() https://docs.seats.io/docs/renderer/chart-gotoallfloorsview
 
   // TODO everything under Prompts API https://docs.seats.io/docs/renderer/prompts-api/onPlacesPrompt
-  // TODO everything under Spotlight https://docs.seats.io/docs/renderer/spotlight
-
-  // TODO everything under Advanced https://docs.seats.io/docs/renderer/config-fitto
+  // TODO everything under Spotlight https://docs.seats.io/docs/renderer/spotlight (chart.xxx() methods)
 
   // TODO everything under React To Events https://docs.seats.io/docs/renderer/events-onchartrendered
+
+  @BuiltValueField(serialize: false)
+  Function(SeatsioObject object, SelectedTicketType? ticketType)? get onObjectSelected;
 
   // TODO everything under Renderer Properties https://docs.seats.io/docs/renderer/chart-properties-chartselectedobjects
 
@@ -226,6 +227,7 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
       if (activeFloor != null) "activeFloor": activeFloor,
       if (lockActiveFloor != null) "lockActiveFloor": lockActiveFloor,
       if (showFloorElevator != null) "showFloorElevator": showFloorElevator,
+      // react to events
     };
   }
 }
