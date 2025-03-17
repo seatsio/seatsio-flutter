@@ -109,8 +109,7 @@ class LargeTheatreMaximal extends StatelessWidget {
             ..onObjectSelected = onObjectSelected
             ..onChartRendered = onChartRendered
             ..onChartRenderingFailed = onChartRenderingFailed
-              ..onChartRerenderingStarted = onChartRerenderingStarted
-          ),
+            ..onChartRerenderingStarted = onChartRerenderingStarted),
         ));
   }
 }
