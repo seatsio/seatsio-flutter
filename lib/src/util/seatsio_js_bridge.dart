@@ -68,7 +68,16 @@ class SeatsioJsBridge {
       """);
     }
 
-    // onObjectClicked
+    if (chartConfig.onObjectClicked != null) {
+      callbacks.add("""
+        "onObjectClicked": (object) => {
+          window.onObjectClickedJsChannel.postMessage(JSON.stringify({
+            object: object
+          }));
+        }
+      """);
+    }
+
     if (chartConfig.onObjectSelected != null) {
       callbacks.add("""
         "onObjectSelected": (object, ticketType) => {

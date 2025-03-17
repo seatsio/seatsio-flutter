@@ -78,6 +78,7 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
       ..addJavaScriptChannel('onChartRenderedJsChannel', onMessageReceived: onChartRendered)
       ..addJavaScriptChannel('onChartRenderingFailedJsChannel', onMessageReceived: onChartRenderingFailed)
       ..addJavaScriptChannel('onChartRerenderingStartedJsChannel', onMessageReceived: onChartRerenderingStarted)
+      ..addJavaScriptChannel('onObjectClickedJsChannel', onMessageReceived: onObjectClicked)
       ..addJavaScriptChannel('onObjectSelectedJsChannel', onMessageReceived: onObjectSelected);
 
     _seatsioController = SeatsioWebViewController(webViewController: _webViewController);
@@ -99,6 +100,14 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
   void onChartRerenderingStarted(JavaScriptMessage message) {
     if (widget._config.onChartRerenderingStarted != null) {
       widget._config.onChartRerenderingStarted!();
+    }
+  }
+
+  void onObjectClicked(JavaScriptMessage message) {
+    if (widget._config.onObjectClicked != null) {
+      final Map<String, dynamic> data = jsonDecode(message.message);
+      final SeatsioObject object = SeatsioObject(label: data["object"]["label"]);
+      widget._config.onObjectClicked!(object);
     }
   }
 

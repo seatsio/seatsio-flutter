@@ -33,13 +33,11 @@ class LargeTheatreMaximal extends StatelessWidget {
 
     final popoverInfo = (SeatsioObject object) => "something [b]something[/b] ${object.label}";
 
-    final onObjectSelected = (SeatsioObject object, SelectedTicketType? ticketType) {
-      print("In Example project: object selected - ${object.label} - ${ticketType?.price}");
-    };
-
     final onChartRendered = () => print("Chart rendered");
     final onChartRenderingFailed = () => print("Chart rendering failed");
     final onChartRerenderingStarted = () => print("Chart rerendering started");
+    final onObjectClicked = (SeatsioObject object) => print("object clicked - ${object.label}");
+    final onObjectSelected = (SeatsioObject object, SelectedTicketType? ticketType) => print("object selected - ${object.label} - ${ticketType?.price}");
 
     return Scaffold(
         appBar: AppBar(title: Text("Small Theatre - Minimal Config")),
@@ -106,10 +104,12 @@ class LargeTheatreMaximal extends StatelessWidget {
               ..hideUnavailableLegendItems = true
               ..hidePricing = false
               ..hideCategoryName = true))
-            ..onObjectSelected = onObjectSelected
             ..onChartRendered = onChartRendered
             ..onChartRenderingFailed = onChartRenderingFailed
-            ..onChartRerenderingStarted = onChartRerenderingStarted),
+            ..onChartRerenderingStarted = onChartRerenderingStarted
+            ..onObjectClicked = onObjectClicked
+            ..onObjectSelected = onObjectSelected
+          ),
         ));
   }
 }
