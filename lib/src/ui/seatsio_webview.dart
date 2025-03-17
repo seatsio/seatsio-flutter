@@ -75,10 +75,17 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
           debugPrint("Error while processing message from WebView: $e");
         }
       })
+      ..addJavaScriptChannel('onChartRenderedJsChannel', onMessageReceived: onChartRendered)
       ..addJavaScriptChannel('onObjectSelectedJsChannel', onMessageReceived: onObjectSelected);
 
     _seatsioController = SeatsioWebViewController(webViewController: _webViewController);
     widget._onWebViewCreated?.call(_seatsioController);
+  }
+
+  void onChartRendered(JavaScriptMessage message) {
+    if (widget._config.onChartRendered != null) {
+      widget._config.onChartRendered!();
+    }
   }
 
   void onObjectSelected(JavaScriptMessage message) {

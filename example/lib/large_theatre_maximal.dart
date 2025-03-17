@@ -102,7 +102,8 @@ class LargeTheatreMaximal extends StatelessWidget {
               ..hideUnavailableLegendItems = true
               ..hidePricing = false
               ..hideCategoryName = true))
-            ..onObjectSelected = onObjectSelected),
+            ..onObjectSelected = onObjectSelected
+            ..onChartRendered = () => print("Chart rendered")),
         ));
   }
 }

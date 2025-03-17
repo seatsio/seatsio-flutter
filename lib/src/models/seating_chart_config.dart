@@ -135,7 +135,12 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
   // TODO everything under Prompts API https://docs.seats.io/docs/renderer/prompts-api/onPlacesPrompt
   // TODO everything under Spotlight https://docs.seats.io/docs/renderer/spotlight (chart.xxx() methods)
 
-  // TODO everything under React To Events https://docs.seats.io/docs/renderer/events-onchartrendered
+  // onChartRenderingFailed
+  // onChartRerenderingStarted
+  // onObjectClicked
+
+  @BuiltValueField(serialize: false)
+  Function()? get onChartRendered;
 
   @BuiltValueField(serialize: false)
   Function(SeatsioObject object, SelectedTicketType? ticketType)? get onObjectSelected;

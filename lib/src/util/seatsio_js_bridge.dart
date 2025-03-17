@@ -40,6 +40,19 @@ class SeatsioJsBridge {
       """);
     }
 
+    if (chartConfig.onChartRendered != null) {
+      callbacks.add("""
+        "onChartRendered": (chart) => {
+          window.onChartRenderedJsChannel.postMessage(JSON.stringify({
+            chart: chart
+          }));
+        }
+      """);
+    }
+
+    // onChartRenderingFailed
+    // onChartRerenderingStarted
+    // onObjectClicked
     if (chartConfig.onObjectSelected != null) {
       callbacks.add("""
         "onObjectSelected": (object, ticketType) => {
@@ -50,6 +63,24 @@ class SeatsioJsBridge {
         }
       """);
     }
+
+    // onObjectDeselected
+    // onObjectStatusChanged
+    // onOBjectBooked
+    // onSessionInitialized
+    // onHoldCallsInProgress
+    // onHoldCallsComplete
+    // onHoldSucceeded
+    // onHoldFailed
+    // onHoldTokenExpired
+    // onReleaseHoldSucceeded
+    // onReleaseHoldFailed
+    // onSelectionValid
+    // onSelectionInvalid
+    // onFullScreenOpened
+    // onFullScreenClosed
+    // onFilteredCategoriesChanged
+    //
 
     return callbacks;
   }
