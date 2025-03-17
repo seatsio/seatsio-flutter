@@ -600,6 +600,9 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   final Function(SeatsioObject object, SelectedTicketType? ticketType)?
       onObjectSelected;
+  @override
+  final Function(SeatsioObject object, SelectedTicketType? ticketType)?
+      onObjectDeselected;
 
   factory _$SeatingChartConfig(
           [void Function(SeatingChartConfigBuilder)? updates]) =>
@@ -656,7 +659,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       this.onChartRenderingFailed,
       this.onChartRerenderingStarted,
       this.onObjectClicked,
-      this.onObjectSelected})
+      this.onObjectSelected,
+      this.onObjectDeselected})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         workspaceKey, r'SeatingChartConfig', 'workspaceKey');
@@ -732,7 +736,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         onChartRenderingFailed == _$dynamicOther.onChartRenderingFailed &&
         onChartRerenderingStarted == _$dynamicOther.onChartRerenderingStarted &&
         onObjectClicked == _$dynamicOther.onObjectClicked &&
-        onObjectSelected == _$dynamicOther.onObjectSelected;
+        onObjectSelected == _$dynamicOther.onObjectSelected &&
+        onObjectDeselected == _$dynamicOther.onObjectDeselected;
   }
 
   @override
@@ -789,6 +794,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     _$hash = $jc(_$hash, onChartRerenderingStarted.hashCode);
     _$hash = $jc(_$hash, onObjectClicked.hashCode);
     _$hash = $jc(_$hash, onObjectSelected.hashCode);
+    _$hash = $jc(_$hash, onObjectDeselected.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -848,7 +854,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
           ..add('onChartRenderingFailed', onChartRenderingFailed)
           ..add('onChartRerenderingStarted', onChartRerenderingStarted)
           ..add('onObjectClicked', onObjectClicked)
-          ..add('onObjectSelected', onObjectSelected))
+          ..add('onObjectSelected', onObjectSelected)
+          ..add('onObjectDeselected', onObjectDeselected))
         .toString();
   }
 }
@@ -1108,6 +1115,15 @@ class SeatingChartConfigBuilder
               onObjectSelected) =>
       _$this._onObjectSelected = onObjectSelected;
 
+  Function(SeatsioObject object, SelectedTicketType? ticketType)?
+      _onObjectDeselected;
+  Function(SeatsioObject object, SelectedTicketType? ticketType)?
+      get onObjectDeselected => _$this._onObjectDeselected;
+  set onObjectDeselected(
+          Function(SeatsioObject object, SelectedTicketType? ticketType)?
+              onObjectDeselected) =>
+      _$this._onObjectDeselected = onObjectDeselected;
+
   SeatingChartConfigBuilder() {
     SeatingChartConfig._initializeBuilder(this);
   }
@@ -1166,6 +1182,7 @@ class SeatingChartConfigBuilder
       _onChartRerenderingStarted = $v.onChartRerenderingStarted;
       _onObjectClicked = $v.onObjectClicked;
       _onObjectSelected = $v.onObjectSelected;
+      _onObjectDeselected = $v.onObjectDeselected;
       _$v = null;
     }
     return this;
@@ -1244,6 +1261,7 @@ class SeatingChartConfigBuilder
             onChartRerenderingStarted: onChartRerenderingStarted,
             onObjectClicked: onObjectClicked,
             onObjectSelected: onObjectSelected,
+            onObjectDeselected: onObjectDeselected,
           );
     } catch (_) {
       late String _$failedField;

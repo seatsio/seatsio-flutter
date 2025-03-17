@@ -89,6 +89,17 @@ class SeatsioJsBridge {
       """);
     }
 
+    if (chartConfig.onObjectDeselected != null) {
+      callbacks.add("""
+        "onObjectDeselected": (object, ticketType) => {
+          window.onObjectDeselectedJsChannel.postMessage(JSON.stringify({
+            object: object,
+            ticketType: ticketType
+          }));
+        }
+      """);
+    }
+
     // onObjectDeselected
     // onObjectStatusChanged
     // onOBjectBooked

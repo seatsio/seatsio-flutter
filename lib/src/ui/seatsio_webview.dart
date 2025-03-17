@@ -79,7 +79,8 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
       ..addJavaScriptChannel('onChartRenderingFailedJsChannel', onMessageReceived: onChartRenderingFailed)
       ..addJavaScriptChannel('onChartRerenderingStartedJsChannel', onMessageReceived: onChartRerenderingStarted)
       ..addJavaScriptChannel('onObjectClickedJsChannel', onMessageReceived: onObjectClicked)
-      ..addJavaScriptChannel('onObjectSelectedJsChannel', onMessageReceived: onObjectSelected);
+      ..addJavaScriptChannel('onObjectSelectedJsChannel', onMessageReceived: onObjectSelected)
+      ..addJavaScriptChannel('onObjectDeselectedJsChannel', onMessageReceived: onObjectDeselected);
 
     _seatsioController = SeatsioWebViewController(webViewController: _webViewController);
     widget._onWebViewCreated?.call(_seatsioController);
@@ -117,6 +118,15 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
       final SeatsioObject object = SeatsioObject(label: data["object"]["label"]);
       final SelectedTicketType? ticketType = SelectedTicketType.fromJson(data["ticketType"]);
       widget._config.onObjectSelected!(object, ticketType);
+    }
+  }
+
+  void onObjectDeselected(JavaScriptMessage message) {
+    if (widget._config.onObjectDeselected != null) {
+      final Map<String, dynamic> data = jsonDecode(message.message);
+      final SeatsioObject object = SeatsioObject(label: data["object"]["label"]);
+      final SelectedTicketType? ticketType = SelectedTicketType.fromJson(data["ticketType"]);
+      widget._config.onObjectDeselected!(object, ticketType);
     }
   }
 
