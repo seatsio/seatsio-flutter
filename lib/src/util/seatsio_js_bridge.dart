@@ -50,7 +50,16 @@ class SeatsioJsBridge {
       """);
     }
 
-    // onChartRenderingFailed
+    if (chartConfig.onChartRenderingFailed != null) {
+      callbacks.add("""
+        "onChartRenderingFailed": (chart) => {
+          window.onChartRenderingFailedJsChannel.postMessage(JSON.stringify({
+            chart: chart
+          }));
+        }
+      """);
+    }
+
     // onChartRerenderingStarted
     // onObjectClicked
     if (chartConfig.onObjectSelected != null) {

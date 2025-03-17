@@ -37,6 +37,9 @@ class LargeTheatreMaximal extends StatelessWidget {
       print("In Example project: object selected - ${object.label} - ${ticketType?.price}");
     };
 
+    final onChartRendered = () => print("Chart rendered");
+    final onChartRenderingFailed = () => print("Chart rendering failed");
+
     return Scaffold(
         appBar: AppBar(title: Text("Small Theatre - Minimal Config")),
         body: SeatsioSeatingChart(
@@ -103,7 +106,8 @@ class LargeTheatreMaximal extends StatelessWidget {
               ..hidePricing = false
               ..hideCategoryName = true))
             ..onObjectSelected = onObjectSelected
-            ..onChartRendered = () => print("Chart rendered")),
+            ..onChartRendered = onChartRendered
+            ..onChartRenderingFailed = onChartRenderingFailed),
         ));
   }
 }
