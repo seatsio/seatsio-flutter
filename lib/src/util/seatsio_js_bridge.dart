@@ -100,9 +100,28 @@ class SeatsioJsBridge {
       """);
     }
 
-    // onObjectDeselected
+    if (chartConfig.onObjectStatusChanged != null) {
+      callbacks.add("""
+        "onObjectStatusChanged": (object) => {
+          window.onObjectStatusChangedJsChannel.postMessage(JSON.stringify({
+            object: object
+          }));
+        }
+      """);
+    }
+
+    if (chartConfig.onObjectBooked != null) {
+      callbacks.add("""
+        "onObjectonObjectBooked": (object) => {
+          window.onObjectBookedJsChannel.postMessage(JSON.stringify({
+            object: object
+          }));
+        }
+      """);
+    }
+
     // onObjectStatusChanged
-    // onOBjectBooked
+    // onObjectBooked
     // onSessionInitialized
     // onHoldCallsInProgress
     // onHoldCallsComplete

@@ -37,8 +37,12 @@ class LargeTheatreMaximal extends StatelessWidget {
     final onChartRenderingFailed = () => print("Chart rendering failed");
     final onChartRerenderingStarted = () => print("Chart rerendering started");
     final onObjectClicked = (SeatsioObject object) => print("object clicked - ${object.label}");
-    final onObjectSelected = (SeatsioObject object, SelectedTicketType? ticketType) => print("object selected - ${object.label} - ${ticketType?.price}");
-    final onObjectDeselected = (SeatsioObject object, SelectedTicketType? deselectedTicketType) => print("object deselected - ${object.label} - ${deselectedTicketType?.price}");
+    final onObjectSelected = (SeatsioObject object, SelectedTicketType? ticketType) =>
+        print("object selected - ${object.label} - ${ticketType?.price}");
+    final onObjectDeselected = (SeatsioObject object, SelectedTicketType? deselectedTicketType) =>
+        print("object deselected - ${object.label} - ${deselectedTicketType?.price}");
+    final onObjectStatusChanged = (SeatsioObject object) => print("object status changed - ${object.label}");
+    final onObjectBooked = (SeatsioObject object) => print("object booked - ${object.label}");
 
     return Scaffold(
         appBar: AppBar(title: Text("Small Theatre - Minimal Config")),
@@ -111,6 +115,8 @@ class LargeTheatreMaximal extends StatelessWidget {
             ..onObjectClicked = onObjectClicked
             ..onObjectSelected = onObjectSelected
             ..onObjectDeselected = onObjectDeselected
+            ..onObjectStatusChanged = onObjectStatusChanged
+            ..onObjectBooked = onObjectBooked
           ),
         ));
   }

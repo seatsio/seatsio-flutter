@@ -603,6 +603,10 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   final Function(SeatsioObject object, SelectedTicketType? ticketType)?
       onObjectDeselected;
+  @override
+  final Function(SeatsioObject object)? onObjectStatusChanged;
+  @override
+  final Function(SeatsioObject object)? onObjectBooked;
 
   factory _$SeatingChartConfig(
           [void Function(SeatingChartConfigBuilder)? updates]) =>
@@ -660,7 +664,9 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       this.onChartRerenderingStarted,
       this.onObjectClicked,
       this.onObjectSelected,
-      this.onObjectDeselected})
+      this.onObjectDeselected,
+      this.onObjectStatusChanged,
+      this.onObjectBooked})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         workspaceKey, r'SeatingChartConfig', 'workspaceKey');
@@ -737,7 +743,9 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         onChartRerenderingStarted == _$dynamicOther.onChartRerenderingStarted &&
         onObjectClicked == _$dynamicOther.onObjectClicked &&
         onObjectSelected == _$dynamicOther.onObjectSelected &&
-        onObjectDeselected == _$dynamicOther.onObjectDeselected;
+        onObjectDeselected == _$dynamicOther.onObjectDeselected &&
+        onObjectStatusChanged == _$dynamicOther.onObjectStatusChanged &&
+        onObjectBooked == _$dynamicOther.onObjectBooked;
   }
 
   @override
@@ -795,6 +803,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     _$hash = $jc(_$hash, onObjectClicked.hashCode);
     _$hash = $jc(_$hash, onObjectSelected.hashCode);
     _$hash = $jc(_$hash, onObjectDeselected.hashCode);
+    _$hash = $jc(_$hash, onObjectStatusChanged.hashCode);
+    _$hash = $jc(_$hash, onObjectBooked.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -855,7 +865,9 @@ class _$SeatingChartConfig extends SeatingChartConfig {
           ..add('onChartRerenderingStarted', onChartRerenderingStarted)
           ..add('onObjectClicked', onObjectClicked)
           ..add('onObjectSelected', onObjectSelected)
-          ..add('onObjectDeselected', onObjectDeselected))
+          ..add('onObjectDeselected', onObjectDeselected)
+          ..add('onObjectStatusChanged', onObjectStatusChanged)
+          ..add('onObjectBooked', onObjectBooked))
         .toString();
   }
 }
@@ -1124,6 +1136,18 @@ class SeatingChartConfigBuilder
               onObjectDeselected) =>
       _$this._onObjectDeselected = onObjectDeselected;
 
+  Function(SeatsioObject object)? _onObjectStatusChanged;
+  Function(SeatsioObject object)? get onObjectStatusChanged =>
+      _$this._onObjectStatusChanged;
+  set onObjectStatusChanged(
+          Function(SeatsioObject object)? onObjectStatusChanged) =>
+      _$this._onObjectStatusChanged = onObjectStatusChanged;
+
+  Function(SeatsioObject object)? _onObjectBooked;
+  Function(SeatsioObject object)? get onObjectBooked => _$this._onObjectBooked;
+  set onObjectBooked(Function(SeatsioObject object)? onObjectBooked) =>
+      _$this._onObjectBooked = onObjectBooked;
+
   SeatingChartConfigBuilder() {
     SeatingChartConfig._initializeBuilder(this);
   }
@@ -1183,6 +1207,8 @@ class SeatingChartConfigBuilder
       _onObjectClicked = $v.onObjectClicked;
       _onObjectSelected = $v.onObjectSelected;
       _onObjectDeselected = $v.onObjectDeselected;
+      _onObjectStatusChanged = $v.onObjectStatusChanged;
+      _onObjectBooked = $v.onObjectBooked;
       _$v = null;
     }
     return this;
@@ -1262,6 +1288,8 @@ class SeatingChartConfigBuilder
             onObjectClicked: onObjectClicked,
             onObjectSelected: onObjectSelected,
             onObjectDeselected: onObjectDeselected,
+            onObjectStatusChanged: onObjectStatusChanged,
+            onObjectBooked: onObjectBooked,
           );
     } catch (_) {
       late String _$failedField;
