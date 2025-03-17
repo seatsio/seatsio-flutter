@@ -227,7 +227,6 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
       if (activeFloor != null) "activeFloor": activeFloor,
       if (lockActiveFloor != null) "lockActiveFloor": lockActiveFloor,
       if (showFloorElevator != null) "showFloorElevator": showFloorElevator,
-      // react to events
     };
   }
 }

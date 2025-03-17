@@ -23,15 +23,19 @@ class SeatsioWebViewController {
   }
 
   String _generateHtmlContentAsDataUri(SeatingChartConfig chartConfig) {
-    final String configJson = jsonEncode(chartConfig.toJson()); // TODO move everything below this to chartConfig.toJson()
-    final List<String> callbackEntries = SeatsioJsBridge.buildCallbacksConfiguration(chartConfig);
-    final String callbacksJson = callbackEntries.isNotEmpty ? ', ${callbackEntries.join(", ")}' : '';
+    final String configJson = jsonEncode(chartConfig.toJson());
+    final String callbacksJson = _callbacksJson(chartConfig);
     final String fullConfigJson = _injectCallbacksJsonIntoConfigJson(configJson, callbacksJson);
     if (_debug) {
       debugPrint(fullConfigJson);
     }
     final String htmlString = _injectConfigInHtml(chartConfig, fullConfigJson);
     return _convertToDataUri(htmlString);
+  }
+
+  String _callbacksJson(SeatingChartConfig chartConfig) {
+    final List<String> callbackEntries = SeatsioJsBridge.buildCallbacksConfiguration(chartConfig);
+    return callbackEntries.isNotEmpty ? ', ${callbackEntries.join(", ")}' : '';
   }
 
   String _injectCallbacksJsonIntoConfigJson(String configJson, String callbacksJson) {
