@@ -54,7 +54,7 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
           debugPrint("[WebView] ${message.message}");
         },
       )
-      ..addJavaScriptChannel("FlutterCallback", onMessageReceived: (JavaScriptMessage message) {
+      ..addJavaScriptChannel("callbackChannel", onMessageReceived: (JavaScriptMessage message) {
         try {
           Map<String, dynamic> parsedMessage = jsonDecode(message.message);
           var messageType = parsedMessage["type"];

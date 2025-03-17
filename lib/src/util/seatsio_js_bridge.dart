@@ -8,7 +8,7 @@ class SeatsioJsBridge {
       callbacks.add("""
         "priceFormatter": (price) => {
           promiseCounter++;
-          window.FlutterCallback.postMessage(JSON.stringify({
+          window.callbackChannel.postMessage(JSON.stringify({
             type: "priceFormatterRequested",
             data: {
               promiseId: promiseCounter,
@@ -26,7 +26,7 @@ class SeatsioJsBridge {
       callbacks.add("""
         "popoverInfo": (object) => {
           promiseCounter++;
-          window.FlutterCallback.postMessage(JSON.stringify({
+          window.callbackChannel.postMessage(JSON.stringify({
             type: "popoverInfoRequested",
             data: {
               promiseId: promiseCounter,
