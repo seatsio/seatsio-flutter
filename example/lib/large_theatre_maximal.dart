@@ -43,6 +43,7 @@ class LargeTheatreMaximal extends StatelessWidget {
         print("object deselected - ${object.label} - ${deselectedTicketType?.price}");
     final onObjectStatusChanged = (SeatsioObject object) => print("object status changed - ${object.label}");
     final onObjectBooked = (SeatsioObject object) => print("object booked - ${object.label}");
+    final onSessionInitialized = (HoldToken token) => print("session initialized - ${token.token} - ${token.expiresAt}");
 
     return Scaffold(
         appBar: AppBar(title: Text("Small Theatre - Minimal Config")),
@@ -117,6 +118,7 @@ class LargeTheatreMaximal extends StatelessWidget {
             ..onObjectDeselected = onObjectDeselected
             ..onObjectStatusChanged = onObjectStatusChanged
             ..onObjectBooked = onObjectBooked
+              ..onSessionInitialized = onSessionInitialized
           ),
         ));
   }

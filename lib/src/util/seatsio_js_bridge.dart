@@ -112,7 +112,7 @@ class SeatsioJsBridge {
 
     if (chartConfig.onObjectBooked != null) {
       callbacks.add("""
-        "onObjectonObjectBooked": (object) => {
+        "onObjectBooked": (object) => {
           window.onObjectBookedJsChannel.postMessage(JSON.stringify({
             object: object
           }));
@@ -120,8 +120,16 @@ class SeatsioJsBridge {
       """);
     }
 
-    // onObjectStatusChanged
-    // onObjectBooked
+    if (chartConfig.onSessionInitialized != null) {
+      callbacks.add("""
+      "onSessionInitialized": (holdToken) => {
+        window.onSessionInitializedJsChannel.postMessage(JSON.stringify({
+          holdToken: holdToken
+        }));
+      }
+      """);
+    }
+
     // onSessionInitialized
     // onHoldCallsInProgress
     // onHoldCallsComplete

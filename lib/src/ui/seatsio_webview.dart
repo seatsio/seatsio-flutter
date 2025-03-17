@@ -82,7 +82,9 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
       ..addJavaScriptChannel('onObjectSelectedJsChannel', onMessageReceived: onObjectSelected)
       ..addJavaScriptChannel('onObjectDeselectedJsChannel', onMessageReceived: onObjectDeselected)
       ..addJavaScriptChannel('onObjectStatusChangedJsChannel', onMessageReceived: onObjectStatusChanged)
-      ..addJavaScriptChannel('onObjectBookedJsChannel', onMessageReceived: onObjectBooked);
+      ..addJavaScriptChannel('onObjectBookedJsChannel', onMessageReceived: onObjectBooked)
+      ..addJavaScriptChannel('onSessionInitializedJsChannel', onMessageReceived: onSessionInitialized);
+    ;
 
     _seatsioController = SeatsioWebViewController(webViewController: _webViewController);
     widget._onWebViewCreated?.call(_seatsioController);
@@ -145,6 +147,14 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
       final Map<String, dynamic> data = jsonDecode(message.message);
       final SeatsioObject object = SeatsioObject(label: data["object"]["label"]);
       widget._config.onObjectBooked!(object);
+    }
+  }
+
+  void onSessionInitialized(JavaScriptMessage message) {
+    if (widget._config.onSessionInitialized != null) {
+      final Map<String, dynamic> data = jsonDecode(message.message);
+      final HoldToken token = HoldToken.fromJson(data["holdToken"]);
+      widget._config.onSessionInitialized!(token);
     }
   }
 

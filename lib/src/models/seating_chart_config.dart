@@ -159,6 +159,9 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
   @BuiltValueField(serialize: false)
   Function(SeatsioObject object)? get onObjectBooked;
 
+  @BuiltValueField(serialize: false)
+  Function(HoldToken object)? get onSessionInitialized;
+
   // TODO everything under Renderer Properties https://docs.seats.io/docs/renderer/chart-properties-chartselectedobjects
 
   // TODO everything under Renderer Methods https://docs.seats.io/docs/renderer/chart-properties-chartrender
