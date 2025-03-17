@@ -83,7 +83,10 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
       ..addJavaScriptChannel('onObjectDeselectedJsChannel', onMessageReceived: onObjectDeselected)
       ..addJavaScriptChannel('onObjectStatusChangedJsChannel', onMessageReceived: onObjectStatusChanged)
       ..addJavaScriptChannel('onObjectBookedJsChannel', onMessageReceived: onObjectBooked)
-      ..addJavaScriptChannel('onSessionInitializedJsChannel', onMessageReceived: onSessionInitialized);
+      ..addJavaScriptChannel('onSessionInitializedJsChannel', onMessageReceived: onSessionInitialized)
+      ..addJavaScriptChannel('onHoldCallsInProgressJsChannel', onMessageReceived: onHoldCallsInProgress)
+      ..addJavaScriptChannel('onHoldCallsCompleteJsChannel', onMessageReceived: onHoldCallsComplete);
+    ;
     ;
 
     _seatsioController = SeatsioWebViewController(webViewController: _webViewController);
@@ -157,6 +160,19 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
       widget._config.onSessionInitialized!(token);
     }
   }
+
+  void onHoldCallsInProgress(JavaScriptMessage message) {
+    if (widget._config.onHoldCallsInProgress != null) {
+      widget._config.onHoldCallsInProgress!();
+    }
+  }
+
+  void onHoldCallsComplete(JavaScriptMessage message) {
+    if (widget._config.onHoldCallsComplete != null) {
+      widget._config.onHoldCallsComplete!();
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {

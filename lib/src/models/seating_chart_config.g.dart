@@ -609,6 +609,10 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   final Function(SeatsioObject object)? onObjectBooked;
   @override
   final Function(HoldToken object)? onSessionInitialized;
+  @override
+  final Function()? onHoldCallsInProgress;
+  @override
+  final Function()? onHoldCallsComplete;
 
   factory _$SeatingChartConfig(
           [void Function(SeatingChartConfigBuilder)? updates]) =>
@@ -669,7 +673,9 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       this.onObjectDeselected,
       this.onObjectStatusChanged,
       this.onObjectBooked,
-      this.onSessionInitialized})
+      this.onSessionInitialized,
+      this.onHoldCallsInProgress,
+      this.onHoldCallsComplete})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         workspaceKey, r'SeatingChartConfig', 'workspaceKey');
@@ -749,7 +755,9 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         onObjectDeselected == _$dynamicOther.onObjectDeselected &&
         onObjectStatusChanged == _$dynamicOther.onObjectStatusChanged &&
         onObjectBooked == _$dynamicOther.onObjectBooked &&
-        onSessionInitialized == _$dynamicOther.onSessionInitialized;
+        onSessionInitialized == _$dynamicOther.onSessionInitialized &&
+        onHoldCallsInProgress == _$dynamicOther.onHoldCallsInProgress &&
+        onHoldCallsComplete == _$dynamicOther.onHoldCallsComplete;
   }
 
   @override
@@ -810,6 +818,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     _$hash = $jc(_$hash, onObjectStatusChanged.hashCode);
     _$hash = $jc(_$hash, onObjectBooked.hashCode);
     _$hash = $jc(_$hash, onSessionInitialized.hashCode);
+    _$hash = $jc(_$hash, onHoldCallsInProgress.hashCode);
+    _$hash = $jc(_$hash, onHoldCallsComplete.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -873,7 +883,9 @@ class _$SeatingChartConfig extends SeatingChartConfig {
           ..add('onObjectDeselected', onObjectDeselected)
           ..add('onObjectStatusChanged', onObjectStatusChanged)
           ..add('onObjectBooked', onObjectBooked)
-          ..add('onSessionInitialized', onSessionInitialized))
+          ..add('onSessionInitialized', onSessionInitialized)
+          ..add('onHoldCallsInProgress', onHoldCallsInProgress)
+          ..add('onHoldCallsComplete', onHoldCallsComplete))
         .toString();
   }
 }
@@ -1160,6 +1172,16 @@ class SeatingChartConfigBuilder
   set onSessionInitialized(Function(HoldToken object)? onSessionInitialized) =>
       _$this._onSessionInitialized = onSessionInitialized;
 
+  Function()? _onHoldCallsInProgress;
+  Function()? get onHoldCallsInProgress => _$this._onHoldCallsInProgress;
+  set onHoldCallsInProgress(Function()? onHoldCallsInProgress) =>
+      _$this._onHoldCallsInProgress = onHoldCallsInProgress;
+
+  Function()? _onHoldCallsComplete;
+  Function()? get onHoldCallsComplete => _$this._onHoldCallsComplete;
+  set onHoldCallsComplete(Function()? onHoldCallsComplete) =>
+      _$this._onHoldCallsComplete = onHoldCallsComplete;
+
   SeatingChartConfigBuilder() {
     SeatingChartConfig._initializeBuilder(this);
   }
@@ -1222,6 +1244,8 @@ class SeatingChartConfigBuilder
       _onObjectStatusChanged = $v.onObjectStatusChanged;
       _onObjectBooked = $v.onObjectBooked;
       _onSessionInitialized = $v.onSessionInitialized;
+      _onHoldCallsInProgress = $v.onHoldCallsInProgress;
+      _onHoldCallsComplete = $v.onHoldCallsComplete;
       _$v = null;
     }
     return this;
@@ -1304,6 +1328,8 @@ class SeatingChartConfigBuilder
             onObjectStatusChanged: onObjectStatusChanged,
             onObjectBooked: onObjectBooked,
             onSessionInitialized: onSessionInitialized,
+            onHoldCallsInProgress: onHoldCallsInProgress,
+            onHoldCallsComplete: onHoldCallsComplete,
           );
     } catch (_) {
       late String _$failedField;

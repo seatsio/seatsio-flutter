@@ -130,9 +130,24 @@ class SeatsioJsBridge {
       """);
     }
 
-    // onSessionInitialized
-    // onHoldCallsInProgress
-    // onHoldCallsComplete
+    if (chartConfig.onHoldCallsInProgress != null) {
+      callbacks.add("""
+      "onHoldCallsInProgress": () => {
+        window.onHoldCallsInProgressJsChannel.postMessage(JSON.stringify({
+        }));
+      }
+      """);
+    }
+
+    if (chartConfig.onHoldCallsComplete != null) {
+      callbacks.add("""
+      "onHoldCallsComplete": () => {
+        window.onHoldCallsCompleteJsChannel.postMessage(JSON.stringify({
+        }));
+      }
+      """);
+    }
+
     // onHoldSucceeded
     // onHoldFailed
     // onHoldTokenExpired
