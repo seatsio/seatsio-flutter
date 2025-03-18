@@ -635,6 +635,10 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   final Function()? onSelectionValid;
   @override
   final Function(List<String> violations)? onSelectionInvalid;
+  @override
+  final Function()? onFullScreenOpened;
+  @override
+  final Function()? onFullScreenClosed;
 
   factory _$SeatingChartConfig(
           [void Function(SeatingChartConfigBuilder)? updates]) =>
@@ -704,7 +708,9 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       this.onReleaseHoldSucceeded,
       this.onReleaseHoldFailed,
       this.onSelectionValid,
-      this.onSelectionInvalid})
+      this.onSelectionInvalid,
+      this.onFullScreenOpened,
+      this.onFullScreenClosed})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         workspaceKey, r'SeatingChartConfig', 'workspaceKey');
@@ -793,7 +799,9 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         onReleaseHoldSucceeded == _$dynamicOther.onReleaseHoldSucceeded &&
         onReleaseHoldFailed == _$dynamicOther.onReleaseHoldFailed &&
         onSelectionValid == _$dynamicOther.onSelectionValid &&
-        onSelectionInvalid == _$dynamicOther.onSelectionInvalid;
+        onSelectionInvalid == _$dynamicOther.onSelectionInvalid &&
+        onFullScreenOpened == _$dynamicOther.onFullScreenOpened &&
+        onFullScreenClosed == _$dynamicOther.onFullScreenClosed;
   }
 
   @override
@@ -863,6 +871,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     _$hash = $jc(_$hash, onReleaseHoldFailed.hashCode);
     _$hash = $jc(_$hash, onSelectionValid.hashCode);
     _$hash = $jc(_$hash, onSelectionInvalid.hashCode);
+    _$hash = $jc(_$hash, onFullScreenOpened.hashCode);
+    _$hash = $jc(_$hash, onFullScreenClosed.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -935,7 +945,9 @@ class _$SeatingChartConfig extends SeatingChartConfig {
           ..add('onReleaseHoldSucceeded', onReleaseHoldSucceeded)
           ..add('onReleaseHoldFailed', onReleaseHoldFailed)
           ..add('onSelectionValid', onSelectionValid)
-          ..add('onSelectionInvalid', onSelectionInvalid))
+          ..add('onSelectionInvalid', onSelectionInvalid)
+          ..add('onFullScreenOpened', onFullScreenOpened)
+          ..add('onFullScreenClosed', onFullScreenClosed))
         .toString();
   }
 }
@@ -1289,6 +1301,16 @@ class SeatingChartConfigBuilder
           Function(List<String> violations)? onSelectionInvalid) =>
       _$this._onSelectionInvalid = onSelectionInvalid;
 
+  Function()? _onFullScreenOpened;
+  Function()? get onFullScreenOpened => _$this._onFullScreenOpened;
+  set onFullScreenOpened(Function()? onFullScreenOpened) =>
+      _$this._onFullScreenOpened = onFullScreenOpened;
+
+  Function()? _onFullScreenClosed;
+  Function()? get onFullScreenClosed => _$this._onFullScreenClosed;
+  set onFullScreenClosed(Function()? onFullScreenClosed) =>
+      _$this._onFullScreenClosed = onFullScreenClosed;
+
   SeatingChartConfigBuilder() {
     SeatingChartConfig._initializeBuilder(this);
   }
@@ -1360,6 +1382,8 @@ class SeatingChartConfigBuilder
       _onReleaseHoldFailed = $v.onReleaseHoldFailed;
       _onSelectionValid = $v.onSelectionValid;
       _onSelectionInvalid = $v.onSelectionInvalid;
+      _onFullScreenOpened = $v.onFullScreenOpened;
+      _onFullScreenClosed = $v.onFullScreenClosed;
       _$v = null;
     }
     return this;
@@ -1451,6 +1475,8 @@ class SeatingChartConfigBuilder
             onReleaseHoldFailed: onReleaseHoldFailed,
             onSelectionValid: onSelectionValid,
             onSelectionInvalid: onSelectionInvalid,
+            onFullScreenOpened: onFullScreenOpened,
+            onFullScreenClosed: onFullScreenClosed,
           );
     } catch (_) {
       late String _$failedField;

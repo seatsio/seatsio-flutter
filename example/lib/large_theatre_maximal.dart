@@ -58,6 +58,8 @@ class LargeTheatreMaximal extends StatelessWidget {
         print("release hold failed - ${objects.map((e) => e.label)} - ${ticketTypes?.map((e) => e.price)}");
     final onSelectionValid = () => print("selection valid");
     final onSelectionInvalid = (List<String> violations) => print("selection invalid: ${violations}");
+    final onFullScreenOpened = () => print("full screen opened");
+    final onFullScreenClosed = () => print("full screen closed");
 
     return Scaffold(
         appBar: AppBar(title: Text("Small Theatre - Minimal Config")),
@@ -141,7 +143,9 @@ class LargeTheatreMaximal extends StatelessWidget {
             ..onReleaseHoldSucceeded = onReleaseHoldSucceeded
             ..onReleaseHoldFailed = onReleaseHoldFailed
             ..onSelectionValid = onSelectionValid
-            ..onSelectionInvalid = onSelectionInvalid),
+            ..onSelectionInvalid = onSelectionInvalid
+            ..onFullScreenOpened = onFullScreenOpened
+            ..onFullScreenClosed = onFullScreenClosed),
         ));
   }
 }
