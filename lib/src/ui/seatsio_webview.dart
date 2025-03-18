@@ -90,7 +90,9 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
       ..addJavaScriptChannel('onHoldFailedJsChannel', onMessageReceived: onHoldFailed)
       ..addJavaScriptChannel('onHoldTokenExpiredJsChannel', onMessageReceived: onHoldTokenExpired)
       ..addJavaScriptChannel('onReleaseHoldSucceededJsChannel', onMessageReceived: onReleaseHoldSucceeded)
-      ..addJavaScriptChannel('onReleaseHoldFailedJsChannel', onMessageReceived: onReleaseHoldFailed);
+      ..addJavaScriptChannel('onReleaseHoldFailedJsChannel', onMessageReceived: onReleaseHoldFailed)
+      ..addJavaScriptChannel('onSelectionValidJsChannel', onMessageReceived: onSelectionValid)
+      ..addJavaScriptChannel('onSelectionInvalidJsChannel', onMessageReceived: onSelectionInvalid);
 
     _seatsioController = SeatsioWebViewController(webViewController: _webViewController);
     widget._onWebViewCreated?.call(_seatsioController);
@@ -217,6 +219,23 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
       widget._config.onReleaseHoldFailed!(objects, ticketTypes);
     }
   }
+
+  void onSelectionValid(JavaScriptMessage message) {
+    if (widget._config.onSelectionValid != null) {
+      widget._config.onSelectionValid!();
+    }
+  }
+
+  void onSelectionInvalid(JavaScriptMessage message) {
+    if (widget._config.onSelectionInvalid != null) {
+      final Map<String, dynamic> data = jsonDecode(message.message);
+      final List<String> violations = (data["violations"] as List<dynamic>)
+          .map((v) => v.toString())
+          .toList();
+      widget._config.onSelectionInvalid!(violations);
+    }
+  }
+
 
   List<SeatsioObject> _toObjectsList(objectsData) {
     final List<SeatsioObject> objects =

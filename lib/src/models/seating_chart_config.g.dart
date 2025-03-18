@@ -631,6 +631,10 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   final Function(
           List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes)?
       onReleaseHoldFailed;
+  @override
+  final Function()? onSelectionValid;
+  @override
+  final Function(List<String> violations)? onSelectionInvalid;
 
   factory _$SeatingChartConfig(
           [void Function(SeatingChartConfigBuilder)? updates]) =>
@@ -698,7 +702,9 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       this.onHoldFailed,
       this.onHoldTokenExpired,
       this.onReleaseHoldSucceeded,
-      this.onReleaseHoldFailed})
+      this.onReleaseHoldFailed,
+      this.onSelectionValid,
+      this.onSelectionInvalid})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         workspaceKey, r'SeatingChartConfig', 'workspaceKey');
@@ -785,7 +791,9 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         onHoldFailed == _$dynamicOther.onHoldFailed &&
         onHoldTokenExpired == _$dynamicOther.onHoldTokenExpired &&
         onReleaseHoldSucceeded == _$dynamicOther.onReleaseHoldSucceeded &&
-        onReleaseHoldFailed == _$dynamicOther.onReleaseHoldFailed;
+        onReleaseHoldFailed == _$dynamicOther.onReleaseHoldFailed &&
+        onSelectionValid == _$dynamicOther.onSelectionValid &&
+        onSelectionInvalid == _$dynamicOther.onSelectionInvalid;
   }
 
   @override
@@ -853,6 +861,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     _$hash = $jc(_$hash, onHoldTokenExpired.hashCode);
     _$hash = $jc(_$hash, onReleaseHoldSucceeded.hashCode);
     _$hash = $jc(_$hash, onReleaseHoldFailed.hashCode);
+    _$hash = $jc(_$hash, onSelectionValid.hashCode);
+    _$hash = $jc(_$hash, onSelectionInvalid.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -923,7 +933,9 @@ class _$SeatingChartConfig extends SeatingChartConfig {
           ..add('onHoldFailed', onHoldFailed)
           ..add('onHoldTokenExpired', onHoldTokenExpired)
           ..add('onReleaseHoldSucceeded', onReleaseHoldSucceeded)
-          ..add('onReleaseHoldFailed', onReleaseHoldFailed))
+          ..add('onReleaseHoldFailed', onReleaseHoldFailed)
+          ..add('onSelectionValid', onSelectionValid)
+          ..add('onSelectionInvalid', onSelectionInvalid))
         .toString();
   }
 }
@@ -1265,6 +1277,18 @@ class SeatingChartConfigBuilder
               onReleaseHoldFailed) =>
       _$this._onReleaseHoldFailed = onReleaseHoldFailed;
 
+  Function()? _onSelectionValid;
+  Function()? get onSelectionValid => _$this._onSelectionValid;
+  set onSelectionValid(Function()? onSelectionValid) =>
+      _$this._onSelectionValid = onSelectionValid;
+
+  Function(List<String> violations)? _onSelectionInvalid;
+  Function(List<String> violations)? get onSelectionInvalid =>
+      _$this._onSelectionInvalid;
+  set onSelectionInvalid(
+          Function(List<String> violations)? onSelectionInvalid) =>
+      _$this._onSelectionInvalid = onSelectionInvalid;
+
   SeatingChartConfigBuilder() {
     SeatingChartConfig._initializeBuilder(this);
   }
@@ -1334,6 +1358,8 @@ class SeatingChartConfigBuilder
       _onHoldTokenExpired = $v.onHoldTokenExpired;
       _onReleaseHoldSucceeded = $v.onReleaseHoldSucceeded;
       _onReleaseHoldFailed = $v.onReleaseHoldFailed;
+      _onSelectionValid = $v.onSelectionValid;
+      _onSelectionInvalid = $v.onSelectionInvalid;
       _$v = null;
     }
     return this;
@@ -1423,6 +1449,8 @@ class SeatingChartConfigBuilder
             onHoldTokenExpired: onHoldTokenExpired,
             onReleaseHoldSucceeded: onReleaseHoldSucceeded,
             onReleaseHoldFailed: onReleaseHoldFailed,
+            onSelectionValid: onSelectionValid,
+            onSelectionInvalid: onSelectionInvalid,
           );
     } catch (_) {
       late String _$failedField;

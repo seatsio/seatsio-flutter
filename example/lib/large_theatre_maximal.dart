@@ -56,6 +56,8 @@ class LargeTheatreMaximal extends StatelessWidget {
         print("release hold succeeded - ${objects.map((e) => e.label)} - ${ticketTypes?.map((e) => e.price)}");
     final onReleaseHoldFailed = (List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes) =>
         print("release hold failed - ${objects.map((e) => e.label)} - ${ticketTypes?.map((e) => e.price)}");
+    final onSelectionValid = () => print("selection valid");
+    final onSelectionInvalid = (List<String> violations) => print("selection invalid: ${violations}");
 
     return Scaffold(
         appBar: AppBar(title: Text("Small Theatre - Minimal Config")),
@@ -68,8 +70,8 @@ class LargeTheatreMaximal extends StatelessWidget {
             ..showSectionPricingOverlay = true
             // ..selectedObjects = ['Circle P-1-12', 'Circle P-1-11', 'Circle P-1-10']
             ..selectionValidators = [
-              // NoOrphanSeats(ignoreCategories: true, mode: NoOrphanSeatsMode.strict, highlight: true),
-              // ConsecutiveSeats(),
+              NoOrphanSeats(ignoreCategories: true, mode: NoOrphanSeatsMode.strict, highlight: true),
+              ConsecutiveSeats(),
               // MinimumSelectedPlaces(4)
             ]
             //..maxSelectedObjects = MaxSelectedObjects.total(4)
@@ -79,7 +81,7 @@ class LargeTheatreMaximal extends StatelessWidget {
             // MaxSelectedObjectsRule.total(3)
             // ])
 
-            ..numberOfPlacesToSelect = 2
+            // ..numberOfPlacesToSelect = 2
             ..multiSelectEnabled = true
             ..objectPopover.replace(ObjectPopover((b) => b
               ..showAvailability = false
@@ -137,7 +139,9 @@ class LargeTheatreMaximal extends StatelessWidget {
             ..onHoldFailed = onHoldFailed
             ..onHoldTokenExpired = onHoldTokenExpired
             ..onReleaseHoldSucceeded = onReleaseHoldSucceeded
-            ..onReleaseHoldFailed = onReleaseHoldFailed),
+            ..onReleaseHoldFailed = onReleaseHoldFailed
+            ..onSelectionValid = onSelectionValid
+            ..onSelectionInvalid = onSelectionInvalid),
         ));
   }
 }
