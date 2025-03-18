@@ -179,8 +179,28 @@ class SeatsioJsBridge {
       """);
     }
 
-    // onReleaseHoldSucceeded
-    // onReleaseHoldFailed
+    if(chartConfig.onReleaseHoldSucceeded != null) {
+      callbacks.add("""
+        "onReleaseHoldSucceeded": (objects, ticketTypes) => {
+          window.onReleaseHoldSucceededJsChannel.postMessage(JSON.stringify({
+            objects: objects,
+            ticketTypes: ticketTypes
+          }));
+        }      
+      """);
+    }
+
+    if(chartConfig.onReleaseHoldFailed != null) {
+      callbacks.add("""
+        "onReleaseHoldFailed": (objects, ticketTypes) => {
+          window.onReleaseHoldFailedJsChannel.postMessage(JSON.stringify({
+            objects: objects,
+            ticketTypes: ticketTypes
+          }));
+        }      
+      """);
+    }
+
     // onSelectionValid
     // onSelectionInvalid
     // onFullScreenOpened

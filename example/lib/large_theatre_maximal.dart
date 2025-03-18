@@ -52,6 +52,10 @@ class LargeTheatreMaximal extends StatelessWidget {
     final onHoldFailed = (List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes) =>
         print("hold failed - ${objects.map((e) => e.label)} - ${ticketTypes?.map((e) => e.price)}");
     final onHoldTokenExpired = () => print("hold token expired");
+    final onReleaseHoldSucceeded = (List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes) =>
+        print("release hold succeeded - ${objects.map((e) => e.label)} - ${ticketTypes?.map((e) => e.price)}");
+    final onReleaseHoldFailed = (List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes) =>
+        print("release hold failed - ${objects.map((e) => e.label)} - ${ticketTypes?.map((e) => e.price)}");
 
     return Scaffold(
         appBar: AppBar(title: Text("Small Theatre - Minimal Config")),
@@ -131,7 +135,9 @@ class LargeTheatreMaximal extends StatelessWidget {
             ..onHoldCallsComplete = onHoldCallsComplete
             ..onHoldSucceeded = onHoldSucceeded
             ..onHoldFailed = onHoldFailed
-            ..onHoldTokenExpired = onHoldTokenExpired),
+            ..onHoldTokenExpired = onHoldTokenExpired
+            ..onReleaseHoldSucceeded = onReleaseHoldSucceeded
+            ..onReleaseHoldFailed = onReleaseHoldFailed),
         ));
   }
 }

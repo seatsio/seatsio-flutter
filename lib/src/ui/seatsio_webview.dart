@@ -88,7 +88,9 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
       ..addJavaScriptChannel('onHoldCallsCompleteJsChannel', onMessageReceived: onHoldCallsComplete)
       ..addJavaScriptChannel('onHoldSucceededJsChannel', onMessageReceived: onHoldSucceeded)
       ..addJavaScriptChannel('onHoldFailedJsChannel', onMessageReceived: onHoldFailed)
-      ..addJavaScriptChannel('onHoldTokenExpiredJsChannel', onMessageReceived: onHoldTokenExpired);
+      ..addJavaScriptChannel('onHoldTokenExpiredJsChannel', onMessageReceived: onHoldTokenExpired)
+      ..addJavaScriptChannel('onReleaseHoldSucceededJsChannel', onMessageReceived: onReleaseHoldSucceeded)
+      ..addJavaScriptChannel('onReleaseHoldFailedJsChannel', onMessageReceived: onReleaseHoldFailed);
 
     _seatsioController = SeatsioWebViewController(webViewController: _webViewController);
     widget._onWebViewCreated?.call(_seatsioController);
@@ -177,17 +179,8 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
   void onHoldSucceeded(JavaScriptMessage message) {
     if (widget._config.onHoldSucceeded != null) {
       final Map<String, dynamic> data = jsonDecode(message.message);
-      final List<SeatsioObject> objects = (data["objects"] as List)
-          .map((obj) => SeatsioObject(label: obj["label"] as String))
-          .toList();
-
-      final List<SelectedTicketType>? ticketTypes = data["ticketTypes"] != null
-          ? (data["ticketTypes"] as List)
-          .map((ticket) => SelectedTicketType.fromJson(ticket as Map<String, dynamic>))
-          .whereType<SelectedTicketType>()
-          .toList()
-          : null;
-
+      List<SeatsioObject> objects = _toObjectsList(data["objects"]);
+      List<SelectedTicketType>? ticketTypes = _toTicketTypesList(data["ticketTypes"]);
       widget._config.onHoldSucceeded!(objects, ticketTypes);
     }
   }
@@ -195,17 +188,8 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
   void onHoldFailed(JavaScriptMessage message) {
     if (widget._config.onHoldFailed != null) {
       final Map<String, dynamic> data = jsonDecode(message.message);
-      final List<SeatsioObject> objects = (data["objects"] as List)
-          .map((obj) => SeatsioObject(label: obj["label"] as String))
-          .toList();
-
-      final List<SelectedTicketType>? ticketTypes = data["ticketTypes"] != null
-          ? (data["ticketTypes"] as List)
-          .map((ticket) => SelectedTicketType.fromJson(ticket as Map<String, dynamic>))
-          .whereType<SelectedTicketType>()
-          .toList()
-          : null;
-
+      List<SeatsioObject> objects = _toObjectsList(data["objects"]);
+      List<SelectedTicketType>? ticketTypes = _toTicketTypesList(data["ticketTypes"]);
       widget._config.onHoldFailed!(objects, ticketTypes);
     }
   }
@@ -214,6 +198,40 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
     if (widget._config.onHoldTokenExpired != null) {
       widget._config.onHoldTokenExpired!();
     }
+  }
+
+  void onReleaseHoldSucceeded(JavaScriptMessage message) {
+    if (widget._config.onReleaseHoldSucceeded != null) {
+      final Map<String, dynamic> data = jsonDecode(message.message);
+      List<SeatsioObject> objects = _toObjectsList(data["objects"]);
+      List<SelectedTicketType>? ticketTypes = _toTicketTypesList(data["ticketTypes"]);
+      widget._config.onReleaseHoldSucceeded!(objects, ticketTypes);
+    }
+  }
+
+  void onReleaseHoldFailed(JavaScriptMessage message) {
+    if (widget._config.onReleaseHoldFailed != null) {
+      final Map<String, dynamic> data = jsonDecode(message.message);
+      List<SeatsioObject> objects = _toObjectsList(data["objects"]);
+      List<SelectedTicketType>? ticketTypes = _toTicketTypesList(data["ticketTypes"]);
+      widget._config.onReleaseHoldFailed!(objects, ticketTypes);
+    }
+  }
+
+  List<SeatsioObject> _toObjectsList(objectsData) {
+    final List<SeatsioObject> objects =
+        (objectsData as List).map((obj) => SeatsioObject(label: obj["label"] as String)).toList();
+    return objects;
+  }
+
+  List<SelectedTicketType>? _toTicketTypesList(ticketTypesData) {
+    final List<SelectedTicketType>? ticketTypes = ticketTypesData != null
+        ? (ticketTypesData as List)
+            .map((ticket) => SelectedTicketType.fromJson(ticket as Map<String, dynamic>))
+            .whereType<SelectedTicketType>()
+            .toList()
+        : null;
+    return ticketTypes;
   }
 
   @override

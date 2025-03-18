@@ -177,6 +177,11 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
   @BuiltValueField(serialize: false)
   Function()? get onHoldTokenExpired;
 
+  @BuiltValueField(serialize: false)
+  Function(List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes)? get onReleaseHoldSucceeded;
+
+  @BuiltValueField(serialize: false)
+  Function(List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes)? get onReleaseHoldFailed;
 
 
   // TODO everything under Renderer Properties https://docs.seats.io/docs/renderer/chart-properties-chartselectedobjects

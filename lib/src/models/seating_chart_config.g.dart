@@ -623,6 +623,14 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       onHoldFailed;
   @override
   final Function()? onHoldTokenExpired;
+  @override
+  final Function(
+          List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes)?
+      onReleaseHoldSucceeded;
+  @override
+  final Function(
+          List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes)?
+      onReleaseHoldFailed;
 
   factory _$SeatingChartConfig(
           [void Function(SeatingChartConfigBuilder)? updates]) =>
@@ -688,7 +696,9 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       this.onHoldCallsComplete,
       this.onHoldSucceeded,
       this.onHoldFailed,
-      this.onHoldTokenExpired})
+      this.onHoldTokenExpired,
+      this.onReleaseHoldSucceeded,
+      this.onReleaseHoldFailed})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         workspaceKey, r'SeatingChartConfig', 'workspaceKey');
@@ -773,7 +783,9 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         onHoldCallsComplete == _$dynamicOther.onHoldCallsComplete &&
         onHoldSucceeded == _$dynamicOther.onHoldSucceeded &&
         onHoldFailed == _$dynamicOther.onHoldFailed &&
-        onHoldTokenExpired == _$dynamicOther.onHoldTokenExpired;
+        onHoldTokenExpired == _$dynamicOther.onHoldTokenExpired &&
+        onReleaseHoldSucceeded == _$dynamicOther.onReleaseHoldSucceeded &&
+        onReleaseHoldFailed == _$dynamicOther.onReleaseHoldFailed;
   }
 
   @override
@@ -839,6 +851,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     _$hash = $jc(_$hash, onHoldSucceeded.hashCode);
     _$hash = $jc(_$hash, onHoldFailed.hashCode);
     _$hash = $jc(_$hash, onHoldTokenExpired.hashCode);
+    _$hash = $jc(_$hash, onReleaseHoldSucceeded.hashCode);
+    _$hash = $jc(_$hash, onReleaseHoldFailed.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -907,7 +921,9 @@ class _$SeatingChartConfig extends SeatingChartConfig {
           ..add('onHoldCallsComplete', onHoldCallsComplete)
           ..add('onHoldSucceeded', onHoldSucceeded)
           ..add('onHoldFailed', onHoldFailed)
-          ..add('onHoldTokenExpired', onHoldTokenExpired))
+          ..add('onHoldTokenExpired', onHoldTokenExpired)
+          ..add('onReleaseHoldSucceeded', onReleaseHoldSucceeded)
+          ..add('onReleaseHoldFailed', onReleaseHoldFailed))
         .toString();
   }
 }
@@ -1229,6 +1245,26 @@ class SeatingChartConfigBuilder
   set onHoldTokenExpired(Function()? onHoldTokenExpired) =>
       _$this._onHoldTokenExpired = onHoldTokenExpired;
 
+  Function(List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes)?
+      _onReleaseHoldSucceeded;
+  Function(List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes)?
+      get onReleaseHoldSucceeded => _$this._onReleaseHoldSucceeded;
+  set onReleaseHoldSucceeded(
+          Function(List<SeatsioObject> objects,
+                  List<SelectedTicketType>? ticketTypes)?
+              onReleaseHoldSucceeded) =>
+      _$this._onReleaseHoldSucceeded = onReleaseHoldSucceeded;
+
+  Function(List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes)?
+      _onReleaseHoldFailed;
+  Function(List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes)?
+      get onReleaseHoldFailed => _$this._onReleaseHoldFailed;
+  set onReleaseHoldFailed(
+          Function(List<SeatsioObject> objects,
+                  List<SelectedTicketType>? ticketTypes)?
+              onReleaseHoldFailed) =>
+      _$this._onReleaseHoldFailed = onReleaseHoldFailed;
+
   SeatingChartConfigBuilder() {
     SeatingChartConfig._initializeBuilder(this);
   }
@@ -1296,6 +1332,8 @@ class SeatingChartConfigBuilder
       _onHoldSucceeded = $v.onHoldSucceeded;
       _onHoldFailed = $v.onHoldFailed;
       _onHoldTokenExpired = $v.onHoldTokenExpired;
+      _onReleaseHoldSucceeded = $v.onReleaseHoldSucceeded;
+      _onReleaseHoldFailed = $v.onReleaseHoldFailed;
       _$v = null;
     }
     return this;
@@ -1383,6 +1421,8 @@ class SeatingChartConfigBuilder
             onHoldSucceeded: onHoldSucceeded,
             onHoldFailed: onHoldFailed,
             onHoldTokenExpired: onHoldTokenExpired,
+            onReleaseHoldSucceeded: onReleaseHoldSucceeded,
+            onReleaseHoldFailed: onReleaseHoldFailed,
           );
     } catch (_) {
       late String _$failedField;
