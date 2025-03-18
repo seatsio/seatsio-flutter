@@ -228,6 +228,7 @@ class SeatsioJsBridge {
       }
       """);
     }
+
     if (chartConfig.onFullScreenClosed != null) {
       callbacks.add("""
       "onFullScreenClosed": () => {
@@ -237,7 +238,15 @@ class SeatsioJsBridge {
       """);
     }
 
-    // onFilteredCategoriesChanged
+    if (chartConfig.onFilteredCategoriesChanged != null) {
+      callbacks.add("""
+      "onFilteredCategoriesChanged": (categories) => {
+        window.onFilteredCategoriesChangedJsChannel.postMessage(JSON.stringify({
+          categories: categories
+        }));
+      }
+      """);
+    }
 
     return callbacks;
   }

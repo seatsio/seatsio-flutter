@@ -60,6 +60,7 @@ class LargeTheatreMaximal extends StatelessWidget {
     final onSelectionInvalid = (List<String> violations) => print("selection invalid: ${violations}");
     final onFullScreenOpened = () => print("full screen opened");
     final onFullScreenClosed = () => print("full screen closed");
+    final onFilteredCategoriesChanged = (List<SeatsioCategory> categories) => print("filtered categories changed: ${categories.map((c) => c.label)}");
 
     return Scaffold(
         appBar: AppBar(title: Text("Small Theatre - Minimal Config")),
@@ -145,7 +146,8 @@ class LargeTheatreMaximal extends StatelessWidget {
             ..onSelectionValid = onSelectionValid
             ..onSelectionInvalid = onSelectionInvalid
             ..onFullScreenOpened = onFullScreenOpened
-            ..onFullScreenClosed = onFullScreenClosed),
+            ..onFullScreenClosed = onFullScreenClosed
+            ..onFilteredCategoriesChanged = onFilteredCategoriesChanged),
         ));
   }
 }

@@ -95,6 +95,7 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
       ..addJavaScriptChannel('onSelectionInvalidJsChannel', onMessageReceived: onSelectionInvalid)
       ..addJavaScriptChannel('onFullScreenOpenedJsChannel', onMessageReceived: onFullScreenOpened)
       ..addJavaScriptChannel('onFullScreenClosedJsChannel', onMessageReceived: onFullScreenClosed)
+      ..addJavaScriptChannel('onFilteredCategoriesChangedJsChannel', onMessageReceived: onFilteredCategoriesChanged)
     ;
 
     _seatsioController = SeatsioWebViewController(webViewController: _webViewController);
@@ -248,6 +249,16 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
   void onFullScreenClosed(JavaScriptMessage message) {
     if (widget._config.onFullScreenClosed != null) {
       widget._config.onFullScreenClosed!();
+    }
+  }
+
+  void onFilteredCategoriesChanged(JavaScriptMessage message) {
+    if (widget._config.onFilteredCategoriesChanged != null) {
+      final Map<String, dynamic> data = jsonDecode(message.message);
+      final List<SeatsioCategory> categories = (data["categories"] as List<dynamic>)
+          .map((category) => SeatsioCategory.fromJson(category))
+          .toList();
+      widget._config.onFilteredCategoriesChanged!(categories);
     }
   }
 
