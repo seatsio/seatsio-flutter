@@ -187,7 +187,7 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
   Function()? get onSelectionValid;
 
   @BuiltValueField(serialize: false)
-  Function(List<String> violations)? get onSelectionInvalid; // TODO add violations as param
+  Function(List<String> violations)? get onSelectionInvalid;
 
 
   // TODO everything under Renderer Properties https://docs.seats.io/docs/renderer/chart-properties-chartselectedobjects
