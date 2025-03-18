@@ -621,6 +621,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   final Function(
           List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes)?
       onHoldFailed;
+  @override
+  final Function()? onHoldTokenExpired;
 
   factory _$SeatingChartConfig(
           [void Function(SeatingChartConfigBuilder)? updates]) =>
@@ -685,7 +687,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       this.onHoldCallsInProgress,
       this.onHoldCallsComplete,
       this.onHoldSucceeded,
-      this.onHoldFailed})
+      this.onHoldFailed,
+      this.onHoldTokenExpired})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         workspaceKey, r'SeatingChartConfig', 'workspaceKey');
@@ -769,7 +772,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         onHoldCallsInProgress == _$dynamicOther.onHoldCallsInProgress &&
         onHoldCallsComplete == _$dynamicOther.onHoldCallsComplete &&
         onHoldSucceeded == _$dynamicOther.onHoldSucceeded &&
-        onHoldFailed == _$dynamicOther.onHoldFailed;
+        onHoldFailed == _$dynamicOther.onHoldFailed &&
+        onHoldTokenExpired == _$dynamicOther.onHoldTokenExpired;
   }
 
   @override
@@ -834,6 +838,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     _$hash = $jc(_$hash, onHoldCallsComplete.hashCode);
     _$hash = $jc(_$hash, onHoldSucceeded.hashCode);
     _$hash = $jc(_$hash, onHoldFailed.hashCode);
+    _$hash = $jc(_$hash, onHoldTokenExpired.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -901,7 +906,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
           ..add('onHoldCallsInProgress', onHoldCallsInProgress)
           ..add('onHoldCallsComplete', onHoldCallsComplete)
           ..add('onHoldSucceeded', onHoldSucceeded)
-          ..add('onHoldFailed', onHoldFailed))
+          ..add('onHoldFailed', onHoldFailed)
+          ..add('onHoldTokenExpired', onHoldTokenExpired))
         .toString();
   }
 }
@@ -1218,6 +1224,11 @@ class SeatingChartConfigBuilder
               onHoldFailed) =>
       _$this._onHoldFailed = onHoldFailed;
 
+  Function()? _onHoldTokenExpired;
+  Function()? get onHoldTokenExpired => _$this._onHoldTokenExpired;
+  set onHoldTokenExpired(Function()? onHoldTokenExpired) =>
+      _$this._onHoldTokenExpired = onHoldTokenExpired;
+
   SeatingChartConfigBuilder() {
     SeatingChartConfig._initializeBuilder(this);
   }
@@ -1284,6 +1295,7 @@ class SeatingChartConfigBuilder
       _onHoldCallsComplete = $v.onHoldCallsComplete;
       _onHoldSucceeded = $v.onHoldSucceeded;
       _onHoldFailed = $v.onHoldFailed;
+      _onHoldTokenExpired = $v.onHoldTokenExpired;
       _$v = null;
     }
     return this;
@@ -1370,6 +1382,7 @@ class SeatingChartConfigBuilder
             onHoldCallsComplete: onHoldCallsComplete,
             onHoldSucceeded: onHoldSucceeded,
             onHoldFailed: onHoldFailed,
+            onHoldTokenExpired: onHoldTokenExpired,
           );
     } catch (_) {
       late String _$failedField;

@@ -87,7 +87,8 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
       ..addJavaScriptChannel('onHoldCallsInProgressJsChannel', onMessageReceived: onHoldCallsInProgress)
       ..addJavaScriptChannel('onHoldCallsCompleteJsChannel', onMessageReceived: onHoldCallsComplete)
       ..addJavaScriptChannel('onHoldSucceededJsChannel', onMessageReceived: onHoldSucceeded)
-      ..addJavaScriptChannel('onHoldFailedJsChannel', onMessageReceived: onHoldFailed);
+      ..addJavaScriptChannel('onHoldFailedJsChannel', onMessageReceived: onHoldFailed)
+      ..addJavaScriptChannel('onHoldTokenExpiredJsChannel', onMessageReceived: onHoldTokenExpired);
 
     _seatsioController = SeatsioWebViewController(webViewController: _webViewController);
     widget._onWebViewCreated?.call(_seatsioController);
@@ -206,6 +207,12 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
           : null;
 
       widget._config.onHoldFailed!(objects, ticketTypes);
+    }
+  }
+
+  void onHoldTokenExpired(JavaScriptMessage message) {
+    if (widget._config.onHoldTokenExpired != null) {
+      widget._config.onHoldTokenExpired!();
     }
   }
 

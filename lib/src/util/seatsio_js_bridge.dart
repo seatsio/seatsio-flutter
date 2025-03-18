@@ -170,9 +170,15 @@ class SeatsioJsBridge {
       """);
     }
 
-    // onHoldSucceeded
-    // onHoldFailed
-    // onHoldTokenExpired
+    if (chartConfig.onHoldTokenExpired != null) {
+      callbacks.add("""
+      "onHoldTokenExpired": () => {
+        window.onHoldTokenExpiredJsChannel.postMessage(JSON.stringify({
+        }));
+      }
+      """);
+    }
+
     // onReleaseHoldSucceeded
     // onReleaseHoldFailed
     // onSelectionValid
