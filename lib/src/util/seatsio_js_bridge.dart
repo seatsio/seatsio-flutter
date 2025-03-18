@@ -148,6 +148,28 @@ class SeatsioJsBridge {
       """);
     }
 
+    if(chartConfig.onHoldSucceeded != null) {
+      callbacks.add("""
+        "onHoldSucceeded": (objects, ticketTypes) => {
+          window.onHoldSucceededJsChannel.postMessage(JSON.stringify({
+            objects: objects,
+            ticketTypes: ticketTypes
+          }));
+        }      
+      """);
+    }
+
+    if(chartConfig.onHoldFailed != null) {
+      callbacks.add("""
+        "onHoldFailed": (objects, ticketTypes) => {
+          window.onHoldFailedJsChannel.postMessage(JSON.stringify({
+            objects: objects,
+            ticketTypes: ticketTypes
+          }));
+        }      
+      """);
+    }
+
     // onHoldSucceeded
     // onHoldFailed
     // onHoldTokenExpired

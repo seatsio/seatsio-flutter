@@ -85,9 +85,9 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
       ..addJavaScriptChannel('onObjectBookedJsChannel', onMessageReceived: onObjectBooked)
       ..addJavaScriptChannel('onSessionInitializedJsChannel', onMessageReceived: onSessionInitialized)
       ..addJavaScriptChannel('onHoldCallsInProgressJsChannel', onMessageReceived: onHoldCallsInProgress)
-      ..addJavaScriptChannel('onHoldCallsCompleteJsChannel', onMessageReceived: onHoldCallsComplete);
-    ;
-    ;
+      ..addJavaScriptChannel('onHoldCallsCompleteJsChannel', onMessageReceived: onHoldCallsComplete)
+      ..addJavaScriptChannel('onHoldSucceededJsChannel', onMessageReceived: onHoldSucceeded)
+      ..addJavaScriptChannel('onHoldFailedJsChannel', onMessageReceived: onHoldFailed);
 
     _seatsioController = SeatsioWebViewController(webViewController: _webViewController);
     widget._onWebViewCreated?.call(_seatsioController);
@@ -173,6 +173,41 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
     }
   }
 
+  void onHoldSucceeded(JavaScriptMessage message) {
+    if (widget._config.onHoldSucceeded != null) {
+      final Map<String, dynamic> data = jsonDecode(message.message);
+      final List<SeatsioObject> objects = (data["objects"] as List)
+          .map((obj) => SeatsioObject(label: obj["label"] as String))
+          .toList();
+
+      final List<SelectedTicketType>? ticketTypes = data["ticketTypes"] != null
+          ? (data["ticketTypes"] as List)
+          .map((ticket) => SelectedTicketType.fromJson(ticket as Map<String, dynamic>))
+          .whereType<SelectedTicketType>()
+          .toList()
+          : null;
+
+      widget._config.onHoldSucceeded!(objects, ticketTypes);
+    }
+  }
+
+  void onHoldFailed(JavaScriptMessage message) {
+    if (widget._config.onHoldFailed != null) {
+      final Map<String, dynamic> data = jsonDecode(message.message);
+      final List<SeatsioObject> objects = (data["objects"] as List)
+          .map((obj) => SeatsioObject(label: obj["label"] as String))
+          .toList();
+
+      final List<SelectedTicketType>? ticketTypes = data["ticketTypes"] != null
+          ? (data["ticketTypes"] as List)
+          .map((ticket) => SelectedTicketType.fromJson(ticket as Map<String, dynamic>))
+          .whereType<SelectedTicketType>()
+          .toList()
+          : null;
+
+      widget._config.onHoldFailed!(objects, ticketTypes);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

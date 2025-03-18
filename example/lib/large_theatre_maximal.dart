@@ -47,6 +47,10 @@ class LargeTheatreMaximal extends StatelessWidget {
         (HoldToken token) => print("session initialized - ${token.token} - ${token.expiresAt}");
     final onHoldCallsInProgress = () => print("hold calls in progress");
     final onHoldCallsComplete = () => print("hold calls complete");
+    final onHoldSucceeded = (List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes) =>
+        print("hold succeeded - ${objects.map((e) => e.label)} - ${ticketTypes?.map((e) => e.price)}");
+    final onHoldFailed = (List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes) =>
+        print("hold failed - ${objects.map((e) => e.label)} - ${ticketTypes?.map((e) => e.price)}");
 
     return Scaffold(
         appBar: AppBar(title: Text("Small Theatre - Minimal Config")),
@@ -123,7 +127,9 @@ class LargeTheatreMaximal extends StatelessWidget {
             ..onObjectBooked = onObjectBooked
             ..onSessionInitialized = onSessionInitialized
             ..onHoldCallsInProgress = onHoldCallsInProgress
-            ..onHoldCallsComplete = onHoldCallsComplete),
+            ..onHoldCallsComplete = onHoldCallsComplete
+            ..onHoldSucceeded = onHoldSucceeded
+            ..onHoldFailed = onHoldFailed),
         ));
   }
 }

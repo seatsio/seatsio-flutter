@@ -613,6 +613,14 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   final Function()? onHoldCallsInProgress;
   @override
   final Function()? onHoldCallsComplete;
+  @override
+  final Function(
+          List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes)?
+      onHoldSucceeded;
+  @override
+  final Function(
+          List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes)?
+      onHoldFailed;
 
   factory _$SeatingChartConfig(
           [void Function(SeatingChartConfigBuilder)? updates]) =>
@@ -675,7 +683,9 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       this.onObjectBooked,
       this.onSessionInitialized,
       this.onHoldCallsInProgress,
-      this.onHoldCallsComplete})
+      this.onHoldCallsComplete,
+      this.onHoldSucceeded,
+      this.onHoldFailed})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         workspaceKey, r'SeatingChartConfig', 'workspaceKey');
@@ -757,7 +767,9 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         onObjectBooked == _$dynamicOther.onObjectBooked &&
         onSessionInitialized == _$dynamicOther.onSessionInitialized &&
         onHoldCallsInProgress == _$dynamicOther.onHoldCallsInProgress &&
-        onHoldCallsComplete == _$dynamicOther.onHoldCallsComplete;
+        onHoldCallsComplete == _$dynamicOther.onHoldCallsComplete &&
+        onHoldSucceeded == _$dynamicOther.onHoldSucceeded &&
+        onHoldFailed == _$dynamicOther.onHoldFailed;
   }
 
   @override
@@ -820,6 +832,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     _$hash = $jc(_$hash, onSessionInitialized.hashCode);
     _$hash = $jc(_$hash, onHoldCallsInProgress.hashCode);
     _$hash = $jc(_$hash, onHoldCallsComplete.hashCode);
+    _$hash = $jc(_$hash, onHoldSucceeded.hashCode);
+    _$hash = $jc(_$hash, onHoldFailed.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -885,7 +899,9 @@ class _$SeatingChartConfig extends SeatingChartConfig {
           ..add('onObjectBooked', onObjectBooked)
           ..add('onSessionInitialized', onSessionInitialized)
           ..add('onHoldCallsInProgress', onHoldCallsInProgress)
-          ..add('onHoldCallsComplete', onHoldCallsComplete))
+          ..add('onHoldCallsComplete', onHoldCallsComplete)
+          ..add('onHoldSucceeded', onHoldSucceeded)
+          ..add('onHoldFailed', onHoldFailed))
         .toString();
   }
 }
@@ -1182,6 +1198,26 @@ class SeatingChartConfigBuilder
   set onHoldCallsComplete(Function()? onHoldCallsComplete) =>
       _$this._onHoldCallsComplete = onHoldCallsComplete;
 
+  Function(List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes)?
+      _onHoldSucceeded;
+  Function(List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes)?
+      get onHoldSucceeded => _$this._onHoldSucceeded;
+  set onHoldSucceeded(
+          Function(List<SeatsioObject> objects,
+                  List<SelectedTicketType>? ticketTypes)?
+              onHoldSucceeded) =>
+      _$this._onHoldSucceeded = onHoldSucceeded;
+
+  Function(List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes)?
+      _onHoldFailed;
+  Function(List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes)?
+      get onHoldFailed => _$this._onHoldFailed;
+  set onHoldFailed(
+          Function(List<SeatsioObject> objects,
+                  List<SelectedTicketType>? ticketTypes)?
+              onHoldFailed) =>
+      _$this._onHoldFailed = onHoldFailed;
+
   SeatingChartConfigBuilder() {
     SeatingChartConfig._initializeBuilder(this);
   }
@@ -1246,6 +1282,8 @@ class SeatingChartConfigBuilder
       _onSessionInitialized = $v.onSessionInitialized;
       _onHoldCallsInProgress = $v.onHoldCallsInProgress;
       _onHoldCallsComplete = $v.onHoldCallsComplete;
+      _onHoldSucceeded = $v.onHoldSucceeded;
+      _onHoldFailed = $v.onHoldFailed;
       _$v = null;
     }
     return this;
@@ -1330,6 +1368,8 @@ class SeatingChartConfigBuilder
             onSessionInitialized: onSessionInitialized,
             onHoldCallsInProgress: onHoldCallsInProgress,
             onHoldCallsComplete: onHoldCallsComplete,
+            onHoldSucceeded: onHoldSucceeded,
+            onHoldFailed: onHoldFailed,
           );
     } catch (_) {
       late String _$failedField;
