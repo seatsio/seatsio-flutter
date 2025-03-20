@@ -14,11 +14,14 @@ class SeatsioWebView extends StatefulWidget {
   final SeatingChartConfig _config;
   final Set<Factory<OneSequenceGestureRecognizer>> _gestureRecognizers;
 
+  final Function(String message)? onResetViewCompleted;
+
   const SeatsioWebView({
     super.key,
     SeatsioWebViewCreatedCallback? onWebViewCreated,
     required SeatingChartConfig config,
     Set<Factory<OneSequenceGestureRecognizer>> gestureRecognizers = const <Factory<OneSequenceGestureRecognizer>>{},
+    this.onResetViewCompleted
   })  : this._onWebViewCreated = onWebViewCreated,
         this._config = config,
         this._gestureRecognizers = gestureRecognizers;
@@ -96,7 +99,8 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
       ..addJavaScriptChannel('onFullScreenOpenedJsChannel', onMessageReceived: onFullScreenOpened)
       ..addJavaScriptChannel('onFullScreenClosedJsChannel', onMessageReceived: onFullScreenClosed)
       ..addJavaScriptChannel('onFilteredCategoriesChangedJsChannel', onMessageReceived: onFilteredCategoriesChanged)
-    ;
+      // renderer method
+      ..addJavaScriptChannel("resetViewJsChannel", onMessageReceived: resetViewCompleted);
 
     _seatsioController = SeatsioWebViewController(webViewController: _webViewController);
     widget._onWebViewCreated?.call(_seatsioController);
@@ -233,9 +237,7 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
   void onSelectionInvalid(JavaScriptMessage message) {
     if (widget._config.onSelectionInvalid != null) {
       final Map<String, dynamic> data = jsonDecode(message.message);
-      final List<String> violations = (data["violations"] as List<dynamic>)
-          .map((v) => v.toString())
-          .toList();
+      final List<String> violations = (data["violations"] as List<dynamic>).map((v) => v.toString()).toList();
       widget._config.onSelectionInvalid!(violations);
     }
   }
@@ -255,14 +257,17 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
   void onFilteredCategoriesChanged(JavaScriptMessage message) {
     if (widget._config.onFilteredCategoriesChanged != null) {
       final Map<String, dynamic> data = jsonDecode(message.message);
-      final List<SeatsioCategory> categories = (data["categories"] as List<dynamic>)
-          .map((category) => SeatsioCategory.fromJson(category))
-          .toList();
+      final List<SeatsioCategory> categories =
+          (data["categories"] as List<dynamic>).map((category) => SeatsioCategory.fromJson(category)).toList();
       widget._config.onFilteredCategoriesChanged!(categories);
     }
   }
 
-
+  void resetViewCompleted(JavaScriptMessage message) {
+    if (widget.onResetViewCompleted != null) {
+      widget.onResetViewCompleted!(message.message);
+    }
+  }
   List<SeatsioObject> _toObjectsList(objectsData) {
     final List<SeatsioObject> objects =
         (objectsData as List).map((obj) => SeatsioObject(label: obj["label"] as String)).toList();
