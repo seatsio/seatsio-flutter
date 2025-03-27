@@ -14,15 +14,15 @@ class SeatsioWebView extends StatefulWidget {
   final SeatingChartConfig _config;
   final Set<Factory<OneSequenceGestureRecognizer>> _gestureRecognizers;
 
-  final Function(String message)? onResetViewCompleted;
+  final void Function(JavaScriptMessage) onResetViewCompleted;
 
-  const SeatsioWebView({
-    super.key,
-    SeatsioWebViewCreatedCallback? onWebViewCreated,
-    required SeatingChartConfig config,
-    Set<Factory<OneSequenceGestureRecognizer>> gestureRecognizers = const <Factory<OneSequenceGestureRecognizer>>{},
-    this.onResetViewCompleted
-  })  : this._onWebViewCreated = onWebViewCreated,
+  const SeatsioWebView(
+      {super.key,
+      SeatsioWebViewCreatedCallback? onWebViewCreated,
+      required SeatingChartConfig config,
+      Set<Factory<OneSequenceGestureRecognizer>> gestureRecognizers = const <Factory<OneSequenceGestureRecognizer>>{},
+      required this.onResetViewCompleted})
+      : this._onWebViewCreated = onWebViewCreated,
         this._config = config,
         this._gestureRecognizers = gestureRecognizers;
 
@@ -100,7 +100,7 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
       ..addJavaScriptChannel('onFullScreenClosedJsChannel', onMessageReceived: onFullScreenClosed)
       ..addJavaScriptChannel('onFilteredCategoriesChangedJsChannel', onMessageReceived: onFilteredCategoriesChanged)
       // renderer method
-      ..addJavaScriptChannel("resetViewJsChannel", onMessageReceived: resetViewCompleted);
+      ..addJavaScriptChannel("resetViewJsChannel", onMessageReceived: widget.onResetViewCompleted);
 
     _seatsioController = SeatsioWebViewController(webViewController: _webViewController);
     widget._onWebViewCreated?.call(_seatsioController);
@@ -263,11 +263,6 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
     }
   }
 
-  void resetViewCompleted(JavaScriptMessage message) {
-    if (widget.onResetViewCompleted != null) {
-      widget.onResetViewCompleted!(message.message);
-    }
-  }
   List<SeatsioObject> _toObjectsList(objectsData) {
     final List<SeatsioObject> objects =
         (objectsData as List).map((obj) => SeatsioObject(label: obj["label"] as String)).toList();

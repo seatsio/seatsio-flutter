@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:seatsio/seatsio.dart';
 import 'package:seatsio/src/ui/seatsio_web_view_controller.dart';
 import 'package:seatsio/src/ui/seatsio_webview.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class SeatsioSeatingChart extends StatefulWidget {
   final SeatingChartConfig config;
@@ -37,8 +38,8 @@ class SeatsioSeatingChartState extends State<SeatsioSeatingChart> {
     return completer.future;
   }
 
-  void _handleResetViewCompleted(String message) {
-    final Map<String, dynamic> data = jsonDecode(message);
+  void _handleResetViewCompleted(JavaScriptMessage message) {
+    final Map<String, dynamic> data = jsonDecode(message.message);
     final String promiseId = data["id"];
     final String status = data["status"];
 
