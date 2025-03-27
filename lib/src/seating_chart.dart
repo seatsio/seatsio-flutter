@@ -119,7 +119,7 @@ class SeatsioSeatingChartState extends State<SeatsioSeatingChart> {
     return completer.future;
   }
 
-  void _handlePromiseCompleted(JavaScriptMessage message) {
+  void _handleVoidPromiseCompleted(JavaScriptMessage message) {
     final Map<String, dynamic> promiseResult = jsonDecode(message.message);
     final completer = _pendingPromises.remove(promiseResult["id"]);
     if (completer != null) {
@@ -156,11 +156,8 @@ class SeatsioSeatingChartState extends State<SeatsioSeatingChart> {
         _controller.reload(widget.config);
       },
       config: widget.config,
-      onResetViewCompleted: _handlePromiseCompleted,
-      onStartNewSessionCompleted: _handlePromiseCompleted,
+      onVoidPromiseCompleted: _handleVoidPromiseCompleted,
       onListSelectedObjectsCompleted: _handleListSelectedObjectsCompleted,
-      onClearSelectionCompleted: _handlePromiseCompleted,
-      onVoidPromiseCompleted: _handlePromiseCompleted,
     );
   }
 }
