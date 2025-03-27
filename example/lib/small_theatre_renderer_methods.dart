@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:seatsio/seatsio.dart';
+
 class SmallTheatreRendererMethods extends StatefulWidget {
   @override
   _SmallTheatreRendererMethodsState createState() => _SmallTheatreRendererMethodsState();
@@ -20,6 +21,7 @@ class _SmallTheatreRendererMethodsState extends State<SmallTheatreRendererMethod
       // 're-render': () =>
       'resetView': () => _chart.currentState?.resetView() ?? Future.value(),
       'startNewSession': () => _chart.currentState?.startNewSession() ?? Future.value(),
+      'listSelectedObjects': () => this.printSelectedObjects(),
       // listSelectedObjects
       // clearSelection
       // trySelectObjects
@@ -40,8 +42,6 @@ class _SmallTheatreRendererMethodsState extends State<SmallTheatreRendererMethod
       // setSpotlightObjects
       // setSpotlightOnSelection
       // clearSpotlightObjects
-
-
     });
   }
 
@@ -73,9 +73,9 @@ class _SmallTheatreRendererMethodsState extends State<SmallTheatreRendererMethod
               },
               items: _actions.keys
                   .map((String action) => DropdownMenuItem<String>(
-                value: action,
-                child: Text(action),
-              ))
+                        value: action,
+                        child: Text(action),
+                      ))
                   .toList(),
             ),
           ),
@@ -94,5 +94,19 @@ class _SmallTheatreRendererMethodsState extends State<SmallTheatreRendererMethod
         ],
       ),
     );
+  }
+
+  Future<void> printSelectedObjects() async {
+    try {
+      final objects = await _chart.currentState?.listSelectedObjects();
+      if (objects != null) {
+        print("Selected objects:");
+        for (var obj in objects) {
+          print("Label: ${obj.label}, Status: ${obj.labels?.own}, Category: ${obj.category?.label}");
+        }
+      }
+    } catch (e) {
+      print("Error fetching selected objects: $e");
+    }
   }
 }
