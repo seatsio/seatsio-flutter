@@ -17,6 +17,7 @@ class SeatsioWebView extends StatefulWidget {
   final void Function(JavaScriptMessage) onResetViewCompleted;
   final void Function(JavaScriptMessage) onStartNewSessionCompleted;
   final void Function(JavaScriptMessage) onListSelectedObjectsCompleted;
+  final void Function(JavaScriptMessage) onClearSelectionCompleted;
 
   const SeatsioWebView(
       {super.key,
@@ -25,7 +26,8 @@ class SeatsioWebView extends StatefulWidget {
       Set<Factory<OneSequenceGestureRecognizer>> gestureRecognizers = const <Factory<OneSequenceGestureRecognizer>>{},
       required this.onResetViewCompleted,
       required this.onStartNewSessionCompleted,
-      required this.onListSelectedObjectsCompleted})
+      required this.onListSelectedObjectsCompleted,
+      required this.onClearSelectionCompleted})
       : this._onWebViewCreated = onWebViewCreated,
         this._config = config,
         this._gestureRecognizers = gestureRecognizers;
@@ -106,7 +108,8 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
       // renderer methods
       ..addJavaScriptChannel("resetViewJsChannel", onMessageReceived: widget.onResetViewCompleted)
       ..addJavaScriptChannel("startNewSessionJsChannel", onMessageReceived: widget.onStartNewSessionCompleted)
-      ..addJavaScriptChannel("listSelectedObjectsJsChannel", onMessageReceived: widget.onListSelectedObjectsCompleted);
+      ..addJavaScriptChannel("listSelectedObjectsJsChannel", onMessageReceived: widget.onListSelectedObjectsCompleted)
+      ..addJavaScriptChannel("clearSelectionJsChannel", onMessageReceived: widget.onClearSelectionCompleted);
 
     _seatsioController = SeatsioWebViewController(webViewController: _webViewController);
     widget._onWebViewCreated?.call(_seatsioController);

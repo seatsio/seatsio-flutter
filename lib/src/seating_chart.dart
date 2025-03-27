@@ -81,6 +81,21 @@ class SeatsioSeatingChartState extends State<SeatsioSeatingChart> {
     return completer.future;
   }
 
+  Future<void> clearSelection() async {
+    final String promiseId = DateTime.now().millisecondsSinceEpoch.toString();
+    final Completer<void> completer = Completer<void>();
+
+    _pendingPromises[promiseId] = completer;
+
+    await _controller.evaluateJavascript("""
+      chart.clearSelection()
+        .then(() => window.clearSelectionJsChannel.postMessage(JSON.stringify({ "id": "$promiseId", "status": "resolved" })))
+        .catch(error => window.clearSelectionJsChannel.postMessage(JSON.stringify({ "id": "$promiseId", "status": "error", "message": error })));
+    """);
+
+    return completer.future;
+  }
+
   void _handlePromiseCompleted(JavaScriptMessage message) {
     final Map<String, dynamic> promiseResult = jsonDecode(message.message);
     final completer = _pendingPromises.remove(promiseResult["id"]);
@@ -120,6 +135,7 @@ class SeatsioSeatingChartState extends State<SeatsioSeatingChart> {
         config: widget.config,
         onResetViewCompleted: _handlePromiseCompleted,
         onStartNewSessionCompleted: _handlePromiseCompleted,
-        onListSelectedObjectsCompleted: _handleListSelectedObjectsCompleted);
+        onListSelectedObjectsCompleted: _handleListSelectedObjectsCompleted,
+        onClearSelectionCompleted: _handlePromiseCompleted);
   }
 }
