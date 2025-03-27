@@ -53,6 +53,36 @@ class SeatsioSeatingChartState extends State<SeatsioSeatingChart> {
     }
   }
 
+  Future<void> startNewSession() async {
+    final String promiseId = DateTime.now().millisecondsSinceEpoch.toString();
+    final Completer<void> completer = Completer<void>();
+
+    _pendingPromises[promiseId] = completer;
+
+    await _controller.evaluateJavascript("""
+      chart.startNewSession()
+        .then(() => window.startNewSessionJsChannel.postMessage(JSON.stringify({ "id": "$promiseId", "status": "resolved" })))
+        .catch(error => window.startNewSessionJsChannel.postMessage(JSON.stringify({ "id": "$promiseId", "status": "error", "message": error })));
+    """);
+
+    return completer.future;
+  }
+
+  void _handleStartNewSessionCompleted(JavaScriptMessage message) {
+    final Map<String, dynamic> data = jsonDecode(message.message);
+    final String promiseId = data["id"];
+    final String status = data["status"];
+
+    final completer = _pendingPromises.remove(promiseId);
+    if (completer != null) {
+      if (status == "resolved") {
+        completer.complete();
+      } else {
+        completer.completeError("Error resetting view: ${data["message"]}");
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SeatsioWebView(
@@ -61,6 +91,8 @@ class SeatsioSeatingChartState extends State<SeatsioSeatingChart> {
           _controller.reload(widget.config);
         },
         config: widget.config,
-        onResetViewCompleted: _handleResetViewCompleted);
+        onResetViewCompleted: _handleResetViewCompleted,
+        onStartNewSessionCompleted: _handleStartNewSessionCompleted
+    );
   }
 }

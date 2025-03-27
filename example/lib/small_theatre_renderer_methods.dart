@@ -19,7 +19,7 @@ class _SmallTheatreRendererMethodsState extends State<SmallTheatreRendererMethod
     _actions.addAll({
       // 're-render': () =>
       'resetView': () => _chart.currentState?.resetView() ?? Future.value(),
-      // startNewSession
+      'startNewSession': () => _chart.currentState?.startNewSession() ?? Future.value(),
       // listSelectedObjects
       // clearSelection
       // trySelectObjects

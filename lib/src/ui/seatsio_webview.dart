@@ -15,13 +15,15 @@ class SeatsioWebView extends StatefulWidget {
   final Set<Factory<OneSequenceGestureRecognizer>> _gestureRecognizers;
 
   final void Function(JavaScriptMessage) onResetViewCompleted;
+  final void Function(JavaScriptMessage) onStartNewSessionCompleted;
 
   const SeatsioWebView(
       {super.key,
       SeatsioWebViewCreatedCallback? onWebViewCreated,
       required SeatingChartConfig config,
       Set<Factory<OneSequenceGestureRecognizer>> gestureRecognizers = const <Factory<OneSequenceGestureRecognizer>>{},
-      required this.onResetViewCompleted})
+      required this.onResetViewCompleted,
+      required this.onStartNewSessionCompleted})
       : this._onWebViewCreated = onWebViewCreated,
         this._config = config,
         this._gestureRecognizers = gestureRecognizers;
@@ -99,8 +101,9 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
       ..addJavaScriptChannel('onFullScreenOpenedJsChannel', onMessageReceived: onFullScreenOpened)
       ..addJavaScriptChannel('onFullScreenClosedJsChannel', onMessageReceived: onFullScreenClosed)
       ..addJavaScriptChannel('onFilteredCategoriesChangedJsChannel', onMessageReceived: onFilteredCategoriesChanged)
-      // renderer method
-      ..addJavaScriptChannel("resetViewJsChannel", onMessageReceived: widget.onResetViewCompleted);
+      // renderer methods
+      ..addJavaScriptChannel("resetViewJsChannel", onMessageReceived: widget.onResetViewCompleted)
+      ..addJavaScriptChannel("startNewSessionJsChannel", onMessageReceived: widget.onStartNewSessionCompleted);
 
     _seatsioController = SeatsioWebViewController(webViewController: _webViewController);
     widget._onWebViewCreated?.call(_seatsioController);
