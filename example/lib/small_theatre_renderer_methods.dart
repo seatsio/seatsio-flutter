@@ -23,6 +23,7 @@ class _SmallTheatreRendererMethodsState extends State<SmallTheatreRendererMethod
       'startNewSession': () => _chart.currentState?.startNewSession() ?? Future.value(),
       'listSelectedObjects': () => this.printSelectedObjects(),
       'clearSelection': () => _chart.currentState?.clearSelection() ?? Future.value(),
+      'trySelectObjects': () => _chart.currentState?.trySelectObjects(["A-12", "A-10"]) ?? Future.value(),
       // trySelectObjects
       // doSelectObjects
       // deselectObjects

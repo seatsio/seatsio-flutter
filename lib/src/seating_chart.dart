@@ -95,6 +95,30 @@ class SeatsioSeatingChartState extends State<SeatsioSeatingChart> {
     return completer.future;
   }
 
+  Future<void> trySelectObjects(List<String> objects) async {
+    final String promiseId = DateTime.now().millisecondsSinceEpoch.toString();
+    final Completer<void> completer = Completer<void>();
+
+    _pendingPromises[promiseId] = completer;
+
+    final String jsArray = jsonEncode(objects);
+
+    await _controller.evaluateJavascript('''
+    chart.trySelectObjects($jsArray)
+      .then(() => window.trySelectObjectsJsChannel.postMessage(JSON.stringify({
+        "id": "$promiseId\",
+        \"status\": \"resolved\"
+      })))
+      .catch(error => window.trySelectObjectsJsChannel.postMessage(JSON.stringify({
+        \"id\": \"$promiseId\",
+        \"status\": \"error\",
+        \"message\": error
+      })));
+  ''');
+
+    return completer.future;
+  }
+
   void _handlePromiseCompleted(JavaScriptMessage message) {
     final Map<String, dynamic> promiseResult = jsonDecode(message.message);
     final completer = _pendingPromises.remove(promiseResult["id"]);
@@ -127,14 +151,16 @@ class SeatsioSeatingChartState extends State<SeatsioSeatingChart> {
   @override
   Widget build(BuildContext context) {
     return SeatsioWebView(
-        onWebViewCreated: (controller) {
-          _controller = controller;
-          _controller.reload(widget.config);
-        },
-        config: widget.config,
-        onResetViewCompleted: _handlePromiseCompleted,
-        onStartNewSessionCompleted: _handlePromiseCompleted,
-        onListSelectedObjectsCompleted: _handleListSelectedObjectsCompleted,
-        onClearSelectionCompleted: _handlePromiseCompleted);
+      onWebViewCreated: (controller) {
+        _controller = controller;
+        _controller.reload(widget.config);
+      },
+      config: widget.config,
+      onResetViewCompleted: _handlePromiseCompleted,
+      onStartNewSessionCompleted: _handlePromiseCompleted,
+      onListSelectedObjectsCompleted: _handleListSelectedObjectsCompleted,
+      onClearSelectionCompleted: _handlePromiseCompleted,
+      onVoidPromiseCompleted: _handlePromiseCompleted,
+    );
   }
 }
