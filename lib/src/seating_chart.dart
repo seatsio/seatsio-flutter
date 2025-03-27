@@ -38,17 +38,14 @@ class SeatsioSeatingChartState extends State<SeatsioSeatingChart> {
     return completer.future;
   }
 
-  void _handleResetViewCompleted(JavaScriptMessage message) {
-    final Map<String, dynamic> data = jsonDecode(message.message);
-    final String promiseId = data["id"];
-    final String status = data["status"];
-
-    final completer = _pendingPromises.remove(promiseId);
+  void _handlePromiseCompleted(JavaScriptMessage message) {
+    final Map<String, dynamic> promiseResult = jsonDecode(message.message);
+    final completer = _pendingPromises.remove(promiseResult["id"]);
     if (completer != null) {
-      if (status == "resolved") {
+      if (promiseResult["status"] == "resolved") {
         completer.complete();
       } else {
-        completer.completeError("Error resetting view: ${data["message"]}");
+        completer.completeError("Error resetting view: ${promiseResult["message"]}");
       }
     }
   }
@@ -68,21 +65,6 @@ class SeatsioSeatingChartState extends State<SeatsioSeatingChart> {
     return completer.future;
   }
 
-  void _handleStartNewSessionCompleted(JavaScriptMessage message) {
-    final Map<String, dynamic> data = jsonDecode(message.message);
-    final String promiseId = data["id"];
-    final String status = data["status"];
-
-    final completer = _pendingPromises.remove(promiseId);
-    if (completer != null) {
-      if (status == "resolved") {
-        completer.complete();
-      } else {
-        completer.completeError("Error resetting view: ${data["message"]}");
-      }
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return SeatsioWebView(
@@ -91,8 +73,7 @@ class SeatsioSeatingChartState extends State<SeatsioSeatingChart> {
           _controller.reload(widget.config);
         },
         config: widget.config,
-        onResetViewCompleted: _handleResetViewCompleted,
-        onStartNewSessionCompleted: _handleStartNewSessionCompleted
-    );
+        onResetViewCompleted: _handlePromiseCompleted,
+        onStartNewSessionCompleted: _handlePromiseCompleted);
   }
 }
