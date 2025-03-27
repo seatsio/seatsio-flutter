@@ -119,6 +119,54 @@ class SeatsioSeatingChartState extends State<SeatsioSeatingChart> {
     return completer.future;
   }
 
+  Future<void> doSelectObjects(List<String> objects) async {
+    final String promiseId = DateTime.now().millisecondsSinceEpoch.toString();
+    final Completer<void> completer = Completer<void>();
+
+    _pendingPromises[promiseId] = completer;
+
+    final String jsArray = jsonEncode(objects);
+
+    await _controller.evaluateJavascript('''
+    chart.doSelectObjects($jsArray)
+      .then(() => window.doSelectObjectsJsChannel.postMessage(JSON.stringify({
+        "id": "$promiseId\",
+        \"status\": \"resolved\"
+      })))
+      .catch(error => window.doSelectObjectsJsChannel.postMessage(JSON.stringify({
+        \"id\": \"$promiseId\",
+        \"status\": \"error\",
+        \"message\": error
+      })));
+  ''');
+
+    return completer.future;
+  }
+
+  Future<void> deselectObjects(List<String> objects) async {
+    final String promiseId = DateTime.now().millisecondsSinceEpoch.toString();
+    final Completer<void> completer = Completer<void>();
+
+    _pendingPromises[promiseId] = completer;
+
+    final String jsArray = jsonEncode(objects);
+
+    await _controller.evaluateJavascript('''
+    chart.deselectObjects($jsArray)
+      .then(() => window.deselectObjectsJsChannel.postMessage(JSON.stringify({
+        "id": "$promiseId\",
+        \"status\": \"resolved\"
+      })))
+      .catch(error => window.deselectObjectsJsChannel.postMessage(JSON.stringify({
+        \"id\": \"$promiseId\",
+        \"status\": \"error\",
+        \"message\": error
+      })));
+  ''');
+
+    return completer.future;
+  }
+
   void _handleVoidPromiseCompleted(JavaScriptMessage message) {
     final Map<String, dynamic> promiseResult = jsonDecode(message.message);
     final completer = _pendingPromises.remove(promiseResult["id"]);

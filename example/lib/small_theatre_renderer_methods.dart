@@ -24,9 +24,8 @@ class _SmallTheatreRendererMethodsState extends State<SmallTheatreRendererMethod
       'listSelectedObjects': () => this.printSelectedObjects(),
       'clearSelection': () => _chart.currentState?.clearSelection() ?? Future.value(),
       'trySelectObjects': () => _chart.currentState?.trySelectObjects(["A-12", "A-10"]) ?? Future.value(),
-      // trySelectObjects
-      // doSelectObjects
-      // deselectObjects
+      'doSelectObjects': () => _chart.currentState?.doSelectObjects(["A-12", "A-10"]) ?? Future.value(),
+      'deselectObjects': () => _chart.currentState?.deselectObjects(["A-12", "A-10"]) ?? Future.value(),
       // selectCategories
       // deselectCategories
       // pulse
