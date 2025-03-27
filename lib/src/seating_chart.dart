@@ -57,7 +57,6 @@ class SeatsioSeatingChartState extends State<SeatsioSeatingChart> {
     final String promiseId = DateTime.now().millisecondsSinceEpoch.toString();
     final Completer<List<SeatsioSelectedObject>> completer = Completer();
 
-    // Store the completer in a generic map; you can store typed completers if you prefer
     _pendingPromises[promiseId] = completer;
 
     await _controller.evaluateJavascript("""
