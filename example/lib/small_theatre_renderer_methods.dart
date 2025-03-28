@@ -26,6 +26,8 @@ class _SmallTheatreRendererMethodsState extends State<SmallTheatreRendererMethod
       'trySelectObjects': () => _chart.currentState?.trySelectObjects(["A-12", "A-10"]),
       'doSelectObjects': () => _chart.currentState?.doSelectObjects(["A-12", "A-10"]),
       'deselectObjects': () => _chart.currentState?.deselectObjects(["A-12", "A-10"]),
+      'selectCategories': () => _chart.currentState?.selectCategories(["1"]),
+      'deselectCategories': () => _chart.currentState?.deselectCategories(["1"]),
       // selectCategories
       // deselectCategories
       // pulse
