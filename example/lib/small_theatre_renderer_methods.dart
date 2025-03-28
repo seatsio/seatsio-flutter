@@ -11,7 +11,7 @@ class _SmallTheatreRendererMethodsState extends State<SmallTheatreRendererMethod
 
   String _selectedAction = 'resetView';
 
-  final Map<String, Future<void> Function()> _actions = {};
+  final Map<String, Future<void>? Function()> _actions = {};
 
   @override
   void initState() {
@@ -19,13 +19,13 @@ class _SmallTheatreRendererMethodsState extends State<SmallTheatreRendererMethod
 
     _actions.addAll({
       // 're-render': () =>
-      'resetView': () => _chart.currentState?.resetView() ?? Future.value(),
-      'startNewSession': () => _chart.currentState?.startNewSession() ?? Future.value(),
+      'resetView': () => _chart.currentState?.resetView(),
+      'startNewSession': () => _chart.currentState?.startNewSession(),
       'listSelectedObjects': () => this.printSelectedObjects(),
-      'clearSelection': () => _chart.currentState?.clearSelection() ?? Future.value(),
-      'trySelectObjects': () => _chart.currentState?.trySelectObjects(["A-12", "A-10"]) ?? Future.value(),
-      'doSelectObjects': () => _chart.currentState?.doSelectObjects(["A-12", "A-10"]) ?? Future.value(),
-      'deselectObjects': () => _chart.currentState?.deselectObjects(["A-12", "A-10"]) ?? Future.value(),
+      'clearSelection': () => _chart.currentState?.clearSelection(),
+      'trySelectObjects': () => _chart.currentState?.trySelectObjects(["A-12", "A-10"]),
+      'doSelectObjects': () => _chart.currentState?.doSelectObjects(["A-12", "A-10"]),
+      'deselectObjects': () => _chart.currentState?.deselectObjects(["A-12", "A-10"]),
       // selectCategories
       // deselectCategories
       // pulse
@@ -47,7 +47,7 @@ class _SmallTheatreRendererMethodsState extends State<SmallTheatreRendererMethod
   void _runSelectedAction() {
     final selectedMethod = _actions[_selectedAction];
     if (selectedMethod != null) {
-      selectedMethod().then((_) {
+      selectedMethod()?.then((_) {
         print("Action $_selectedAction completed.");
       }).catchError((e) {
         print("Error in $_selectedAction: $e");
