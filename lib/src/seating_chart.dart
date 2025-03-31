@@ -268,6 +268,45 @@ class SeatsioSeatingChartState extends State<SeatsioSeatingChart> {
     return completer.future;
   }
 
+  Future<void> zoomToObjects(List<String> objects) async {
+    final String promiseId = DateTime.now().millisecondsSinceEpoch.toString();
+    final Completer<void> completer = Completer<void>();
+
+    _pendingPromises[promiseId] = completer;
+
+    final String jsArray = jsonEncode(objects);
+
+    await _controller.evaluateJavascript('''
+    chart.zoomToObjects($jsArray)
+      .then(() => window.zoomToObjectsJsChannel.postMessage(JSON.stringify({
+        "id": "$promiseId\",
+        \"status\": \"resolved\"
+      })))
+      .catch(error => window.zoomToObjectsJsChannel.postMessage(JSON.stringify({
+        \"id\": \"$promiseId\",
+        \"status\": \"error\",
+        \"message\": error
+      })));
+  ''');
+
+    return completer.future;
+  }
+
+  Future<void> zoomToSelectedObjects() async {
+    final String promiseId = DateTime.now().millisecondsSinceEpoch.toString();
+    final Completer<void> completer = Completer<void>();
+
+    _pendingPromises[promiseId] = completer;
+
+    await _controller.evaluateJavascript("""
+      chart.zoomToSelectedObjects()
+        .then(() => window.zoomToSelectedObjectsJsChannel.postMessage(JSON.stringify({ "id": "$promiseId", "status": "resolved" })))
+        .catch(error => window.zoomToSelectedObjectsJsChannel.postMessage(JSON.stringify({ "id": "$promiseId", "status": "error", "message": error })));
+    """);
+
+    return completer.future;
+  }
+
   void _handleVoidPromiseCompleted(JavaScriptMessage message) {
     final Map<String, dynamic> promiseResult = jsonDecode(message.message);
     final completer = _pendingPromises.remove(promiseResult["id"]);

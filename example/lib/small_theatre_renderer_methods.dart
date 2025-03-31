@@ -65,8 +65,9 @@ class _SmallTheatreRendererMethodsState extends State<SmallTheatreRendererMethod
           // ..channels = ["channel1", "channel2"]
           )),
       'findObject': () => findAndPrintObject("A-12"),
-      // listCategories
-      // zoomToObjects
+      // TODO listCategories
+      'zoomToObjects': () => _chart.currentState?.zoomToObjects(["A-12", "A-10"]),
+      'zoomToSelectedObjects': () => _chart.currentState?.zoomToSelectedObjects(),
       // zoomToSelectedObjects
       // zoomToFilteredCategories
       // zoomToSection

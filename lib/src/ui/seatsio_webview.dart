@@ -114,7 +114,9 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
       ..addJavaScriptChannel("selectCategoriesJsChannel", onMessageReceived: widget.onVoidPromiseCompleted)
       ..addJavaScriptChannel("deselectCategoriesJsChannel", onMessageReceived: widget.onVoidPromiseCompleted)
       ..addJavaScriptChannel("changeConfigJsChannel", onMessageReceived: widget.onVoidPromiseCompleted)
-      ..addJavaScriptChannel("findObjectJsChannel", onMessageReceived: widget.onFindObjectCompleted);
+      ..addJavaScriptChannel("findObjectJsChannel", onMessageReceived: widget.onFindObjectCompleted)
+      ..addJavaScriptChannel("zoomToObjectsJsChannel", onMessageReceived: widget.onVoidPromiseCompleted)
+      ..addJavaScriptChannel("zoomToSelectedObjectsJsChannel", onMessageReceived: widget.onVoidPromiseCompleted);
 
     _seatsioController = SeatsioWebViewController(webViewController: _webViewController);
     widget._onWebViewCreated?.call(_seatsioController);
