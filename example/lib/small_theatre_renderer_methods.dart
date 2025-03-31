@@ -64,7 +64,7 @@ class _SmallTheatreRendererMethodsState extends State<SmallTheatreRendererMethod
           ..pricing = simplePricing
           // ..channels = ["channel1", "channel2"]
           )),
-      // findObject
+      'findObject': () => findAndPrintObject("A-12"),
       // listCategories
       // zoomToObjects
       // zoomToSelectedObjects
@@ -141,5 +141,18 @@ class _SmallTheatreRendererMethodsState extends State<SmallTheatreRendererMethod
     } catch (e) {
       print("Error fetching selected objects: $e");
     }
+  }
+
+  Future<void> findAndPrintObject(String objectLabel) async {
+    try {
+      final object = await _chart.currentState?.findObject(objectLabel);
+      if (object != null) {
+        print("Found object:");
+        print("Label: ${object.label}");
+      }
+    } catch (e) {
+      print("Error fetching object: $e");
+    }
+
   }
 }

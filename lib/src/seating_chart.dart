@@ -239,6 +239,35 @@ class SeatsioSeatingChartState extends State<SeatsioSeatingChart> {
     return completer.future;
   }
 
+  Future<SeatsioObject> findObject(String objectLabel) async {
+    final String promiseId = DateTime.now().millisecondsSinceEpoch.toString();
+    final Completer<SeatsioObject> completer = Completer();
+
+    _pendingPromises[promiseId] = completer;
+
+    final String objectLabelString = jsonEncode(objectLabel);
+
+    await _controller.evaluateJavascript("""
+    chart.findObject($objectLabelString)
+      .then(object => {
+        window.findObjectJsChannel.postMessage(JSON.stringify({
+          \"id\": \"$promiseId\",
+          \"status\": \"resolved\",
+          \"object\": object
+        }));
+      })
+      .catch(error => {
+        window.findObjectJsChannel.postMessage(JSON.stringify({
+          \"id\": \"$promiseId\",
+          \"status\": \"error\",
+          \"message\": error
+        }));
+      });
+  """);
+
+    return completer.future;
+  }
+
   void _handleVoidPromiseCompleted(JavaScriptMessage message) {
     final Map<String, dynamic> promiseResult = jsonDecode(message.message);
     final completer = _pendingPromises.remove(promiseResult["id"]);
@@ -268,6 +297,23 @@ class SeatsioSeatingChartState extends State<SeatsioSeatingChart> {
     }
   }
 
+  void _handleFindObjectCompleted(JavaScriptMessage message) {
+    final Map<String, dynamic> data = jsonDecode(message.message);
+    final String promiseId = data["id"];
+    final String status = data["status"];
+
+    final completer = _pendingPromises.remove(promiseId) as Completer<SeatsioObject>?;
+    if (completer != null) {
+      if (status == "resolved") {
+        var objectData = data["object"] as dynamic;
+        final object = SeatsioObject.fromJson(objectData);
+        completer.complete(object);
+      } else {
+        completer.completeError("Error listing selected objects: ${data["message"]}");
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SeatsioWebView(
@@ -278,6 +324,7 @@ class SeatsioSeatingChartState extends State<SeatsioSeatingChart> {
       config: widget.config,
       onVoidPromiseCompleted: _handleVoidPromiseCompleted,
       onListSelectedObjectsCompleted: _handleListSelectedObjectsCompleted,
+      onFindObjectCompleted: _handleFindObjectCompleted,
     );
   }
 }
