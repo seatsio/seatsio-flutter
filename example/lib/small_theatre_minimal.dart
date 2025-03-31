@@ -1,4 +1,3 @@
-import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
 import 'package:seatsio/seatsio.dart';
 
@@ -8,10 +7,8 @@ class SmallTheatreMinimal extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(title: Text("Small Theatre - Minimal Config")),
         body: SeatsioSeatingChart(
-          config: SeatingChartConfig.init().rebuild((b) => b
-            ..workspaceKey = "publicDemoKey"
-            ..event = "smallTheatreEvent2"
-            ..region = SeatsioRegion.eu),
-        ));
+            config: SeatingChartConfig((b) => b
+              ..workspaceKey = "publicDemoKey"
+              ..event = "smallTheatreEvent2")));
   }
 }

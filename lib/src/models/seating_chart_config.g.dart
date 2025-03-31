@@ -8,16 +8,6 @@ part of 'seating_chart_config.dart';
 
 Serializer<SeatingChartConfig> _$seatingChartConfigSerializer =
     new _$SeatingChartConfigSerializer();
-Serializer<SelectedObject> _$selectedObjectSerializer =
-    new _$SelectedObjectSerializer();
-Serializer<ObjectTooltip> _$objectTooltipSerializer =
-    new _$ObjectTooltipSerializer();
-Serializer<LegendForCategory> _$legendForCategorySerializer =
-    new _$LegendForCategorySerializer();
-Serializer<BestAvailable> _$bestAvailableSerializer =
-    new _$BestAvailableSerializer();
-Serializer<SelectionValidator> _$selectionValidatorSerializer =
-    new _$SelectionValidatorSerializer();
 
 class _$SeatingChartConfigSerializer
     implements StructuredSerializer<SeatingChartConfig> {
@@ -34,76 +24,36 @@ class _$SeatingChartConfigSerializer
       'workspaceKey',
       serializers.serialize(object.workspaceKey,
           specifiedType: const FullType(String)),
-      'event',
-      serializers.serialize(object.event,
-          specifiedType: const FullType(String)),
       'region',
       serializers.serialize(object.region,
-          specifiedType: const FullType(SeatsioRegion)),
-      'enableChartRenderedCallback',
-      serializers.serialize(object.enableChartRenderedCallback,
-          specifiedType: const FullType(bool)),
-      'enableChartRenderingFailedCallback',
-      serializers.serialize(object.enableChartRenderingFailedCallback,
-          specifiedType: const FullType(bool)),
-      'enableObjectClickedCallback',
-      serializers.serialize(object.enableObjectClickedCallback,
-          specifiedType: const FullType(bool)),
-      'enableObjectSelectedCallback',
-      serializers.serialize(object.enableObjectSelectedCallback,
-          specifiedType: const FullType(bool)),
-      'enableObjectDeselectedCallback',
-      serializers.serialize(object.enableObjectDeselectedCallback,
-          specifiedType: const FullType(bool)),
-      'enableSelectionValidCallback',
-      serializers.serialize(object.enableSelectionValidCallback,
-          specifiedType: const FullType(bool)),
-      'enableSelectionInvalidCallback',
-      serializers.serialize(object.enableSelectionInvalidCallback,
-          specifiedType: const FullType(bool)),
-      'enableBestAvailableSelectedCallback',
-      serializers.serialize(object.enableBestAvailableSelectedCallback,
-          specifiedType: const FullType(bool)),
-      'enableBestAvailableSelectionFailedCallback',
-      serializers.serialize(object.enableBestAvailableSelectionFailedCallback,
-          specifiedType: const FullType(bool)),
-      'enableHoldSucceededCallback',
-      serializers.serialize(object.enableHoldSucceededCallback,
-          specifiedType: const FullType(bool)),
-      'enableHoldFailedCallback',
-      serializers.serialize(object.enableHoldFailedCallback,
-          specifiedType: const FullType(bool)),
-      'enableHoldTokenExpiredCallback',
-      serializers.serialize(object.enableHoldTokenExpiredCallback,
-          specifiedType: const FullType(bool)),
-      'enableSessionInitializedCallback',
-      serializers.serialize(object.enableSessionInitializedCallback,
-          specifiedType: const FullType(bool)),
-      'enableReleaseHoldSucceededCallback',
-      serializers.serialize(object.enableReleaseHoldSucceededCallback,
-          specifiedType: const FullType(bool)),
-      'enableReleaseHoldFailedCallback',
-      serializers.serialize(object.enableReleaseHoldFailedCallback,
-          specifiedType: const FullType(bool)),
-      'enableSelectedObjectBookedCallback',
-      serializers.serialize(object.enableSelectedObjectBookedCallback,
-          specifiedType: const FullType(bool)),
+          specifiedType: const FullType(Region)),
+      'messages',
+      serializers.serialize(object.messages,
+          specifiedType: const FullType(
+              Map, const [const FullType(String), const FullType(String)])),
     ];
     Object? value;
-    value = object.language;
+    value = object.event;
     if (value != null) {
       result
-        ..add('language')
+        ..add('event')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    value = object.messages;
+    value = object.events;
     if (value != null) {
       result
-        ..add('messages')
+        ..add('events')
         ..add(serializers.serialize(value,
-            specifiedType: const FullType(BuiltMap,
-                const [const FullType(String), const FullType(String)])));
+            specifiedType:
+                const FullType(List, const [const FullType(String)])));
+    }
+    value = object.mode;
+    if (value != null) {
+      result
+        ..add('mode')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
     }
     value = object.pricing;
     if (value != null) {
@@ -111,18 +61,12 @@ class _$SeatingChartConfigSerializer
         ..add('pricing')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                BuiltList, const [const FullType(PricingForCategory)])));
+                List, const [const FullType(PricingForCategory)])));
     }
-    value = object.numberOfPlacesToSelect;
+    value = object.showSectionPricingOverlay;
     if (value != null) {
       result
-        ..add('numberOfPlacesToSelect')
-        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
-    }
-    value = object.objectWithoutPricingSelectable;
-    if (value != null) {
-      result
-        ..add('objectWithoutPricingSelectable')
+        ..add('showSectionPricingOverlay')
         ..add(
             serializers.serialize(value, specifiedType: const FullType(bool)));
     }
@@ -131,96 +75,58 @@ class _$SeatingChartConfigSerializer
       result
         ..add('selectedObjects')
         ..add(serializers.serialize(value,
+            specifiedType:
+                const FullType(List, const [const FullType(String)])));
+    }
+    value = object.selectableObjects;
+    if (value != null) {
+      result
+        ..add('selectableObjects')
+        ..add(serializers.serialize(value,
+            specifiedType:
+                const FullType(List, const [const FullType(String)])));
+    }
+    value = object.selectionValidators;
+    if (value != null) {
+      result
+        ..add('selectionValidators')
+        ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                BuiltList, const [const FullType(SelectedObject)])));
-    }
-    value = object.objectTooltip;
-    if (value != null) {
-      result
-        ..add('objectTooltip')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(ObjectTooltip)));
-    }
-    value = object.priceLevelsTooltipMessage;
-    if (value != null) {
-      result
-        ..add('priceLevelsTooltipMessage')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
+                List, const [const FullType(SelectionValidator)])));
     }
     value = object.maxSelectedObjects;
     if (value != null) {
       result
         ..add('maxSelectedObjects')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(MaxSelectedObjects)));
+    }
+    value = object.numberOfPlacesToSelect;
+    if (value != null) {
+      result
+        ..add('numberOfPlacesToSelect')
         ..add(serializers.serialize(value, specifiedType: const FullType(int)));
     }
-    value = object.maxSelectedObjectList;
+    value = object.multiSelectEnabled;
     if (value != null) {
       result
-        ..add('maxSelectedObjectList')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(List, const [
-              const FullType(
-                  Map, const [const FullType(String), const FullType(dynamic)])
-            ])));
-    }
-    value = object.availableCategories;
-    if (value != null) {
-      result
-        ..add('availableCategories')
-        ..add(serializers.serialize(value,
-            specifiedType:
-                const FullType(BuiltList, const [const FullType(String)])));
-    }
-    value = object.unavailableCategories;
-    if (value != null) {
-      result
-        ..add('unavailableCategories')
-        ..add(serializers.serialize(value,
-            specifiedType:
-                const FullType(BuiltList, const [const FullType(String)])));
-    }
-    value = object.alwaysShowSectionContents;
-    if (value != null) {
-      result
-        ..add('alwaysShowSectionContents')
+        ..add('multiSelectEnabled')
         ..add(
             serializers.serialize(value, specifiedType: const FullType(bool)));
     }
-    value = object.showSectionContents;
+    value = object.objectsWithoutPricingSelectable;
     if (value != null) {
       result
-        ..add('showSectionContents')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
-    }
-    value = object.showLegend;
-    if (value != null) {
-      result
-        ..add('showLegend')
+        ..add('objectsWithoutPricingSelectable')
         ..add(
             serializers.serialize(value, specifiedType: const FullType(bool)));
     }
-    value = object.legend;
+    value = object.objectPopover;
     if (value != null) {
       result
-        ..add('legend')
+        ..add('objectPopover')
         ..add(serializers.serialize(value,
-            specifiedType: const FullType(LegendForCategory)));
-    }
-    value = object.showMinimap;
-    if (value != null) {
-      result
-        ..add('showMinimap')
-        ..add(
-            serializers.serialize(value, specifiedType: const FullType(bool)));
-    }
-    value = object.inputDevice;
-    if (value != null) {
-      result
-        ..add('inputDevice')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
+            specifiedType: const FullType(ObjectPopover)));
     }
     value = object.showActiveSectionTooltipOnMobile;
     if (value != null) {
@@ -229,18 +135,84 @@ class _$SeatingChartConfigSerializer
         ..add(
             serializers.serialize(value, specifiedType: const FullType(bool)));
     }
-    value = object.selectionValidators;
+    value = object.language;
     if (value != null) {
       result
-        ..add('selectionValidators')
+        ..add('language')
         ..add(serializers.serialize(value,
-            specifiedType: const FullType(
-                BuiltList, const [const FullType(SelectionValidator)])));
+            specifiedType: const FullType(String)));
     }
-    value = object.mode;
+    value = object.categoryFilter;
     if (value != null) {
       result
-        ..add('mode')
+        ..add('categoryFilter')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(CategoryFilter)));
+    }
+    value = object.availableCategories;
+    if (value != null) {
+      result
+        ..add('availableCategories')
+        ..add(serializers.serialize(value,
+            specifiedType:
+                const FullType(List, const [const FullType(String)])));
+    }
+    value = object.unavailableCategories;
+    if (value != null) {
+      result
+        ..add('unavailableCategories')
+        ..add(serializers.serialize(value,
+            specifiedType:
+                const FullType(List, const [const FullType(String)])));
+    }
+    value = object.filteredCategories;
+    if (value != null) {
+      result
+        ..add('filteredCategories')
+        ..add(serializers.serialize(value,
+            specifiedType:
+                const FullType(List, const [const FullType(String)])));
+    }
+    value = object.channels;
+    if (value != null) {
+      result
+        ..add('channels')
+        ..add(serializers.serialize(value,
+            specifiedType:
+                const FullType(List, const [const FullType(String)])));
+    }
+    value = object.showSectionContents;
+    if (value != null) {
+      result
+        ..add('showSectionContents')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(ShowSectionContents)));
+    }
+    value = object.hideSectionsNotForSale;
+    if (value != null) {
+      result
+        ..add('hideSectionsNotForSale')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(bool)));
+    }
+    value = object.showSeatLabels;
+    if (value != null) {
+      result
+        ..add('showSeatLabels')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(bool)));
+    }
+    value = object.session;
+    if (value != null) {
+      result
+        ..add('session')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(Session)));
+    }
+    value = object.holdToken;
+    if (value != null) {
+      result
+        ..add('holdToken')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
@@ -251,69 +223,12 @@ class _$SeatingChartConfigSerializer
         ..add(
             serializers.serialize(value, specifiedType: const FullType(bool)));
     }
-    value = object.holdToken;
+    value = object.showMinimap;
     if (value != null) {
       result
-        ..add('holdToken')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
-    }
-    value = object.session;
-    if (value != null) {
-      result
-        ..add('session')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
-    }
-    value = object.objectLabel;
-    if (value != null) {
-      result
-        ..add('objectLabel')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
-    }
-    value = object.objectIcon;
-    if (value != null) {
-      result
-        ..add('objectIcon')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
-    }
-    value = object.isObjectVisible;
-    if (value != null) {
-      result
-        ..add('isObjectVisible')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
-    }
-    value = object.isObjectSelectable;
-    if (value != null) {
-      result
-        ..add('isObjectSelectable')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
-    }
-    value = object.objectColor;
-    if (value != null) {
-      result
-        ..add('objectColor')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
-    }
-    value = object.sectionColor;
-    if (value != null) {
-      result
-        ..add('sectionColor')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
-    }
-    value = object.extraConfig;
-    if (value != null) {
-      result
-        ..add('extraConfig')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(BuiltMap,
-                const [const FullType(String), const FullType(String)])));
+        ..add('showMinimap')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(bool)));
     }
     value = object.showFullScreenButton;
     if (value != null) {
@@ -322,13 +237,61 @@ class _$SeatingChartConfigSerializer
         ..add(
             serializers.serialize(value, specifiedType: const FullType(bool)));
     }
-    value = object.channels;
+    value = object.showLegend;
     if (value != null) {
       result
-        ..add('channels')
+        ..add('showLegend')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(bool)));
+    }
+    value = object.legendConfig;
+    if (value != null) {
+      result
+        ..add('legendConfig')
         ..add(serializers.serialize(value,
-            specifiedType:
-                const FullType(BuiltList, const [const FullType(String)])));
+            specifiedType: const FullType(LegendConfig)));
+    }
+    value = object.showZoomOutButtonOnMobile;
+    if (value != null) {
+      result
+        ..add('showZoomOutButtonOnMobile')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(bool)));
+    }
+    value = object.colorScheme;
+    if (value != null) {
+      result
+        ..add('colorScheme')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(SeatsioColorScheme)));
+    }
+    value = object.colors;
+    if (value != null) {
+      result
+        ..add('colors')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(SeatsioColors)));
+    }
+    value = object.activeFloor;
+    if (value != null) {
+      result
+        ..add('activeFloor')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.lockActiveFloor;
+    if (value != null) {
+      result
+        ..add('lockActiveFloor')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(bool)));
+    }
+    value = object.showFloorElevator;
+    if (value != null) {
+      result
+        ..add('showFloorElevator')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(bool)));
     }
     return result;
   }
@@ -349,536 +312,182 @@ class _$SeatingChartConfigSerializer
           result.workspaceKey = serializers.deserialize(value,
               specifiedType: const FullType(String))! as String;
           break;
-        case 'event':
-          result.event = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
-          break;
         case 'region':
           result.region = serializers.deserialize(value,
-              specifiedType: const FullType(SeatsioRegion))! as SeatsioRegion;
+              specifiedType: const FullType(Region))! as Region;
+          break;
+        case 'event':
+          result.event = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
+        case 'events':
+          result.events = serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(List, const [const FullType(String)]))
+              as List<String>?;
+          break;
+        case 'mode':
+          result.mode = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
+        case 'pricing':
+          result.pricing = serializers.deserialize(value,
+                  specifiedType: const FullType(
+                      List, const [const FullType(PricingForCategory)]))
+              as List<PricingForCategory>?;
+          break;
+        case 'showSectionPricingOverlay':
+          result.showSectionPricingOverlay = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool?;
+          break;
+        case 'selectedObjects':
+          result.selectedObjects = serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(List, const [const FullType(String)]))
+              as List<String>?;
+          break;
+        case 'selectableObjects':
+          result.selectableObjects = serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(List, const [const FullType(String)]))
+              as List<String>?;
+          break;
+        case 'selectionValidators':
+          result.selectionValidators = serializers.deserialize(value,
+                  specifiedType: const FullType(
+                      List, const [const FullType(SelectionValidator)]))
+              as List<SelectionValidator>?;
+          break;
+        case 'maxSelectedObjects':
+          result.maxSelectedObjects = serializers.deserialize(value,
+                  specifiedType: const FullType(MaxSelectedObjects))
+              as MaxSelectedObjects?;
+          break;
+        case 'numberOfPlacesToSelect':
+          result.numberOfPlacesToSelect = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int?;
+          break;
+        case 'multiSelectEnabled':
+          result.multiSelectEnabled = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool?;
+          break;
+        case 'objectsWithoutPricingSelectable':
+          result.objectsWithoutPricingSelectable = serializers
+              .deserialize(value, specifiedType: const FullType(bool)) as bool?;
+          break;
+        case 'objectPopover':
+          result.objectPopover.replace(serializers.deserialize(value,
+              specifiedType: const FullType(ObjectPopover))! as ObjectPopover);
+          break;
+        case 'showActiveSectionTooltipOnMobile':
+          result.showActiveSectionTooltipOnMobile = serializers
+              .deserialize(value, specifiedType: const FullType(bool)) as bool?;
           break;
         case 'language':
           result.language = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
         case 'messages':
-          result.messages.replace(serializers.deserialize(value,
-              specifiedType: const FullType(BuiltMap,
-                  const [const FullType(String), const FullType(String)]))!);
+          result.messages = serializers.deserialize(value,
+              specifiedType: const FullType(Map, const [
+                const FullType(String),
+                const FullType(String)
+              ]))! as Map<String, String>;
           break;
-        case 'pricing':
-          result.pricing.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      BuiltList, const [const FullType(PricingForCategory)]))!
-              as BuiltList<Object?>);
-          break;
-        case 'numberOfPlacesToSelect':
-          result.numberOfPlacesToSelect = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int?;
-          break;
-        case 'objectWithoutPricingSelectable':
-          result.objectWithoutPricingSelectable = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool?;
-          break;
-        case 'selectedObjects':
-          result.selectedObjects.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      BuiltList, const [const FullType(SelectedObject)]))!
-              as BuiltList<Object?>);
-          break;
-        case 'objectTooltip':
-          result.objectTooltip.replace(serializers.deserialize(value,
-              specifiedType: const FullType(ObjectTooltip))! as ObjectTooltip);
-          break;
-        case 'priceLevelsTooltipMessage':
-          result.priceLevelsTooltipMessage = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String?;
-          break;
-        case 'maxSelectedObjects':
-          result.maxSelectedObjects = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int?;
-          break;
-        case 'maxSelectedObjectList':
-          result.maxSelectedObjectList = serializers.deserialize(value,
-              specifiedType: const FullType(List, const [
-                const FullType(Map,
-                    const [const FullType(String), const FullType(dynamic)])
-              ])) as List<Map<String, dynamic>>?;
+        case 'categoryFilter':
+          result.categoryFilter.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(CategoryFilter))!
+              as CategoryFilter);
           break;
         case 'availableCategories':
-          result.availableCategories.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      BuiltList, const [const FullType(String)]))!
-              as BuiltList<Object?>);
+          result.availableCategories = serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(List, const [const FullType(String)]))
+              as List<String>?;
           break;
         case 'unavailableCategories':
-          result.unavailableCategories.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      BuiltList, const [const FullType(String)]))!
-              as BuiltList<Object?>);
+          result.unavailableCategories = serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(List, const [const FullType(String)]))
+              as List<String>?;
           break;
-        case 'alwaysShowSectionContents':
-          result.alwaysShowSectionContents = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool?;
+        case 'filteredCategories':
+          result.filteredCategories = serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(List, const [const FullType(String)]))
+              as List<String>?;
+          break;
+        case 'channels':
+          result.channels = serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(List, const [const FullType(String)]))
+              as List<String>?;
           break;
         case 'showSectionContents':
           result.showSectionContents = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String?;
+                  specifiedType: const FullType(ShowSectionContents))
+              as ShowSectionContents?;
           break;
-        case 'showLegend':
-          result.showLegend = serializers.deserialize(value,
+        case 'hideSectionsNotForSale':
+          result.hideSectionsNotForSale = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool?;
           break;
-        case 'legend':
-          result.legend.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(LegendForCategory))!
-              as LegendForCategory);
-          break;
-        case 'showMinimap':
-          result.showMinimap = serializers.deserialize(value,
+        case 'showSeatLabels':
+          result.showSeatLabels = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool?;
           break;
-        case 'inputDevice':
-          result.inputDevice = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String?;
+        case 'session':
+          result.session = serializers.deserialize(value,
+              specifiedType: const FullType(Session)) as Session?;
           break;
-        case 'showActiveSectionTooltipOnMobile':
-          result.showActiveSectionTooltipOnMobile = serializers
-              .deserialize(value, specifiedType: const FullType(bool)) as bool?;
-          break;
-        case 'selectionValidators':
-          result.selectionValidators.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      BuiltList, const [const FullType(SelectionValidator)]))!
-              as BuiltList<Object?>);
-          break;
-        case 'mode':
-          result.mode = serializers.deserialize(value,
+        case 'holdToken':
+          result.holdToken = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
         case 'holdOnSelectForGAs':
           result.holdOnSelectForGAs = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool?;
           break;
-        case 'holdToken':
-          result.holdToken = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String?;
-          break;
-        case 'session':
-          result.session = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String?;
-          break;
-        case 'objectLabel':
-          result.objectLabel = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String?;
-          break;
-        case 'objectIcon':
-          result.objectIcon = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String?;
-          break;
-        case 'isObjectVisible':
-          result.isObjectVisible = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String?;
-          break;
-        case 'isObjectSelectable':
-          result.isObjectSelectable = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String?;
-          break;
-        case 'objectColor':
-          result.objectColor = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String?;
-          break;
-        case 'sectionColor':
-          result.sectionColor = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String?;
-          break;
-        case 'extraConfig':
-          result.extraConfig.replace(serializers.deserialize(value,
-              specifiedType: const FullType(BuiltMap,
-                  const [const FullType(String), const FullType(String)]))!);
+        case 'showMinimap':
+          result.showMinimap = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool?;
           break;
         case 'showFullScreenButton':
           result.showFullScreenButton = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool?;
           break;
-        case 'channels':
-          result.channels.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      BuiltList, const [const FullType(String)]))!
-              as BuiltList<Object?>);
+        case 'showLegend':
+          result.showLegend = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool?;
           break;
-        case 'enableChartRenderedCallback':
-          result.enableChartRenderedCallback = serializers.deserialize(value,
-              specifiedType: const FullType(bool))! as bool;
+        case 'legendConfig':
+          result.legendConfig.replace(serializers.deserialize(value,
+              specifiedType: const FullType(LegendConfig))! as LegendConfig);
           break;
-        case 'enableChartRenderingFailedCallback':
-          result.enableChartRenderingFailedCallback = serializers
-              .deserialize(value, specifiedType: const FullType(bool))! as bool;
+        case 'showZoomOutButtonOnMobile':
+          result.showZoomOutButtonOnMobile = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool?;
           break;
-        case 'enableObjectClickedCallback':
-          result.enableObjectClickedCallback = serializers.deserialize(value,
-              specifiedType: const FullType(bool))! as bool;
+        case 'colorScheme':
+          result.colorScheme = serializers.deserialize(value,
+                  specifiedType: const FullType(SeatsioColorScheme))
+              as SeatsioColorScheme?;
           break;
-        case 'enableObjectSelectedCallback':
-          result.enableObjectSelectedCallback = serializers.deserialize(value,
-              specifiedType: const FullType(bool))! as bool;
+        case 'colors':
+          result.colors.replace(serializers.deserialize(value,
+              specifiedType: const FullType(SeatsioColors))! as SeatsioColors);
           break;
-        case 'enableObjectDeselectedCallback':
-          result.enableObjectDeselectedCallback = serializers.deserialize(value,
-              specifiedType: const FullType(bool))! as bool;
-          break;
-        case 'enableSelectionValidCallback':
-          result.enableSelectionValidCallback = serializers.deserialize(value,
-              specifiedType: const FullType(bool))! as bool;
-          break;
-        case 'enableSelectionInvalidCallback':
-          result.enableSelectionInvalidCallback = serializers.deserialize(value,
-              specifiedType: const FullType(bool))! as bool;
-          break;
-        case 'enableBestAvailableSelectedCallback':
-          result.enableBestAvailableSelectedCallback = serializers
-              .deserialize(value, specifiedType: const FullType(bool))! as bool;
-          break;
-        case 'enableBestAvailableSelectionFailedCallback':
-          result.enableBestAvailableSelectionFailedCallback = serializers
-              .deserialize(value, specifiedType: const FullType(bool))! as bool;
-          break;
-        case 'enableHoldSucceededCallback':
-          result.enableHoldSucceededCallback = serializers.deserialize(value,
-              specifiedType: const FullType(bool))! as bool;
-          break;
-        case 'enableHoldFailedCallback':
-          result.enableHoldFailedCallback = serializers.deserialize(value,
-              specifiedType: const FullType(bool))! as bool;
-          break;
-        case 'enableHoldTokenExpiredCallback':
-          result.enableHoldTokenExpiredCallback = serializers.deserialize(value,
-              specifiedType: const FullType(bool))! as bool;
-          break;
-        case 'enableSessionInitializedCallback':
-          result.enableSessionInitializedCallback = serializers
-              .deserialize(value, specifiedType: const FullType(bool))! as bool;
-          break;
-        case 'enableReleaseHoldSucceededCallback':
-          result.enableReleaseHoldSucceededCallback = serializers
-              .deserialize(value, specifiedType: const FullType(bool))! as bool;
-          break;
-        case 'enableReleaseHoldFailedCallback':
-          result.enableReleaseHoldFailedCallback = serializers
-              .deserialize(value, specifiedType: const FullType(bool))! as bool;
-          break;
-        case 'enableSelectedObjectBookedCallback':
-          result.enableSelectedObjectBookedCallback = serializers
-              .deserialize(value, specifiedType: const FullType(bool))! as bool;
-          break;
-      }
-    }
-
-    return result.build();
-  }
-}
-
-class _$SelectedObjectSerializer
-    implements StructuredSerializer<SelectedObject> {
-  @override
-  final Iterable<Type> types = const [SelectedObject, _$SelectedObject];
-  @override
-  final String wireName = 'SelectedObject';
-
-  @override
-  Iterable<Object?> serialize(Serializers serializers, SelectedObject object,
-      {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object?>[
-      'label',
-      serializers.serialize(object.label,
-          specifiedType: const FullType(String)),
-    ];
-    Object? value;
-    value = object.ticketType;
-    if (value != null) {
-      result
-        ..add('ticketType')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
-    }
-    value = object.amount;
-    if (value != null) {
-      result
-        ..add('amount')
-        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
-    }
-    return result;
-  }
-
-  @override
-  SelectedObject deserialize(
-      Serializers serializers, Iterable<Object?> serialized,
-      {FullType specifiedType = FullType.unspecified}) {
-    final result = new SelectedObjectBuilder();
-
-    final iterator = serialized.iterator;
-    while (iterator.moveNext()) {
-      final key = iterator.current! as String;
-      iterator.moveNext();
-      final Object? value = iterator.current;
-      switch (key) {
-        case 'label':
-          result.label = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
-          break;
-        case 'ticketType':
-          result.ticketType = serializers.deserialize(value,
+        case 'activeFloor':
+          result.activeFloor = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
-        case 'amount':
-          result.amount = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int?;
+        case 'lockActiveFloor':
+          result.lockActiveFloor = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool?;
           break;
-      }
-    }
-
-    return result.build();
-  }
-}
-
-class _$ObjectTooltipSerializer implements StructuredSerializer<ObjectTooltip> {
-  @override
-  final Iterable<Type> types = const [ObjectTooltip, _$ObjectTooltip];
-  @override
-  final String wireName = 'ObjectTooltip';
-
-  @override
-  Iterable<Object?> serialize(Serializers serializers, ObjectTooltip object,
-      {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object?>[
-      'showActionHint',
-      serializers.serialize(object.showActionHint,
-          specifiedType: const FullType(bool)),
-      'showAvailability',
-      serializers.serialize(object.showAvailability,
-          specifiedType: const FullType(bool)),
-      'showCategory',
-      serializers.serialize(object.showCategory,
-          specifiedType: const FullType(bool)),
-      'showLabel',
-      serializers.serialize(object.showLabel,
-          specifiedType: const FullType(bool)),
-      'showPricing',
-      serializers.serialize(object.showPricing,
-          specifiedType: const FullType(bool)),
-      'showUnavailableNotice',
-      serializers.serialize(object.showUnavailableNotice,
-          specifiedType: const FullType(bool)),
-      'stylizedLabel',
-      serializers.serialize(object.stylizedLabel,
-          specifiedType: const FullType(bool)),
-      'confirmSelectionOnMobile',
-      serializers.serialize(object.confirmSelectionOnMobile,
-          specifiedType: const FullType(bool)),
-    ];
-
-    return result;
-  }
-
-  @override
-  ObjectTooltip deserialize(
-      Serializers serializers, Iterable<Object?> serialized,
-      {FullType specifiedType = FullType.unspecified}) {
-    final result = new ObjectTooltipBuilder();
-
-    final iterator = serialized.iterator;
-    while (iterator.moveNext()) {
-      final key = iterator.current! as String;
-      iterator.moveNext();
-      final Object? value = iterator.current;
-      switch (key) {
-        case 'showActionHint':
-          result.showActionHint = serializers.deserialize(value,
-              specifiedType: const FullType(bool))! as bool;
-          break;
-        case 'showAvailability':
-          result.showAvailability = serializers.deserialize(value,
-              specifiedType: const FullType(bool))! as bool;
-          break;
-        case 'showCategory':
-          result.showCategory = serializers.deserialize(value,
-              specifiedType: const FullType(bool))! as bool;
-          break;
-        case 'showLabel':
-          result.showLabel = serializers.deserialize(value,
-              specifiedType: const FullType(bool))! as bool;
-          break;
-        case 'showPricing':
-          result.showPricing = serializers.deserialize(value,
-              specifiedType: const FullType(bool))! as bool;
-          break;
-        case 'showUnavailableNotice':
-          result.showUnavailableNotice = serializers.deserialize(value,
-              specifiedType: const FullType(bool))! as bool;
-          break;
-        case 'stylizedLabel':
-          result.stylizedLabel = serializers.deserialize(value,
-              specifiedType: const FullType(bool))! as bool;
-          break;
-        case 'confirmSelectionOnMobile':
-          result.confirmSelectionOnMobile = serializers.deserialize(value,
-              specifiedType: const FullType(bool))! as bool;
-          break;
-      }
-    }
-
-    return result.build();
-  }
-}
-
-class _$LegendForCategorySerializer
-    implements StructuredSerializer<LegendForCategory> {
-  @override
-  final Iterable<Type> types = const [LegendForCategory, _$LegendForCategory];
-  @override
-  final String wireName = 'LegendForCategory';
-
-  @override
-  Iterable<Object?> serialize(Serializers serializers, LegendForCategory object,
-      {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object?>[
-      'hideNonSelectableCategories',
-      serializers.serialize(object.hideNonSelectableCategories,
-          specifiedType: const FullType(bool)),
-      'hidePricing',
-      serializers.serialize(object.hidePricing,
-          specifiedType: const FullType(bool)),
-    ];
-
-    return result;
-  }
-
-  @override
-  LegendForCategory deserialize(
-      Serializers serializers, Iterable<Object?> serialized,
-      {FullType specifiedType = FullType.unspecified}) {
-    final result = new LegendForCategoryBuilder();
-
-    final iterator = serialized.iterator;
-    while (iterator.moveNext()) {
-      final key = iterator.current! as String;
-      iterator.moveNext();
-      final Object? value = iterator.current;
-      switch (key) {
-        case 'hideNonSelectableCategories':
-          result.hideNonSelectableCategories = serializers.deserialize(value,
-              specifiedType: const FullType(bool))! as bool;
-          break;
-        case 'hidePricing':
-          result.hidePricing = serializers.deserialize(value,
-              specifiedType: const FullType(bool))! as bool;
-          break;
-      }
-    }
-
-    return result.build();
-  }
-}
-
-class _$BestAvailableSerializer implements StructuredSerializer<BestAvailable> {
-  @override
-  final Iterable<Type> types = const [BestAvailable, _$BestAvailable];
-  @override
-  final String wireName = 'BestAvailable';
-
-  @override
-  Iterable<Object?> serialize(Serializers serializers, BestAvailable object,
-      {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object?>[
-      'number',
-      serializers.serialize(object.number, specifiedType: const FullType(int)),
-      'category',
-      serializers.serialize(object.category,
-          specifiedType:
-              const FullType(BuiltList, const [const FullType(String)])),
-      'ticketTypes',
-      serializers.serialize(object.ticketTypes,
-          specifiedType: const FullType(TicketTypePricing)),
-      'clearSelection',
-      serializers.serialize(object.clearSelection,
-          specifiedType: const FullType(bool)),
-    ];
-
-    return result;
-  }
-
-  @override
-  BestAvailable deserialize(
-      Serializers serializers, Iterable<Object?> serialized,
-      {FullType specifiedType = FullType.unspecified}) {
-    final result = new BestAvailableBuilder();
-
-    final iterator = serialized.iterator;
-    while (iterator.moveNext()) {
-      final key = iterator.current! as String;
-      iterator.moveNext();
-      final Object? value = iterator.current;
-      switch (key) {
-        case 'number':
-          result.number = serializers.deserialize(value,
-              specifiedType: const FullType(int))! as int;
-          break;
-        case 'category':
-          result.category.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      BuiltList, const [const FullType(String)]))!
-              as BuiltList<Object?>);
-          break;
-        case 'ticketTypes':
-          result.ticketTypes.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(TicketTypePricing))!
-              as TicketTypePricing);
-          break;
-        case 'clearSelection':
-          result.clearSelection = serializers.deserialize(value,
-              specifiedType: const FullType(bool))! as bool;
-          break;
-      }
-    }
-
-    return result.build();
-  }
-}
-
-class _$SelectionValidatorSerializer
-    implements StructuredSerializer<SelectionValidator> {
-  @override
-  final Iterable<Type> types = const [SelectionValidator, _$SelectionValidator];
-  @override
-  final String wireName = 'SelectionValidator';
-
-  @override
-  Iterable<Object?> serialize(
-      Serializers serializers, SelectionValidator object,
-      {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object?>[
-      'type',
-      serializers.serialize(object.type, specifiedType: const FullType(String)),
-    ];
-
-    return result;
-  }
-
-  @override
-  SelectionValidator deserialize(
-      Serializers serializers, Iterable<Object?> serialized,
-      {FullType specifiedType = FullType.unspecified}) {
-    final result = new SelectionValidatorBuilder();
-
-    final iterator = serialized.iterator;
-    while (iterator.moveNext()) {
-      final key = iterator.current! as String;
-      iterator.moveNext();
-      final Object? value = iterator.current;
-      switch (key) {
-        case 'type':
-          result.type = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+        case 'showFloorElevator':
+          result.showFloorElevator = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool?;
           break;
       }
     }
@@ -891,109 +500,147 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   final String workspaceKey;
   @override
-  final String event;
+  final Region region;
   @override
-  final SeatsioRegion region;
+  final String? event;
   @override
-  final String? language;
-  @override
-  final BuiltMap<String, String>? messages;
-  @override
-  final BuiltList<PricingForCategory>? pricing;
-  @override
-  final Function(num price)? priceFormatter;
-  @override
-  final int? numberOfPlacesToSelect;
-  @override
-  final bool? objectWithoutPricingSelectable;
-  @override
-  final BuiltList<SelectedObject>? selectedObjects;
-  @override
-  final ObjectTooltip? objectTooltip;
-  @override
-  final String? priceLevelsTooltipMessage;
-  @override
-  final int? maxSelectedObjects;
-  @override
-  final List<Map<String, dynamic>>? maxSelectedObjectList;
-  @override
-  final BuiltList<String>? availableCategories;
-  @override
-  final BuiltList<String>? unavailableCategories;
-  @override
-  final bool? alwaysShowSectionContents;
-  @override
-  final String? showSectionContents;
-  @override
-  final bool? showLegend;
-  @override
-  final LegendForCategory? legend;
-  @override
-  final bool? showMinimap;
-  @override
-  final String? inputDevice;
-  @override
-  final bool? showActiveSectionTooltipOnMobile;
-  @override
-  final BuiltList<SelectionValidator>? selectionValidators;
+  final List<String>? events;
   @override
   final String? mode;
   @override
-  final bool? holdOnSelectForGAs;
+  final List<PricingForCategory>? pricing;
   @override
-  final String? holdToken;
+  final Function(num price)? priceFormatter;
   @override
-  final String? session;
+  final bool? showSectionPricingOverlay;
   @override
-  final String? objectLabel;
+  final List<String>? selectedObjects;
   @override
-  final String? objectIcon;
+  final List<String>? selectableObjects;
   @override
-  final String? isObjectVisible;
+  final List<SelectionValidator>? selectionValidators;
   @override
-  final String? isObjectSelectable;
+  final MaxSelectedObjects? maxSelectedObjects;
+  @override
+  final int? numberOfPlacesToSelect;
+  @override
+  final bool? multiSelectEnabled;
+  @override
+  final bool? objectsWithoutPricingSelectable;
+  @override
+  final ObjectPopover? objectPopover;
+  @override
+  final Function(SeatsioObject price)? popoverInfo;
+  @override
+  final bool? showActiveSectionTooltipOnMobile;
+  @override
+  final String? language;
+  @override
+  final Map<String, String> messages;
+  @override
+  final CategoryFilter? categoryFilter;
+  @override
+  final List<String>? availableCategories;
+  @override
+  final List<String>? unavailableCategories;
+  @override
+  final List<String>? filteredCategories;
+  @override
+  final List<String>? channels;
   @override
   final String? objectColor;
   @override
   final String? sectionColor;
   @override
-  final BuiltMap<String, String>? extraConfig;
+  final String? objectLabel;
+  @override
+  final String? objectIcon;
+  @override
+  final ShowSectionContents? showSectionContents;
+  @override
+  final bool? hideSectionsNotForSale;
+  @override
+  final String? isObjectVisible;
+  @override
+  final bool? showSeatLabels;
+  @override
+  final Session? session;
+  @override
+  final String? holdToken;
+  @override
+  final bool? holdOnSelectForGAs;
+  @override
+  final bool? showMinimap;
   @override
   final bool? showFullScreenButton;
   @override
-  final BuiltList<String>? channels;
+  final bool? showLegend;
   @override
-  final bool enableChartRenderedCallback;
+  final LegendConfig? legendConfig;
   @override
-  final bool enableChartRenderingFailedCallback;
+  final bool? showZoomOutButtonOnMobile;
   @override
-  final bool enableObjectClickedCallback;
+  final SeatsioColorScheme? colorScheme;
   @override
-  final bool enableObjectSelectedCallback;
+  final SeatsioColors? colors;
   @override
-  final bool enableObjectDeselectedCallback;
+  final String? activeFloor;
   @override
-  final bool enableSelectionValidCallback;
+  final bool? lockActiveFloor;
   @override
-  final bool enableSelectionInvalidCallback;
+  final bool? showFloorElevator;
   @override
-  final bool enableBestAvailableSelectedCallback;
+  final Function()? onChartRendered;
   @override
-  final bool enableBestAvailableSelectionFailedCallback;
+  final Function()? onChartRenderingFailed;
   @override
-  final bool enableHoldSucceededCallback;
+  final Function()? onChartRerenderingStarted;
   @override
-  final bool enableHoldFailedCallback;
+  final Function(SeatsioObject object)? onObjectClicked;
   @override
-  final bool enableHoldTokenExpiredCallback;
+  final Function(SeatsioObject object, SelectedTicketType? ticketType)?
+      onObjectSelected;
   @override
-  final bool enableSessionInitializedCallback;
+  final Function(SeatsioObject object, SelectedTicketType? ticketType)?
+      onObjectDeselected;
   @override
-  final bool enableReleaseHoldSucceededCallback;
+  final Function(SeatsioObject object)? onObjectStatusChanged;
   @override
-  final bool enableReleaseHoldFailedCallback;
+  final Function(SeatsioObject object)? onObjectBooked;
   @override
-  final bool enableSelectedObjectBookedCallback;
+  final Function(HoldToken object)? onSessionInitialized;
+  @override
+  final Function()? onHoldCallsInProgress;
+  @override
+  final Function()? onHoldCallsComplete;
+  @override
+  final Function(
+          List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes)?
+      onHoldSucceeded;
+  @override
+  final Function(
+          List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes)?
+      onHoldFailed;
+  @override
+  final Function()? onHoldTokenExpired;
+  @override
+  final Function(
+          List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes)?
+      onReleaseHoldSucceeded;
+  @override
+  final Function(
+          List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes)?
+      onReleaseHoldFailed;
+  @override
+  final Function()? onSelectionValid;
+  @override
+  final Function(List<String> violations)? onSelectionInvalid;
+  @override
+  final Function()? onFullScreenOpened;
+  @override
+  final Function()? onFullScreenClosed;
+  @override
+  final Function(List<SeatsioCategory>)? onFilteredCategoriesChanged;
 
   factory _$SeatingChartConfig(
           [void Function(SeatingChartConfigBuilder)? updates]) =>
@@ -1001,99 +648,79 @@ class _$SeatingChartConfig extends SeatingChartConfig {
 
   _$SeatingChartConfig._(
       {required this.workspaceKey,
-      required this.event,
       required this.region,
-      this.language,
-      this.messages,
+      this.event,
+      this.events,
+      this.mode,
       this.pricing,
       this.priceFormatter,
-      this.numberOfPlacesToSelect,
-      this.objectWithoutPricingSelectable,
+      this.showSectionPricingOverlay,
       this.selectedObjects,
-      this.objectTooltip,
-      this.priceLevelsTooltipMessage,
+      this.selectableObjects,
+      this.selectionValidators,
       this.maxSelectedObjects,
-      this.maxSelectedObjectList,
+      this.numberOfPlacesToSelect,
+      this.multiSelectEnabled,
+      this.objectsWithoutPricingSelectable,
+      this.objectPopover,
+      this.popoverInfo,
+      this.showActiveSectionTooltipOnMobile,
+      this.language,
+      required this.messages,
+      this.categoryFilter,
       this.availableCategories,
       this.unavailableCategories,
-      this.alwaysShowSectionContents,
-      this.showSectionContents,
-      this.showLegend,
-      this.legend,
-      this.showMinimap,
-      this.inputDevice,
-      this.showActiveSectionTooltipOnMobile,
-      this.selectionValidators,
-      this.mode,
-      this.holdOnSelectForGAs,
-      this.holdToken,
-      this.session,
-      this.objectLabel,
-      this.objectIcon,
-      this.isObjectVisible,
-      this.isObjectSelectable,
+      this.filteredCategories,
+      this.channels,
       this.objectColor,
       this.sectionColor,
-      this.extraConfig,
+      this.objectLabel,
+      this.objectIcon,
+      this.showSectionContents,
+      this.hideSectionsNotForSale,
+      this.isObjectVisible,
+      this.showSeatLabels,
+      this.session,
+      this.holdToken,
+      this.holdOnSelectForGAs,
+      this.showMinimap,
       this.showFullScreenButton,
-      this.channels,
-      required this.enableChartRenderedCallback,
-      required this.enableChartRenderingFailedCallback,
-      required this.enableObjectClickedCallback,
-      required this.enableObjectSelectedCallback,
-      required this.enableObjectDeselectedCallback,
-      required this.enableSelectionValidCallback,
-      required this.enableSelectionInvalidCallback,
-      required this.enableBestAvailableSelectedCallback,
-      required this.enableBestAvailableSelectionFailedCallback,
-      required this.enableHoldSucceededCallback,
-      required this.enableHoldFailedCallback,
-      required this.enableHoldTokenExpiredCallback,
-      required this.enableSessionInitializedCallback,
-      required this.enableReleaseHoldSucceededCallback,
-      required this.enableReleaseHoldFailedCallback,
-      required this.enableSelectedObjectBookedCallback})
+      this.showLegend,
+      this.legendConfig,
+      this.showZoomOutButtonOnMobile,
+      this.colorScheme,
+      this.colors,
+      this.activeFloor,
+      this.lockActiveFloor,
+      this.showFloorElevator,
+      this.onChartRendered,
+      this.onChartRenderingFailed,
+      this.onChartRerenderingStarted,
+      this.onObjectClicked,
+      this.onObjectSelected,
+      this.onObjectDeselected,
+      this.onObjectStatusChanged,
+      this.onObjectBooked,
+      this.onSessionInitialized,
+      this.onHoldCallsInProgress,
+      this.onHoldCallsComplete,
+      this.onHoldSucceeded,
+      this.onHoldFailed,
+      this.onHoldTokenExpired,
+      this.onReleaseHoldSucceeded,
+      this.onReleaseHoldFailed,
+      this.onSelectionValid,
+      this.onSelectionInvalid,
+      this.onFullScreenOpened,
+      this.onFullScreenClosed,
+      this.onFilteredCategoriesChanged})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         workspaceKey, r'SeatingChartConfig', 'workspaceKey');
     BuiltValueNullFieldError.checkNotNull(
-        event, r'SeatingChartConfig', 'event');
-    BuiltValueNullFieldError.checkNotNull(
         region, r'SeatingChartConfig', 'region');
-    BuiltValueNullFieldError.checkNotNull(enableChartRenderedCallback,
-        r'SeatingChartConfig', 'enableChartRenderedCallback');
-    BuiltValueNullFieldError.checkNotNull(enableChartRenderingFailedCallback,
-        r'SeatingChartConfig', 'enableChartRenderingFailedCallback');
-    BuiltValueNullFieldError.checkNotNull(enableObjectClickedCallback,
-        r'SeatingChartConfig', 'enableObjectClickedCallback');
-    BuiltValueNullFieldError.checkNotNull(enableObjectSelectedCallback,
-        r'SeatingChartConfig', 'enableObjectSelectedCallback');
-    BuiltValueNullFieldError.checkNotNull(enableObjectDeselectedCallback,
-        r'SeatingChartConfig', 'enableObjectDeselectedCallback');
-    BuiltValueNullFieldError.checkNotNull(enableSelectionValidCallback,
-        r'SeatingChartConfig', 'enableSelectionValidCallback');
-    BuiltValueNullFieldError.checkNotNull(enableSelectionInvalidCallback,
-        r'SeatingChartConfig', 'enableSelectionInvalidCallback');
-    BuiltValueNullFieldError.checkNotNull(enableBestAvailableSelectedCallback,
-        r'SeatingChartConfig', 'enableBestAvailableSelectedCallback');
     BuiltValueNullFieldError.checkNotNull(
-        enableBestAvailableSelectionFailedCallback,
-        r'SeatingChartConfig',
-        'enableBestAvailableSelectionFailedCallback');
-    BuiltValueNullFieldError.checkNotNull(enableHoldSucceededCallback,
-        r'SeatingChartConfig', 'enableHoldSucceededCallback');
-    BuiltValueNullFieldError.checkNotNull(enableHoldFailedCallback,
-        r'SeatingChartConfig', 'enableHoldFailedCallback');
-    BuiltValueNullFieldError.checkNotNull(enableHoldTokenExpiredCallback,
-        r'SeatingChartConfig', 'enableHoldTokenExpiredCallback');
-    BuiltValueNullFieldError.checkNotNull(enableSessionInitializedCallback,
-        r'SeatingChartConfig', 'enableSessionInitializedCallback');
-    BuiltValueNullFieldError.checkNotNull(enableReleaseHoldSucceededCallback,
-        r'SeatingChartConfig', 'enableReleaseHoldSucceededCallback');
-    BuiltValueNullFieldError.checkNotNull(enableReleaseHoldFailedCallback,
-        r'SeatingChartConfig', 'enableReleaseHoldFailedCallback');
-    BuiltValueNullFieldError.checkNotNull(enableSelectedObjectBookedCallback,
-        r'SeatingChartConfig', 'enableSelectedObjectBookedCallback');
+        messages, r'SeatingChartConfig', 'messages');
   }
 
   @override
@@ -1111,128 +738,147 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     final dynamic _$dynamicOther = other;
     return other is SeatingChartConfig &&
         workspaceKey == other.workspaceKey &&
-        event == other.event &&
         region == other.region &&
-        language == other.language &&
-        messages == other.messages &&
+        event == other.event &&
+        events == other.events &&
+        mode == other.mode &&
         pricing == other.pricing &&
         priceFormatter == _$dynamicOther.priceFormatter &&
-        numberOfPlacesToSelect == other.numberOfPlacesToSelect &&
-        objectWithoutPricingSelectable ==
-            other.objectWithoutPricingSelectable &&
+        showSectionPricingOverlay == other.showSectionPricingOverlay &&
         selectedObjects == other.selectedObjects &&
-        objectTooltip == other.objectTooltip &&
-        priceLevelsTooltipMessage == other.priceLevelsTooltipMessage &&
+        selectableObjects == other.selectableObjects &&
+        selectionValidators == other.selectionValidators &&
         maxSelectedObjects == other.maxSelectedObjects &&
-        maxSelectedObjectList == other.maxSelectedObjectList &&
-        availableCategories == other.availableCategories &&
-        unavailableCategories == other.unavailableCategories &&
-        alwaysShowSectionContents == other.alwaysShowSectionContents &&
-        showSectionContents == other.showSectionContents &&
-        showLegend == other.showLegend &&
-        legend == other.legend &&
-        showMinimap == other.showMinimap &&
-        inputDevice == other.inputDevice &&
+        numberOfPlacesToSelect == other.numberOfPlacesToSelect &&
+        multiSelectEnabled == other.multiSelectEnabled &&
+        objectsWithoutPricingSelectable ==
+            other.objectsWithoutPricingSelectable &&
+        objectPopover == other.objectPopover &&
+        popoverInfo == _$dynamicOther.popoverInfo &&
         showActiveSectionTooltipOnMobile ==
             other.showActiveSectionTooltipOnMobile &&
-        selectionValidators == other.selectionValidators &&
-        mode == other.mode &&
-        holdOnSelectForGAs == other.holdOnSelectForGAs &&
-        holdToken == other.holdToken &&
-        session == other.session &&
-        objectLabel == other.objectLabel &&
-        objectIcon == other.objectIcon &&
-        isObjectVisible == other.isObjectVisible &&
-        isObjectSelectable == other.isObjectSelectable &&
+        language == other.language &&
+        messages == other.messages &&
+        categoryFilter == other.categoryFilter &&
+        availableCategories == other.availableCategories &&
+        unavailableCategories == other.unavailableCategories &&
+        filteredCategories == other.filteredCategories &&
+        channels == other.channels &&
         objectColor == other.objectColor &&
         sectionColor == other.sectionColor &&
-        extraConfig == other.extraConfig &&
+        objectLabel == other.objectLabel &&
+        objectIcon == other.objectIcon &&
+        showSectionContents == other.showSectionContents &&
+        hideSectionsNotForSale == other.hideSectionsNotForSale &&
+        isObjectVisible == other.isObjectVisible &&
+        showSeatLabels == other.showSeatLabels &&
+        session == other.session &&
+        holdToken == other.holdToken &&
+        holdOnSelectForGAs == other.holdOnSelectForGAs &&
+        showMinimap == other.showMinimap &&
         showFullScreenButton == other.showFullScreenButton &&
-        channels == other.channels &&
-        enableChartRenderedCallback == other.enableChartRenderedCallback &&
-        enableChartRenderingFailedCallback ==
-            other.enableChartRenderingFailedCallback &&
-        enableObjectClickedCallback == other.enableObjectClickedCallback &&
-        enableObjectSelectedCallback == other.enableObjectSelectedCallback &&
-        enableObjectDeselectedCallback ==
-            other.enableObjectDeselectedCallback &&
-        enableSelectionValidCallback == other.enableSelectionValidCallback &&
-        enableSelectionInvalidCallback ==
-            other.enableSelectionInvalidCallback &&
-        enableBestAvailableSelectedCallback ==
-            other.enableBestAvailableSelectedCallback &&
-        enableBestAvailableSelectionFailedCallback ==
-            other.enableBestAvailableSelectionFailedCallback &&
-        enableHoldSucceededCallback == other.enableHoldSucceededCallback &&
-        enableHoldFailedCallback == other.enableHoldFailedCallback &&
-        enableHoldTokenExpiredCallback ==
-            other.enableHoldTokenExpiredCallback &&
-        enableSessionInitializedCallback ==
-            other.enableSessionInitializedCallback &&
-        enableReleaseHoldSucceededCallback ==
-            other.enableReleaseHoldSucceededCallback &&
-        enableReleaseHoldFailedCallback ==
-            other.enableReleaseHoldFailedCallback &&
-        enableSelectedObjectBookedCallback ==
-            other.enableSelectedObjectBookedCallback;
+        showLegend == other.showLegend &&
+        legendConfig == other.legendConfig &&
+        showZoomOutButtonOnMobile == other.showZoomOutButtonOnMobile &&
+        colorScheme == other.colorScheme &&
+        colors == other.colors &&
+        activeFloor == other.activeFloor &&
+        lockActiveFloor == other.lockActiveFloor &&
+        showFloorElevator == other.showFloorElevator &&
+        onChartRendered == _$dynamicOther.onChartRendered &&
+        onChartRenderingFailed == _$dynamicOther.onChartRenderingFailed &&
+        onChartRerenderingStarted == _$dynamicOther.onChartRerenderingStarted &&
+        onObjectClicked == _$dynamicOther.onObjectClicked &&
+        onObjectSelected == _$dynamicOther.onObjectSelected &&
+        onObjectDeselected == _$dynamicOther.onObjectDeselected &&
+        onObjectStatusChanged == _$dynamicOther.onObjectStatusChanged &&
+        onObjectBooked == _$dynamicOther.onObjectBooked &&
+        onSessionInitialized == _$dynamicOther.onSessionInitialized &&
+        onHoldCallsInProgress == _$dynamicOther.onHoldCallsInProgress &&
+        onHoldCallsComplete == _$dynamicOther.onHoldCallsComplete &&
+        onHoldSucceeded == _$dynamicOther.onHoldSucceeded &&
+        onHoldFailed == _$dynamicOther.onHoldFailed &&
+        onHoldTokenExpired == _$dynamicOther.onHoldTokenExpired &&
+        onReleaseHoldSucceeded == _$dynamicOther.onReleaseHoldSucceeded &&
+        onReleaseHoldFailed == _$dynamicOther.onReleaseHoldFailed &&
+        onSelectionValid == _$dynamicOther.onSelectionValid &&
+        onSelectionInvalid == _$dynamicOther.onSelectionInvalid &&
+        onFullScreenOpened == _$dynamicOther.onFullScreenOpened &&
+        onFullScreenClosed == _$dynamicOther.onFullScreenClosed &&
+        onFilteredCategoriesChanged ==
+            _$dynamicOther.onFilteredCategoriesChanged;
   }
 
   @override
   int get hashCode {
     var _$hash = 0;
     _$hash = $jc(_$hash, workspaceKey.hashCode);
-    _$hash = $jc(_$hash, event.hashCode);
     _$hash = $jc(_$hash, region.hashCode);
-    _$hash = $jc(_$hash, language.hashCode);
-    _$hash = $jc(_$hash, messages.hashCode);
+    _$hash = $jc(_$hash, event.hashCode);
+    _$hash = $jc(_$hash, events.hashCode);
+    _$hash = $jc(_$hash, mode.hashCode);
     _$hash = $jc(_$hash, pricing.hashCode);
     _$hash = $jc(_$hash, priceFormatter.hashCode);
-    _$hash = $jc(_$hash, numberOfPlacesToSelect.hashCode);
-    _$hash = $jc(_$hash, objectWithoutPricingSelectable.hashCode);
+    _$hash = $jc(_$hash, showSectionPricingOverlay.hashCode);
     _$hash = $jc(_$hash, selectedObjects.hashCode);
-    _$hash = $jc(_$hash, objectTooltip.hashCode);
-    _$hash = $jc(_$hash, priceLevelsTooltipMessage.hashCode);
+    _$hash = $jc(_$hash, selectableObjects.hashCode);
+    _$hash = $jc(_$hash, selectionValidators.hashCode);
     _$hash = $jc(_$hash, maxSelectedObjects.hashCode);
-    _$hash = $jc(_$hash, maxSelectedObjectList.hashCode);
+    _$hash = $jc(_$hash, numberOfPlacesToSelect.hashCode);
+    _$hash = $jc(_$hash, multiSelectEnabled.hashCode);
+    _$hash = $jc(_$hash, objectsWithoutPricingSelectable.hashCode);
+    _$hash = $jc(_$hash, objectPopover.hashCode);
+    _$hash = $jc(_$hash, popoverInfo.hashCode);
+    _$hash = $jc(_$hash, showActiveSectionTooltipOnMobile.hashCode);
+    _$hash = $jc(_$hash, language.hashCode);
+    _$hash = $jc(_$hash, messages.hashCode);
+    _$hash = $jc(_$hash, categoryFilter.hashCode);
     _$hash = $jc(_$hash, availableCategories.hashCode);
     _$hash = $jc(_$hash, unavailableCategories.hashCode);
-    _$hash = $jc(_$hash, alwaysShowSectionContents.hashCode);
-    _$hash = $jc(_$hash, showSectionContents.hashCode);
-    _$hash = $jc(_$hash, showLegend.hashCode);
-    _$hash = $jc(_$hash, legend.hashCode);
-    _$hash = $jc(_$hash, showMinimap.hashCode);
-    _$hash = $jc(_$hash, inputDevice.hashCode);
-    _$hash = $jc(_$hash, showActiveSectionTooltipOnMobile.hashCode);
-    _$hash = $jc(_$hash, selectionValidators.hashCode);
-    _$hash = $jc(_$hash, mode.hashCode);
-    _$hash = $jc(_$hash, holdOnSelectForGAs.hashCode);
-    _$hash = $jc(_$hash, holdToken.hashCode);
-    _$hash = $jc(_$hash, session.hashCode);
-    _$hash = $jc(_$hash, objectLabel.hashCode);
-    _$hash = $jc(_$hash, objectIcon.hashCode);
-    _$hash = $jc(_$hash, isObjectVisible.hashCode);
-    _$hash = $jc(_$hash, isObjectSelectable.hashCode);
+    _$hash = $jc(_$hash, filteredCategories.hashCode);
+    _$hash = $jc(_$hash, channels.hashCode);
     _$hash = $jc(_$hash, objectColor.hashCode);
     _$hash = $jc(_$hash, sectionColor.hashCode);
-    _$hash = $jc(_$hash, extraConfig.hashCode);
+    _$hash = $jc(_$hash, objectLabel.hashCode);
+    _$hash = $jc(_$hash, objectIcon.hashCode);
+    _$hash = $jc(_$hash, showSectionContents.hashCode);
+    _$hash = $jc(_$hash, hideSectionsNotForSale.hashCode);
+    _$hash = $jc(_$hash, isObjectVisible.hashCode);
+    _$hash = $jc(_$hash, showSeatLabels.hashCode);
+    _$hash = $jc(_$hash, session.hashCode);
+    _$hash = $jc(_$hash, holdToken.hashCode);
+    _$hash = $jc(_$hash, holdOnSelectForGAs.hashCode);
+    _$hash = $jc(_$hash, showMinimap.hashCode);
     _$hash = $jc(_$hash, showFullScreenButton.hashCode);
-    _$hash = $jc(_$hash, channels.hashCode);
-    _$hash = $jc(_$hash, enableChartRenderedCallback.hashCode);
-    _$hash = $jc(_$hash, enableChartRenderingFailedCallback.hashCode);
-    _$hash = $jc(_$hash, enableObjectClickedCallback.hashCode);
-    _$hash = $jc(_$hash, enableObjectSelectedCallback.hashCode);
-    _$hash = $jc(_$hash, enableObjectDeselectedCallback.hashCode);
-    _$hash = $jc(_$hash, enableSelectionValidCallback.hashCode);
-    _$hash = $jc(_$hash, enableSelectionInvalidCallback.hashCode);
-    _$hash = $jc(_$hash, enableBestAvailableSelectedCallback.hashCode);
-    _$hash = $jc(_$hash, enableBestAvailableSelectionFailedCallback.hashCode);
-    _$hash = $jc(_$hash, enableHoldSucceededCallback.hashCode);
-    _$hash = $jc(_$hash, enableHoldFailedCallback.hashCode);
-    _$hash = $jc(_$hash, enableHoldTokenExpiredCallback.hashCode);
-    _$hash = $jc(_$hash, enableSessionInitializedCallback.hashCode);
-    _$hash = $jc(_$hash, enableReleaseHoldSucceededCallback.hashCode);
-    _$hash = $jc(_$hash, enableReleaseHoldFailedCallback.hashCode);
-    _$hash = $jc(_$hash, enableSelectedObjectBookedCallback.hashCode);
+    _$hash = $jc(_$hash, showLegend.hashCode);
+    _$hash = $jc(_$hash, legendConfig.hashCode);
+    _$hash = $jc(_$hash, showZoomOutButtonOnMobile.hashCode);
+    _$hash = $jc(_$hash, colorScheme.hashCode);
+    _$hash = $jc(_$hash, colors.hashCode);
+    _$hash = $jc(_$hash, activeFloor.hashCode);
+    _$hash = $jc(_$hash, lockActiveFloor.hashCode);
+    _$hash = $jc(_$hash, showFloorElevator.hashCode);
+    _$hash = $jc(_$hash, onChartRendered.hashCode);
+    _$hash = $jc(_$hash, onChartRenderingFailed.hashCode);
+    _$hash = $jc(_$hash, onChartRerenderingStarted.hashCode);
+    _$hash = $jc(_$hash, onObjectClicked.hashCode);
+    _$hash = $jc(_$hash, onObjectSelected.hashCode);
+    _$hash = $jc(_$hash, onObjectDeselected.hashCode);
+    _$hash = $jc(_$hash, onObjectStatusChanged.hashCode);
+    _$hash = $jc(_$hash, onObjectBooked.hashCode);
+    _$hash = $jc(_$hash, onSessionInitialized.hashCode);
+    _$hash = $jc(_$hash, onHoldCallsInProgress.hashCode);
+    _$hash = $jc(_$hash, onHoldCallsComplete.hashCode);
+    _$hash = $jc(_$hash, onHoldSucceeded.hashCode);
+    _$hash = $jc(_$hash, onHoldFailed.hashCode);
+    _$hash = $jc(_$hash, onHoldTokenExpired.hashCode);
+    _$hash = $jc(_$hash, onReleaseHoldSucceeded.hashCode);
+    _$hash = $jc(_$hash, onReleaseHoldFailed.hashCode);
+    _$hash = $jc(_$hash, onSelectionValid.hashCode);
+    _$hash = $jc(_$hash, onSelectionInvalid.hashCode);
+    _$hash = $jc(_$hash, onFullScreenOpened.hashCode);
+    _$hash = $jc(_$hash, onFullScreenClosed.hashCode);
+    _$hash = $jc(_$hash, onFilteredCategoriesChanged.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -1241,70 +887,74 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   String toString() {
     return (newBuiltValueToStringHelper(r'SeatingChartConfig')
           ..add('workspaceKey', workspaceKey)
-          ..add('event', event)
           ..add('region', region)
-          ..add('language', language)
-          ..add('messages', messages)
+          ..add('event', event)
+          ..add('events', events)
+          ..add('mode', mode)
           ..add('pricing', pricing)
           ..add('priceFormatter', priceFormatter)
-          ..add('numberOfPlacesToSelect', numberOfPlacesToSelect)
-          ..add(
-              'objectWithoutPricingSelectable', objectWithoutPricingSelectable)
+          ..add('showSectionPricingOverlay', showSectionPricingOverlay)
           ..add('selectedObjects', selectedObjects)
-          ..add('objectTooltip', objectTooltip)
-          ..add('priceLevelsTooltipMessage', priceLevelsTooltipMessage)
+          ..add('selectableObjects', selectableObjects)
+          ..add('selectionValidators', selectionValidators)
           ..add('maxSelectedObjects', maxSelectedObjects)
-          ..add('maxSelectedObjectList', maxSelectedObjectList)
-          ..add('availableCategories', availableCategories)
-          ..add('unavailableCategories', unavailableCategories)
-          ..add('alwaysShowSectionContents', alwaysShowSectionContents)
-          ..add('showSectionContents', showSectionContents)
-          ..add('showLegend', showLegend)
-          ..add('legend', legend)
-          ..add('showMinimap', showMinimap)
-          ..add('inputDevice', inputDevice)
+          ..add('numberOfPlacesToSelect', numberOfPlacesToSelect)
+          ..add('multiSelectEnabled', multiSelectEnabled)
+          ..add('objectsWithoutPricingSelectable',
+              objectsWithoutPricingSelectable)
+          ..add('objectPopover', objectPopover)
+          ..add('popoverInfo', popoverInfo)
           ..add('showActiveSectionTooltipOnMobile',
               showActiveSectionTooltipOnMobile)
-          ..add('selectionValidators', selectionValidators)
-          ..add('mode', mode)
-          ..add('holdOnSelectForGAs', holdOnSelectForGAs)
-          ..add('holdToken', holdToken)
-          ..add('session', session)
-          ..add('objectLabel', objectLabel)
-          ..add('objectIcon', objectIcon)
-          ..add('isObjectVisible', isObjectVisible)
-          ..add('isObjectSelectable', isObjectSelectable)
+          ..add('language', language)
+          ..add('messages', messages)
+          ..add('categoryFilter', categoryFilter)
+          ..add('availableCategories', availableCategories)
+          ..add('unavailableCategories', unavailableCategories)
+          ..add('filteredCategories', filteredCategories)
+          ..add('channels', channels)
           ..add('objectColor', objectColor)
           ..add('sectionColor', sectionColor)
-          ..add('extraConfig', extraConfig)
+          ..add('objectLabel', objectLabel)
+          ..add('objectIcon', objectIcon)
+          ..add('showSectionContents', showSectionContents)
+          ..add('hideSectionsNotForSale', hideSectionsNotForSale)
+          ..add('isObjectVisible', isObjectVisible)
+          ..add('showSeatLabels', showSeatLabels)
+          ..add('session', session)
+          ..add('holdToken', holdToken)
+          ..add('holdOnSelectForGAs', holdOnSelectForGAs)
+          ..add('showMinimap', showMinimap)
           ..add('showFullScreenButton', showFullScreenButton)
-          ..add('channels', channels)
-          ..add('enableChartRenderedCallback', enableChartRenderedCallback)
-          ..add('enableChartRenderingFailedCallback',
-              enableChartRenderingFailedCallback)
-          ..add('enableObjectClickedCallback', enableObjectClickedCallback)
-          ..add('enableObjectSelectedCallback', enableObjectSelectedCallback)
-          ..add(
-              'enableObjectDeselectedCallback', enableObjectDeselectedCallback)
-          ..add('enableSelectionValidCallback', enableSelectionValidCallback)
-          ..add(
-              'enableSelectionInvalidCallback', enableSelectionInvalidCallback)
-          ..add('enableBestAvailableSelectedCallback',
-              enableBestAvailableSelectedCallback)
-          ..add('enableBestAvailableSelectionFailedCallback',
-              enableBestAvailableSelectionFailedCallback)
-          ..add('enableHoldSucceededCallback', enableHoldSucceededCallback)
-          ..add('enableHoldFailedCallback', enableHoldFailedCallback)
-          ..add(
-              'enableHoldTokenExpiredCallback', enableHoldTokenExpiredCallback)
-          ..add('enableSessionInitializedCallback',
-              enableSessionInitializedCallback)
-          ..add('enableReleaseHoldSucceededCallback',
-              enableReleaseHoldSucceededCallback)
-          ..add('enableReleaseHoldFailedCallback',
-              enableReleaseHoldFailedCallback)
-          ..add('enableSelectedObjectBookedCallback',
-              enableSelectedObjectBookedCallback))
+          ..add('showLegend', showLegend)
+          ..add('legendConfig', legendConfig)
+          ..add('showZoomOutButtonOnMobile', showZoomOutButtonOnMobile)
+          ..add('colorScheme', colorScheme)
+          ..add('colors', colors)
+          ..add('activeFloor', activeFloor)
+          ..add('lockActiveFloor', lockActiveFloor)
+          ..add('showFloorElevator', showFloorElevator)
+          ..add('onChartRendered', onChartRendered)
+          ..add('onChartRenderingFailed', onChartRenderingFailed)
+          ..add('onChartRerenderingStarted', onChartRerenderingStarted)
+          ..add('onObjectClicked', onObjectClicked)
+          ..add('onObjectSelected', onObjectSelected)
+          ..add('onObjectDeselected', onObjectDeselected)
+          ..add('onObjectStatusChanged', onObjectStatusChanged)
+          ..add('onObjectBooked', onObjectBooked)
+          ..add('onSessionInitialized', onSessionInitialized)
+          ..add('onHoldCallsInProgress', onHoldCallsInProgress)
+          ..add('onHoldCallsComplete', onHoldCallsComplete)
+          ..add('onHoldSucceeded', onHoldSucceeded)
+          ..add('onHoldFailed', onHoldFailed)
+          ..add('onHoldTokenExpired', onHoldTokenExpired)
+          ..add('onReleaseHoldSucceeded', onReleaseHoldSucceeded)
+          ..add('onReleaseHoldFailed', onReleaseHoldFailed)
+          ..add('onSelectionValid', onSelectionValid)
+          ..add('onSelectionInvalid', onSelectionInvalid)
+          ..add('onFullScreenOpened', onFullScreenOpened)
+          ..add('onFullScreenClosed', onFullScreenClosed)
+          ..add('onFilteredCategoriesChanged', onFilteredCategoriesChanged))
         .toString();
   }
 }
@@ -1317,113 +967,83 @@ class SeatingChartConfigBuilder
   String? get workspaceKey => _$this._workspaceKey;
   set workspaceKey(String? workspaceKey) => _$this._workspaceKey = workspaceKey;
 
+  Region? _region;
+  Region? get region => _$this._region;
+  set region(Region? region) => _$this._region = region;
+
   String? _event;
   String? get event => _$this._event;
   set event(String? event) => _$this._event = event;
 
-  SeatsioRegion? _region;
-  SeatsioRegion? get region => _$this._region;
-  set region(SeatsioRegion? region) => _$this._region = region;
+  List<String>? _events;
+  List<String>? get events => _$this._events;
+  set events(List<String>? events) => _$this._events = events;
 
-  String? _language;
-  String? get language => _$this._language;
-  set language(String? language) => _$this._language = language;
+  String? _mode;
+  String? get mode => _$this._mode;
+  set mode(String? mode) => _$this._mode = mode;
 
-  MapBuilder<String, String>? _messages;
-  MapBuilder<String, String> get messages =>
-      _$this._messages ??= new MapBuilder<String, String>();
-  set messages(MapBuilder<String, String>? messages) =>
-      _$this._messages = messages;
-
-  ListBuilder<PricingForCategory>? _pricing;
-  ListBuilder<PricingForCategory> get pricing =>
-      _$this._pricing ??= new ListBuilder<PricingForCategory>();
-  set pricing(ListBuilder<PricingForCategory>? pricing) =>
-      _$this._pricing = pricing;
+  List<PricingForCategory>? _pricing;
+  List<PricingForCategory>? get pricing => _$this._pricing;
+  set pricing(List<PricingForCategory>? pricing) => _$this._pricing = pricing;
 
   Function(num price)? _priceFormatter;
   Function(num price)? get priceFormatter => _$this._priceFormatter;
   set priceFormatter(Function(num price)? priceFormatter) =>
       _$this._priceFormatter = priceFormatter;
 
+  bool? _showSectionPricingOverlay;
+  bool? get showSectionPricingOverlay => _$this._showSectionPricingOverlay;
+  set showSectionPricingOverlay(bool? showSectionPricingOverlay) =>
+      _$this._showSectionPricingOverlay = showSectionPricingOverlay;
+
+  List<String>? _selectedObjects;
+  List<String>? get selectedObjects => _$this._selectedObjects;
+  set selectedObjects(List<String>? selectedObjects) =>
+      _$this._selectedObjects = selectedObjects;
+
+  List<String>? _selectableObjects;
+  List<String>? get selectableObjects => _$this._selectableObjects;
+  set selectableObjects(List<String>? selectableObjects) =>
+      _$this._selectableObjects = selectableObjects;
+
+  List<SelectionValidator>? _selectionValidators;
+  List<SelectionValidator>? get selectionValidators =>
+      _$this._selectionValidators;
+  set selectionValidators(List<SelectionValidator>? selectionValidators) =>
+      _$this._selectionValidators = selectionValidators;
+
+  MaxSelectedObjects? _maxSelectedObjects;
+  MaxSelectedObjects? get maxSelectedObjects => _$this._maxSelectedObjects;
+  set maxSelectedObjects(MaxSelectedObjects? maxSelectedObjects) =>
+      _$this._maxSelectedObjects = maxSelectedObjects;
+
   int? _numberOfPlacesToSelect;
   int? get numberOfPlacesToSelect => _$this._numberOfPlacesToSelect;
   set numberOfPlacesToSelect(int? numberOfPlacesToSelect) =>
       _$this._numberOfPlacesToSelect = numberOfPlacesToSelect;
 
-  bool? _objectWithoutPricingSelectable;
-  bool? get objectWithoutPricingSelectable =>
-      _$this._objectWithoutPricingSelectable;
-  set objectWithoutPricingSelectable(bool? objectWithoutPricingSelectable) =>
-      _$this._objectWithoutPricingSelectable = objectWithoutPricingSelectable;
+  bool? _multiSelectEnabled;
+  bool? get multiSelectEnabled => _$this._multiSelectEnabled;
+  set multiSelectEnabled(bool? multiSelectEnabled) =>
+      _$this._multiSelectEnabled = multiSelectEnabled;
 
-  ListBuilder<SelectedObject>? _selectedObjects;
-  ListBuilder<SelectedObject> get selectedObjects =>
-      _$this._selectedObjects ??= new ListBuilder<SelectedObject>();
-  set selectedObjects(ListBuilder<SelectedObject>? selectedObjects) =>
-      _$this._selectedObjects = selectedObjects;
+  bool? _objectsWithoutPricingSelectable;
+  bool? get objectsWithoutPricingSelectable =>
+      _$this._objectsWithoutPricingSelectable;
+  set objectsWithoutPricingSelectable(bool? objectsWithoutPricingSelectable) =>
+      _$this._objectsWithoutPricingSelectable = objectsWithoutPricingSelectable;
 
-  ObjectTooltipBuilder? _objectTooltip;
-  ObjectTooltipBuilder get objectTooltip =>
-      _$this._objectTooltip ??= new ObjectTooltipBuilder();
-  set objectTooltip(ObjectTooltipBuilder? objectTooltip) =>
-      _$this._objectTooltip = objectTooltip;
+  ObjectPopoverBuilder? _objectPopover;
+  ObjectPopoverBuilder get objectPopover =>
+      _$this._objectPopover ??= new ObjectPopoverBuilder();
+  set objectPopover(ObjectPopoverBuilder? objectPopover) =>
+      _$this._objectPopover = objectPopover;
 
-  String? _priceLevelsTooltipMessage;
-  String? get priceLevelsTooltipMessage => _$this._priceLevelsTooltipMessage;
-  set priceLevelsTooltipMessage(String? priceLevelsTooltipMessage) =>
-      _$this._priceLevelsTooltipMessage = priceLevelsTooltipMessage;
-
-  int? _maxSelectedObjects;
-  int? get maxSelectedObjects => _$this._maxSelectedObjects;
-  set maxSelectedObjects(int? maxSelectedObjects) =>
-      _$this._maxSelectedObjects = maxSelectedObjects;
-
-  List<Map<String, dynamic>>? _maxSelectedObjectList;
-  List<Map<String, dynamic>>? get maxSelectedObjectList =>
-      _$this._maxSelectedObjectList;
-  set maxSelectedObjectList(
-          List<Map<String, dynamic>>? maxSelectedObjectList) =>
-      _$this._maxSelectedObjectList = maxSelectedObjectList;
-
-  ListBuilder<String>? _availableCategories;
-  ListBuilder<String> get availableCategories =>
-      _$this._availableCategories ??= new ListBuilder<String>();
-  set availableCategories(ListBuilder<String>? availableCategories) =>
-      _$this._availableCategories = availableCategories;
-
-  ListBuilder<String>? _unavailableCategories;
-  ListBuilder<String> get unavailableCategories =>
-      _$this._unavailableCategories ??= new ListBuilder<String>();
-  set unavailableCategories(ListBuilder<String>? unavailableCategories) =>
-      _$this._unavailableCategories = unavailableCategories;
-
-  bool? _alwaysShowSectionContents;
-  bool? get alwaysShowSectionContents => _$this._alwaysShowSectionContents;
-  set alwaysShowSectionContents(bool? alwaysShowSectionContents) =>
-      _$this._alwaysShowSectionContents = alwaysShowSectionContents;
-
-  String? _showSectionContents;
-  String? get showSectionContents => _$this._showSectionContents;
-  set showSectionContents(String? showSectionContents) =>
-      _$this._showSectionContents = showSectionContents;
-
-  bool? _showLegend;
-  bool? get showLegend => _$this._showLegend;
-  set showLegend(bool? showLegend) => _$this._showLegend = showLegend;
-
-  LegendForCategoryBuilder? _legend;
-  LegendForCategoryBuilder get legend =>
-      _$this._legend ??= new LegendForCategoryBuilder();
-  set legend(LegendForCategoryBuilder? legend) => _$this._legend = legend;
-
-  bool? _showMinimap;
-  bool? get showMinimap => _$this._showMinimap;
-  set showMinimap(bool? showMinimap) => _$this._showMinimap = showMinimap;
-
-  String? _inputDevice;
-  String? get inputDevice => _$this._inputDevice;
-  set inputDevice(String? inputDevice) => _$this._inputDevice = inputDevice;
+  Function(SeatsioObject price)? _popoverInfo;
+  Function(SeatsioObject price)? get popoverInfo => _$this._popoverInfo;
+  set popoverInfo(Function(SeatsioObject price)? popoverInfo) =>
+      _$this._popoverInfo = popoverInfo;
 
   bool? _showActiveSectionTooltipOnMobile;
   bool? get showActiveSectionTooltipOnMobile =>
@@ -1433,47 +1053,38 @@ class SeatingChartConfigBuilder
       _$this._showActiveSectionTooltipOnMobile =
           showActiveSectionTooltipOnMobile;
 
-  ListBuilder<SelectionValidator>? _selectionValidators;
-  ListBuilder<SelectionValidator> get selectionValidators =>
-      _$this._selectionValidators ??= new ListBuilder<SelectionValidator>();
-  set selectionValidators(
-          ListBuilder<SelectionValidator>? selectionValidators) =>
-      _$this._selectionValidators = selectionValidators;
+  String? _language;
+  String? get language => _$this._language;
+  set language(String? language) => _$this._language = language;
 
-  String? _mode;
-  String? get mode => _$this._mode;
-  set mode(String? mode) => _$this._mode = mode;
+  Map<String, String>? _messages;
+  Map<String, String>? get messages => _$this._messages;
+  set messages(Map<String, String>? messages) => _$this._messages = messages;
 
-  bool? _holdOnSelectForGAs;
-  bool? get holdOnSelectForGAs => _$this._holdOnSelectForGAs;
-  set holdOnSelectForGAs(bool? holdOnSelectForGAs) =>
-      _$this._holdOnSelectForGAs = holdOnSelectForGAs;
+  CategoryFilterBuilder? _categoryFilter;
+  CategoryFilterBuilder get categoryFilter =>
+      _$this._categoryFilter ??= new CategoryFilterBuilder();
+  set categoryFilter(CategoryFilterBuilder? categoryFilter) =>
+      _$this._categoryFilter = categoryFilter;
 
-  String? _holdToken;
-  String? get holdToken => _$this._holdToken;
-  set holdToken(String? holdToken) => _$this._holdToken = holdToken;
+  List<String>? _availableCategories;
+  List<String>? get availableCategories => _$this._availableCategories;
+  set availableCategories(List<String>? availableCategories) =>
+      _$this._availableCategories = availableCategories;
 
-  String? _session;
-  String? get session => _$this._session;
-  set session(String? session) => _$this._session = session;
+  List<String>? _unavailableCategories;
+  List<String>? get unavailableCategories => _$this._unavailableCategories;
+  set unavailableCategories(List<String>? unavailableCategories) =>
+      _$this._unavailableCategories = unavailableCategories;
 
-  String? _objectLabel;
-  String? get objectLabel => _$this._objectLabel;
-  set objectLabel(String? objectLabel) => _$this._objectLabel = objectLabel;
+  List<String>? _filteredCategories;
+  List<String>? get filteredCategories => _$this._filteredCategories;
+  set filteredCategories(List<String>? filteredCategories) =>
+      _$this._filteredCategories = filteredCategories;
 
-  String? _objectIcon;
-  String? get objectIcon => _$this._objectIcon;
-  set objectIcon(String? objectIcon) => _$this._objectIcon = objectIcon;
-
-  String? _isObjectVisible;
-  String? get isObjectVisible => _$this._isObjectVisible;
-  set isObjectVisible(String? isObjectVisible) =>
-      _$this._isObjectVisible = isObjectVisible;
-
-  String? _isObjectSelectable;
-  String? get isObjectSelectable => _$this._isObjectSelectable;
-  set isObjectSelectable(String? isObjectSelectable) =>
-      _$this._isObjectSelectable = isObjectSelectable;
+  List<String>? _channels;
+  List<String>? get channels => _$this._channels;
+  set channels(List<String>? channels) => _$this._channels = channels;
 
   String? _objectColor;
   String? get objectColor => _$this._objectColor;
@@ -1483,189 +1094,311 @@ class SeatingChartConfigBuilder
   String? get sectionColor => _$this._sectionColor;
   set sectionColor(String? sectionColor) => _$this._sectionColor = sectionColor;
 
-  MapBuilder<String, String>? _extraConfig;
-  MapBuilder<String, String> get extraConfig =>
-      _$this._extraConfig ??= new MapBuilder<String, String>();
-  set extraConfig(MapBuilder<String, String>? extraConfig) =>
-      _$this._extraConfig = extraConfig;
+  String? _objectLabel;
+  String? get objectLabel => _$this._objectLabel;
+  set objectLabel(String? objectLabel) => _$this._objectLabel = objectLabel;
+
+  String? _objectIcon;
+  String? get objectIcon => _$this._objectIcon;
+  set objectIcon(String? objectIcon) => _$this._objectIcon = objectIcon;
+
+  ShowSectionContents? _showSectionContents;
+  ShowSectionContents? get showSectionContents => _$this._showSectionContents;
+  set showSectionContents(ShowSectionContents? showSectionContents) =>
+      _$this._showSectionContents = showSectionContents;
+
+  bool? _hideSectionsNotForSale;
+  bool? get hideSectionsNotForSale => _$this._hideSectionsNotForSale;
+  set hideSectionsNotForSale(bool? hideSectionsNotForSale) =>
+      _$this._hideSectionsNotForSale = hideSectionsNotForSale;
+
+  String? _isObjectVisible;
+  String? get isObjectVisible => _$this._isObjectVisible;
+  set isObjectVisible(String? isObjectVisible) =>
+      _$this._isObjectVisible = isObjectVisible;
+
+  bool? _showSeatLabels;
+  bool? get showSeatLabels => _$this._showSeatLabels;
+  set showSeatLabels(bool? showSeatLabels) =>
+      _$this._showSeatLabels = showSeatLabels;
+
+  Session? _session;
+  Session? get session => _$this._session;
+  set session(Session? session) => _$this._session = session;
+
+  String? _holdToken;
+  String? get holdToken => _$this._holdToken;
+  set holdToken(String? holdToken) => _$this._holdToken = holdToken;
+
+  bool? _holdOnSelectForGAs;
+  bool? get holdOnSelectForGAs => _$this._holdOnSelectForGAs;
+  set holdOnSelectForGAs(bool? holdOnSelectForGAs) =>
+      _$this._holdOnSelectForGAs = holdOnSelectForGAs;
+
+  bool? _showMinimap;
+  bool? get showMinimap => _$this._showMinimap;
+  set showMinimap(bool? showMinimap) => _$this._showMinimap = showMinimap;
 
   bool? _showFullScreenButton;
   bool? get showFullScreenButton => _$this._showFullScreenButton;
   set showFullScreenButton(bool? showFullScreenButton) =>
       _$this._showFullScreenButton = showFullScreenButton;
 
-  ListBuilder<String>? _channels;
-  ListBuilder<String> get channels =>
-      _$this._channels ??= new ListBuilder<String>();
-  set channels(ListBuilder<String>? channels) => _$this._channels = channels;
+  bool? _showLegend;
+  bool? get showLegend => _$this._showLegend;
+  set showLegend(bool? showLegend) => _$this._showLegend = showLegend;
 
-  bool? _enableChartRenderedCallback;
-  bool? get enableChartRenderedCallback => _$this._enableChartRenderedCallback;
-  set enableChartRenderedCallback(bool? enableChartRenderedCallback) =>
-      _$this._enableChartRenderedCallback = enableChartRenderedCallback;
+  LegendConfigBuilder? _legendConfig;
+  LegendConfigBuilder get legendConfig =>
+      _$this._legendConfig ??= new LegendConfigBuilder();
+  set legendConfig(LegendConfigBuilder? legendConfig) =>
+      _$this._legendConfig = legendConfig;
 
-  bool? _enableChartRenderingFailedCallback;
-  bool? get enableChartRenderingFailedCallback =>
-      _$this._enableChartRenderingFailedCallback;
-  set enableChartRenderingFailedCallback(
-          bool? enableChartRenderingFailedCallback) =>
-      _$this._enableChartRenderingFailedCallback =
-          enableChartRenderingFailedCallback;
+  bool? _showZoomOutButtonOnMobile;
+  bool? get showZoomOutButtonOnMobile => _$this._showZoomOutButtonOnMobile;
+  set showZoomOutButtonOnMobile(bool? showZoomOutButtonOnMobile) =>
+      _$this._showZoomOutButtonOnMobile = showZoomOutButtonOnMobile;
 
-  bool? _enableObjectClickedCallback;
-  bool? get enableObjectClickedCallback => _$this._enableObjectClickedCallback;
-  set enableObjectClickedCallback(bool? enableObjectClickedCallback) =>
-      _$this._enableObjectClickedCallback = enableObjectClickedCallback;
+  SeatsioColorScheme? _colorScheme;
+  SeatsioColorScheme? get colorScheme => _$this._colorScheme;
+  set colorScheme(SeatsioColorScheme? colorScheme) =>
+      _$this._colorScheme = colorScheme;
 
-  bool? _enableObjectSelectedCallback;
-  bool? get enableObjectSelectedCallback =>
-      _$this._enableObjectSelectedCallback;
-  set enableObjectSelectedCallback(bool? enableObjectSelectedCallback) =>
-      _$this._enableObjectSelectedCallback = enableObjectSelectedCallback;
+  SeatsioColorsBuilder? _colors;
+  SeatsioColorsBuilder get colors =>
+      _$this._colors ??= new SeatsioColorsBuilder();
+  set colors(SeatsioColorsBuilder? colors) => _$this._colors = colors;
 
-  bool? _enableObjectDeselectedCallback;
-  bool? get enableObjectDeselectedCallback =>
-      _$this._enableObjectDeselectedCallback;
-  set enableObjectDeselectedCallback(bool? enableObjectDeselectedCallback) =>
-      _$this._enableObjectDeselectedCallback = enableObjectDeselectedCallback;
+  String? _activeFloor;
+  String? get activeFloor => _$this._activeFloor;
+  set activeFloor(String? activeFloor) => _$this._activeFloor = activeFloor;
 
-  bool? _enableSelectionValidCallback;
-  bool? get enableSelectionValidCallback =>
-      _$this._enableSelectionValidCallback;
-  set enableSelectionValidCallback(bool? enableSelectionValidCallback) =>
-      _$this._enableSelectionValidCallback = enableSelectionValidCallback;
+  bool? _lockActiveFloor;
+  bool? get lockActiveFloor => _$this._lockActiveFloor;
+  set lockActiveFloor(bool? lockActiveFloor) =>
+      _$this._lockActiveFloor = lockActiveFloor;
 
-  bool? _enableSelectionInvalidCallback;
-  bool? get enableSelectionInvalidCallback =>
-      _$this._enableSelectionInvalidCallback;
-  set enableSelectionInvalidCallback(bool? enableSelectionInvalidCallback) =>
-      _$this._enableSelectionInvalidCallback = enableSelectionInvalidCallback;
+  bool? _showFloorElevator;
+  bool? get showFloorElevator => _$this._showFloorElevator;
+  set showFloorElevator(bool? showFloorElevator) =>
+      _$this._showFloorElevator = showFloorElevator;
 
-  bool? _enableBestAvailableSelectedCallback;
-  bool? get enableBestAvailableSelectedCallback =>
-      _$this._enableBestAvailableSelectedCallback;
-  set enableBestAvailableSelectedCallback(
-          bool? enableBestAvailableSelectedCallback) =>
-      _$this._enableBestAvailableSelectedCallback =
-          enableBestAvailableSelectedCallback;
+  Function()? _onChartRendered;
+  Function()? get onChartRendered => _$this._onChartRendered;
+  set onChartRendered(Function()? onChartRendered) =>
+      _$this._onChartRendered = onChartRendered;
 
-  bool? _enableBestAvailableSelectionFailedCallback;
-  bool? get enableBestAvailableSelectionFailedCallback =>
-      _$this._enableBestAvailableSelectionFailedCallback;
-  set enableBestAvailableSelectionFailedCallback(
-          bool? enableBestAvailableSelectionFailedCallback) =>
-      _$this._enableBestAvailableSelectionFailedCallback =
-          enableBestAvailableSelectionFailedCallback;
+  Function()? _onChartRenderingFailed;
+  Function()? get onChartRenderingFailed => _$this._onChartRenderingFailed;
+  set onChartRenderingFailed(Function()? onChartRenderingFailed) =>
+      _$this._onChartRenderingFailed = onChartRenderingFailed;
 
-  bool? _enableHoldSucceededCallback;
-  bool? get enableHoldSucceededCallback => _$this._enableHoldSucceededCallback;
-  set enableHoldSucceededCallback(bool? enableHoldSucceededCallback) =>
-      _$this._enableHoldSucceededCallback = enableHoldSucceededCallback;
+  Function()? _onChartRerenderingStarted;
+  Function()? get onChartRerenderingStarted =>
+      _$this._onChartRerenderingStarted;
+  set onChartRerenderingStarted(Function()? onChartRerenderingStarted) =>
+      _$this._onChartRerenderingStarted = onChartRerenderingStarted;
 
-  bool? _enableHoldFailedCallback;
-  bool? get enableHoldFailedCallback => _$this._enableHoldFailedCallback;
-  set enableHoldFailedCallback(bool? enableHoldFailedCallback) =>
-      _$this._enableHoldFailedCallback = enableHoldFailedCallback;
+  Function(SeatsioObject object)? _onObjectClicked;
+  Function(SeatsioObject object)? get onObjectClicked =>
+      _$this._onObjectClicked;
+  set onObjectClicked(Function(SeatsioObject object)? onObjectClicked) =>
+      _$this._onObjectClicked = onObjectClicked;
 
-  bool? _enableHoldTokenExpiredCallback;
-  bool? get enableHoldTokenExpiredCallback =>
-      _$this._enableHoldTokenExpiredCallback;
-  set enableHoldTokenExpiredCallback(bool? enableHoldTokenExpiredCallback) =>
-      _$this._enableHoldTokenExpiredCallback = enableHoldTokenExpiredCallback;
+  Function(SeatsioObject object, SelectedTicketType? ticketType)?
+      _onObjectSelected;
+  Function(SeatsioObject object, SelectedTicketType? ticketType)?
+      get onObjectSelected => _$this._onObjectSelected;
+  set onObjectSelected(
+          Function(SeatsioObject object, SelectedTicketType? ticketType)?
+              onObjectSelected) =>
+      _$this._onObjectSelected = onObjectSelected;
 
-  bool? _enableSessionInitializedCallback;
-  bool? get enableSessionInitializedCallback =>
-      _$this._enableSessionInitializedCallback;
-  set enableSessionInitializedCallback(
-          bool? enableSessionInitializedCallback) =>
-      _$this._enableSessionInitializedCallback =
-          enableSessionInitializedCallback;
+  Function(SeatsioObject object, SelectedTicketType? ticketType)?
+      _onObjectDeselected;
+  Function(SeatsioObject object, SelectedTicketType? ticketType)?
+      get onObjectDeselected => _$this._onObjectDeselected;
+  set onObjectDeselected(
+          Function(SeatsioObject object, SelectedTicketType? ticketType)?
+              onObjectDeselected) =>
+      _$this._onObjectDeselected = onObjectDeselected;
 
-  bool? _enableReleaseHoldSucceededCallback;
-  bool? get enableReleaseHoldSucceededCallback =>
-      _$this._enableReleaseHoldSucceededCallback;
-  set enableReleaseHoldSucceededCallback(
-          bool? enableReleaseHoldSucceededCallback) =>
-      _$this._enableReleaseHoldSucceededCallback =
-          enableReleaseHoldSucceededCallback;
+  Function(SeatsioObject object)? _onObjectStatusChanged;
+  Function(SeatsioObject object)? get onObjectStatusChanged =>
+      _$this._onObjectStatusChanged;
+  set onObjectStatusChanged(
+          Function(SeatsioObject object)? onObjectStatusChanged) =>
+      _$this._onObjectStatusChanged = onObjectStatusChanged;
 
-  bool? _enableReleaseHoldFailedCallback;
-  bool? get enableReleaseHoldFailedCallback =>
-      _$this._enableReleaseHoldFailedCallback;
-  set enableReleaseHoldFailedCallback(bool? enableReleaseHoldFailedCallback) =>
-      _$this._enableReleaseHoldFailedCallback = enableReleaseHoldFailedCallback;
+  Function(SeatsioObject object)? _onObjectBooked;
+  Function(SeatsioObject object)? get onObjectBooked => _$this._onObjectBooked;
+  set onObjectBooked(Function(SeatsioObject object)? onObjectBooked) =>
+      _$this._onObjectBooked = onObjectBooked;
 
-  bool? _enableSelectedObjectBookedCallback;
-  bool? get enableSelectedObjectBookedCallback =>
-      _$this._enableSelectedObjectBookedCallback;
-  set enableSelectedObjectBookedCallback(
-          bool? enableSelectedObjectBookedCallback) =>
-      _$this._enableSelectedObjectBookedCallback =
-          enableSelectedObjectBookedCallback;
+  Function(HoldToken object)? _onSessionInitialized;
+  Function(HoldToken object)? get onSessionInitialized =>
+      _$this._onSessionInitialized;
+  set onSessionInitialized(Function(HoldToken object)? onSessionInitialized) =>
+      _$this._onSessionInitialized = onSessionInitialized;
 
-  SeatingChartConfigBuilder();
+  Function()? _onHoldCallsInProgress;
+  Function()? get onHoldCallsInProgress => _$this._onHoldCallsInProgress;
+  set onHoldCallsInProgress(Function()? onHoldCallsInProgress) =>
+      _$this._onHoldCallsInProgress = onHoldCallsInProgress;
+
+  Function()? _onHoldCallsComplete;
+  Function()? get onHoldCallsComplete => _$this._onHoldCallsComplete;
+  set onHoldCallsComplete(Function()? onHoldCallsComplete) =>
+      _$this._onHoldCallsComplete = onHoldCallsComplete;
+
+  Function(List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes)?
+      _onHoldSucceeded;
+  Function(List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes)?
+      get onHoldSucceeded => _$this._onHoldSucceeded;
+  set onHoldSucceeded(
+          Function(List<SeatsioObject> objects,
+                  List<SelectedTicketType>? ticketTypes)?
+              onHoldSucceeded) =>
+      _$this._onHoldSucceeded = onHoldSucceeded;
+
+  Function(List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes)?
+      _onHoldFailed;
+  Function(List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes)?
+      get onHoldFailed => _$this._onHoldFailed;
+  set onHoldFailed(
+          Function(List<SeatsioObject> objects,
+                  List<SelectedTicketType>? ticketTypes)?
+              onHoldFailed) =>
+      _$this._onHoldFailed = onHoldFailed;
+
+  Function()? _onHoldTokenExpired;
+  Function()? get onHoldTokenExpired => _$this._onHoldTokenExpired;
+  set onHoldTokenExpired(Function()? onHoldTokenExpired) =>
+      _$this._onHoldTokenExpired = onHoldTokenExpired;
+
+  Function(List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes)?
+      _onReleaseHoldSucceeded;
+  Function(List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes)?
+      get onReleaseHoldSucceeded => _$this._onReleaseHoldSucceeded;
+  set onReleaseHoldSucceeded(
+          Function(List<SeatsioObject> objects,
+                  List<SelectedTicketType>? ticketTypes)?
+              onReleaseHoldSucceeded) =>
+      _$this._onReleaseHoldSucceeded = onReleaseHoldSucceeded;
+
+  Function(List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes)?
+      _onReleaseHoldFailed;
+  Function(List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes)?
+      get onReleaseHoldFailed => _$this._onReleaseHoldFailed;
+  set onReleaseHoldFailed(
+          Function(List<SeatsioObject> objects,
+                  List<SelectedTicketType>? ticketTypes)?
+              onReleaseHoldFailed) =>
+      _$this._onReleaseHoldFailed = onReleaseHoldFailed;
+
+  Function()? _onSelectionValid;
+  Function()? get onSelectionValid => _$this._onSelectionValid;
+  set onSelectionValid(Function()? onSelectionValid) =>
+      _$this._onSelectionValid = onSelectionValid;
+
+  Function(List<String> violations)? _onSelectionInvalid;
+  Function(List<String> violations)? get onSelectionInvalid =>
+      _$this._onSelectionInvalid;
+  set onSelectionInvalid(
+          Function(List<String> violations)? onSelectionInvalid) =>
+      _$this._onSelectionInvalid = onSelectionInvalid;
+
+  Function()? _onFullScreenOpened;
+  Function()? get onFullScreenOpened => _$this._onFullScreenOpened;
+  set onFullScreenOpened(Function()? onFullScreenOpened) =>
+      _$this._onFullScreenOpened = onFullScreenOpened;
+
+  Function()? _onFullScreenClosed;
+  Function()? get onFullScreenClosed => _$this._onFullScreenClosed;
+  set onFullScreenClosed(Function()? onFullScreenClosed) =>
+      _$this._onFullScreenClosed = onFullScreenClosed;
+
+  Function(List<SeatsioCategory>)? _onFilteredCategoriesChanged;
+  Function(List<SeatsioCategory>)? get onFilteredCategoriesChanged =>
+      _$this._onFilteredCategoriesChanged;
+  set onFilteredCategoriesChanged(
+          Function(List<SeatsioCategory>)? onFilteredCategoriesChanged) =>
+      _$this._onFilteredCategoriesChanged = onFilteredCategoriesChanged;
+
+  SeatingChartConfigBuilder() {
+    SeatingChartConfig._initializeBuilder(this);
+  }
 
   SeatingChartConfigBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _workspaceKey = $v.workspaceKey;
-      _event = $v.event;
       _region = $v.region;
-      _language = $v.language;
-      _messages = $v.messages?.toBuilder();
-      _pricing = $v.pricing?.toBuilder();
-      _priceFormatter = $v.priceFormatter;
-      _numberOfPlacesToSelect = $v.numberOfPlacesToSelect;
-      _objectWithoutPricingSelectable = $v.objectWithoutPricingSelectable;
-      _selectedObjects = $v.selectedObjects?.toBuilder();
-      _objectTooltip = $v.objectTooltip?.toBuilder();
-      _priceLevelsTooltipMessage = $v.priceLevelsTooltipMessage;
-      _maxSelectedObjects = $v.maxSelectedObjects;
-      _maxSelectedObjectList = $v.maxSelectedObjectList;
-      _availableCategories = $v.availableCategories?.toBuilder();
-      _unavailableCategories = $v.unavailableCategories?.toBuilder();
-      _alwaysShowSectionContents = $v.alwaysShowSectionContents;
-      _showSectionContents = $v.showSectionContents;
-      _showLegend = $v.showLegend;
-      _legend = $v.legend?.toBuilder();
-      _showMinimap = $v.showMinimap;
-      _inputDevice = $v.inputDevice;
-      _showActiveSectionTooltipOnMobile = $v.showActiveSectionTooltipOnMobile;
-      _selectionValidators = $v.selectionValidators?.toBuilder();
+      _event = $v.event;
+      _events = $v.events;
       _mode = $v.mode;
-      _holdOnSelectForGAs = $v.holdOnSelectForGAs;
-      _holdToken = $v.holdToken;
-      _session = $v.session;
-      _objectLabel = $v.objectLabel;
-      _objectIcon = $v.objectIcon;
-      _isObjectVisible = $v.isObjectVisible;
-      _isObjectSelectable = $v.isObjectSelectable;
+      _pricing = $v.pricing;
+      _priceFormatter = $v.priceFormatter;
+      _showSectionPricingOverlay = $v.showSectionPricingOverlay;
+      _selectedObjects = $v.selectedObjects;
+      _selectableObjects = $v.selectableObjects;
+      _selectionValidators = $v.selectionValidators;
+      _maxSelectedObjects = $v.maxSelectedObjects;
+      _numberOfPlacesToSelect = $v.numberOfPlacesToSelect;
+      _multiSelectEnabled = $v.multiSelectEnabled;
+      _objectsWithoutPricingSelectable = $v.objectsWithoutPricingSelectable;
+      _objectPopover = $v.objectPopover?.toBuilder();
+      _popoverInfo = $v.popoverInfo;
+      _showActiveSectionTooltipOnMobile = $v.showActiveSectionTooltipOnMobile;
+      _language = $v.language;
+      _messages = $v.messages;
+      _categoryFilter = $v.categoryFilter?.toBuilder();
+      _availableCategories = $v.availableCategories;
+      _unavailableCategories = $v.unavailableCategories;
+      _filteredCategories = $v.filteredCategories;
+      _channels = $v.channels;
       _objectColor = $v.objectColor;
       _sectionColor = $v.sectionColor;
-      _extraConfig = $v.extraConfig?.toBuilder();
+      _objectLabel = $v.objectLabel;
+      _objectIcon = $v.objectIcon;
+      _showSectionContents = $v.showSectionContents;
+      _hideSectionsNotForSale = $v.hideSectionsNotForSale;
+      _isObjectVisible = $v.isObjectVisible;
+      _showSeatLabels = $v.showSeatLabels;
+      _session = $v.session;
+      _holdToken = $v.holdToken;
+      _holdOnSelectForGAs = $v.holdOnSelectForGAs;
+      _showMinimap = $v.showMinimap;
       _showFullScreenButton = $v.showFullScreenButton;
-      _channels = $v.channels?.toBuilder();
-      _enableChartRenderedCallback = $v.enableChartRenderedCallback;
-      _enableChartRenderingFailedCallback =
-          $v.enableChartRenderingFailedCallback;
-      _enableObjectClickedCallback = $v.enableObjectClickedCallback;
-      _enableObjectSelectedCallback = $v.enableObjectSelectedCallback;
-      _enableObjectDeselectedCallback = $v.enableObjectDeselectedCallback;
-      _enableSelectionValidCallback = $v.enableSelectionValidCallback;
-      _enableSelectionInvalidCallback = $v.enableSelectionInvalidCallback;
-      _enableBestAvailableSelectedCallback =
-          $v.enableBestAvailableSelectedCallback;
-      _enableBestAvailableSelectionFailedCallback =
-          $v.enableBestAvailableSelectionFailedCallback;
-      _enableHoldSucceededCallback = $v.enableHoldSucceededCallback;
-      _enableHoldFailedCallback = $v.enableHoldFailedCallback;
-      _enableHoldTokenExpiredCallback = $v.enableHoldTokenExpiredCallback;
-      _enableSessionInitializedCallback = $v.enableSessionInitializedCallback;
-      _enableReleaseHoldSucceededCallback =
-          $v.enableReleaseHoldSucceededCallback;
-      _enableReleaseHoldFailedCallback = $v.enableReleaseHoldFailedCallback;
-      _enableSelectedObjectBookedCallback =
-          $v.enableSelectedObjectBookedCallback;
+      _showLegend = $v.showLegend;
+      _legendConfig = $v.legendConfig?.toBuilder();
+      _showZoomOutButtonOnMobile = $v.showZoomOutButtonOnMobile;
+      _colorScheme = $v.colorScheme;
+      _colors = $v.colors?.toBuilder();
+      _activeFloor = $v.activeFloor;
+      _lockActiveFloor = $v.lockActiveFloor;
+      _showFloorElevator = $v.showFloorElevator;
+      _onChartRendered = $v.onChartRendered;
+      _onChartRenderingFailed = $v.onChartRenderingFailed;
+      _onChartRerenderingStarted = $v.onChartRerenderingStarted;
+      _onObjectClicked = $v.onObjectClicked;
+      _onObjectSelected = $v.onObjectSelected;
+      _onObjectDeselected = $v.onObjectDeselected;
+      _onObjectStatusChanged = $v.onObjectStatusChanged;
+      _onObjectBooked = $v.onObjectBooked;
+      _onSessionInitialized = $v.onSessionInitialized;
+      _onHoldCallsInProgress = $v.onHoldCallsInProgress;
+      _onHoldCallsComplete = $v.onHoldCallsComplete;
+      _onHoldSucceeded = $v.onHoldSucceeded;
+      _onHoldFailed = $v.onHoldFailed;
+      _onHoldTokenExpired = $v.onHoldTokenExpired;
+      _onReleaseHoldSucceeded = $v.onReleaseHoldSucceeded;
+      _onReleaseHoldFailed = $v.onReleaseHoldFailed;
+      _onSelectionValid = $v.onSelectionValid;
+      _onSelectionInvalid = $v.onSelectionInvalid;
+      _onFullScreenOpened = $v.onFullScreenOpened;
+      _onFullScreenClosed = $v.onFullScreenClosed;
+      _onFilteredCategoriesChanged = $v.onFilteredCategoriesChanged;
       _$v = null;
     }
     return this;
@@ -1692,797 +1425,95 @@ class SeatingChartConfigBuilder
           new _$SeatingChartConfig._(
             workspaceKey: BuiltValueNullFieldError.checkNotNull(
                 workspaceKey, r'SeatingChartConfig', 'workspaceKey'),
-            event: BuiltValueNullFieldError.checkNotNull(
-                event, r'SeatingChartConfig', 'event'),
             region: BuiltValueNullFieldError.checkNotNull(
                 region, r'SeatingChartConfig', 'region'),
-            language: language,
-            messages: _messages?.build(),
-            pricing: _pricing?.build(),
-            priceFormatter: priceFormatter,
-            numberOfPlacesToSelect: numberOfPlacesToSelect,
-            objectWithoutPricingSelectable: objectWithoutPricingSelectable,
-            selectedObjects: _selectedObjects?.build(),
-            objectTooltip: _objectTooltip?.build(),
-            priceLevelsTooltipMessage: priceLevelsTooltipMessage,
-            maxSelectedObjects: maxSelectedObjects,
-            maxSelectedObjectList: maxSelectedObjectList,
-            availableCategories: _availableCategories?.build(),
-            unavailableCategories: _unavailableCategories?.build(),
-            alwaysShowSectionContents: alwaysShowSectionContents,
-            showSectionContents: showSectionContents,
-            showLegend: showLegend,
-            legend: _legend?.build(),
-            showMinimap: showMinimap,
-            inputDevice: inputDevice,
-            showActiveSectionTooltipOnMobile: showActiveSectionTooltipOnMobile,
-            selectionValidators: _selectionValidators?.build(),
+            event: event,
+            events: events,
             mode: mode,
-            holdOnSelectForGAs: holdOnSelectForGAs,
-            holdToken: holdToken,
-            session: session,
-            objectLabel: objectLabel,
-            objectIcon: objectIcon,
-            isObjectVisible: isObjectVisible,
-            isObjectSelectable: isObjectSelectable,
+            pricing: pricing,
+            priceFormatter: priceFormatter,
+            showSectionPricingOverlay: showSectionPricingOverlay,
+            selectedObjects: selectedObjects,
+            selectableObjects: selectableObjects,
+            selectionValidators: selectionValidators,
+            maxSelectedObjects: maxSelectedObjects,
+            numberOfPlacesToSelect: numberOfPlacesToSelect,
+            multiSelectEnabled: multiSelectEnabled,
+            objectsWithoutPricingSelectable: objectsWithoutPricingSelectable,
+            objectPopover: _objectPopover?.build(),
+            popoverInfo: popoverInfo,
+            showActiveSectionTooltipOnMobile: showActiveSectionTooltipOnMobile,
+            language: language,
+            messages: BuiltValueNullFieldError.checkNotNull(
+                messages, r'SeatingChartConfig', 'messages'),
+            categoryFilter: _categoryFilter?.build(),
+            availableCategories: availableCategories,
+            unavailableCategories: unavailableCategories,
+            filteredCategories: filteredCategories,
+            channels: channels,
             objectColor: objectColor,
             sectionColor: sectionColor,
-            extraConfig: _extraConfig?.build(),
+            objectLabel: objectLabel,
+            objectIcon: objectIcon,
+            showSectionContents: showSectionContents,
+            hideSectionsNotForSale: hideSectionsNotForSale,
+            isObjectVisible: isObjectVisible,
+            showSeatLabels: showSeatLabels,
+            session: session,
+            holdToken: holdToken,
+            holdOnSelectForGAs: holdOnSelectForGAs,
+            showMinimap: showMinimap,
             showFullScreenButton: showFullScreenButton,
-            channels: _channels?.build(),
-            enableChartRenderedCallback: BuiltValueNullFieldError.checkNotNull(
-                enableChartRenderedCallback,
-                r'SeatingChartConfig',
-                'enableChartRenderedCallback'),
-            enableChartRenderingFailedCallback:
-                BuiltValueNullFieldError.checkNotNull(
-                    enableChartRenderingFailedCallback,
-                    r'SeatingChartConfig',
-                    'enableChartRenderingFailedCallback'),
-            enableObjectClickedCallback: BuiltValueNullFieldError.checkNotNull(
-                enableObjectClickedCallback,
-                r'SeatingChartConfig',
-                'enableObjectClickedCallback'),
-            enableObjectSelectedCallback: BuiltValueNullFieldError.checkNotNull(
-                enableObjectSelectedCallback,
-                r'SeatingChartConfig',
-                'enableObjectSelectedCallback'),
-            enableObjectDeselectedCallback:
-                BuiltValueNullFieldError.checkNotNull(
-                    enableObjectDeselectedCallback,
-                    r'SeatingChartConfig',
-                    'enableObjectDeselectedCallback'),
-            enableSelectionValidCallback: BuiltValueNullFieldError.checkNotNull(
-                enableSelectionValidCallback,
-                r'SeatingChartConfig',
-                'enableSelectionValidCallback'),
-            enableSelectionInvalidCallback:
-                BuiltValueNullFieldError.checkNotNull(
-                    enableSelectionInvalidCallback,
-                    r'SeatingChartConfig',
-                    'enableSelectionInvalidCallback'),
-            enableBestAvailableSelectedCallback:
-                BuiltValueNullFieldError.checkNotNull(
-                    enableBestAvailableSelectedCallback,
-                    r'SeatingChartConfig',
-                    'enableBestAvailableSelectedCallback'),
-            enableBestAvailableSelectionFailedCallback:
-                BuiltValueNullFieldError.checkNotNull(
-                    enableBestAvailableSelectionFailedCallback,
-                    r'SeatingChartConfig',
-                    'enableBestAvailableSelectionFailedCallback'),
-            enableHoldSucceededCallback: BuiltValueNullFieldError.checkNotNull(
-                enableHoldSucceededCallback,
-                r'SeatingChartConfig',
-                'enableHoldSucceededCallback'),
-            enableHoldFailedCallback: BuiltValueNullFieldError.checkNotNull(
-                enableHoldFailedCallback,
-                r'SeatingChartConfig',
-                'enableHoldFailedCallback'),
-            enableHoldTokenExpiredCallback:
-                BuiltValueNullFieldError.checkNotNull(
-                    enableHoldTokenExpiredCallback,
-                    r'SeatingChartConfig',
-                    'enableHoldTokenExpiredCallback'),
-            enableSessionInitializedCallback:
-                BuiltValueNullFieldError.checkNotNull(
-                    enableSessionInitializedCallback,
-                    r'SeatingChartConfig',
-                    'enableSessionInitializedCallback'),
-            enableReleaseHoldSucceededCallback:
-                BuiltValueNullFieldError.checkNotNull(
-                    enableReleaseHoldSucceededCallback,
-                    r'SeatingChartConfig',
-                    'enableReleaseHoldSucceededCallback'),
-            enableReleaseHoldFailedCallback:
-                BuiltValueNullFieldError.checkNotNull(
-                    enableReleaseHoldFailedCallback,
-                    r'SeatingChartConfig',
-                    'enableReleaseHoldFailedCallback'),
-            enableSelectedObjectBookedCallback:
-                BuiltValueNullFieldError.checkNotNull(
-                    enableSelectedObjectBookedCallback,
-                    r'SeatingChartConfig',
-                    'enableSelectedObjectBookedCallback'),
+            showLegend: showLegend,
+            legendConfig: _legendConfig?.build(),
+            showZoomOutButtonOnMobile: showZoomOutButtonOnMobile,
+            colorScheme: colorScheme,
+            colors: _colors?.build(),
+            activeFloor: activeFloor,
+            lockActiveFloor: lockActiveFloor,
+            showFloorElevator: showFloorElevator,
+            onChartRendered: onChartRendered,
+            onChartRenderingFailed: onChartRenderingFailed,
+            onChartRerenderingStarted: onChartRerenderingStarted,
+            onObjectClicked: onObjectClicked,
+            onObjectSelected: onObjectSelected,
+            onObjectDeselected: onObjectDeselected,
+            onObjectStatusChanged: onObjectStatusChanged,
+            onObjectBooked: onObjectBooked,
+            onSessionInitialized: onSessionInitialized,
+            onHoldCallsInProgress: onHoldCallsInProgress,
+            onHoldCallsComplete: onHoldCallsComplete,
+            onHoldSucceeded: onHoldSucceeded,
+            onHoldFailed: onHoldFailed,
+            onHoldTokenExpired: onHoldTokenExpired,
+            onReleaseHoldSucceeded: onReleaseHoldSucceeded,
+            onReleaseHoldFailed: onReleaseHoldFailed,
+            onSelectionValid: onSelectionValid,
+            onSelectionInvalid: onSelectionInvalid,
+            onFullScreenOpened: onFullScreenOpened,
+            onFullScreenClosed: onFullScreenClosed,
+            onFilteredCategoriesChanged: onFilteredCategoriesChanged,
           );
     } catch (_) {
       late String _$failedField;
       try {
-        _$failedField = 'messages';
-        _messages?.build();
-        _$failedField = 'pricing';
-        _pricing?.build();
+        _$failedField = 'objectPopover';
+        _objectPopover?.build();
 
-        _$failedField = 'selectedObjects';
-        _selectedObjects?.build();
-        _$failedField = 'objectTooltip';
-        _objectTooltip?.build();
+        _$failedField = 'categoryFilter';
+        _categoryFilter?.build();
 
-        _$failedField = 'availableCategories';
-        _availableCategories?.build();
-        _$failedField = 'unavailableCategories';
-        _unavailableCategories?.build();
+        _$failedField = 'legendConfig';
+        _legendConfig?.build();
 
-        _$failedField = 'legend';
-        _legend?.build();
-
-        _$failedField = 'selectionValidators';
-        _selectionValidators?.build();
-
-        _$failedField = 'extraConfig';
-        _extraConfig?.build();
-
-        _$failedField = 'channels';
-        _channels?.build();
+        _$failedField = 'colors';
+        _colors?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             r'SeatingChartConfig', _$failedField, e.toString());
       }
       rethrow;
     }
-    replace(_$result);
-    return _$result;
-  }
-}
-
-class _$SelectedObject extends SelectedObject {
-  @override
-  final String label;
-  @override
-  final String? ticketType;
-  @override
-  final int? amount;
-
-  factory _$SelectedObject([void Function(SelectedObjectBuilder)? updates]) =>
-      (new SelectedObjectBuilder()..update(updates))._build();
-
-  _$SelectedObject._({required this.label, this.ticketType, this.amount})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(label, r'SelectedObject', 'label');
-  }
-
-  @override
-  SelectedObject rebuild(void Function(SelectedObjectBuilder) updates) =>
-      (toBuilder()..update(updates)).build();
-
-  @override
-  SelectedObjectBuilder toBuilder() =>
-      new SelectedObjectBuilder()..replace(this);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(other, this)) return true;
-    return other is SelectedObject &&
-        label == other.label &&
-        ticketType == other.ticketType &&
-        amount == other.amount;
-  }
-
-  @override
-  int get hashCode {
-    var _$hash = 0;
-    _$hash = $jc(_$hash, label.hashCode);
-    _$hash = $jc(_$hash, ticketType.hashCode);
-    _$hash = $jc(_$hash, amount.hashCode);
-    _$hash = $jf(_$hash);
-    return _$hash;
-  }
-}
-
-class SelectedObjectBuilder
-    implements Builder<SelectedObject, SelectedObjectBuilder> {
-  _$SelectedObject? _$v;
-
-  String? _label;
-  String? get label => _$this._label;
-  set label(String? label) => _$this._label = label;
-
-  String? _ticketType;
-  String? get ticketType => _$this._ticketType;
-  set ticketType(String? ticketType) => _$this._ticketType = ticketType;
-
-  int? _amount;
-  int? get amount => _$this._amount;
-  set amount(int? amount) => _$this._amount = amount;
-
-  SelectedObjectBuilder();
-
-  SelectedObjectBuilder get _$this {
-    final $v = _$v;
-    if ($v != null) {
-      _label = $v.label;
-      _ticketType = $v.ticketType;
-      _amount = $v.amount;
-      _$v = null;
-    }
-    return this;
-  }
-
-  @override
-  void replace(SelectedObject other) {
-    ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$SelectedObject;
-  }
-
-  @override
-  void update(void Function(SelectedObjectBuilder)? updates) {
-    if (updates != null) updates(this);
-  }
-
-  @override
-  SelectedObject build() => _build();
-
-  _$SelectedObject _build() {
-    final _$result = _$v ??
-        new _$SelectedObject._(
-          label: BuiltValueNullFieldError.checkNotNull(
-              label, r'SelectedObject', 'label'),
-          ticketType: ticketType,
-          amount: amount,
-        );
-    replace(_$result);
-    return _$result;
-  }
-}
-
-class _$ObjectTooltip extends ObjectTooltip {
-  @override
-  final bool showActionHint;
-  @override
-  final bool showAvailability;
-  @override
-  final bool showCategory;
-  @override
-  final bool showLabel;
-  @override
-  final bool showPricing;
-  @override
-  final bool showUnavailableNotice;
-  @override
-  final bool stylizedLabel;
-  @override
-  final bool confirmSelectionOnMobile;
-
-  factory _$ObjectTooltip([void Function(ObjectTooltipBuilder)? updates]) =>
-      (new ObjectTooltipBuilder()..update(updates))._build();
-
-  _$ObjectTooltip._(
-      {required this.showActionHint,
-      required this.showAvailability,
-      required this.showCategory,
-      required this.showLabel,
-      required this.showPricing,
-      required this.showUnavailableNotice,
-      required this.stylizedLabel,
-      required this.confirmSelectionOnMobile})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(
-        showActionHint, r'ObjectTooltip', 'showActionHint');
-    BuiltValueNullFieldError.checkNotNull(
-        showAvailability, r'ObjectTooltip', 'showAvailability');
-    BuiltValueNullFieldError.checkNotNull(
-        showCategory, r'ObjectTooltip', 'showCategory');
-    BuiltValueNullFieldError.checkNotNull(
-        showLabel, r'ObjectTooltip', 'showLabel');
-    BuiltValueNullFieldError.checkNotNull(
-        showPricing, r'ObjectTooltip', 'showPricing');
-    BuiltValueNullFieldError.checkNotNull(
-        showUnavailableNotice, r'ObjectTooltip', 'showUnavailableNotice');
-    BuiltValueNullFieldError.checkNotNull(
-        stylizedLabel, r'ObjectTooltip', 'stylizedLabel');
-    BuiltValueNullFieldError.checkNotNull(
-        confirmSelectionOnMobile, r'ObjectTooltip', 'confirmSelectionOnMobile');
-  }
-
-  @override
-  ObjectTooltip rebuild(void Function(ObjectTooltipBuilder) updates) =>
-      (toBuilder()..update(updates)).build();
-
-  @override
-  ObjectTooltipBuilder toBuilder() => new ObjectTooltipBuilder()..replace(this);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(other, this)) return true;
-    return other is ObjectTooltip &&
-        showActionHint == other.showActionHint &&
-        showAvailability == other.showAvailability &&
-        showCategory == other.showCategory &&
-        showLabel == other.showLabel &&
-        showPricing == other.showPricing &&
-        showUnavailableNotice == other.showUnavailableNotice &&
-        stylizedLabel == other.stylizedLabel &&
-        confirmSelectionOnMobile == other.confirmSelectionOnMobile;
-  }
-
-  @override
-  int get hashCode {
-    var _$hash = 0;
-    _$hash = $jc(_$hash, showActionHint.hashCode);
-    _$hash = $jc(_$hash, showAvailability.hashCode);
-    _$hash = $jc(_$hash, showCategory.hashCode);
-    _$hash = $jc(_$hash, showLabel.hashCode);
-    _$hash = $jc(_$hash, showPricing.hashCode);
-    _$hash = $jc(_$hash, showUnavailableNotice.hashCode);
-    _$hash = $jc(_$hash, stylizedLabel.hashCode);
-    _$hash = $jc(_$hash, confirmSelectionOnMobile.hashCode);
-    _$hash = $jf(_$hash);
-    return _$hash;
-  }
-
-  @override
-  String toString() {
-    return (newBuiltValueToStringHelper(r'ObjectTooltip')
-          ..add('showActionHint', showActionHint)
-          ..add('showAvailability', showAvailability)
-          ..add('showCategory', showCategory)
-          ..add('showLabel', showLabel)
-          ..add('showPricing', showPricing)
-          ..add('showUnavailableNotice', showUnavailableNotice)
-          ..add('stylizedLabel', stylizedLabel)
-          ..add('confirmSelectionOnMobile', confirmSelectionOnMobile))
-        .toString();
-  }
-}
-
-class ObjectTooltipBuilder
-    implements Builder<ObjectTooltip, ObjectTooltipBuilder> {
-  _$ObjectTooltip? _$v;
-
-  bool? _showActionHint;
-  bool? get showActionHint => _$this._showActionHint;
-  set showActionHint(bool? showActionHint) =>
-      _$this._showActionHint = showActionHint;
-
-  bool? _showAvailability;
-  bool? get showAvailability => _$this._showAvailability;
-  set showAvailability(bool? showAvailability) =>
-      _$this._showAvailability = showAvailability;
-
-  bool? _showCategory;
-  bool? get showCategory => _$this._showCategory;
-  set showCategory(bool? showCategory) => _$this._showCategory = showCategory;
-
-  bool? _showLabel;
-  bool? get showLabel => _$this._showLabel;
-  set showLabel(bool? showLabel) => _$this._showLabel = showLabel;
-
-  bool? _showPricing;
-  bool? get showPricing => _$this._showPricing;
-  set showPricing(bool? showPricing) => _$this._showPricing = showPricing;
-
-  bool? _showUnavailableNotice;
-  bool? get showUnavailableNotice => _$this._showUnavailableNotice;
-  set showUnavailableNotice(bool? showUnavailableNotice) =>
-      _$this._showUnavailableNotice = showUnavailableNotice;
-
-  bool? _stylizedLabel;
-  bool? get stylizedLabel => _$this._stylizedLabel;
-  set stylizedLabel(bool? stylizedLabel) =>
-      _$this._stylizedLabel = stylizedLabel;
-
-  bool? _confirmSelectionOnMobile;
-  bool? get confirmSelectionOnMobile => _$this._confirmSelectionOnMobile;
-  set confirmSelectionOnMobile(bool? confirmSelectionOnMobile) =>
-      _$this._confirmSelectionOnMobile = confirmSelectionOnMobile;
-
-  ObjectTooltipBuilder();
-
-  ObjectTooltipBuilder get _$this {
-    final $v = _$v;
-    if ($v != null) {
-      _showActionHint = $v.showActionHint;
-      _showAvailability = $v.showAvailability;
-      _showCategory = $v.showCategory;
-      _showLabel = $v.showLabel;
-      _showPricing = $v.showPricing;
-      _showUnavailableNotice = $v.showUnavailableNotice;
-      _stylizedLabel = $v.stylizedLabel;
-      _confirmSelectionOnMobile = $v.confirmSelectionOnMobile;
-      _$v = null;
-    }
-    return this;
-  }
-
-  @override
-  void replace(ObjectTooltip other) {
-    ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$ObjectTooltip;
-  }
-
-  @override
-  void update(void Function(ObjectTooltipBuilder)? updates) {
-    if (updates != null) updates(this);
-  }
-
-  @override
-  ObjectTooltip build() => _build();
-
-  _$ObjectTooltip _build() {
-    final _$result = _$v ??
-        new _$ObjectTooltip._(
-          showActionHint: BuiltValueNullFieldError.checkNotNull(
-              showActionHint, r'ObjectTooltip', 'showActionHint'),
-          showAvailability: BuiltValueNullFieldError.checkNotNull(
-              showAvailability, r'ObjectTooltip', 'showAvailability'),
-          showCategory: BuiltValueNullFieldError.checkNotNull(
-              showCategory, r'ObjectTooltip', 'showCategory'),
-          showLabel: BuiltValueNullFieldError.checkNotNull(
-              showLabel, r'ObjectTooltip', 'showLabel'),
-          showPricing: BuiltValueNullFieldError.checkNotNull(
-              showPricing, r'ObjectTooltip', 'showPricing'),
-          showUnavailableNotice: BuiltValueNullFieldError.checkNotNull(
-              showUnavailableNotice, r'ObjectTooltip', 'showUnavailableNotice'),
-          stylizedLabel: BuiltValueNullFieldError.checkNotNull(
-              stylizedLabel, r'ObjectTooltip', 'stylizedLabel'),
-          confirmSelectionOnMobile: BuiltValueNullFieldError.checkNotNull(
-              confirmSelectionOnMobile,
-              r'ObjectTooltip',
-              'confirmSelectionOnMobile'),
-        );
-    replace(_$result);
-    return _$result;
-  }
-}
-
-class _$LegendForCategory extends LegendForCategory {
-  @override
-  final bool hideNonSelectableCategories;
-  @override
-  final bool hidePricing;
-
-  factory _$LegendForCategory(
-          [void Function(LegendForCategoryBuilder)? updates]) =>
-      (new LegendForCategoryBuilder()..update(updates))._build();
-
-  _$LegendForCategory._(
-      {required this.hideNonSelectableCategories, required this.hidePricing})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(hideNonSelectableCategories,
-        r'LegendForCategory', 'hideNonSelectableCategories');
-    BuiltValueNullFieldError.checkNotNull(
-        hidePricing, r'LegendForCategory', 'hidePricing');
-  }
-
-  @override
-  LegendForCategory rebuild(void Function(LegendForCategoryBuilder) updates) =>
-      (toBuilder()..update(updates)).build();
-
-  @override
-  LegendForCategoryBuilder toBuilder() =>
-      new LegendForCategoryBuilder()..replace(this);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(other, this)) return true;
-    return other is LegendForCategory &&
-        hideNonSelectableCategories == other.hideNonSelectableCategories &&
-        hidePricing == other.hidePricing;
-  }
-
-  @override
-  int get hashCode {
-    var _$hash = 0;
-    _$hash = $jc(_$hash, hideNonSelectableCategories.hashCode);
-    _$hash = $jc(_$hash, hidePricing.hashCode);
-    _$hash = $jf(_$hash);
-    return _$hash;
-  }
-
-  @override
-  String toString() {
-    return (newBuiltValueToStringHelper(r'LegendForCategory')
-          ..add('hideNonSelectableCategories', hideNonSelectableCategories)
-          ..add('hidePricing', hidePricing))
-        .toString();
-  }
-}
-
-class LegendForCategoryBuilder
-    implements Builder<LegendForCategory, LegendForCategoryBuilder> {
-  _$LegendForCategory? _$v;
-
-  bool? _hideNonSelectableCategories;
-  bool? get hideNonSelectableCategories => _$this._hideNonSelectableCategories;
-  set hideNonSelectableCategories(bool? hideNonSelectableCategories) =>
-      _$this._hideNonSelectableCategories = hideNonSelectableCategories;
-
-  bool? _hidePricing;
-  bool? get hidePricing => _$this._hidePricing;
-  set hidePricing(bool? hidePricing) => _$this._hidePricing = hidePricing;
-
-  LegendForCategoryBuilder();
-
-  LegendForCategoryBuilder get _$this {
-    final $v = _$v;
-    if ($v != null) {
-      _hideNonSelectableCategories = $v.hideNonSelectableCategories;
-      _hidePricing = $v.hidePricing;
-      _$v = null;
-    }
-    return this;
-  }
-
-  @override
-  void replace(LegendForCategory other) {
-    ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$LegendForCategory;
-  }
-
-  @override
-  void update(void Function(LegendForCategoryBuilder)? updates) {
-    if (updates != null) updates(this);
-  }
-
-  @override
-  LegendForCategory build() => _build();
-
-  _$LegendForCategory _build() {
-    final _$result = _$v ??
-        new _$LegendForCategory._(
-          hideNonSelectableCategories: BuiltValueNullFieldError.checkNotNull(
-              hideNonSelectableCategories,
-              r'LegendForCategory',
-              'hideNonSelectableCategories'),
-          hidePricing: BuiltValueNullFieldError.checkNotNull(
-              hidePricing, r'LegendForCategory', 'hidePricing'),
-        );
-    replace(_$result);
-    return _$result;
-  }
-}
-
-class _$BestAvailable extends BestAvailable {
-  @override
-  final int number;
-  @override
-  final BuiltList<String> category;
-  @override
-  final TicketTypePricing ticketTypes;
-  @override
-  final bool clearSelection;
-
-  factory _$BestAvailable([void Function(BestAvailableBuilder)? updates]) =>
-      (new BestAvailableBuilder()..update(updates))._build();
-
-  _$BestAvailable._(
-      {required this.number,
-      required this.category,
-      required this.ticketTypes,
-      required this.clearSelection})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(number, r'BestAvailable', 'number');
-    BuiltValueNullFieldError.checkNotNull(
-        category, r'BestAvailable', 'category');
-    BuiltValueNullFieldError.checkNotNull(
-        ticketTypes, r'BestAvailable', 'ticketTypes');
-    BuiltValueNullFieldError.checkNotNull(
-        clearSelection, r'BestAvailable', 'clearSelection');
-  }
-
-  @override
-  BestAvailable rebuild(void Function(BestAvailableBuilder) updates) =>
-      (toBuilder()..update(updates)).build();
-
-  @override
-  BestAvailableBuilder toBuilder() => new BestAvailableBuilder()..replace(this);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(other, this)) return true;
-    return other is BestAvailable &&
-        number == other.number &&
-        category == other.category &&
-        ticketTypes == other.ticketTypes &&
-        clearSelection == other.clearSelection;
-  }
-
-  @override
-  int get hashCode {
-    var _$hash = 0;
-    _$hash = $jc(_$hash, number.hashCode);
-    _$hash = $jc(_$hash, category.hashCode);
-    _$hash = $jc(_$hash, ticketTypes.hashCode);
-    _$hash = $jc(_$hash, clearSelection.hashCode);
-    _$hash = $jf(_$hash);
-    return _$hash;
-  }
-
-  @override
-  String toString() {
-    return (newBuiltValueToStringHelper(r'BestAvailable')
-          ..add('number', number)
-          ..add('category', category)
-          ..add('ticketTypes', ticketTypes)
-          ..add('clearSelection', clearSelection))
-        .toString();
-  }
-}
-
-class BestAvailableBuilder
-    implements Builder<BestAvailable, BestAvailableBuilder> {
-  _$BestAvailable? _$v;
-
-  int? _number;
-  int? get number => _$this._number;
-  set number(int? number) => _$this._number = number;
-
-  ListBuilder<String>? _category;
-  ListBuilder<String> get category =>
-      _$this._category ??= new ListBuilder<String>();
-  set category(ListBuilder<String>? category) => _$this._category = category;
-
-  TicketTypePricingBuilder? _ticketTypes;
-  TicketTypePricingBuilder get ticketTypes =>
-      _$this._ticketTypes ??= new TicketTypePricingBuilder();
-  set ticketTypes(TicketTypePricingBuilder? ticketTypes) =>
-      _$this._ticketTypes = ticketTypes;
-
-  bool? _clearSelection;
-  bool? get clearSelection => _$this._clearSelection;
-  set clearSelection(bool? clearSelection) =>
-      _$this._clearSelection = clearSelection;
-
-  BestAvailableBuilder();
-
-  BestAvailableBuilder get _$this {
-    final $v = _$v;
-    if ($v != null) {
-      _number = $v.number;
-      _category = $v.category.toBuilder();
-      _ticketTypes = $v.ticketTypes.toBuilder();
-      _clearSelection = $v.clearSelection;
-      _$v = null;
-    }
-    return this;
-  }
-
-  @override
-  void replace(BestAvailable other) {
-    ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$BestAvailable;
-  }
-
-  @override
-  void update(void Function(BestAvailableBuilder)? updates) {
-    if (updates != null) updates(this);
-  }
-
-  @override
-  BestAvailable build() => _build();
-
-  _$BestAvailable _build() {
-    _$BestAvailable _$result;
-    try {
-      _$result = _$v ??
-          new _$BestAvailable._(
-            number: BuiltValueNullFieldError.checkNotNull(
-                number, r'BestAvailable', 'number'),
-            category: category.build(),
-            ticketTypes: ticketTypes.build(),
-            clearSelection: BuiltValueNullFieldError.checkNotNull(
-                clearSelection, r'BestAvailable', 'clearSelection'),
-          );
-    } catch (_) {
-      late String _$failedField;
-      try {
-        _$failedField = 'category';
-        category.build();
-        _$failedField = 'ticketTypes';
-        ticketTypes.build();
-      } catch (e) {
-        throw new BuiltValueNestedFieldError(
-            r'BestAvailable', _$failedField, e.toString());
-      }
-      rethrow;
-    }
-    replace(_$result);
-    return _$result;
-  }
-}
-
-class _$SelectionValidator extends SelectionValidator {
-  @override
-  final String type;
-
-  factory _$SelectionValidator(
-          [void Function(SelectionValidatorBuilder)? updates]) =>
-      (new SelectionValidatorBuilder()..update(updates))._build();
-
-  _$SelectionValidator._({required this.type}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(type, r'SelectionValidator', 'type');
-  }
-
-  @override
-  SelectionValidator rebuild(
-          void Function(SelectionValidatorBuilder) updates) =>
-      (toBuilder()..update(updates)).build();
-
-  @override
-  SelectionValidatorBuilder toBuilder() =>
-      new SelectionValidatorBuilder()..replace(this);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(other, this)) return true;
-    return other is SelectionValidator && type == other.type;
-  }
-
-  @override
-  int get hashCode {
-    var _$hash = 0;
-    _$hash = $jc(_$hash, type.hashCode);
-    _$hash = $jf(_$hash);
-    return _$hash;
-  }
-
-  @override
-  String toString() {
-    return (newBuiltValueToStringHelper(r'SelectionValidator')
-          ..add('type', type))
-        .toString();
-  }
-}
-
-class SelectionValidatorBuilder
-    implements Builder<SelectionValidator, SelectionValidatorBuilder> {
-  _$SelectionValidator? _$v;
-
-  String? _type;
-  String? get type => _$this._type;
-  set type(String? type) => _$this._type = type;
-
-  SelectionValidatorBuilder();
-
-  SelectionValidatorBuilder get _$this {
-    final $v = _$v;
-    if ($v != null) {
-      _type = $v.type;
-      _$v = null;
-    }
-    return this;
-  }
-
-  @override
-  void replace(SelectionValidator other) {
-    ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$SelectionValidator;
-  }
-
-  @override
-  void update(void Function(SelectionValidatorBuilder)? updates) {
-    if (updates != null) updates(this);
-  }
-
-  @override
-  SelectionValidator build() => _build();
-
-  _$SelectionValidator _build() {
-    final _$result = _$v ??
-        new _$SelectionValidator._(
-          type: BuiltValueNullFieldError.checkNotNull(
-              type, r'SelectionValidator', 'type'),
-        );
     replace(_$result);
     return _$result;
   }

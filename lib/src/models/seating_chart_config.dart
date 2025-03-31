@@ -1,319 +1,291 @@
-import 'dart:io';
-
-import 'package:built_collection/built_collection.dart';
+import '../../seatsio.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
-import 'package:seatsio/src/models/hold_token.dart';
-import 'package:seatsio/src/models/seatsio_region.dart';
-
-import 'pricing_for_category.dart';
-import 'seating_chart.dart';
-import 'seatsio_category.dart';
-import 'seatsio_object.dart';
-import 'seatsio_ticket_type.dart';
 
 part 'seating_chart_config.g.dart';
 
-typedef VoidCallback = void Function();
-typedef SeatsioObjectCallback = void Function(SeatsioObject);
-typedef SeatingChartCallback = void Function(SeatingChart);
-typedef SeatsioCategoryListCallback = void Function(BuiltList<SeatsioCategory>?);
-typedef SelectionValidatorTypesCallback = void Function(List<SelectionValidatorType>);
-typedef SeatsioObjectsBoolCallback = void Function(List<SeatsioObject>, bool);
-typedef SeatsioObjectTicketTypeCallback = void Function(SeatsioObject, SeatsioTicketType?);
-typedef SeatsioObjectsTicketTypesCallback = void Function(List<SeatsioObject>, List<SeatsioTicketType>?);
-typedef SeatsioHoldTokenCallback = void Function(HoldToken holdToken);
-
-enum SelectionValidatorType {
-  consecutiveSeats,
-  noOrphanSeats,
-}
-
 abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingChartConfigBuilder> {
-  const SeatingChartConfig._();
-
-  factory SeatingChartConfig([updates(SeatingChartConfigBuilder b)]) = _$SeatingChartConfig;
-
+  // Fundamentals & General Purpose
   String get workspaceKey;
-  String get event;
-  SeatsioRegion get region;
 
-  String? get language;
-  BuiltMap<String, String>? get messages; // TODO does not seem to be passed to the chart
+  Region get region;
 
-  BuiltList<PricingForCategory>? get pricing;
+  String? get event;
 
-  @BuiltValueField(wireName: 'priceFormatter', serialize: false)
+  List<String>? get events;
+
+  String? get mode;
+
+  // TODO extraConfig
+
+  // Pricing
+  List<PricingForCategory>? get pricing;
+
+  @BuiltValueField(serialize: false)
   Function(num price)? get priceFormatter;
 
+  bool? get showSectionPricingOverlay;
+
+  // Selection
+  List<String>? get selectedObjects;
+
+  List<String>? get selectableObjects;
+
+  List<SelectionValidator>? get selectionValidators;
+
+  MaxSelectedObjects? get maxSelectedObjects;
+
   int? get numberOfPlacesToSelect;
-  bool? get objectWithoutPricingSelectable;
 
-  BuiltList<SelectedObject>? get selectedObjects;
+  bool? get multiSelectEnabled;
 
-  ObjectTooltip? get objectTooltip; // TODO deprecated replace with objectPopover
+  // TODO canGASelectionBeIncreased ?
 
-  String? get priceLevelsTooltipMessage;
+  bool? get objectsWithoutPricingSelectable;
 
-  int? get maxSelectedObjects;
-  List<Map<String, dynamic>>? get maxSelectedObjectList;
+  // Popovers and Tooltips
+  @BuiltValueField(wireName: 'objectPopover')
+  ObjectPopover? get objectPopover;
 
-  BuiltList<String>? get availableCategories;
-  BuiltList<String>? get unavailableCategories;
-  bool? get alwaysShowSectionContents;
-  String? get showSectionContents; // TODO enum this
-  bool? get showLegend;
-  LegendForCategory? get legend;
-  bool? get showMinimap;
-  String? get inputDevice; // TODO enum this
+  @BuiltValueField(serialize: false)
+  Function(SeatsioObject price)? get popoverInfo;
 
   bool? get showActiveSectionTooltipOnMobile;
 
+  // Language and Text
+  String? get language; // TODO make this an enum
 
-  BuiltList<SelectionValidator>? get selectionValidators;
+  Map<String, String> get messages;
 
-  String? get mode; // TODO enum this
+  // Categories
+  CategoryFilter? get categoryFilter;
 
-  bool? get holdOnSelectForGAs;
+  List<String>? get availableCategories;
+
+  List<String>? get unavailableCategories;
+
+  List<String>? get filteredCategories;
+
+  // Channels
+  List<String>? get channels;
+
+  // TODO everything under Categories https://docs.seats.io/docs/renderer/categoryfilter
+
+  // TODO channels https://docs.seats.io/docs/renderer/config-channels
+
+  // TODO everything under Object overrides https://docs.seats.io/docs/renderer/config-objectcolor
+
+  @BuiltValueField(serialize: false)
+  String? get objectColor;
+
+  @BuiltValueField(serialize: false)
+  String? get sectionColor;
+
+  @BuiltValueField(serialize: false)
+  String? get objectLabel;
+
+  @BuiltValueField(serialize: false)
+  String? get objectIcon;
+
+  // Visibility
+  ShowSectionContents? get showSectionContents;
+
+  bool? get hideSectionsNotForSale;
+
+  @BuiltValueField(serialize: false)
+  String? get isObjectVisible;
+
+  bool? get showSeatLabels;
+
+  // Session
+  Session? get session;
 
   String? get holdToken;
 
-  String? get session;
+  bool? get holdOnSelectForGAs;
 
-  String? get objectLabel;
-
-  String? get objectIcon;
-
-  String? get isObjectVisible;
-
-  String? get isObjectSelectable;
-
-  String? get objectColor;
-
-  String? get sectionColor;
-
-  BuiltMap<String, String>? get extraConfig;
+  //Customization
+  bool? get showMinimap;
 
   bool? get showFullScreenButton;
 
-  BuiltList<String>? get channels;
+  bool? get showLegend;
 
-  bool get enableChartRenderedCallback;
+  LegendConfig? get legendConfig;
 
-  bool get enableChartRenderingFailedCallback;
+  bool? get showZoomOutButtonOnMobile;
 
-  bool get enableObjectClickedCallback;
+  // styling
+  SeatsioColorScheme? get colorScheme;
 
-  bool get enableObjectSelectedCallback;
+  SeatsioColors? get colors;
 
-  bool get enableObjectDeselectedCallback;
+  // TODO what with StylePreset and Style?
 
-  bool get enableSelectionValidCallback;
+  // Floors
+  String? get activeFloor;
 
-  bool get enableSelectionInvalidCallback;
+  bool? get lockActiveFloor;
 
-  bool get enableBestAvailableSelectedCallback;
+  bool? get showFloorElevator;
 
-  bool get enableBestAvailableSelectionFailedCallback;
+  // TODO chart.goToFloor(): https://docs.seats.io/docs/renderer/chart-gotofloor
+  // TODO chart.goToAllFloorsView() https://docs.seats.io/docs/renderer/chart-gotoallfloorsview
 
-  bool get enableHoldSucceededCallback;
+  // TODO everything under Prompts API https://docs.seats.io/docs/renderer/prompts-api/onPlacesPrompt
+  // TODO everything under Spotlight https://docs.seats.io/docs/renderer/spotlight (chart.xxx() methods)
 
-  bool get enableHoldFailedCallback;
+  @BuiltValueField(serialize: false)
+  Function()? get onChartRendered;
 
-  bool get enableHoldTokenExpiredCallback;
+  @BuiltValueField(serialize: false)
+  Function()? get onChartRenderingFailed;
 
-  bool get enableSessionInitializedCallback;
+  @BuiltValueField(serialize: false)
+  Function()? get onChartRerenderingStarted;
 
-  bool get enableReleaseHoldSucceededCallback;
+  @BuiltValueField(serialize: false)
+  Function(SeatsioObject object)? get onObjectClicked;
 
-  bool get enableReleaseHoldFailedCallback;
+  @BuiltValueField(serialize: false)
+  Function(SeatsioObject object, SelectedTicketType? ticketType)? get onObjectSelected;
 
-  bool get enableSelectedObjectBookedCallback;
+  @BuiltValueField(serialize: false)
+  Function(SeatsioObject object, SelectedTicketType? ticketType)? get onObjectDeselected;
 
-  factory SeatingChartConfig.init() {
-    return SeatingChartConfig((b) => b
-      ..workspaceKey = ""
-      ..event = ""
-      ..region = SeatsioRegion.eu
-      ..language = 'en'
-      ..enableChartRenderedCallback = true
-      ..enableChartRenderingFailedCallback = true
-      ..enableObjectClickedCallback = true
-      ..enableObjectSelectedCallback = true
-      ..enableObjectDeselectedCallback = true
-      ..enableSelectionValidCallback = false
-      ..enableSelectionInvalidCallback = false
-      ..enableBestAvailableSelectedCallback = false
-      ..enableBestAvailableSelectionFailedCallback = false
-      ..enableHoldSucceededCallback = false
-      ..enableHoldFailedCallback = false
-      ..enableHoldTokenExpiredCallback = true
-      ..enableSessionInitializedCallback = true
-      ..enableReleaseHoldSucceededCallback = false
-      ..enableReleaseHoldFailedCallback = false
-      ..enableSelectedObjectBookedCallback = false);
+  @BuiltValueField(serialize: false)
+  Function(SeatsioObject object)? get onObjectStatusChanged;
+
+  @BuiltValueField(serialize: false)
+  Function(SeatsioObject object)? get onObjectBooked;
+
+  @BuiltValueField(serialize: false)
+  Function(HoldToken object)? get onSessionInitialized;
+
+  @BuiltValueField(serialize: false)
+  Function()? get onHoldCallsInProgress;
+
+  @BuiltValueField(serialize: false)
+  Function()? get onHoldCallsComplete;
+
+  @BuiltValueField(serialize: false)
+  Function(List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes)? get onHoldSucceeded;
+
+  @BuiltValueField(serialize: false)
+  Function(List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes)? get onHoldFailed;
+
+  @BuiltValueField(serialize: false)
+  Function()? get onHoldTokenExpired;
+
+  @BuiltValueField(serialize: false)
+  Function(List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes)? get onReleaseHoldSucceeded;
+
+  @BuiltValueField(serialize: false)
+  Function(List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes)? get onReleaseHoldFailed;
+
+  @BuiltValueField(serialize: false)
+  Function()? get onSelectionValid;
+
+  @BuiltValueField(serialize: false)
+  Function(List<String> violations)? get onSelectionInvalid;
+
+  @BuiltValueField(serialize: false)
+  Function()? get onFullScreenOpened;
+
+  @BuiltValueField(serialize: false)
+  Function()? get onFullScreenClosed;
+
+  @BuiltValueField(serialize: false)
+  Function(List<SeatsioCategory>)? get onFilteredCategoriesChanged;
+
+
+  // TODO everything under Renderer Properties https://docs.seats.io/docs/renderer/chart-properties-chartselectedobjects
+
+  // TODO everything under Renderer Methods https://docs.seats.io/docs/renderer/chart-properties-chartrender
+
+  SeatingChartConfig._();
+
+  factory SeatingChartConfig([void Function(SeatingChartConfigBuilder)? updates]) {
+    final instance = _$SeatingChartConfig(updates ?? (b) {});
+
+    if (instance.workspaceKey.isEmpty) {
+      throw ArgumentError('workspaceKey is required and cannot be empty.');
+    }
+    if ((instance.event?.isEmpty ?? true) == (instance.events?.isEmpty ?? true)) {
+      throw ArgumentError(
+        'Either "event" or "events" must be provided, but not both.',
+      );
+    }
+
+    return instance;
   }
 
-  Map<String, Object?> toMap() {
-    final configMap = {
-      "workspaceKey": workspaceKey,
-      "event": event,
-      "region": region,
-      "language": language ?? "en",
-      "holdToken": holdToken ?? "",
-      "session": session ?? "none",
-      "mode": mode,
-      "showLegend": showLegend ?? true,
-      "showFullScreenButton": showFullScreenButton ?? true,
-      "showMinimap": showMinimap ?? true,
-      "inputDevice": inputDevice ?? 'auto',
-      "showSectionContents": showSectionContents ?? "auto",
-      "priceFormatter": priceFormatter,
-    };
-
-    if (pricing != null) {
-      configMap["pricing"] = pricing?.toList();
-    }
-
-    if (objectIcon != null) {
-      configMap["objectIcon"] = objectIcon;
-      if (extraConfig == null) {
-        configMap["extraConfig"] = {};
-      }
-    }
-
-    if (maxSelectedObjectList != null) {
-      configMap["maxSelectedObjects"] = maxSelectedObjectList;
-    } else if (maxSelectedObjects != null) {
-      configMap["maxSelectedObjects"] = maxSelectedObjects;
-    }
-
-    if (extraConfig != null) {
-      configMap["extraConfig"] = extraConfig!.toMap().toString();
-    }
-
-    if (availableCategories != null && availableCategories!.isNotEmpty) {
-      configMap["availableCategories"] = availableCategories!.toList();
-    }
-
-    if (unavailableCategories != null && unavailableCategories!.isNotEmpty) {
-      configMap["unavailableCategories"] = unavailableCategories?.toList();
-    }
-
-    if (Platform.isAndroid) {
-      configMap["_client"] = "android";
-    }
-
-    if (Platform.isIOS) {
-      configMap["_library"] = "ios";
-    }
-
-    if (numberOfPlacesToSelect != null) {
-      configMap["numberOfPlacesToSelect"] = numberOfPlacesToSelect;
-    }
-
-    if (selectedObjects != null) {
-      configMap["selectedObjects"] = selectedObjects!.map((obj) {
-        if (obj.ticketType != null) {
-          final Map<String, dynamic> map = {
-            "label": obj.label,
-            "ticketType": obj.ticketType.toString(),
-          };
-          if (obj.amount != null) {
-            map["amount"] = obj.amount!;
-          }
-          return map;
-        } else {
-          return obj.label;
-        }
-      }).toList();
-    }
-
-    return configMap;
+  static void _initializeBuilder(SeatingChartConfigBuilder b) {
+    b.region = Region.eu;
+    b.messages = {};
   }
 
   static Serializer<SeatingChartConfig> get serializer => _$seatingChartConfigSerializer;
-}
 
-abstract class SelectedObject implements Built<SelectedObject, SelectedObjectBuilder> {
-  SelectedObject._();
-
-  factory SelectedObject([updates(SelectedObjectBuilder b)]) = _$SelectedObject;
-
-  String get label;
-
-  String? get ticketType;
-
-  int? get amount;
-
-  static Serializer<SelectedObject> get serializer => _$selectedObjectSerializer;
-
-  @override
-  String toString() {
-    return 'SelectedObject(label: $label, ticketType: $ticketType, amount: $amount)';
+  Map<String, dynamic> toJson() {
+    return {
+      // fundamentals & general purpose
+      "workspaceKey": workspaceKey,
+      if (event != null) "event": event,
+      if (events != null) "events": events,
+      if (mode != null) "mode": mode,
+      // pricing
+      if (pricing != null) "pricing": pricing!.map((p) => p.toJson()).toList(),
+      if (showSectionPricingOverlay != null) "showSectionPricingOverlay": showSectionPricingOverlay,
+      // selection
+      if (selectedObjects != null) "selectedObjects": selectedObjects,
+      if (selectableObjects != null) "selectableObjects": selectableObjects,
+      if (selectionValidators != null) "selectionValidators": selectionValidators!.map((v) => v.toJson()).toList(),
+      if (maxSelectedObjects != null) "maxSelectedObjects": maxSelectedObjects!.toJson(),
+      if (numberOfPlacesToSelect != null) "numberOfPlacesToSelect": numberOfPlacesToSelect,
+      if (multiSelectEnabled != null) "multiSelectEnabled": multiSelectEnabled,
+      if (objectsWithoutPricingSelectable != null) "objectsWithoutPricingSelectable": objectsWithoutPricingSelectable,
+      // popovers and tooltips
+      if (objectPopover != null) "objectPopover": objectPopover!.toJson(),
+      if (showActiveSectionTooltipOnMobile != null)
+        "showActiveSectionTooltipOnMobile": showActiveSectionTooltipOnMobile,
+      // language and text
+      if (language != null) "language": language,
+      if (messages.isNotEmpty) "messages": messages,
+      // categories
+      if (categoryFilter != null) "categoryFilter": categoryFilter!.toJson(),
+      if (availableCategories != null) "availableCategories": availableCategories,
+      if (unavailableCategories != null) "unavailableCategories": unavailableCategories,
+      if (filteredCategories != null) "filteredCategories": filteredCategories,
+      // channels
+      if (channels != null) "channels": channels,
+      // object overrides
+      if (objectColor != null) "objectColor": objectColor,
+      if (sectionColor != null) "sectionColor": sectionColor,
+      if (objectLabel != null) "objectLabel": objectLabel,
+      if (objectIcon != null) "objectIcon": objectIcon,
+      // visibility
+      if (showSectionContents != null) "showSectionContents": showSectionContents!.toJson(),
+      if (hideSectionsNotForSale != null) "hideSectionsNotForSale": hideSectionsNotForSale,
+      if (isObjectVisible != null) "isObjectVisible": isObjectVisible,
+      if (showSeatLabels != null) "showSeatLabels": showSeatLabels,
+      // session
+      if (session != null) "session": session!.toJson(),
+      if (holdToken != null) "holdToken": holdToken,
+      if (holdOnSelectForGAs != null) "holdOnSelectForGAs": holdOnSelectForGAs,
+      // customization
+      if (showMinimap != null) "showMinimap": showMinimap,
+      if (showFullScreenButton != null) "showFullScreenButton": showFullScreenButton,
+      if (showLegend != null) "showLegend": showLegend,
+      if (legendConfig != null) "legendConfig": legendConfig!.toJson(),
+      if (showZoomOutButtonOnMobile != null) "showZoomOutButtonOnMobile": showZoomOutButtonOnMobile,
+      // styling
+      if (colorScheme != null) "colorScheme": colorScheme!.toJson(),
+      if (colors != null) "colors": colors!.toJson(),
+      // floors
+      if (activeFloor != null) "activeFloor": activeFloor,
+      if (lockActiveFloor != null) "lockActiveFloor": lockActiveFloor,
+      if (showFloorElevator != null) "showFloorElevator": showFloorElevator,
+    };
   }
-}
-
-abstract class ObjectTooltip implements Built<ObjectTooltip, ObjectTooltipBuilder> {
-  ObjectTooltip._();
-
-  factory ObjectTooltip([updates(ObjectTooltipBuilder b)]) = _$ObjectTooltip;
-
-  bool get showActionHint;
-
-  bool get showAvailability;
-
-  bool get showCategory;
-
-  bool get showLabel;
-
-  bool get showPricing;
-
-  bool get showUnavailableNotice;
-
-  bool get stylizedLabel;
-
-  bool get confirmSelectionOnMobile;
-
-  static Serializer<ObjectTooltip> get serializer => _$objectTooltipSerializer;
-}
-
-abstract class LegendForCategory implements Built<LegendForCategory, LegendForCategoryBuilder> {
-  LegendForCategory._();
-
-  factory LegendForCategory([updates(LegendForCategoryBuilder b)]) = _$LegendForCategory;
-
-  bool get hideNonSelectableCategories;
-
-  bool get hidePricing;
-
-  static Serializer<LegendForCategory> get serializer => _$legendForCategorySerializer;
-}
-
-abstract class BestAvailable implements Built<BestAvailable, BestAvailableBuilder> {
-  BestAvailable._();
-
-  factory BestAvailable([updates(BestAvailableBuilder b)]) = _$BestAvailable;
-
-  int get number;
-
-  BuiltList<String> get category;
-
-  TicketTypePricing get ticketTypes;
-
-  bool get clearSelection;
-
-  static Serializer<BestAvailable> get serializer => _$bestAvailableSerializer;
-}
-
-abstract class SelectionValidator implements Built<SelectionValidator, SelectionValidatorBuilder> {
-  SelectionValidator._();
-
-  factory SelectionValidator([updates(SelectionValidatorBuilder b)]) = _$SelectionValidator;
-
-  /// https://docs.seats.io/docs/renderer/config-selectionvalidators
-  /// Possible values: 'noOrphanSeats', 'consecutiveSeats'
-  String get type;
-
-  static Serializer<SelectionValidator> get serializer => _$selectionValidatorSerializer;
 }

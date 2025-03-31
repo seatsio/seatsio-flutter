@@ -1,7 +1,8 @@
-import 'package:example/seatsio_demo_page.dart';
 import 'package:example/small_theatre_minimal.dart';
+import 'package:example/small_theatre_renderer_methods.dart';
 import 'package:flutter/material.dart';
 
+import 'large_theatre_maximal.dart';
 
 void main() {
   runApp(SeatsioDemoApp());
@@ -28,7 +29,8 @@ class SeatsioDemoHome extends StatelessWidget {
       body: ListView(
         children: [
           _exampleButton(context, 'Small Theatre - minimal config', (context) => SmallTheatreMinimal()),
-          _exampleButton(context, 'Playground', (context) => SmallTheatrePlayground(title: 'Playground')),
+          _exampleButton(context, 'Large Theatre - plenty of config', (context) => LargeTheatreMaximal()),
+          _exampleButton(context, 'Small Theatre - renderer methods', (context) => SmallTheatreRendererMethods())
         ],
       ),
     );

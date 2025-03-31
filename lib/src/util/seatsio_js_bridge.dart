@@ -1,83 +1,253 @@
 import '../models/seating_chart_config.dart';
 
 class SeatsioJsBridge {
-  /// 将callback转成字符串
-  static List<String> buildCallbacksConfiguration(
-      SeatingChartConfig chartConfig) {
+  static List<String> buildCallbacksConfiguration(SeatingChartConfig chartConfig) {
     final List<String> callbacks = [];
 
-    if (chartConfig.enableChartRenderedCallback) {
-      callbacks.add(buildCallbackConfigAsJS("onChartRendered"));
+    if (chartConfig.priceFormatter != null) {
+      callbacks.add("""
+        "priceFormatter": (price) => {
+          promiseCounter++;
+          window.callbackChannel.postMessage(JSON.stringify({
+            type: "priceFormatterRequested",
+            data: {
+              promiseId: promiseCounter,
+              price: price
+            }
+          }));
+          return new Promise((resolve) => {
+            promises[promiseCounter] = resolve;
+          });
+        }        
+      """);
     }
 
-    if (chartConfig.enableChartRenderingFailedCallback) {
-      callbacks.add(buildCallbackConfigAsJS("onChartRenderingFailed"));
+    if (chartConfig.popoverInfo != null) {
+      callbacks.add("""
+        "popoverInfo": (object) => {
+          promiseCounter++;
+          window.callbackChannel.postMessage(JSON.stringify({
+            type: "popoverInfoRequested",
+            data: {
+              promiseId: promiseCounter,
+              object: object
+            }
+          }));
+          return new Promise((resolve) => {
+            promises[promiseCounter] = resolve;
+          });
+        }
+      """);
     }
 
-    if (chartConfig.enableObjectClickedCallback) {
-      callbacks.add(buildCallbackConfigAsJS("onObjectClicked"));
+    if (chartConfig.onChartRendered != null) {
+      callbacks.add("""
+        "onChartRendered": (chart) => {
+          window.onChartRenderedJsChannel.postMessage(JSON.stringify({
+            chart: chart
+          }));
+        }
+      """);
+    }
+    if (chartConfig.onChartRenderingFailed != null) {
+      callbacks.add("""
+        "onChartRenderingFailed": (chart) => {
+          window.onChartRenderingFailedJsChannel.postMessage(JSON.stringify({
+            chart: chart
+          }));
+        }
+      """);
+    }
+    if (chartConfig.onChartRerenderingStarted != null) {
+      callbacks.add("""
+        "onChartRerenderingStarted": (chart) => {
+          window.onChartRerenderingStartedJsChannel.postMessage(JSON.stringify({
+            chart: chart
+          }));
+        }
+      """);
     }
 
-    if (chartConfig.enableObjectSelectedCallback) {
-      callbacks.add(buildCallbackConfigAsJS("onObjectSelected"));
+    if (chartConfig.onObjectClicked != null) {
+      callbacks.add("""
+        "onObjectClicked": (object) => {
+          window.onObjectClickedJsChannel.postMessage(JSON.stringify({
+            object: object
+          }));
+        }
+      """);
     }
 
-    if (chartConfig.enableObjectDeselectedCallback) {
-      callbacks.add(buildCallbackConfigAsJS("onObjectDeselected"));
+    if (chartConfig.onObjectSelected != null) {
+      callbacks.add("""
+        "onObjectSelected": (object, ticketType) => {
+          window.onObjectSelectedJsChannel.postMessage(JSON.stringify({
+            object: object,
+            ticketType: ticketType
+          }));
+        }
+      """);
     }
 
-    if (chartConfig.enableSelectionValidCallback) {
-      callbacks.add(buildCallbackConfigAsJS("onSelectionValid"));
+    if (chartConfig.onObjectDeselected != null) {
+      callbacks.add("""
+        "onObjectDeselected": (object, ticketType) => {
+          window.onObjectDeselectedJsChannel.postMessage(JSON.stringify({
+            object: object,
+            ticketType: ticketType
+          }));
+        }
+      """);
     }
 
-    if (chartConfig.enableSelectionInvalidCallback) {
-      callbacks.add(buildCallbackConfigAsJS("onSelectionInvalid"));
+    if (chartConfig.onObjectStatusChanged != null) {
+      callbacks.add("""
+        "onObjectStatusChanged": (object) => {
+          window.onObjectStatusChangedJsChannel.postMessage(JSON.stringify({
+            object: object
+          }));
+        }
+      """);
     }
 
-    if (chartConfig.enableBestAvailableSelectedCallback) {
-      callbacks.add(buildCallbackConfigAsJS("onBestAvailableSelected"));
+    if (chartConfig.onObjectBooked != null) {
+      callbacks.add("""
+        "onObjectBooked": (object) => {
+          window.onObjectBookedJsChannel.postMessage(JSON.stringify({
+            object: object
+          }));
+        }
+      """);
     }
 
-    if (chartConfig.enableBestAvailableSelectionFailedCallback) {
-      callbacks.add(buildCallbackConfigAsJS("onBestAvailableSelectionFailed"));
+    if (chartConfig.onSessionInitialized != null) {
+      callbacks.add("""
+      "onSessionInitialized": (holdToken) => {
+        window.onSessionInitializedJsChannel.postMessage(JSON.stringify({
+          holdToken: holdToken
+        }));
+      }
+      """);
     }
 
-    if (chartConfig.enableHoldSucceededCallback) {
-      callbacks.add(buildCallbackConfigAsJS("onHoldSucceeded"));
+    if (chartConfig.onHoldCallsInProgress != null) {
+      callbacks.add("""
+      "onHoldCallsInProgress": () => {
+        window.onHoldCallsInProgressJsChannel.postMessage(JSON.stringify({
+        }));
+      }
+      """);
     }
 
-    if (chartConfig.enableHoldFailedCallback) {
-      callbacks.add(buildCallbackConfigAsJS("onHoldFailed"));
+    if (chartConfig.onHoldCallsComplete != null) {
+      callbacks.add("""
+      "onHoldCallsComplete": () => {
+        window.onHoldCallsCompleteJsChannel.postMessage(JSON.stringify({
+        }));
+      }
+      """);
     }
 
-    if (chartConfig.enableHoldTokenExpiredCallback) {
-      callbacks.add(buildCallbackConfigAsJS("onHoldTokenExpired"));
+    if(chartConfig.onHoldSucceeded != null) {
+      callbacks.add("""
+        "onHoldSucceeded": (objects, ticketTypes) => {
+          window.onHoldSucceededJsChannel.postMessage(JSON.stringify({
+            objects: objects,
+            ticketTypes: ticketTypes
+          }));
+        }      
+      """);
     }
 
-    if (chartConfig.enableSessionInitializedCallback) {
-      callbacks.add(buildCallbackConfigAsJS("onSessionInitialized"));
+    if(chartConfig.onHoldFailed != null) {
+      callbacks.add("""
+        "onHoldFailed": (objects, ticketTypes) => {
+          window.onHoldFailedJsChannel.postMessage(JSON.stringify({
+            objects: objects,
+            ticketTypes: ticketTypes
+          }));
+        }      
+      """);
     }
 
-    if (chartConfig.enableReleaseHoldSucceededCallback) {
-      callbacks.add(buildCallbackConfigAsJS("onReleaseHoldSucceeded"));
+    if (chartConfig.onHoldTokenExpired != null) {
+      callbacks.add("""
+      "onHoldTokenExpired": () => {
+        window.onHoldTokenExpiredJsChannel.postMessage(JSON.stringify({
+        }));
+      }
+      """);
     }
 
-    if (chartConfig.enableReleaseHoldFailedCallback) {
-      callbacks.add(buildCallbackConfigAsJS("onReleaseHoldFailed"));
+    if(chartConfig.onReleaseHoldSucceeded != null) {
+      callbacks.add("""
+        "onReleaseHoldSucceeded": (objects, ticketTypes) => {
+          window.onReleaseHoldSucceededJsChannel.postMessage(JSON.stringify({
+            objects: objects,
+            ticketTypes: ticketTypes
+          }));
+        }      
+      """);
     }
 
-    if (chartConfig.enableSelectedObjectBookedCallback) {
-      callbacks.add(buildCallbackConfigAsJS("onSelectedObjectBooked"));
+    if(chartConfig.onReleaseHoldFailed != null) {
+      callbacks.add("""
+        "onReleaseHoldFailed": (objects, ticketTypes) => {
+          window.onReleaseHoldFailedJsChannel.postMessage(JSON.stringify({
+            objects: objects,
+            ticketTypes: ticketTypes
+          }));
+        }      
+      """);
+    }
+
+    if (chartConfig.onSelectionValid != null) {
+      callbacks.add("""
+      "onSelectionValid": () => {
+        window.onSelectionValidJsChannel.postMessage(JSON.stringify({
+        }));
+      }
+      """);
+    }
+
+    if (chartConfig.onSelectionInvalid != null) {
+      callbacks.add("""
+      "onSelectionInvalid": (violations) => {
+        window.onSelectionInvalidJsChannel.postMessage(JSON.stringify({
+          violations: violations
+        }));
+      }
+      """);
+    }
+
+    if (chartConfig.onFullScreenOpened != null) {
+      callbacks.add("""
+      "onFullScreenOpened": () => {
+        window.onFullScreenOpenedJsChannel.postMessage(JSON.stringify({
+        }));
+      }
+      """);
+    }
+
+    if (chartConfig.onFullScreenClosed != null) {
+      callbacks.add("""
+      "onFullScreenClosed": () => {
+        window.onFullScreenClosedJsChannel.postMessage(JSON.stringify({
+        }));
+      }
+      """);
+    }
+
+    if (chartConfig.onFilteredCategoriesChanged != null) {
+      callbacks.add("""
+      "onFilteredCategoriesChanged": (categories) => {
+        window.onFilteredCategoriesChangedJsChannel.postMessage(JSON.stringify({
+          categories: categories
+        }));
+      }
+      """);
     }
 
     return callbacks;
-  }
-
-  static String buildCallbackConfigAsJS(String name) {
-    return '$name: object => $name.postMessage(JSON.stringify(object))';
-  }
-
-  static String seatsioInjectString(String selectedFeature) {
-    return "(object, dfValue, extraConfig) => {if(extraConfig[object.label] == 'true') {return '$selectedFeature'} else {return dfValue}}";
   }
 }

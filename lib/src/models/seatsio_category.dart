@@ -1,68 +1,60 @@
-import 'dart:convert';
+class SeatsioCategory {
+  final bool? accessible;
+  final String? color;
+  final int? key;
+  final String? label;
+  final PricingInfo? pricing;
+  final bool? hasSelectableObjects;
 
-import 'package:built_collection/built_collection.dart';
-import 'package:built_value/built_value.dart';
-import 'package:built_value/serializer.dart';
-import 'pricing_for_category.dart';
+  SeatsioCategory({
+    this.accessible,
+    this.color,
+    this.key,
+    this.label,
+    this.pricing,
+    this.hasSelectableObjects,
+  });
 
-part 'seatsio_category.g.dart';
-
-abstract class SeatsioCategory
-    implements Built<SeatsioCategory, SeatsioCategoryBuilder> {
-  const SeatsioCategory._();
-
-  factory SeatsioCategory([updates(SeatsioCategoryBuilder b)]) =
-      _$SeatsioCategory;
-
-  String get key;
-
-  String? get label;
-
-  String? get color;
-
-  PricingForCategory? get pricing;
-
-  bool? get accessible;
-
-  bool? get isFiltered;
-
-  static SeatsioCategory? fromJson(String jsonString) {
-    final data = json.decode(jsonString);
-    if (data != null) {
-      return SeatsioCategory.fromMap(data);
-    }
-    return null;
+  factory SeatsioCategory.fromJson(Map<String, dynamic> json) {
+    return SeatsioCategory(
+      accessible: json['accessible'] as bool?,
+      color: json['color'] as String?,
+      key: json['key'] as int?,
+      label: json['label'] as String?,
+      pricing: json['pricing'] != null ? PricingInfo.fromJson(json['pricing']) : null,
+      hasSelectableObjects: json['hasSelectableObjects'] as bool?,
+    );
   }
 
-  static SeatsioCategory? fromMap(Map? data) {
-    if (data == null) {
-      return null;
-    }
+  Map<String, dynamic> toJson() {
+    return {
+      if (accessible != null) 'accessible': accessible,
+      if (color != null) 'color': color,
+      if (key != null) 'key': key,
+      if (label != null) 'label': label,
+      if (pricing != null) 'pricing': pricing!.toJson(),
+      if (hasSelectableObjects != null) 'hasSelectableObjects': hasSelectableObjects,
+    };
+  }
+}
 
-    return SeatsioCategory((b) => b
-      ..key = data["key"].toString()
-      ..label = data["label"]
-      ..color = data["color"]
-      ..pricing = PricingForCategory.fromMap(data["pricing"])?.toBuilder()
-      ..accessible = data["accessible"]
-      ..isFiltered = data["isFiltered"]);
+class PricingInfo {
+  final double? price;
+  final String? formattedPrice;
+
+  PricingInfo({this.price, this.formattedPrice});
+
+  factory PricingInfo.fromJson(Map<String, dynamic> json) {
+    return PricingInfo(
+      price: (json['price'] as num?)?.toDouble(),
+      formattedPrice: json['formattedPrice'] as String?,
+    );
   }
 
-  static BuiltList<SeatsioCategory>? arrayFromJson(String jsonString) {
-    final data = json.decode(jsonString);
-    if (data != null && data is List) {
-      final List<SeatsioCategory> objects = [];
-      data.forEach((e) {
-        final object = SeatsioCategory.fromMap(e);
-        if (object != null) {
-          objects.add(object);
-        }
-      });
-      return objects.toBuiltList();
-    }
-    return null;
+  Map<String, dynamic> toJson() {
+    return {
+      if (price != null) 'price': price,
+      if (formattedPrice != null) 'formattedPrice': formattedPrice,
+    };
   }
-
-  static Serializer<SeatsioCategory> get serializer =>
-      _$seatsioCategorySerializer;
 }
