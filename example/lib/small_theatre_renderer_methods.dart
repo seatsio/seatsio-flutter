@@ -68,13 +68,12 @@ class _SmallTheatreRendererMethodsState extends State<SmallTheatreRendererMethod
       // TODO listCategories
       'zoomToObjects': () => _chart.currentState?.zoomToObjects(["A-12", "A-10"]),
       'zoomToSelectedObjects': () => _chart.currentState?.zoomToSelectedObjects(),
-      // zoomToSelectedObjects
-      // zoomToFilteredCategories
-      // zoomToSection
-      // getReportBySelectability
-      // setSpotlightObjects
-      // setSpotlightOnSelection
-      // clearSpotlightObjects
+      // TODO zoomToFilteredCategories
+      // TODO zoomToSection
+      // TODO getReportBySelectability
+      // TODO setSpotlightObjects
+      // TODO setSpotlightOnSelection
+      // TODO clearSpotlightObjects
     });
   }
 
