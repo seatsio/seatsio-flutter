@@ -13,6 +13,31 @@ class _SmallTheatreRendererMethodsState extends State<SmallTheatreRendererMethod
 
   final Map<String, Future<void>? Function()> _actions = {};
 
+  final multiLevelPricing = [
+    PricingForCategory(
+      category: 1,
+      ticketTypes: [
+        TicketType(ticketType: "adult", price: 30, originalPrice: 50),
+        TicketType(ticketType: "child", price: 20, label: "For children"),
+      ],
+    ),
+    PricingForCategory(
+      category: 2,
+      ticketTypes: [
+        TicketType(ticketType: "adult", price: 40),
+        TicketType(ticketType: "child", price: 30, label: "For children"),
+        TicketType(ticketType: "65+", price: 25, label: "For senior citizens"),
+      ],
+    ),
+    PricingForCategory(category: "3", price: 50),
+  ];
+
+  final simplePricing = [
+    PricingForCategory(category: 1, price: 30, originalPrice: 40),
+    PricingForCategory(category: "2", price: 40),
+    PricingForCategory(category: "3", price: 50),
+  ];
+
   @override
   void initState() {
     super.initState();
@@ -28,11 +53,17 @@ class _SmallTheatreRendererMethodsState extends State<SmallTheatreRendererMethod
       'deselectObjects': () => _chart.currentState?.deselectObjects(["A-12", "A-10"]),
       'selectCategories': () => _chart.currentState?.selectCategories(["1"]),
       'deselectCategories': () => _chart.currentState?.deselectCategories(["1"]),
-      // selectCategories
-      // deselectCategories
-      // pulse
-      // unpulse
-      // changeConfig
+      'changeConfig': () => _chart.currentState?.changeConfig(SeatingChartConfigChange((b) => b
+          // ..objectColor = "function(object, defaultColor) { return object.label.startsWith('A') ? 'green' : 'blue'; }"
+          // ..objectLabel = "function(object) { return object.label + ' (' + object.status + ')'; }")),
+          // ..numberOfPlacesToSelect = 2
+          // ..maxSelectedObjects = MaxSelectedObjects.total(4)
+          // ..availableCategories = ["Stalls"]
+          // ..unavailableCategories = ["Stalls"]
+          // ..filteredCategories = ["Stalls"]
+          ..pricing = simplePricing
+          // ..channels = ["channel1", "channel2"]
+          )),
       // findObject
       // listCategories
       // zoomToObjects
@@ -89,7 +120,8 @@ class _SmallTheatreRendererMethodsState extends State<SmallTheatreRendererMethod
               key: _chart,
               config: SeatingChartConfig((b) => b
                 ..workspaceKey = "publicDemoKey"
-                ..event = "smallTheatreEvent2"),
+                ..event = "smallTheatreEvent2"
+                ..pricing = multiLevelPricing),
             ),
           ),
         ],

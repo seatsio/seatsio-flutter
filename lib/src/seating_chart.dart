@@ -215,7 +215,29 @@ class SeatsioSeatingChartState extends State<SeatsioSeatingChart> {
     return completer.future;
   }
 
+  Future<void> changeConfig(SeatingChartConfigChange configChange) async {
+    final String promiseId = DateTime.now().millisecondsSinceEpoch.toString();
+    final Completer<void> completer = Completer<void>();
 
+    _pendingPromises[promiseId] = completer;
+
+    final String jsArray = jsonEncode(configChange.toJson());
+
+    await _controller.evaluateJavascript('''
+    chart.changeConfig($jsArray)
+      .then(() => window.changeConfigJsChannel.postMessage(JSON.stringify({
+        "id": "$promiseId\",
+        \"status\": \"resolved\"
+      })))
+      .catch(error => window.changeConfigJsChannel.postMessage(JSON.stringify({
+        \"id\": \"$promiseId\",
+        \"status\": \"error\",
+        \"message\": error
+      })));
+  ''');
+
+    return completer.future;
+  }
 
   void _handleVoidPromiseCompleted(JavaScriptMessage message) {
     final Map<String, dynamic> promiseResult = jsonDecode(message.message);
