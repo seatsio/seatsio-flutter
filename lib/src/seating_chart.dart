@@ -213,6 +213,28 @@ class SeatsioSeatingChartState extends State<SeatsioSeatingChart> {
     return completer.future;
   }
 
+  Future<void> clearSpotlightObjects() async {
+    final String promiseId = DateTime.now().millisecondsSinceEpoch.toString();
+    final Completer<void> completer = Completer<void>();
+
+    _pendingPromises[promiseId] = completer;
+
+    await _controller.evaluateJavascript('''
+    chart.clearSpotlightObjects()
+      .then(() => window.clearSpotlightObjectsJsChannel.postMessage(JSON.stringify({
+        "id": "$promiseId\",
+        \"status\": \"resolved\"
+      })))
+      .catch(error => window.clearSpotlightObjectsJsChannel.postMessage(JSON.stringify({
+        \"id\": \"$promiseId\",
+        \"status\": \"error\",
+        \"message\": error
+      })));
+  ''');
+
+    return completer.future;
+  }
+
   Future<void> selectCategories(List<String> categoryKeys) async {
     final String promiseId = DateTime.now().millisecondsSinceEpoch.toString();
     final Completer<void> completer = Completer<void>();

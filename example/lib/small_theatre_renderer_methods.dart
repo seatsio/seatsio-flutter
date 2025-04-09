@@ -81,9 +81,8 @@ class _SmallTheatreRendererMethodsState extends State<SmallTheatreRendererMethod
           print("Report: ${report}");
       }),
       'setSpotlightObjects': () => _chart.currentState?.setSpotlightObjects(["A-12", "A-10"]),
-      'setSpotlightOnSelection': () => _chart.currentState?.setSpotlightOnSelection()
-      // TODO setSpotlightOnSelection
-      // TODO clearSpotlightObjects
+      'setSpotlightOnSelection': () => _chart.currentState?.setSpotlightOnSelection(),
+      'clearSpotlightObjects': () => _chart.currentState?.clearSpotlightObjects()
     });
   }
 
