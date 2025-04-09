@@ -295,6 +295,33 @@ class SeatsioSeatingChartState extends State<SeatsioSeatingChart> {
     return completer.future;
   }
 
+  Future<dynamic> getReportBySelectability() async {
+    final String promiseId = DateTime.now().millisecondsSinceEpoch.toString();
+    final Completer<dynamic> completer = Completer();
+
+    _pendingPromises[promiseId] = completer;
+
+    await _controller.evaluateJavascript("""
+    chart.getReportBySelectability()
+      .then(report => {
+        window.getReportBySelectabilityJsChannel.postMessage(JSON.stringify({
+          \"id\": \"$promiseId\",
+          \"status\": \"resolved\",
+          \"report\": report
+        }));
+      })
+      .catch(error => {
+        window.getReportBySelectabilityJsChannel.postMessage(JSON.stringify({
+          \"id\": \"$promiseId\",
+          \"status\": \"error\",
+          \"message\": error
+        }));
+      });
+  """);
+
+    return completer.future;
+  }
+
   Future<void> zoomToObjects(List<String> objects) async {
     final String promiseId = DateTime.now().millisecondsSinceEpoch.toString();
     final Completer<void> completer = Completer<void>();
@@ -421,6 +448,24 @@ class SeatsioSeatingChartState extends State<SeatsioSeatingChart> {
     }
   }
 
+  void _handleGetReportBySelectabilityCompleted(JavaScriptMessage message) {
+    final Map<String, dynamic> data = jsonDecode(message.message);
+    final String promiseId = data["id"];
+    final String status = data["status"];
+
+    final completer = _pendingPromises.remove(promiseId)
+        as Completer<dynamic>?;
+    if (completer != null) {
+      if (status == "resolved") {
+        var report = data["report"] as dynamic;
+        completer.complete(report);
+      } else {
+        completer.completeError(
+            "Error getting report by selectability: ${data["message"]}");
+      }
+    }
+  }
+
   void _handleFindObjectCompleted(JavaScriptMessage message) {
     final Map<String, dynamic> data = jsonDecode(message.message);
     final String promiseId = data["id"];
@@ -451,7 +496,8 @@ class SeatsioSeatingChartState extends State<SeatsioSeatingChart> {
       onVoidPromiseCompleted: _handleVoidPromiseCompleted,
       onListSelectedObjectsCompleted: _handleListSelectedObjectsCompleted,
       onFindObjectCompleted: _handleFindObjectCompleted,
-      onListCategoriesCompleted: _handleListCategoriesCompleted
+      onListCategoriesCompleted: _handleListCategoriesCompleted,
+      onGetReportBySelectabilityCompleted: _handleGetReportBySelectabilityCompleted
     );
   }
 }

@@ -18,6 +18,7 @@ class SeatsioWebView extends StatefulWidget {
   final void Function(JavaScriptMessage) onListSelectedObjectsCompleted;
   final void Function(JavaScriptMessage) onFindObjectCompleted;
   final void Function(JavaScriptMessage) onListCategoriesCompleted;
+  final void Function(JavaScriptMessage) onGetReportBySelectabilityCompleted;
 
   const SeatsioWebView({
     super.key,
@@ -27,7 +28,8 @@ class SeatsioWebView extends StatefulWidget {
     required this.onVoidPromiseCompleted,
     required this.onListSelectedObjectsCompleted,
     required this.onFindObjectCompleted,
-    required this.onListCategoriesCompleted
+    required this.onListCategoriesCompleted,
+    required this.onGetReportBySelectabilityCompleted
   })  : this._onWebViewCreated = onWebViewCreated,
         this._config = config,
         this._gestureRecognizers = gestureRecognizers;
@@ -118,6 +120,7 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
       ..addJavaScriptChannel("changeConfigJsChannel", onMessageReceived: widget.onVoidPromiseCompleted)
       ..addJavaScriptChannel("findObjectJsChannel", onMessageReceived: widget.onFindObjectCompleted)
       ..addJavaScriptChannel("listCategoriesJsChannel", onMessageReceived: widget.onListCategoriesCompleted)
+      ..addJavaScriptChannel("getReportBySelectabilityJsChannel", onMessageReceived: widget.onGetReportBySelectabilityCompleted)
       ..addJavaScriptChannel("zoomToObjectsJsChannel", onMessageReceived: widget.onVoidPromiseCompleted)
       ..addJavaScriptChannel("zoomToSelectedObjectsJsChannel", onMessageReceived: widget.onVoidPromiseCompleted)
       ..addJavaScriptChannel("zoomToFilteredCategoriesJsChannel", onMessageReceived: widget.onVoidPromiseCompleted)
