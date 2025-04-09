@@ -268,6 +268,33 @@ class SeatsioSeatingChartState extends State<SeatsioSeatingChart> {
     return completer.future;
   }
 
+  Future<List<SeatsioCategory>> listCategories() async {
+    final String promiseId = DateTime.now().millisecondsSinceEpoch.toString();
+    final Completer<List<SeatsioCategory>> completer = Completer();
+
+    _pendingPromises[promiseId] = completer;
+
+    await _controller.evaluateJavascript("""
+    chart.listCategories()
+      .then(categories => {
+        window.listCategoriesJsChannel.postMessage(JSON.stringify({
+          \"id\": \"$promiseId\",
+          \"status\": \"resolved\",
+          \"categories\": categories
+        }));
+      })
+      .catch(error => {
+        window.listCategoriesJsChannel.postMessage(JSON.stringify({
+          \"id\": \"$promiseId\",
+          \"status\": \"error\",
+          \"message\": error
+        }));
+      });
+  """);
+
+    return completer.future;
+  }
+
   Future<void> zoomToObjects(List<String> objects) async {
     final String promiseId = DateTime.now().millisecondsSinceEpoch.toString();
     final Completer<void> completer = Completer<void>();
@@ -314,7 +341,8 @@ class SeatsioSeatingChartState extends State<SeatsioSeatingChart> {
       if (promiseResult["status"] == "resolved") {
         completer.complete();
       } else {
-        completer.completeError("Error resetting view: ${promiseResult["message"]}");
+        completer
+            .completeError("Error resetting view: ${promiseResult["message"]}");
       }
     }
   }
@@ -324,14 +352,39 @@ class SeatsioSeatingChartState extends State<SeatsioSeatingChart> {
     final String promiseId = data["id"];
     final String status = data["status"];
 
-    final completer = _pendingPromises.remove(promiseId) as Completer<List<SeatsioSelectedObject>>?;
+    final completer = _pendingPromises.remove(promiseId)
+        as Completer<List<SeatsioSelectedObject>>?;
     if (completer != null) {
       if (status == "resolved") {
         var objectsData = data["objects"] as List<dynamic>;
-        final objects = objectsData.map((obj) => SeatsioSelectedObject.fromJson(obj)).toList();
+        final objects = objectsData
+            .map((obj) => SeatsioSelectedObject.fromJson(obj))
+            .toList();
         completer.complete(objects);
       } else {
-        completer.completeError("Error listing selected objects: ${data["message"]}");
+        completer.completeError(
+            "Error listing selected objects: ${data["message"]}");
+      }
+    }
+  }
+
+  void _handleListCategoriesCompleted(JavaScriptMessage message) {
+    final Map<String, dynamic> data = jsonDecode(message.message);
+    final String promiseId = data["id"];
+    final String status = data["status"];
+
+    final completer = _pendingPromises.remove(promiseId)
+        as Completer<List<SeatsioCategory>>?;
+    if (completer != null) {
+      if (status == "resolved") {
+        var categoriesData = data["categories"] as List<dynamic>;
+        final categories = categoriesData
+            .map((obj) => SeatsioCategory.fromJson(obj))
+            .toList();
+        completer.complete(categories);
+      } else {
+        completer.completeError(
+            "Error listing categories: ${data["message"]}");
       }
     }
   }
@@ -341,14 +394,16 @@ class SeatsioSeatingChartState extends State<SeatsioSeatingChart> {
     final String promiseId = data["id"];
     final String status = data["status"];
 
-    final completer = _pendingPromises.remove(promiseId) as Completer<SeatsioObject>?;
+    final completer =
+        _pendingPromises.remove(promiseId) as Completer<SeatsioObject>?;
     if (completer != null) {
       if (status == "resolved") {
         var objectData = data["object"] as dynamic;
         final object = SeatsioObject.fromJson(objectData);
         completer.complete(object);
       } else {
-        completer.completeError("Error listing selected objects: ${data["message"]}");
+        completer.completeError(
+            "Error listing selected objects: ${data["message"]}");
       }
     }
   }
@@ -364,6 +419,7 @@ class SeatsioSeatingChartState extends State<SeatsioSeatingChart> {
       onVoidPromiseCompleted: _handleVoidPromiseCompleted,
       onListSelectedObjectsCompleted: _handleListSelectedObjectsCompleted,
       onFindObjectCompleted: _handleFindObjectCompleted,
+      onListCategoriesCompleted: _handleListCategoriesCompleted
     );
   }
 }
