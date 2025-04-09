@@ -74,6 +74,9 @@ class _SmallTheatreRendererMethodsState extends State<SmallTheatreRendererMethod
       'zoomToObjects': () => _chart.currentState?.zoomToObjects(["A-12", "A-10"]),
       'zoomToSelectedObjects': () => _chart.currentState?.zoomToSelectedObjects(),
       'zoomToFilteredCategories': () => _chart.currentState?.zoomToFilteredCategories(),
+      'zoomToSection': () => _chart.currentState?.zoomToSection("West Choir").then((_) {
+        print("Zoomed to section.");
+      }),
       // TODO zoomToSection
       // TODO getReportBySelectability
       // TODO setSpotlightObjects

@@ -349,6 +349,23 @@ class SeatsioSeatingChartState extends State<SeatsioSeatingChart> {
     return completer.future;
   }
 
+  Future<void> zoomToSection(String section) async {
+    final String promiseId = DateTime.now().millisecondsSinceEpoch.toString();
+    final Completer<void> completer = Completer<void>();
+
+    _pendingPromises[promiseId] = completer;
+
+    final String jsonSection = jsonEncode(section);
+
+    await _controller.evaluateJavascript("""
+      chart.zoomToSection($jsonSection)
+        .then(() => window.zoomToSectionJsChannel.postMessage(JSON.stringify({ "id": "$promiseId", "status": "resolved" })))
+        .catch(error => window.zoomToSectionJsChannel.postMessage(JSON.stringify({ "id": "$promiseId", "status": "error", "message": error })));
+    """);
+
+    return completer.future;
+  }
+
   void _handleVoidPromiseCompleted(JavaScriptMessage message) {
     final Map<String, dynamic> promiseResult = jsonDecode(message.message);
     final completer = _pendingPromises.remove(promiseResult["id"]);
