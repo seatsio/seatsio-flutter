@@ -51,7 +51,7 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
   bool? get showActiveSectionTooltipOnMobile;
 
   // Language and Text
-  String? get language; // TODO make this an enum
+  String? get language;
 
   Map<String, String> get messages;
 
