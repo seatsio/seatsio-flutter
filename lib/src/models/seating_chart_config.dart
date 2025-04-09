@@ -39,8 +39,6 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
 
   bool? get multiSelectEnabled;
 
-  // TODO canGASelectionBeIncreased ?
-
   bool? get objectsWithoutPricingSelectable;
 
   // Popovers and Tooltips
