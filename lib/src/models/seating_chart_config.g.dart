@@ -55,6 +55,14 @@ class _$SeatingChartConfigSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.extraConfig;
+    if (value != null) {
+      result
+        ..add('extraConfig')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(
+                Map, const [const FullType(String), const FullType(dynamic)])));
+    }
     value = object.pricing;
     if (value != null) {
       result
@@ -330,6 +338,13 @@ class _$SeatingChartConfigSerializer
           result.mode = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
+        case 'extraConfig':
+          result.extraConfig = serializers.deserialize(value,
+              specifiedType: const FullType(Map, const [
+                const FullType(String),
+                const FullType(dynamic)
+              ])) as Map<String, dynamic>?;
+          break;
         case 'pricing':
           result.pricing = serializers.deserialize(value,
                   specifiedType: const FullType(
@@ -508,6 +523,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   final String? mode;
   @override
+  final Map<String, dynamic>? extraConfig;
+  @override
   final List<PricingForCategory>? pricing;
   @override
   final Function(num price)? priceFormatter;
@@ -652,6 +669,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       this.event,
       this.events,
       this.mode,
+      this.extraConfig,
       this.pricing,
       this.priceFormatter,
       this.showSectionPricingOverlay,
@@ -742,6 +760,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         event == other.event &&
         events == other.events &&
         mode == other.mode &&
+        extraConfig == other.extraConfig &&
         pricing == other.pricing &&
         priceFormatter == _$dynamicOther.priceFormatter &&
         showSectionPricingOverlay == other.showSectionPricingOverlay &&
@@ -817,6 +836,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     _$hash = $jc(_$hash, event.hashCode);
     _$hash = $jc(_$hash, events.hashCode);
     _$hash = $jc(_$hash, mode.hashCode);
+    _$hash = $jc(_$hash, extraConfig.hashCode);
     _$hash = $jc(_$hash, pricing.hashCode);
     _$hash = $jc(_$hash, priceFormatter.hashCode);
     _$hash = $jc(_$hash, showSectionPricingOverlay.hashCode);
@@ -891,6 +911,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
           ..add('event', event)
           ..add('events', events)
           ..add('mode', mode)
+          ..add('extraConfig', extraConfig)
           ..add('pricing', pricing)
           ..add('priceFormatter', priceFormatter)
           ..add('showSectionPricingOverlay', showSectionPricingOverlay)
@@ -982,6 +1003,11 @@ class SeatingChartConfigBuilder
   String? _mode;
   String? get mode => _$this._mode;
   set mode(String? mode) => _$this._mode = mode;
+
+  Map<String, dynamic>? _extraConfig;
+  Map<String, dynamic>? get extraConfig => _$this._extraConfig;
+  set extraConfig(Map<String, dynamic>? extraConfig) =>
+      _$this._extraConfig = extraConfig;
 
   List<PricingForCategory>? _pricing;
   List<PricingForCategory>? get pricing => _$this._pricing;
@@ -1337,6 +1363,7 @@ class SeatingChartConfigBuilder
       _event = $v.event;
       _events = $v.events;
       _mode = $v.mode;
+      _extraConfig = $v.extraConfig;
       _pricing = $v.pricing;
       _priceFormatter = $v.priceFormatter;
       _showSectionPricingOverlay = $v.showSectionPricingOverlay;
@@ -1430,6 +1457,7 @@ class SeatingChartConfigBuilder
             event: event,
             events: events,
             mode: mode,
+            extraConfig: extraConfig,
             pricing: pricing,
             priceFormatter: priceFormatter,
             showSectionPricingOverlay: showSectionPricingOverlay,

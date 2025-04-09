@@ -27,6 +27,8 @@ abstract class SeatingChartConfigChange implements Built<SeatingChartConfigChang
 
   List<String>? get channels;
 
+  Map<String, dynamic>? get extraConfig;
+
   SeatingChartConfigChange._();
 
   factory SeatingChartConfigChange([void Function(SeatingChartConfigChangeBuilder)? updates]) {
@@ -39,12 +41,12 @@ abstract class SeatingChartConfigChange implements Built<SeatingChartConfigChang
       if (objectLabel != null) "objectLabel": objectLabel,
       if (numberOfPlacesToSelect != null) "numberOfPlacesToSelect": numberOfPlacesToSelect,
       if (maxSelectedObjects != null) "maxSelectedObjects": maxSelectedObjects!.toJson(),
-      // TODO extraConfig
       if (availableCategories != null) "availableCategories": availableCategories,
       if (unavailableCategories != null) "unavailableCategories": unavailableCategories,
       if (filteredCategories != null) "filteredCategories": filteredCategories,
       if (pricing != null) "pricing": pricing!.map((p) => p.toJson()).toList(),
       if (channels != null) "channels": channels,
+      if (extraConfig != null) "extraConfig": extraConfig,
     };
   }
 

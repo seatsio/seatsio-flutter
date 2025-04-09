@@ -25,6 +25,8 @@ class _$SeatingChartConfigChange extends SeatingChartConfigChange {
   final List<PricingForCategory>? pricing;
   @override
   final List<String>? channels;
+  @override
+  final Map<String, dynamic>? extraConfig;
 
   factory _$SeatingChartConfigChange(
           [void Function(SeatingChartConfigChangeBuilder)? updates]) =>
@@ -39,7 +41,8 @@ class _$SeatingChartConfigChange extends SeatingChartConfigChange {
       this.unavailableCategories,
       this.filteredCategories,
       this.pricing,
-      this.channels})
+      this.channels,
+      this.extraConfig})
       : super._();
 
   @override
@@ -63,7 +66,8 @@ class _$SeatingChartConfigChange extends SeatingChartConfigChange {
         unavailableCategories == other.unavailableCategories &&
         filteredCategories == other.filteredCategories &&
         pricing == other.pricing &&
-        channels == other.channels;
+        channels == other.channels &&
+        extraConfig == other.extraConfig;
   }
 
   @override
@@ -78,6 +82,7 @@ class _$SeatingChartConfigChange extends SeatingChartConfigChange {
     _$hash = $jc(_$hash, filteredCategories.hashCode);
     _$hash = $jc(_$hash, pricing.hashCode);
     _$hash = $jc(_$hash, channels.hashCode);
+    _$hash = $jc(_$hash, extraConfig.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -93,7 +98,8 @@ class _$SeatingChartConfigChange extends SeatingChartConfigChange {
           ..add('unavailableCategories', unavailableCategories)
           ..add('filteredCategories', filteredCategories)
           ..add('pricing', pricing)
-          ..add('channels', channels))
+          ..add('channels', channels)
+          ..add('extraConfig', extraConfig))
         .toString();
   }
 }
@@ -144,6 +150,11 @@ class SeatingChartConfigChangeBuilder
   List<String>? get channels => _$this._channels;
   set channels(List<String>? channels) => _$this._channels = channels;
 
+  Map<String, dynamic>? _extraConfig;
+  Map<String, dynamic>? get extraConfig => _$this._extraConfig;
+  set extraConfig(Map<String, dynamic>? extraConfig) =>
+      _$this._extraConfig = extraConfig;
+
   SeatingChartConfigChangeBuilder();
 
   SeatingChartConfigChangeBuilder get _$this {
@@ -158,6 +169,7 @@ class SeatingChartConfigChangeBuilder
       _filteredCategories = $v.filteredCategories;
       _pricing = $v.pricing;
       _channels = $v.channels;
+      _extraConfig = $v.extraConfig;
       _$v = null;
     }
     return this;
@@ -189,6 +201,7 @@ class SeatingChartConfigChangeBuilder
           filteredCategories: filteredCategories,
           pricing: pricing,
           channels: channels,
+          extraConfig: extraConfig,
         );
     replace(_$result);
     return _$result;

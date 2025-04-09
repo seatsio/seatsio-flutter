@@ -16,7 +16,7 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
 
   String? get mode;
 
-  // TODO extraConfig
+  Map<String, dynamic>? get extraConfig;
 
   // Pricing
   List<PricingForCategory>? get pricing;
@@ -232,6 +232,7 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
       if (event != null) "event": event,
       if (events != null) "events": events,
       if (mode != null) "mode": mode,
+      if (extraConfig != null) "extraConfig": extraConfig,
       // pricing
       if (pricing != null) "pricing": pricing!.map((p) => p.toJson()).toList(),
       if (showSectionPricingOverlay != null) "showSectionPricingOverlay": showSectionPricingOverlay,

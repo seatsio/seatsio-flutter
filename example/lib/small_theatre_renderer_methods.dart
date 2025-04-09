@@ -54,8 +54,8 @@ class _SmallTheatreRendererMethodsState extends State<SmallTheatreRendererMethod
       'selectCategories': () => _chart.currentState?.selectCategories(["1"]),
       'deselectCategories': () => _chart.currentState?.deselectCategories(["1"]),
       'changeConfig': () => _chart.currentState?.changeConfig(SeatingChartConfigChange((b) => b
-          // ..objectColor = "function(object, defaultColor) { return object.label.startsWith('A') ? 'green' : 'blue'; }"
-          // ..objectLabel = "function(object) { return object.label + ' (' + object.status + ')'; }")),
+          // ..objectColor = "function(object, defaultColor, extraConfig) { return object.label.startsWith('A') ? 'green' : 'blue'; }"
+          // ..objectLabel = "function(object, defaultLabel, extraConfig) { return object.label + ' (' + object.status + ')'; }")),
           // ..numberOfPlacesToSelect = 2
           // ..maxSelectedObjects = MaxSelectedObjects.total(4)
           // ..availableCategories = ["Stalls"]
@@ -63,6 +63,7 @@ class _SmallTheatreRendererMethodsState extends State<SmallTheatreRendererMethod
           // ..filteredCategories = ["Stalls"]
           ..pricing = simplePricing
           // ..channels = ["channel1", "channel2"]
+          //..extraConfig = { "foo": "green" },
           )),
       'findObject': () => findAndPrintObject("A-12"),
       'listCategories': () => _chart.currentState?.listCategories().then((categories) {
