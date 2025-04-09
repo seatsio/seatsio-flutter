@@ -80,7 +80,7 @@ class _SmallTheatreRendererMethodsState extends State<SmallTheatreRendererMethod
       'getReportBySelectability': () => _chart.currentState?.getReportBySelectability().then((report) {
           print("Report: ${report}");
       }),
-      // TODO setSpotlightObjects
+      'setSpotlightObjects': () => _chart.currentState?.setSpotlightObjects(["A-12", "A-10"])
       // TODO setSpotlightOnSelection
       // TODO clearSpotlightObjects
     });
