@@ -119,7 +119,13 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
 
   bool? get showFloorElevator;
 
+  // Prompts
+
   // TODO everything under Prompts API https://docs.seats.io/docs/renderer/prompts-api/onPlacesPrompt
+
+  // Advanced
+
+  bool? get unifiedObjectPropertiesInCallbacks;
 
   @BuiltValueField(serialize: false)
   Function()? get onChartRendered;
@@ -275,6 +281,8 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
       if (activeFloor != null) "activeFloor": activeFloor,
       if (lockActiveFloor != null) "lockActiveFloor": lockActiveFloor,
       if (showFloorElevator != null) "showFloorElevator": showFloorElevator,
+      // advanced
+      if (unifiedObjectPropertiesInCallbacks != null) "unifiedObjectPropertiesInCallbacks": unifiedObjectPropertiesInCallbacks,
     };
   }
 }
