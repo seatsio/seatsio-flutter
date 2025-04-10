@@ -230,24 +230,6 @@ class SeatsioJsBridge {
       """);
     }
 
-    if (chartConfig.onFullScreenOpened != null) {
-      callbacks.add("""
-      "onFullScreenOpened": () => {
-        window.onFullScreenOpenedJsChannel.postMessage(JSON.stringify({
-        }));
-      }
-      """);
-    }
-
-    if (chartConfig.onFullScreenClosed != null) {
-      callbacks.add("""
-      "onFullScreenClosed": () => {
-        window.onFullScreenClosedJsChannel.postMessage(JSON.stringify({
-        }));
-      }
-      """);
-    }
-
     if (chartConfig.onFilteredCategoriesChanged != null) {
       callbacks.add("""
       "onFilteredCategoriesChanged": (categories) => {

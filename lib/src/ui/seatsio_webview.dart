@@ -104,8 +104,6 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
       ..addJavaScriptChannel('onReleaseHoldFailedJsChannel', onMessageReceived: onReleaseHoldFailed)
       ..addJavaScriptChannel('onSelectionValidJsChannel', onMessageReceived: onSelectionValid)
       ..addJavaScriptChannel('onSelectionInvalidJsChannel', onMessageReceived: onSelectionInvalid)
-      ..addJavaScriptChannel('onFullScreenOpenedJsChannel', onMessageReceived: onFullScreenOpened)
-      ..addJavaScriptChannel('onFullScreenClosedJsChannel', onMessageReceived: onFullScreenClosed)
       ..addJavaScriptChannel('onFilteredCategoriesChangedJsChannel', onMessageReceived: onFilteredCategoriesChanged)
       ..addJavaScriptChannel('onFloorChangedJsChannel', onMessageReceived: onFloorChanged)
       // renderer methods
@@ -277,18 +275,6 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
       final Map<String, dynamic> data = jsonDecode(message.message);
       final List<String> violations = (data["violations"] as List<dynamic>).map((v) => v.toString()).toList();
       widget._config.onSelectionInvalid!(violations);
-    }
-  }
-
-  void onFullScreenOpened(JavaScriptMessage message) {
-    if (widget._config.onFullScreenOpened != null) {
-      widget._config.onFullScreenOpened!();
-    }
-  }
-
-  void onFullScreenClosed(JavaScriptMessage message) {
-    if (widget._config.onFullScreenClosed != null) {
-      widget._config.onFullScreenClosed!();
     }
   }
 

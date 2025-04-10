@@ -182,12 +182,6 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
   Function(List<String> violations)? get onSelectionInvalid;
 
   @BuiltValueField(serialize: false)
-  Function()? get onFullScreenOpened;
-
-  @BuiltValueField(serialize: false)
-  Function()? get onFullScreenClosed;
-
-  @BuiltValueField(serialize: false)
   Function(List<SeatsioCategory>)? get onFilteredCategoriesChanged;
 
   @BuiltValueField(serialize: false)

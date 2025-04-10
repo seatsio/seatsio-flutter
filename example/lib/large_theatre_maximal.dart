@@ -58,8 +58,6 @@ class LargeTheatreMaximal extends StatelessWidget {
         print("release hold failed - ${objects.map((e) => e.label)} - ${ticketTypes?.map((e) => e.price)}");
     final onSelectionValid = () => print("selection valid");
     final onSelectionInvalid = (List<String> violations) => print("selection invalid: ${violations}");
-    final onFullScreenOpened = () => print("full screen opened");
-    final onFullScreenClosed = () => print("full screen closed");
     final onFilteredCategoriesChanged = (List<SeatsioCategory> categories) => print("filtered categories changed: ${categories.map((c) => c.label)}");
 
     return Scaffold(
@@ -145,8 +143,6 @@ class LargeTheatreMaximal extends StatelessWidget {
             ..onReleaseHoldFailed = onReleaseHoldFailed
             ..onSelectionValid = onSelectionValid
             ..onSelectionInvalid = onSelectionInvalid
-            ..onFullScreenOpened = onFullScreenOpened
-            ..onFullScreenClosed = onFullScreenClosed
             //..extraConfig = { "foo": "green" }
             //..objectColor = "function(object, defaultColor, extraConfig) { return extraConfig.foo; }"
             ..onFilteredCategoriesChanged = onFilteredCategoriesChanged),
