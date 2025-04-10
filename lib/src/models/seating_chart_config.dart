@@ -99,8 +99,6 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
   //Customization
   bool? get showMinimap;
 
-  bool? get showFullScreenButton;
-
   bool? get showLegend;
 
   LegendConfig? get legendConfig;
@@ -112,8 +110,6 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
 
   SeatsioColors? get colors;
 
-  // TODO what with StylePreset and Style?
-
   // Floors
   String? get activeFloor;
 
@@ -122,7 +118,6 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
   bool? get showFloorElevator;
 
   // TODO everything under Prompts API https://docs.seats.io/docs/renderer/prompts-api/onPlacesPrompt
-  // TODO everything under Spotlight https://docs.seats.io/docs/renderer/spotlight (chart.xxx() methods)
 
   @BuiltValueField(serialize: false)
   Function()? get onChartRendered;
@@ -267,7 +262,6 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
       if (holdOnSelectForGAs != null) "holdOnSelectForGAs": holdOnSelectForGAs,
       // customization
       if (showMinimap != null) "showMinimap": showMinimap,
-      if (showFullScreenButton != null) "showFullScreenButton": showFullScreenButton,
       if (showLegend != null) "showLegend": showLegend,
       if (legendConfig != null) "legendConfig": legendConfig!.toJson(),
       if (showZoomOutButtonOnMobile != null) "showZoomOutButtonOnMobile": showZoomOutButtonOnMobile,

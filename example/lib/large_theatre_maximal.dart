@@ -119,7 +119,6 @@ class LargeTheatreMaximal extends StatelessWidget {
             // ..holdToken = "someHoldToken"
             //..holdOnSelectForGAs = true
             // ..showMinimap = false
-            // ..showFullScreenButton = false
             ..showLegend = true
             ..colorScheme = SeatsioColorScheme.dark
             ..legendConfig.replace(LegendConfig((b) => b
