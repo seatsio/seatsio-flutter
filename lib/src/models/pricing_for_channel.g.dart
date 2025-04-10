@@ -1,29 +1,28 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'pricing_for_category.dart';
+part of 'pricing_for_channel.dart';
 
 // **************************************************************************
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializer<PricingForCategory> _$pricingForCategorySerializer =
-    new _$PricingForCategorySerializer();
+Serializer<PricingForChannel> _$pricingForChannelSerializer =
+    new _$PricingForChannelSerializer();
 
-class _$PricingForCategorySerializer
-    implements StructuredSerializer<PricingForCategory> {
+class _$PricingForChannelSerializer
+    implements StructuredSerializer<PricingForChannel> {
   @override
-  final Iterable<Type> types = const [PricingForCategory, _$PricingForCategory];
+  final Iterable<Type> types = const [PricingForChannel, _$PricingForChannel];
   @override
-  final String wireName = 'PricingForCategory';
+  final String wireName = 'PricingForChannel';
 
   @override
-  Iterable<Object?> serialize(
-      Serializers serializers, PricingForCategory object,
+  Iterable<Object?> serialize(Serializers serializers, PricingForChannel object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
-      'category',
-      serializers.serialize(object.category,
-          specifiedType: const FullType(CategoryKey)),
+      'channel',
+      serializers.serialize(object.channel,
+          specifiedType: const FullType(String)),
     ];
     Object? value;
     value = object.price;
@@ -48,22 +47,14 @@ class _$PricingForCategorySerializer
             specifiedType:
                 const FullType(BuiltList, const [const FullType(TicketType)])));
     }
-    value = object.channels;
-    if (value != null) {
-      result
-        ..add('channels')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(
-                BuiltList, const [const FullType(PricingForChannel)])));
-    }
     return result;
   }
 
   @override
-  PricingForCategory deserialize(
+  PricingForChannel deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new PricingForCategoryBuilder();
+    final result = new PricingForChannelBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -71,9 +62,9 @@ class _$PricingForCategorySerializer
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
-        case 'category':
-          result.category.replace(serializers.deserialize(value,
-              specifiedType: const FullType(CategoryKey))! as CategoryKey);
+        case 'channel':
+          result.channel = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
           break;
         case 'price':
           result.price = serializers.deserialize(value,
@@ -89,12 +80,6 @@ class _$PricingForCategorySerializer
                       BuiltList, const [const FullType(TicketType)]))!
               as BuiltList<Object?>);
           break;
-        case 'channels':
-          result.channels.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      BuiltList, const [const FullType(PricingForChannel)]))!
-              as BuiltList<Object?>);
-          break;
       }
     }
 
@@ -102,85 +87,74 @@ class _$PricingForCategorySerializer
   }
 }
 
-class _$PricingForCategory extends PricingForCategory {
+class _$PricingForChannel extends PricingForChannel {
   @override
-  final CategoryKey category;
+  final String channel;
   @override
   final double? price;
   @override
   final double? originalPrice;
   @override
   final BuiltList<TicketType>? ticketTypes;
-  @override
-  final BuiltList<PricingForChannel>? channels;
 
-  factory _$PricingForCategory(
-          [void Function(PricingForCategoryBuilder)? updates]) =>
-      (new PricingForCategoryBuilder()..update(updates))._build();
+  factory _$PricingForChannel(
+          [void Function(PricingForChannelBuilder)? updates]) =>
+      (new PricingForChannelBuilder()..update(updates))._build();
 
-  _$PricingForCategory._(
-      {required this.category,
-      this.price,
-      this.originalPrice,
-      this.ticketTypes,
-      this.channels})
+  _$PricingForChannel._(
+      {required this.channel, this.price, this.originalPrice, this.ticketTypes})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        category, r'PricingForCategory', 'category');
+        channel, r'PricingForChannel', 'channel');
   }
 
   @override
-  PricingForCategory rebuild(
-          void Function(PricingForCategoryBuilder) updates) =>
+  PricingForChannel rebuild(void Function(PricingForChannelBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  PricingForCategoryBuilder toBuilder() =>
-      new PricingForCategoryBuilder()..replace(this);
+  PricingForChannelBuilder toBuilder() =>
+      new PricingForChannelBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is PricingForCategory &&
-        category == other.category &&
+    return other is PricingForChannel &&
+        channel == other.channel &&
         price == other.price &&
         originalPrice == other.originalPrice &&
-        ticketTypes == other.ticketTypes &&
-        channels == other.channels;
+        ticketTypes == other.ticketTypes;
   }
 
   @override
   int get hashCode {
     var _$hash = 0;
-    _$hash = $jc(_$hash, category.hashCode);
+    _$hash = $jc(_$hash, channel.hashCode);
     _$hash = $jc(_$hash, price.hashCode);
     _$hash = $jc(_$hash, originalPrice.hashCode);
     _$hash = $jc(_$hash, ticketTypes.hashCode);
-    _$hash = $jc(_$hash, channels.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper(r'PricingForCategory')
-          ..add('category', category)
+    return (newBuiltValueToStringHelper(r'PricingForChannel')
+          ..add('channel', channel)
           ..add('price', price)
           ..add('originalPrice', originalPrice)
-          ..add('ticketTypes', ticketTypes)
-          ..add('channels', channels))
+          ..add('ticketTypes', ticketTypes))
         .toString();
   }
 }
 
-class PricingForCategoryBuilder
-    implements Builder<PricingForCategory, PricingForCategoryBuilder> {
-  _$PricingForCategory? _$v;
+class PricingForChannelBuilder
+    implements Builder<PricingForChannel, PricingForChannelBuilder> {
+  _$PricingForChannel? _$v;
 
-  CategoryKeyBuilder? _category;
-  CategoryKeyBuilder get category =>
-      _$this._category ??= new CategoryKeyBuilder();
-  set category(CategoryKeyBuilder? category) => _$this._category = category;
+  String? _channel;
+  String? get channel => _$this._channel;
+  set channel(String? channel) => _$this._channel = channel;
 
   double? _price;
   double? get price => _$this._price;
@@ -197,65 +171,53 @@ class PricingForCategoryBuilder
   set ticketTypes(ListBuilder<TicketType>? ticketTypes) =>
       _$this._ticketTypes = ticketTypes;
 
-  ListBuilder<PricingForChannel>? _channels;
-  ListBuilder<PricingForChannel> get channels =>
-      _$this._channels ??= new ListBuilder<PricingForChannel>();
-  set channels(ListBuilder<PricingForChannel>? channels) =>
-      _$this._channels = channels;
+  PricingForChannelBuilder();
 
-  PricingForCategoryBuilder();
-
-  PricingForCategoryBuilder get _$this {
+  PricingForChannelBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      _category = $v.category.toBuilder();
+      _channel = $v.channel;
       _price = $v.price;
       _originalPrice = $v.originalPrice;
       _ticketTypes = $v.ticketTypes?.toBuilder();
-      _channels = $v.channels?.toBuilder();
       _$v = null;
     }
     return this;
   }
 
   @override
-  void replace(PricingForCategory other) {
+  void replace(PricingForChannel other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$PricingForCategory;
+    _$v = other as _$PricingForChannel;
   }
 
   @override
-  void update(void Function(PricingForCategoryBuilder)? updates) {
+  void update(void Function(PricingForChannelBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  PricingForCategory build() => _build();
+  PricingForChannel build() => _build();
 
-  _$PricingForCategory _build() {
-    _$PricingForCategory _$result;
+  _$PricingForChannel _build() {
+    _$PricingForChannel _$result;
     try {
       _$result = _$v ??
-          new _$PricingForCategory._(
-            category: category.build(),
+          new _$PricingForChannel._(
+            channel: BuiltValueNullFieldError.checkNotNull(
+                channel, r'PricingForChannel', 'channel'),
             price: price,
             originalPrice: originalPrice,
             ticketTypes: _ticketTypes?.build(),
-            channels: _channels?.build(),
           );
     } catch (_) {
       late String _$failedField;
       try {
-        _$failedField = 'category';
-        category.build();
-
         _$failedField = 'ticketTypes';
         _ticketTypes?.build();
-        _$failedField = 'channels';
-        _channels?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            r'PricingForCategory', _$failedField, e.toString());
+            r'PricingForChannel', _$failedField, e.toString());
       }
       rethrow;
     }
