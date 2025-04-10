@@ -83,7 +83,9 @@ class _SmallTheatreRendererMethodsState extends State<SmallTheatreRendererMethod
       }),
       'setSpotlightObjects': () => _chart.currentState?.setSpotlightObjects(["A-12", "A-10"]),
       'setSpotlightOnSelection': () => _chart.currentState?.setSpotlightOnSelection(),
-      'clearSpotlightObjects': () => _chart.currentState?.clearSpotlightObjects()
+      'clearSpotlightObjects': () => _chart.currentState?.clearSpotlightObjects(),
+      'goToFloor': () => _chart.currentState?.goToFloor('2'),
+      'goToAllFloorsView': () => _chart.currentState?.goToAllFloorsView()
     });
   }
 

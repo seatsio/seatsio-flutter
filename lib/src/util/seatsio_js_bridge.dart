@@ -89,6 +89,16 @@ class SeatsioJsBridge {
       """);
     }
 
+    if (chartConfig.onFloorChanged != null) {
+      callbacks.add("""
+        "onFloorChanged": (floor) => {
+          window.onFloorChangedJsChannel.postMessage(JSON.stringify({
+            floor: floor
+          }));
+        }
+      """);
+    }
+
     if (chartConfig.onObjectDeselected != null) {
       callbacks.add("""
         "onObjectDeselected": (object, ticketType) => {

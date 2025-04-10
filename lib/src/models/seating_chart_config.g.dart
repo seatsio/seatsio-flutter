@@ -658,6 +658,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   final Function()? onFullScreenClosed;
   @override
   final Function(List<SeatsioCategory>)? onFilteredCategoriesChanged;
+  @override
+  final Function(Floor? floor)? onFloorChanged;
 
   factory _$SeatingChartConfig(
           [void Function(SeatingChartConfigBuilder)? updates]) =>
@@ -731,7 +733,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       this.onSelectionInvalid,
       this.onFullScreenOpened,
       this.onFullScreenClosed,
-      this.onFilteredCategoriesChanged})
+      this.onFilteredCategoriesChanged,
+      this.onFloorChanged})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         workspaceKey, r'SeatingChartConfig', 'workspaceKey');
@@ -825,7 +828,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         onFullScreenOpened == _$dynamicOther.onFullScreenOpened &&
         onFullScreenClosed == _$dynamicOther.onFullScreenClosed &&
         onFilteredCategoriesChanged ==
-            _$dynamicOther.onFilteredCategoriesChanged;
+            _$dynamicOther.onFilteredCategoriesChanged &&
+        onFloorChanged == _$dynamicOther.onFloorChanged;
   }
 
   @override
@@ -899,6 +903,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     _$hash = $jc(_$hash, onFullScreenOpened.hashCode);
     _$hash = $jc(_$hash, onFullScreenClosed.hashCode);
     _$hash = $jc(_$hash, onFilteredCategoriesChanged.hashCode);
+    _$hash = $jc(_$hash, onFloorChanged.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -975,7 +980,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
           ..add('onSelectionInvalid', onSelectionInvalid)
           ..add('onFullScreenOpened', onFullScreenOpened)
           ..add('onFullScreenClosed', onFullScreenClosed)
-          ..add('onFilteredCategoriesChanged', onFilteredCategoriesChanged))
+          ..add('onFilteredCategoriesChanged', onFilteredCategoriesChanged)
+          ..add('onFloorChanged', onFloorChanged))
         .toString();
   }
 }
@@ -1351,6 +1357,11 @@ class SeatingChartConfigBuilder
           Function(List<SeatsioCategory>)? onFilteredCategoriesChanged) =>
       _$this._onFilteredCategoriesChanged = onFilteredCategoriesChanged;
 
+  Function(Floor? floor)? _onFloorChanged;
+  Function(Floor? floor)? get onFloorChanged => _$this._onFloorChanged;
+  set onFloorChanged(Function(Floor? floor)? onFloorChanged) =>
+      _$this._onFloorChanged = onFloorChanged;
+
   SeatingChartConfigBuilder() {
     SeatingChartConfig._initializeBuilder(this);
   }
@@ -1426,6 +1437,7 @@ class SeatingChartConfigBuilder
       _onFullScreenOpened = $v.onFullScreenOpened;
       _onFullScreenClosed = $v.onFullScreenClosed;
       _onFilteredCategoriesChanged = $v.onFilteredCategoriesChanged;
+      _onFloorChanged = $v.onFloorChanged;
       _$v = null;
     }
     return this;
@@ -1521,6 +1533,7 @@ class SeatingChartConfigBuilder
             onFullScreenOpened: onFullScreenOpened,
             onFullScreenClosed: onFullScreenClosed,
             onFilteredCategoriesChanged: onFilteredCategoriesChanged,
+            onFloorChanged: onFloorChanged,
           );
     } catch (_) {
       late String _$failedField;

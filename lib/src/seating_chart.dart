@@ -461,6 +461,52 @@ class SeatsioSeatingChartState extends State<SeatsioSeatingChart> {
     return completer.future;
   }
 
+  Future<void> goToFloor(String floor) async {
+    final String promiseId = DateTime.now().millisecondsSinceEpoch.toString();
+    final Completer<void> completer = Completer<void>();
+
+    _pendingPromises[promiseId] = completer;
+
+    final String jsFloor = jsonEncode(floor);
+
+    await _controller.evaluateJavascript('''
+    chart.goToFloor($jsFloor)
+      .then(() => window.goToFloorJsChannel.postMessage(JSON.stringify({
+        "id": "$promiseId\",
+        \"status\": \"resolved\"
+      })))
+      .catch(error => window.goToFloorJsChannel.postMessage(JSON.stringify({
+        \"id\": \"$promiseId\",
+        \"status\": \"error\",
+        \"message\": error
+      })));
+  ''');
+
+    return completer.future;
+  }
+
+  Future<void> goToAllFloorsView() async {
+    final String promiseId = DateTime.now().millisecondsSinceEpoch.toString();
+    final Completer<void> completer = Completer<void>();
+
+    _pendingPromises[promiseId] = completer;
+
+    await _controller.evaluateJavascript('''
+    chart.goToAllFloorsView()
+      .then(() => window.goToAllFloorsViewJsChannel.postMessage(JSON.stringify({
+        "id": "$promiseId\",
+        \"status\": \"resolved\"
+      })))
+      .catch(error => window.goToAllFloorsViewJsChannel.postMessage(JSON.stringify({
+        \"id\": \"$promiseId\",
+        \"status\": \"error\",
+        \"message\": error
+      })));
+  ''');
+
+    return completer.future;
+  }
+
   void _handleVoidPromiseCompleted(JavaScriptMessage message) {
     final Map<String, dynamic> promiseResult = jsonDecode(message.message);
     final completer = _pendingPromises.remove(promiseResult["id"]);

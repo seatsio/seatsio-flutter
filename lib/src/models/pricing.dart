@@ -7,7 +7,7 @@ import '../util/serializers.dart';
 import 'category_key.dart';
 import 'ticket_type.dart';
 
-part 'pricing_for_category.g.dart';
+part 'pricing.g.dart';
 
 abstract class Pricing
     implements Built<Pricing, PricingBuilder> {

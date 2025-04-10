@@ -107,6 +107,7 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
       ..addJavaScriptChannel('onFullScreenOpenedJsChannel', onMessageReceived: onFullScreenOpened)
       ..addJavaScriptChannel('onFullScreenClosedJsChannel', onMessageReceived: onFullScreenClosed)
       ..addJavaScriptChannel('onFilteredCategoriesChangedJsChannel', onMessageReceived: onFilteredCategoriesChanged)
+      ..addJavaScriptChannel('onFloorChangedJsChannel', onMessageReceived: onFloorChanged)
       // renderer methods
       ..addJavaScriptChannel("resetViewJsChannel", onMessageReceived: widget.onVoidPromiseCompleted)
       ..addJavaScriptChannel("startNewSessionJsChannel", onMessageReceived: widget.onVoidPromiseCompleted)
@@ -127,7 +128,9 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
       ..addJavaScriptChannel("zoomToObjectsJsChannel", onMessageReceived: widget.onVoidPromiseCompleted)
       ..addJavaScriptChannel("zoomToSelectedObjectsJsChannel", onMessageReceived: widget.onVoidPromiseCompleted)
       ..addJavaScriptChannel("zoomToFilteredCategoriesJsChannel", onMessageReceived: widget.onVoidPromiseCompleted)
-      ..addJavaScriptChannel("zoomToSectionJsChannel", onMessageReceived: widget.onVoidPromiseCompleted);
+      ..addJavaScriptChannel("zoomToSectionJsChannel", onMessageReceived: widget.onVoidPromiseCompleted)
+      ..addJavaScriptChannel("goToAllFloorsViewJsChannel", onMessageReceived: widget.onVoidPromiseCompleted)
+      ..addJavaScriptChannel("goToFloorJsChannel", onMessageReceived: widget.onVoidPromiseCompleted);
 
     _seatsioController = SeatsioWebViewController(webViewController: _webViewController);
     widget._onWebViewCreated?.call(_seatsioController);
@@ -165,6 +168,14 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
       final SeatsioObject object = SeatsioObject(label: data["object"]["label"]);
       final SelectedTicketType? ticketType = SelectedTicketType.fromJson(data["ticketType"]);
       widget._config.onObjectSelected!(object, ticketType);
+    }
+  }
+
+  void onFloorChanged(JavaScriptMessage message) {
+    if (widget._config.onFloorChanged != null) {
+      final Map<String, dynamic> data = jsonDecode(message.message);
+      final Floor? floor = Floor.fromJson(data["floor"]);
+      widget._config.onFloorChanged!(floor);
     }
   }
 

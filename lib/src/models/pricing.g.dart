@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'pricing_for_category.dart';
+part of 'pricing.dart';
 
 // **************************************************************************
 // BuiltValueGenerator

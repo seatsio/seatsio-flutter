@@ -67,12 +67,6 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
   // Channels
   List<String>? get channels;
 
-  // TODO everything under Categories https://docs.seats.io/docs/renderer/categoryfilter
-
-  // TODO channels https://docs.seats.io/docs/renderer/config-channels
-
-  // TODO everything under Object overrides https://docs.seats.io/docs/renderer/config-objectcolor
-
   @BuiltValueField(serialize: false)
   String? get objectColor;
 
@@ -126,9 +120,6 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
   bool? get lockActiveFloor;
 
   bool? get showFloorElevator;
-
-  // TODO chart.goToFloor(): https://docs.seats.io/docs/renderer/chart-gotofloor
-  // TODO chart.goToAllFloorsView() https://docs.seats.io/docs/renderer/chart-gotoallfloorsview
 
   // TODO everything under Prompts API https://docs.seats.io/docs/renderer/prompts-api/onPlacesPrompt
   // TODO everything under Spotlight https://docs.seats.io/docs/renderer/spotlight (chart.xxx() methods)
@@ -196,6 +187,8 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
   @BuiltValueField(serialize: false)
   Function(List<SeatsioCategory>)? get onFilteredCategoriesChanged;
 
+  @BuiltValueField(serialize: false)
+  Function(Floor? floor)? get onFloorChanged;
 
   // TODO everything under Renderer Properties https://docs.seats.io/docs/renderer/chart-properties-chartselectedobjects
 
