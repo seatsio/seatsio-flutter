@@ -9,28 +9,28 @@ import 'ticket_type.dart';
 
 part 'pricing_for_category.g.dart';
 
-abstract class PricingForCategory
-    implements Built<PricingForCategory, PricingForCategoryBuilder> {
-  CategoryKey get category;
+abstract class Pricing
+    implements Built<Pricing, PricingBuilder> {
+  CategoryKey? get category;
+  BuiltList<String>? get objects;
   double? get price;
   double? get originalPrice;
   BuiltList<TicketType>? get ticketTypes;
-
   BuiltList<PricingForChannel>? get channels;
 
-  // TODO add support for pricing per object
+  Pricing._();
 
-  PricingForCategory._();
-
-  factory PricingForCategory({
-    required dynamic category,
+  factory Pricing({
+    dynamic category,
+    List<String>? objects,
     double? price,
     double? originalPrice,
     List<TicketType>? ticketTypes,
     List<PricingForChannel>? channels,
   }) {
-    return _$PricingForCategory._(
-      category: CategoryKey.from(category),
+    return _$Pricing._(
+      category: category != null ? CategoryKey.from(category) : null,
+      objects: objects != null ? BuiltList(objects) : null,
       price: price,
       originalPrice: originalPrice,
       ticketTypes: ticketTypes != null ? BuiltList(ticketTypes) : null,
@@ -38,10 +38,11 @@ abstract class PricingForCategory
     );
   }
 
-  static Serializer<PricingForCategory> get serializer => _$pricingForCategorySerializer;
+  static Serializer<Pricing> get serializer =>
+      _$pricingSerializer;
 
   Map<String, dynamic> toJson() {
-    return serializers.serializeWith(PricingForCategory.serializer, this) as Map<String, dynamic>;
+    return serializers.serializeWith(Pricing.serializer, this)
+        as Map<String, dynamic>;
   }
-
 }

@@ -19,7 +19,7 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
   Map<String, dynamic>? get extraConfig;
 
   // Pricing
-  List<PricingForCategory>? get pricing;
+  List<Pricing>? get pricing;
 
   @BuiltValueField(serialize: false)
   Function(num price)? get priceFormatter;

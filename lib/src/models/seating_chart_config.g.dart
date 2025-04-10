@@ -68,8 +68,8 @@ class _$SeatingChartConfigSerializer
       result
         ..add('pricing')
         ..add(serializers.serialize(value,
-            specifiedType: const FullType(
-                List, const [const FullType(PricingForCategory)])));
+            specifiedType:
+                const FullType(List, const [const FullType(Pricing)])));
     }
     value = object.showSectionPricingOverlay;
     if (value != null) {
@@ -347,9 +347,9 @@ class _$SeatingChartConfigSerializer
           break;
         case 'pricing':
           result.pricing = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      List, const [const FullType(PricingForCategory)]))
-              as List<PricingForCategory>?;
+                  specifiedType:
+                      const FullType(List, const [const FullType(Pricing)]))
+              as List<Pricing>?;
           break;
         case 'showSectionPricingOverlay':
           result.showSectionPricingOverlay = serializers.deserialize(value,
@@ -525,7 +525,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   final Map<String, dynamic>? extraConfig;
   @override
-  final List<PricingForCategory>? pricing;
+  final List<Pricing>? pricing;
   @override
   final Function(num price)? priceFormatter;
   @override
@@ -1009,9 +1009,9 @@ class SeatingChartConfigBuilder
   set extraConfig(Map<String, dynamic>? extraConfig) =>
       _$this._extraConfig = extraConfig;
 
-  List<PricingForCategory>? _pricing;
-  List<PricingForCategory>? get pricing => _$this._pricing;
-  set pricing(List<PricingForCategory>? pricing) => _$this._pricing = pricing;
+  List<Pricing>? _pricing;
+  List<Pricing>? get pricing => _$this._pricing;
+  set pricing(List<Pricing>? pricing) => _$this._pricing = pricing;
 
   Function(num price)? _priceFormatter;
   Function(num price)? get priceFormatter => _$this._priceFormatter;

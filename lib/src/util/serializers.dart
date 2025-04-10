@@ -10,7 +10,7 @@ part 'serializers.g.dart';
 @SerializersFor([
   SeatingChartConfig,
   Region,
-  PricingForCategory,
+  Pricing,
   TicketType,
   CategoryKey,
 ])

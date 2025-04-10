@@ -22,7 +22,7 @@ class _$SeatingChartConfigChange extends SeatingChartConfigChange {
   @override
   final List<String>? filteredCategories;
   @override
-  final List<PricingForCategory>? pricing;
+  final List<Pricing>? pricing;
   @override
   final List<String>? channels;
   @override
@@ -142,9 +142,9 @@ class SeatingChartConfigChangeBuilder
   set filteredCategories(List<String>? filteredCategories) =>
       _$this._filteredCategories = filteredCategories;
 
-  List<PricingForCategory>? _pricing;
-  List<PricingForCategory>? get pricing => _$this._pricing;
-  set pricing(List<PricingForCategory>? pricing) => _$this._pricing = pricing;
+  List<Pricing>? _pricing;
+  List<Pricing>? get pricing => _$this._pricing;
+  set pricing(List<Pricing>? pricing) => _$this._pricing = pricing;
 
   List<String>? _channels;
   List<String>? get channels => _$this._channels;

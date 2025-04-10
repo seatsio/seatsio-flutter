@@ -5,14 +5,14 @@ class LargeTheatreMaximal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final multiLevelPricing = [
-      PricingForCategory(
-        category: "Arena",
+      Pricing(
+        objects: ["Arena-1-11", "Arena-1-12"],
         ticketTypes: [
           TicketType(ticketType: "adult", price: 30, originalPrice: 50),
           TicketType(ticketType: "child", price: 20, label: "For children"),
         ],
       ),
-      PricingForCategory(
+      Pricing(
         category: "Stalls",
         ticketTypes: [
           TicketType(ticketType: "adult", price: 40),
@@ -20,13 +20,13 @@ class LargeTheatreMaximal extends StatelessWidget {
           TicketType(ticketType: "65+", price: 25, label: "For senior citizens"),
         ],
       ),
-      PricingForCategory(category: "3", price: 50),
+      Pricing(category: "3", price: 50),
     ];
 
     final simplePricing = [
-      PricingForCategory(category: 1, price: 30, originalPrice: 40),
-      PricingForCategory(category: "2", price: 40),
-      PricingForCategory(category: "3", price: 50),
+      Pricing(category: 1, price: 30, originalPrice: 40),
+      Pricing(category: "2", price: 40),
+      Pricing(category: "3", price: 50),
     ];
 
     final priceFormatter = (num price) => "€${price.toStringAsFixed(2)}";
@@ -89,7 +89,7 @@ class LargeTheatreMaximal extends StatelessWidget {
             ..objectPopover.replace(ObjectPopover((b) => b
               ..showAvailability = false
               ..showCategory = false
-              ..showLabel = false
+              ..showLabel = true
               ..showPricing = false
               ..showUnavailableNotice = true
               ..stylizedLabel = true

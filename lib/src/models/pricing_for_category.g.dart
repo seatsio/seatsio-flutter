@@ -6,26 +6,34 @@ part of 'pricing_for_category.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializer<PricingForCategory> _$pricingForCategorySerializer =
-    new _$PricingForCategorySerializer();
+Serializer<Pricing> _$pricingSerializer = new _$PricingSerializer();
 
-class _$PricingForCategorySerializer
-    implements StructuredSerializer<PricingForCategory> {
+class _$PricingSerializer implements StructuredSerializer<Pricing> {
   @override
-  final Iterable<Type> types = const [PricingForCategory, _$PricingForCategory];
+  final Iterable<Type> types = const [Pricing, _$Pricing];
   @override
-  final String wireName = 'PricingForCategory';
+  final String wireName = 'Pricing';
 
   @override
-  Iterable<Object?> serialize(
-      Serializers serializers, PricingForCategory object,
+  Iterable<Object?> serialize(Serializers serializers, Pricing object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object?>[
-      'category',
-      serializers.serialize(object.category,
-          specifiedType: const FullType(CategoryKey)),
-    ];
+    final result = <Object?>[];
     Object? value;
+    value = object.category;
+    if (value != null) {
+      result
+        ..add('category')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(CategoryKey)));
+    }
+    value = object.objects;
+    if (value != null) {
+      result
+        ..add('objects')
+        ..add(serializers.serialize(value,
+            specifiedType:
+                const FullType(BuiltList, const [const FullType(String)])));
+    }
     value = object.price;
     if (value != null) {
       result
@@ -60,10 +68,9 @@ class _$PricingForCategorySerializer
   }
 
   @override
-  PricingForCategory deserialize(
-      Serializers serializers, Iterable<Object?> serialized,
+  Pricing deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new PricingForCategoryBuilder();
+    final result = new PricingBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -74,6 +81,12 @@ class _$PricingForCategorySerializer
         case 'category':
           result.category.replace(serializers.deserialize(value,
               specifiedType: const FullType(CategoryKey))! as CategoryKey);
+          break;
+        case 'objects':
+          result.objects.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType(String)]))!
+              as BuiltList<Object?>);
           break;
         case 'price':
           result.price = serializers.deserialize(value,
@@ -102,9 +115,11 @@ class _$PricingForCategorySerializer
   }
 }
 
-class _$PricingForCategory extends PricingForCategory {
+class _$Pricing extends Pricing {
   @override
-  final CategoryKey category;
+  final CategoryKey? category;
+  @override
+  final BuiltList<String>? objects;
   @override
   final double? price;
   @override
@@ -114,35 +129,31 @@ class _$PricingForCategory extends PricingForCategory {
   @override
   final BuiltList<PricingForChannel>? channels;
 
-  factory _$PricingForCategory(
-          [void Function(PricingForCategoryBuilder)? updates]) =>
-      (new PricingForCategoryBuilder()..update(updates))._build();
+  factory _$Pricing([void Function(PricingBuilder)? updates]) =>
+      (new PricingBuilder()..update(updates))._build();
 
-  _$PricingForCategory._(
-      {required this.category,
+  _$Pricing._(
+      {this.category,
+      this.objects,
       this.price,
       this.originalPrice,
       this.ticketTypes,
       this.channels})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(
-        category, r'PricingForCategory', 'category');
-  }
+      : super._();
 
   @override
-  PricingForCategory rebuild(
-          void Function(PricingForCategoryBuilder) updates) =>
+  Pricing rebuild(void Function(PricingBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  PricingForCategoryBuilder toBuilder() =>
-      new PricingForCategoryBuilder()..replace(this);
+  PricingBuilder toBuilder() => new PricingBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is PricingForCategory &&
+    return other is Pricing &&
         category == other.category &&
+        objects == other.objects &&
         price == other.price &&
         originalPrice == other.originalPrice &&
         ticketTypes == other.ticketTypes &&
@@ -153,6 +164,7 @@ class _$PricingForCategory extends PricingForCategory {
   int get hashCode {
     var _$hash = 0;
     _$hash = $jc(_$hash, category.hashCode);
+    _$hash = $jc(_$hash, objects.hashCode);
     _$hash = $jc(_$hash, price.hashCode);
     _$hash = $jc(_$hash, originalPrice.hashCode);
     _$hash = $jc(_$hash, ticketTypes.hashCode);
@@ -163,8 +175,9 @@ class _$PricingForCategory extends PricingForCategory {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper(r'PricingForCategory')
+    return (newBuiltValueToStringHelper(r'Pricing')
           ..add('category', category)
+          ..add('objects', objects)
           ..add('price', price)
           ..add('originalPrice', originalPrice)
           ..add('ticketTypes', ticketTypes)
@@ -173,14 +186,18 @@ class _$PricingForCategory extends PricingForCategory {
   }
 }
 
-class PricingForCategoryBuilder
-    implements Builder<PricingForCategory, PricingForCategoryBuilder> {
-  _$PricingForCategory? _$v;
+class PricingBuilder implements Builder<Pricing, PricingBuilder> {
+  _$Pricing? _$v;
 
   CategoryKeyBuilder? _category;
   CategoryKeyBuilder get category =>
       _$this._category ??= new CategoryKeyBuilder();
   set category(CategoryKeyBuilder? category) => _$this._category = category;
+
+  ListBuilder<String>? _objects;
+  ListBuilder<String> get objects =>
+      _$this._objects ??= new ListBuilder<String>();
+  set objects(ListBuilder<String>? objects) => _$this._objects = objects;
 
   double? _price;
   double? get price => _$this._price;
@@ -203,12 +220,13 @@ class PricingForCategoryBuilder
   set channels(ListBuilder<PricingForChannel>? channels) =>
       _$this._channels = channels;
 
-  PricingForCategoryBuilder();
+  PricingBuilder();
 
-  PricingForCategoryBuilder get _$this {
+  PricingBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      _category = $v.category.toBuilder();
+      _category = $v.category?.toBuilder();
+      _objects = $v.objects?.toBuilder();
       _price = $v.price;
       _originalPrice = $v.originalPrice;
       _ticketTypes = $v.ticketTypes?.toBuilder();
@@ -219,25 +237,26 @@ class PricingForCategoryBuilder
   }
 
   @override
-  void replace(PricingForCategory other) {
+  void replace(Pricing other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$PricingForCategory;
+    _$v = other as _$Pricing;
   }
 
   @override
-  void update(void Function(PricingForCategoryBuilder)? updates) {
+  void update(void Function(PricingBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  PricingForCategory build() => _build();
+  Pricing build() => _build();
 
-  _$PricingForCategory _build() {
-    _$PricingForCategory _$result;
+  _$Pricing _build() {
+    _$Pricing _$result;
     try {
       _$result = _$v ??
-          new _$PricingForCategory._(
-            category: category.build(),
+          new _$Pricing._(
+            category: _category?.build(),
+            objects: _objects?.build(),
             price: price,
             originalPrice: originalPrice,
             ticketTypes: _ticketTypes?.build(),
@@ -247,7 +266,9 @@ class PricingForCategoryBuilder
       late String _$failedField;
       try {
         _$failedField = 'category';
-        category.build();
+        _category?.build();
+        _$failedField = 'objects';
+        _objects?.build();
 
         _$failedField = 'ticketTypes';
         _ticketTypes?.build();
@@ -255,7 +276,7 @@ class PricingForCategoryBuilder
         _channels?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            r'PricingForCategory', _$failedField, e.toString());
+            r'Pricing', _$failedField, e.toString());
       }
       rethrow;
     }

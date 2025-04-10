@@ -14,14 +14,14 @@ class _SmallTheatreRendererMethodsState extends State<SmallTheatreRendererMethod
   final Map<String, Future<void>? Function()> _actions = {};
 
   final multiLevelPricing = [
-    PricingForCategory(
+    Pricing(
       category: 1,
       ticketTypes: [
         TicketType(ticketType: "adult", price: 30, originalPrice: 50),
         TicketType(ticketType: "child", price: 20, label: "For children"),
       ],
     ),
-    PricingForCategory(
+    Pricing(
       category: 2,
       ticketTypes: [
         TicketType(ticketType: "adult", price: 40),
@@ -29,13 +29,13 @@ class _SmallTheatreRendererMethodsState extends State<SmallTheatreRendererMethod
         TicketType(ticketType: "65+", price: 25, label: "For senior citizens"),
       ],
     ),
-    PricingForCategory(category: "3", price: 50),
+    Pricing(category: "3", price: 50),
   ];
 
   final simplePricing = [
-    PricingForCategory(category: 1, price: 30, originalPrice: 40),
-    PricingForCategory(category: "2", price: 40),
-    PricingForCategory(category: "3", price: 50),
+    Pricing(category: 1, price: 30, originalPrice: 40),
+    Pricing(category: "2", price: 40),
+    Pricing(category: "3", price: 50),
   ];
 
   @override
