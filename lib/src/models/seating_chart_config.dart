@@ -96,7 +96,7 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
 
   bool? get holdOnSelectForGAs;
 
-  //Customization
+  // UI Customization
   bool? get showMinimap;
 
   bool? get showLegend;
@@ -104,6 +104,8 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
   LegendConfig? get legendConfig;
 
   bool? get showZoomOutButtonOnMobile;
+
+  String? get loading;
 
   // styling
   SeatsioColorScheme? get colorScheme;
@@ -260,11 +262,12 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
       if (session != null) "session": session!.toJson(),
       if (holdToken != null) "holdToken": holdToken,
       if (holdOnSelectForGAs != null) "holdOnSelectForGAs": holdOnSelectForGAs,
-      // customization
+      // UI customization
       if (showMinimap != null) "showMinimap": showMinimap,
       if (showLegend != null) "showLegend": showLegend,
       if (legendConfig != null) "legendConfig": legendConfig!.toJson(),
       if (showZoomOutButtonOnMobile != null) "showZoomOutButtonOnMobile": showZoomOutButtonOnMobile,
+      if (loading != null) "loading": loading,
       // styling
       if (colorScheme != null) "colorScheme": colorScheme!.toJson(),
       if (colors != null) "colors": colors!.toJson(),

@@ -259,6 +259,13 @@ class _$SeatingChartConfigSerializer
         ..add(
             serializers.serialize(value, specifiedType: const FullType(bool)));
     }
+    value = object.loading;
+    if (value != null) {
+      result
+        ..add('loading')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     value = object.colorScheme;
     if (value != null) {
       result
@@ -472,6 +479,10 @@ class _$SeatingChartConfigSerializer
           result.showZoomOutButtonOnMobile = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool?;
           break;
+        case 'loading':
+          result.loading = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
         case 'colorScheme':
           result.colorScheme = serializers.deserialize(value,
                   specifiedType: const FullType(SeatsioColorScheme))
@@ -584,6 +595,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   final bool? showZoomOutButtonOnMobile;
   @override
+  final String? loading;
+  @override
   final SeatsioColorScheme? colorScheme;
   @override
   final SeatsioColors? colors;
@@ -694,6 +707,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       this.showLegend,
       this.legendConfig,
       this.showZoomOutButtonOnMobile,
+      this.loading,
       this.colorScheme,
       this.colors,
       this.activeFloor,
@@ -787,6 +801,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         showLegend == other.showLegend &&
         legendConfig == other.legendConfig &&
         showZoomOutButtonOnMobile == other.showZoomOutButtonOnMobile &&
+        loading == other.loading &&
         colorScheme == other.colorScheme &&
         colors == other.colors &&
         activeFloor == other.activeFloor &&
@@ -861,6 +876,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     _$hash = $jc(_$hash, showLegend.hashCode);
     _$hash = $jc(_$hash, legendConfig.hashCode);
     _$hash = $jc(_$hash, showZoomOutButtonOnMobile.hashCode);
+    _$hash = $jc(_$hash, loading.hashCode);
     _$hash = $jc(_$hash, colorScheme.hashCode);
     _$hash = $jc(_$hash, colors.hashCode);
     _$hash = $jc(_$hash, activeFloor.hashCode);
@@ -938,6 +954,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
           ..add('showLegend', showLegend)
           ..add('legendConfig', legendConfig)
           ..add('showZoomOutButtonOnMobile', showZoomOutButtonOnMobile)
+          ..add('loading', loading)
           ..add('colorScheme', colorScheme)
           ..add('colors', colors)
           ..add('activeFloor', activeFloor)
@@ -1169,6 +1186,10 @@ class SeatingChartConfigBuilder
   set showZoomOutButtonOnMobile(bool? showZoomOutButtonOnMobile) =>
       _$this._showZoomOutButtonOnMobile = showZoomOutButtonOnMobile;
 
+  String? _loading;
+  String? get loading => _$this._loading;
+  set loading(String? loading) => _$this._loading = loading;
+
   SeatsioColorScheme? _colorScheme;
   SeatsioColorScheme? get colorScheme => _$this._colorScheme;
   set colorScheme(SeatsioColorScheme? colorScheme) =>
@@ -1388,6 +1409,7 @@ class SeatingChartConfigBuilder
       _showLegend = $v.showLegend;
       _legendConfig = $v.legendConfig?.toBuilder();
       _showZoomOutButtonOnMobile = $v.showZoomOutButtonOnMobile;
+      _loading = $v.loading;
       _colorScheme = $v.colorScheme;
       _colors = $v.colors?.toBuilder();
       _activeFloor = $v.activeFloor;
@@ -1483,6 +1505,7 @@ class SeatingChartConfigBuilder
             showLegend: showLegend,
             legendConfig: _legendConfig?.build(),
             showZoomOutButtonOnMobile: showZoomOutButtonOnMobile,
+            loading: loading,
             colorScheme: colorScheme,
             colors: _colors?.build(),
             activeFloor: activeFloor,

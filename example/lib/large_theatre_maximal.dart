@@ -119,6 +119,7 @@ class LargeTheatreMaximal extends StatelessWidget {
             // ..holdToken = "someHoldToken"
             //..holdOnSelectForGAs = true
             // ..showMinimap = false
+            //..loading = "<div style=\"width: 100%; height: 100%; background-color: red;\">Loading...</div>"
             ..showLegend = true
             ..colorScheme = SeatsioColorScheme.dark
             ..legendConfig.replace(LegendConfig((b) => b
