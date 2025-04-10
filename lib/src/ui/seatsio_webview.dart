@@ -299,7 +299,7 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
   List<SelectedTicketType>? _toTicketTypesList(ticketTypesData) {
     final List<SelectedTicketType>? ticketTypes = ticketTypesData != null
         ? (ticketTypesData as List)
-            .map((ticket) => SelectedTicketType.fromJson(ticket as Map<String, dynamic>))
+            .map((ticket) => SelectedTicketType.fromJson(ticket as Map<String, dynamic>?))
             .whereType<SelectedTicketType>()
             .toList()
         : null;
