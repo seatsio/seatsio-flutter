@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:seatsio_flutter/seatsio.dart';
+import 'package:seatsio_flutter/seatsio_flutter.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';

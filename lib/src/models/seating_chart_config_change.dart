@@ -1,6 +1,6 @@
 import 'package:built_value/built_value.dart';
 
-import '../../seatsio.dart';
+import '../../seatsio_flutter.dart';
 
 part 'seating_chart_config_change.g.dart';
 

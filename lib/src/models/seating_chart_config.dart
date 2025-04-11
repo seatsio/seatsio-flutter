@@ -1,4 +1,4 @@
-import '../../seatsio.dart';
+import '../../seatsio_flutter.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
