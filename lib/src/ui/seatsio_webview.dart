@@ -281,8 +281,8 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
   void onFilteredCategoriesChanged(JavaScriptMessage message) {
     if (widget._config.onFilteredCategoriesChanged != null) {
       final Map<String, dynamic> data = jsonDecode(message.message);
-      final List<SeatsioCategory> categories =
-          (data["categories"] as List<dynamic>).map((category) => SeatsioCategory.fromJson(category)).toList();
+      final List<Category> categories =
+          (data["categories"] as List<dynamic>).map((category) => Category.fromJson(category)).toList();
       widget._config.onFilteredCategoriesChanged!(categories);
     }
   }

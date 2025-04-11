@@ -58,7 +58,7 @@ class LargeTheatreMaximal extends StatelessWidget {
         print("release hold failed - ${objects.map((e) => e.label)} - ${ticketTypes?.map((e) => e.price)}");
     final onSelectionValid = () => print("selection valid");
     final onSelectionInvalid = (List<String> violations) => print("selection invalid: ${violations}");
-    final onFilteredCategoriesChanged = (List<SeatsioCategory> categories) => print("filtered categories changed: ${categories.map((c) => c.label)}");
+    final onFilteredCategoriesChanged = (List<Category> categories) => print("filtered categories changed: ${categories.map((c) => c.label)}");
 
     return Scaffold(
         appBar: AppBar(title: Text("Small Theatre - Minimal Config")),

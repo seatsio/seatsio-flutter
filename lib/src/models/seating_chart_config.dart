@@ -182,7 +182,7 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
   Function(List<String> violations)? get onSelectionInvalid;
 
   @BuiltValueField(serialize: false)
-  Function(List<SeatsioCategory>)? get onFilteredCategoriesChanged;
+  Function(List<Category>)? get onFilteredCategoriesChanged;
 
   @BuiltValueField(serialize: false)
   Function(Floor? floor)? get onFloorChanged;

@@ -10,7 +10,7 @@ class SeatsioObject {
   final bool? liftUpArmrests;
   final bool? companionSeat;
   final bool? semiAmbulatorySeat;
-  final SeatsioCategory? category;
+  final Category? category;
   final bool? forSale;
 
   SeatsioObject({
@@ -28,7 +28,7 @@ class SeatsioObject {
   });
 
   factory SeatsioObject.fromJson(Map<String, dynamic> json) {
-    return SeatsioObject(
+    return Seats_ioObject(
       label: json['label'] as String?,
       labels: json['labels'] != null ? LabelComponents.fromJson(json['labels']) : null,
       inSelectableChannel: json['inSelectableChannel'] as bool?,
@@ -38,7 +38,7 @@ class SeatsioObject {
       liftUpArmrests: json['liftUpArmrests'] as bool?,
       companionSeat: json['companionSeat'] as bool?,
       semiAmbulatorySeat: json['semiAmbulatorySeat'] as bool?,
-      category: json['category'] != null ? SeatsioCategory.fromJson(json['category'] as Map<String, dynamic>) : null,
+      category: json['category'] != null ? Category.fromJson(json['category'] as Map<String, dynamic>) : null,
       forSale: json['forSale'] as bool?,
     );
   }

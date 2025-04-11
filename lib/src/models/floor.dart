@@ -2,7 +2,7 @@ import 'package:seatsio/seatsio.dart';
 
 class Floor {
   final String name;
-  final List<SeatsioCategory>? categories;
+  final List<Category>? categories;
 
   Floor({
     required this.name,
@@ -18,7 +18,7 @@ class Floor {
       name: json['name'],
       categories: json['categories'] != null
           ? (json['categories'] as List)
-              .map((category) => SeatsioCategory.fromJson(category))
+              .map((category) => Category.fromJson(category))
               .toList()
           : null,
     );
