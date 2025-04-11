@@ -17,7 +17,7 @@ on:
           - minor
           - major
 jobs:
-  release:
+  tag:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -32,6 +32,7 @@ jobs:
           VERSION_TO_BUMP: ${{ inputs.versionToBump }}
           GH_TOKEN: ${{ github.token }}
   publish:
+    needs: tag
     permissions:
       id-token: write
     steps:
