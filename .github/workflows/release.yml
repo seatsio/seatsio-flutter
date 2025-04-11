@@ -37,9 +37,12 @@ jobs:
     permissions:
       id-token: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@master
         with:
-          ref: ${{ github.ref }}
+          fetch-depth: 0
+      - run: |
+          LATEST_TAG=$(git describe --tags `git rev-list --tags --max-count=1`)
+          git checkout $LATEST_TAG
       - uses: dart-lang/setup-dart@v1
       - uses: subosito/flutter-action@v2
       - run: dart pub get
