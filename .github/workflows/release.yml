@@ -30,6 +30,7 @@ jobs:
       - run: yarn zx ./release.mjs -v $VERSION_TO_BUMP
         env:
           VERSION_TO_BUMP: ${{ inputs.versionToBump }}
+          GH_TOKEN: ${{ github.token }}
   publish:
     needs: tag
     permissions:
