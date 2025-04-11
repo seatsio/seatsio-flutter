@@ -38,7 +38,8 @@ jobs:
       id-token: write
     steps:
       - uses: actions/checkout@v4
-        ref: ${{ github.ref }}
+        with:
+          ref: ${{ github.ref }}
       - uses: dart-lang/setup-dart@v1
       - uses: subosito/flutter-action@v2
       - run: dart pub get
