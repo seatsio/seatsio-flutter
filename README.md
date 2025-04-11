@@ -6,6 +6,10 @@ seatsio-flutter allows rendering [seats.io](https://www.seats.io) seating charts
 
 ## Usage
 
+### Installation
+
+Add `seatsio_flutter` as a dependency in your pubspec.yaml file.
+
 ### Minimal
 
 ```dart
