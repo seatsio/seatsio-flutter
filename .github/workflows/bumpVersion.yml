@@ -4,8 +4,8 @@
 #   2. under "Workflow permissions", make sure "Read and write permissions" is checked instead of the (default?) read only.
 #
 
-name: Release
-run-name: Release ${{ github.repository }}
+name: Bump version
+run-name: Bump version of ${{ github.repository }}
 on:
   workflow_dispatch:
     inputs:
