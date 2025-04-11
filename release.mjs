@@ -92,5 +92,6 @@ async function release() {
 
 async function checkout() {
     const newTag = 'v' + nextVersion
+    await $`git fetch --tags`
     await $`git checkout ${newTag}`
 }
