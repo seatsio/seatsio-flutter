@@ -76,7 +76,7 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
                 .evaluateJavascript('resolvePromise(${parsedMessage["data"]["promiseId"]}, "${formattedPrice}")');
           }
           if (messageType == "popoverInfoRequested" && this.widget._config.popoverInfo != null) {
-            var object = SeatsioObject.fromJson(parsedMessage["data"]["object"]);
+            var object = SeatsioSelectedObject.fromJson(parsedMessage["data"]["object"]);
             var popoverInfo = this.widget._config.popoverInfo?.call(object);
             this
                 ._seatsioController
@@ -155,7 +155,7 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
   void onObjectClicked(JavaScriptMessage message) {
     if (widget._config.onObjectClicked != null) {
       final Map<String, dynamic> data = jsonDecode(message.message);
-      final SeatsioObject object = SeatsioObject(label: data["object"]["label"]);
+      final SeatsioSelectedObject object = SeatsioSelectedObject(label: data["object"]["label"]);
       widget._config.onObjectClicked!(object);
     }
   }
@@ -163,7 +163,7 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
   void onObjectSelected(JavaScriptMessage message) {
     if (widget._config.onObjectSelected != null) {
       final Map<String, dynamic> data = jsonDecode(message.message);
-      final SeatsioObject object = SeatsioObject(label: data["object"]["label"]);
+      final SeatsioSelectedObject object = SeatsioSelectedObject(label: data["object"]["label"]);
       final SelectedTicketType? ticketType = SelectedTicketType.fromJson(data["ticketType"]);
       widget._config.onObjectSelected!(object, ticketType);
     }
@@ -180,7 +180,7 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
   void onObjectDeselected(JavaScriptMessage message) {
     if (widget._config.onObjectDeselected != null) {
       final Map<String, dynamic> data = jsonDecode(message.message);
-      final SeatsioObject object = SeatsioObject(label: data["object"]["label"]);
+      final SeatsioSelectedObject object = SeatsioSelectedObject(label: data["object"]["label"]);
       final SelectedTicketType? ticketType = SelectedTicketType.fromJson(data["ticketType"]);
       widget._config.onObjectDeselected!(object, ticketType);
     }
@@ -189,7 +189,7 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
   void onObjectStatusChanged(JavaScriptMessage message) {
     if (widget._config.onObjectStatusChanged != null) {
       final Map<String, dynamic> data = jsonDecode(message.message);
-      final SeatsioObject object = SeatsioObject(label: data["object"]["label"]);
+      final SeatsioSelectedObject object = SeatsioSelectedObject(label: data["object"]["label"]);
       widget._config.onObjectStatusChanged!(object);
     }
   }
@@ -197,7 +197,7 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
   void onObjectBooked(JavaScriptMessage message) {
     if (widget._config.onObjectBooked != null) {
       final Map<String, dynamic> data = jsonDecode(message.message);
-      final SeatsioObject object = SeatsioObject(label: data["object"]["label"]);
+      final SeatsioSelectedObject object = SeatsioSelectedObject(label: data["object"]["label"]);
       widget._config.onObjectBooked!(object);
     }
   }
@@ -225,7 +225,7 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
   void onHoldSucceeded(JavaScriptMessage message) {
     if (widget._config.onHoldSucceeded != null) {
       final Map<String, dynamic> data = jsonDecode(message.message);
-      List<SeatsioObject> objects = _toObjectsList(data["objects"]);
+      List<SeatsioSelectedObject> objects = _toObjectsList(data["objects"]);
       List<SelectedTicketType>? ticketTypes = _toTicketTypesList(data["ticketTypes"]);
       widget._config.onHoldSucceeded!(objects, ticketTypes);
     }
@@ -234,7 +234,7 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
   void onHoldFailed(JavaScriptMessage message) {
     if (widget._config.onHoldFailed != null) {
       final Map<String, dynamic> data = jsonDecode(message.message);
-      List<SeatsioObject> objects = _toObjectsList(data["objects"]);
+      List<SeatsioSelectedObject> objects = _toObjectsList(data["objects"]);
       List<SelectedTicketType>? ticketTypes = _toTicketTypesList(data["ticketTypes"]);
       widget._config.onHoldFailed!(objects, ticketTypes);
     }
@@ -249,7 +249,7 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
   void onReleaseHoldSucceeded(JavaScriptMessage message) {
     if (widget._config.onReleaseHoldSucceeded != null) {
       final Map<String, dynamic> data = jsonDecode(message.message);
-      List<SeatsioObject> objects = _toObjectsList(data["objects"]);
+      List<SeatsioSelectedObject> objects = _toObjectsList(data["objects"]);
       List<SelectedTicketType>? ticketTypes = _toTicketTypesList(data["ticketTypes"]);
       widget._config.onReleaseHoldSucceeded!(objects, ticketTypes);
     }
@@ -258,7 +258,7 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
   void onReleaseHoldFailed(JavaScriptMessage message) {
     if (widget._config.onReleaseHoldFailed != null) {
       final Map<String, dynamic> data = jsonDecode(message.message);
-      List<SeatsioObject> objects = _toObjectsList(data["objects"]);
+      List<SeatsioSelectedObject> objects = _toObjectsList(data["objects"]);
       List<SelectedTicketType>? ticketTypes = _toTicketTypesList(data["ticketTypes"]);
       widget._config.onReleaseHoldFailed!(objects, ticketTypes);
     }
@@ -287,9 +287,9 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
     }
   }
 
-  List<SeatsioObject> _toObjectsList(objectsData) {
-    final List<SeatsioObject> objects =
-        (objectsData as List).map((obj) => SeatsioObject(label: obj["label"] as String)).toList();
+  List<SeatsioSelectedObject> _toObjectsList(objectsData) {
+    final List<SeatsioSelectedObject> objects =
+        (objectsData as List).map((obj) => SeatsioSelectedObject(label: obj["label"] as String)).toList();
     return objects;
   }
 

@@ -46,7 +46,7 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
   ObjectPopover? get objectPopover;
 
   @BuiltValueField(serialize: false)
-  Function(SeatsioObject price)? get popoverInfo;
+  Function(SeatsioSelectedObject price)? get popoverInfo;
 
   bool? get showActiveSectionTooltipOnMobile;
 
@@ -137,19 +137,19 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
   Function()? get onChartRerenderingStarted;
 
   @BuiltValueField(serialize: false)
-  Function(SeatsioObject object)? get onObjectClicked;
+  Function(SeatsioSelectedObject object)? get onObjectClicked;
 
   @BuiltValueField(serialize: false)
-  Function(SeatsioObject object, SelectedTicketType? ticketType)? get onObjectSelected;
+  Function(SeatsioSelectedObject object, SelectedTicketType? ticketType)? get onObjectSelected;
 
   @BuiltValueField(serialize: false)
-  Function(SeatsioObject object, SelectedTicketType? ticketType)? get onObjectDeselected;
+  Function(SeatsioSelectedObject object, SelectedTicketType? ticketType)? get onObjectDeselected;
 
   @BuiltValueField(serialize: false)
-  Function(SeatsioObject object)? get onObjectStatusChanged;
+  Function(SeatsioSelectedObject object)? get onObjectStatusChanged;
 
   @BuiltValueField(serialize: false)
-  Function(SeatsioObject object)? get onObjectBooked;
+  Function(SeatsioSelectedObject object)? get onObjectBooked;
 
   @BuiltValueField(serialize: false)
   Function(HoldToken object)? get onSessionInitialized;
@@ -161,19 +161,19 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
   Function()? get onHoldCallsComplete;
 
   @BuiltValueField(serialize: false)
-  Function(List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes)? get onHoldSucceeded;
+  Function(List<SeatsioSelectedObject> objects, List<SelectedTicketType>? ticketTypes)? get onHoldSucceeded;
 
   @BuiltValueField(serialize: false)
-  Function(List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes)? get onHoldFailed;
+  Function(List<SeatsioSelectedObject> objects, List<SelectedTicketType>? ticketTypes)? get onHoldFailed;
 
   @BuiltValueField(serialize: false)
   Function()? get onHoldTokenExpired;
 
   @BuiltValueField(serialize: false)
-  Function(List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes)? get onReleaseHoldSucceeded;
+  Function(List<SeatsioSelectedObject> objects, List<SelectedTicketType>? ticketTypes)? get onReleaseHoldSucceeded;
 
   @BuiltValueField(serialize: false)
-  Function(List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes)? get onReleaseHoldFailed;
+  Function(List<SeatsioSelectedObject> objects, List<SelectedTicketType>? ticketTypes)? get onReleaseHoldFailed;
 
   @BuiltValueField(serialize: false)
   Function()? get onSelectionValid;

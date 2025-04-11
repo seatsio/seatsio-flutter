@@ -558,7 +558,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   final ObjectPopover? objectPopover;
   @override
-  final Function(SeatsioObject price)? popoverInfo;
+  final Function(SeatsioSelectedObject price)? popoverInfo;
   @override
   final bool? showActiveSectionTooltipOnMobile;
   @override
@@ -626,17 +626,17 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   final Function()? onChartRerenderingStarted;
   @override
-  final Function(SeatsioObject object)? onObjectClicked;
+  final Function(SeatsioSelectedObject object)? onObjectClicked;
   @override
-  final Function(SeatsioObject object, SelectedTicketType? ticketType)?
+  final Function(SeatsioSelectedObject object, SelectedTicketType? ticketType)?
       onObjectSelected;
   @override
-  final Function(SeatsioObject object, SelectedTicketType? ticketType)?
+  final Function(SeatsioSelectedObject object, SelectedTicketType? ticketType)?
       onObjectDeselected;
   @override
-  final Function(SeatsioObject object)? onObjectStatusChanged;
+  final Function(SeatsioSelectedObject object)? onObjectStatusChanged;
   @override
-  final Function(SeatsioObject object)? onObjectBooked;
+  final Function(SeatsioSelectedObject object)? onObjectBooked;
   @override
   final Function(HoldToken object)? onSessionInitialized;
   @override
@@ -644,23 +644,19 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   final Function()? onHoldCallsComplete;
   @override
-  final Function(
-          List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes)?
-      onHoldSucceeded;
+  final Function(List<SeatsioSelectedObject> objects,
+      List<SelectedTicketType>? ticketTypes)? onHoldSucceeded;
   @override
-  final Function(
-          List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes)?
-      onHoldFailed;
+  final Function(List<SeatsioSelectedObject> objects,
+      List<SelectedTicketType>? ticketTypes)? onHoldFailed;
   @override
   final Function()? onHoldTokenExpired;
   @override
-  final Function(
-          List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes)?
-      onReleaseHoldSucceeded;
+  final Function(List<SeatsioSelectedObject> objects,
+      List<SelectedTicketType>? ticketTypes)? onReleaseHoldSucceeded;
   @override
-  final Function(
-          List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes)?
-      onReleaseHoldFailed;
+  final Function(List<SeatsioSelectedObject> objects,
+      List<SelectedTicketType>? ticketTypes)? onReleaseHoldFailed;
   @override
   final Function()? onSelectionValid;
   @override
@@ -1079,9 +1075,9 @@ class SeatingChartConfigBuilder
   set objectPopover(ObjectPopoverBuilder? objectPopover) =>
       _$this._objectPopover = objectPopover;
 
-  Function(SeatsioObject price)? _popoverInfo;
-  Function(SeatsioObject price)? get popoverInfo => _$this._popoverInfo;
-  set popoverInfo(Function(SeatsioObject price)? popoverInfo) =>
+  Function(SeatsioSelectedObject price)? _popoverInfo;
+  Function(SeatsioSelectedObject price)? get popoverInfo => _$this._popoverInfo;
+  set popoverInfo(Function(SeatsioSelectedObject price)? popoverInfo) =>
       _$this._popoverInfo = popoverInfo;
 
   bool? _showActiveSectionTooltipOnMobile;
@@ -1245,40 +1241,44 @@ class SeatingChartConfigBuilder
   set onChartRerenderingStarted(Function()? onChartRerenderingStarted) =>
       _$this._onChartRerenderingStarted = onChartRerenderingStarted;
 
-  Function(SeatsioObject object)? _onObjectClicked;
-  Function(SeatsioObject object)? get onObjectClicked =>
+  Function(SeatsioSelectedObject object)? _onObjectClicked;
+  Function(SeatsioSelectedObject object)? get onObjectClicked =>
       _$this._onObjectClicked;
-  set onObjectClicked(Function(SeatsioObject object)? onObjectClicked) =>
+  set onObjectClicked(
+          Function(SeatsioSelectedObject object)? onObjectClicked) =>
       _$this._onObjectClicked = onObjectClicked;
 
-  Function(SeatsioObject object, SelectedTicketType? ticketType)?
+  Function(SeatsioSelectedObject object, SelectedTicketType? ticketType)?
       _onObjectSelected;
-  Function(SeatsioObject object, SelectedTicketType? ticketType)?
+  Function(SeatsioSelectedObject object, SelectedTicketType? ticketType)?
       get onObjectSelected => _$this._onObjectSelected;
   set onObjectSelected(
-          Function(SeatsioObject object, SelectedTicketType? ticketType)?
+          Function(
+                  SeatsioSelectedObject object, SelectedTicketType? ticketType)?
               onObjectSelected) =>
       _$this._onObjectSelected = onObjectSelected;
 
-  Function(SeatsioObject object, SelectedTicketType? ticketType)?
+  Function(SeatsioSelectedObject object, SelectedTicketType? ticketType)?
       _onObjectDeselected;
-  Function(SeatsioObject object, SelectedTicketType? ticketType)?
+  Function(SeatsioSelectedObject object, SelectedTicketType? ticketType)?
       get onObjectDeselected => _$this._onObjectDeselected;
   set onObjectDeselected(
-          Function(SeatsioObject object, SelectedTicketType? ticketType)?
+          Function(
+                  SeatsioSelectedObject object, SelectedTicketType? ticketType)?
               onObjectDeselected) =>
       _$this._onObjectDeselected = onObjectDeselected;
 
-  Function(SeatsioObject object)? _onObjectStatusChanged;
-  Function(SeatsioObject object)? get onObjectStatusChanged =>
+  Function(SeatsioSelectedObject object)? _onObjectStatusChanged;
+  Function(SeatsioSelectedObject object)? get onObjectStatusChanged =>
       _$this._onObjectStatusChanged;
   set onObjectStatusChanged(
-          Function(SeatsioObject object)? onObjectStatusChanged) =>
+          Function(SeatsioSelectedObject object)? onObjectStatusChanged) =>
       _$this._onObjectStatusChanged = onObjectStatusChanged;
 
-  Function(SeatsioObject object)? _onObjectBooked;
-  Function(SeatsioObject object)? get onObjectBooked => _$this._onObjectBooked;
-  set onObjectBooked(Function(SeatsioObject object)? onObjectBooked) =>
+  Function(SeatsioSelectedObject object)? _onObjectBooked;
+  Function(SeatsioSelectedObject object)? get onObjectBooked =>
+      _$this._onObjectBooked;
+  set onObjectBooked(Function(SeatsioSelectedObject object)? onObjectBooked) =>
       _$this._onObjectBooked = onObjectBooked;
 
   Function(HoldToken object)? _onSessionInitialized;
@@ -1297,22 +1297,24 @@ class SeatingChartConfigBuilder
   set onHoldCallsComplete(Function()? onHoldCallsComplete) =>
       _$this._onHoldCallsComplete = onHoldCallsComplete;
 
-  Function(List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes)?
-      _onHoldSucceeded;
-  Function(List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes)?
+  Function(List<SeatsioSelectedObject> objects,
+      List<SelectedTicketType>? ticketTypes)? _onHoldSucceeded;
+  Function(List<SeatsioSelectedObject> objects,
+          List<SelectedTicketType>? ticketTypes)?
       get onHoldSucceeded => _$this._onHoldSucceeded;
   set onHoldSucceeded(
-          Function(List<SeatsioObject> objects,
+          Function(List<SeatsioSelectedObject> objects,
                   List<SelectedTicketType>? ticketTypes)?
               onHoldSucceeded) =>
       _$this._onHoldSucceeded = onHoldSucceeded;
 
-  Function(List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes)?
-      _onHoldFailed;
-  Function(List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes)?
+  Function(List<SeatsioSelectedObject> objects,
+      List<SelectedTicketType>? ticketTypes)? _onHoldFailed;
+  Function(List<SeatsioSelectedObject> objects,
+          List<SelectedTicketType>? ticketTypes)?
       get onHoldFailed => _$this._onHoldFailed;
   set onHoldFailed(
-          Function(List<SeatsioObject> objects,
+          Function(List<SeatsioSelectedObject> objects,
                   List<SelectedTicketType>? ticketTypes)?
               onHoldFailed) =>
       _$this._onHoldFailed = onHoldFailed;
@@ -1322,22 +1324,24 @@ class SeatingChartConfigBuilder
   set onHoldTokenExpired(Function()? onHoldTokenExpired) =>
       _$this._onHoldTokenExpired = onHoldTokenExpired;
 
-  Function(List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes)?
-      _onReleaseHoldSucceeded;
-  Function(List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes)?
+  Function(List<SeatsioSelectedObject> objects,
+      List<SelectedTicketType>? ticketTypes)? _onReleaseHoldSucceeded;
+  Function(List<SeatsioSelectedObject> objects,
+          List<SelectedTicketType>? ticketTypes)?
       get onReleaseHoldSucceeded => _$this._onReleaseHoldSucceeded;
   set onReleaseHoldSucceeded(
-          Function(List<SeatsioObject> objects,
+          Function(List<SeatsioSelectedObject> objects,
                   List<SelectedTicketType>? ticketTypes)?
               onReleaseHoldSucceeded) =>
       _$this._onReleaseHoldSucceeded = onReleaseHoldSucceeded;
 
-  Function(List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes)?
-      _onReleaseHoldFailed;
-  Function(List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes)?
+  Function(List<SeatsioSelectedObject> objects,
+      List<SelectedTicketType>? ticketTypes)? _onReleaseHoldFailed;
+  Function(List<SeatsioSelectedObject> objects,
+          List<SelectedTicketType>? ticketTypes)?
       get onReleaseHoldFailed => _$this._onReleaseHoldFailed;
   set onReleaseHoldFailed(
-          Function(List<SeatsioObject> objects,
+          Function(List<SeatsioSelectedObject> objects,
                   List<SelectedTicketType>? ticketTypes)?
               onReleaseHoldFailed) =>
       _$this._onReleaseHoldFailed = onReleaseHoldFailed;

@@ -31,30 +31,30 @@ class LargeTheatreMaximal extends StatelessWidget {
 
     final priceFormatter = (num price) => "€${price.toStringAsFixed(2)}";
 
-    final popoverInfo = (SeatsioObject object) => "something [b]something[/b] ${object.label}";
+    final popoverInfo = (SeatsioSelectedObject object) => "something [b]something[/b] ${object.label}";
 
     final onChartRendered = () => print("Chart rendered");
     final onChartRenderingFailed = () => print("Chart rendering failed");
     final onChartRerenderingStarted = () => print("Chart rerendering started");
-    final onObjectClicked = (SeatsioObject object) => print("object clicked - ${object.label}");
-    final onObjectSelected = (SeatsioObject object, SelectedTicketType? ticketType) =>
+    final onObjectClicked = (SeatsioSelectedObject object) => print("object clicked - ${object.label}");
+    final onObjectSelected = (SeatsioSelectedObject object, SelectedTicketType? ticketType) =>
         print("object selected - ${object.label} - ${ticketType?.price}");
-    final onObjectDeselected = (SeatsioObject object, SelectedTicketType? deselectedTicketType) =>
+    final onObjectDeselected = (SeatsioSelectedObject object, SelectedTicketType? deselectedTicketType) =>
         print("object deselected - ${object.label} - ${deselectedTicketType?.price}");
-    final onObjectStatusChanged = (SeatsioObject object) => print("object status changed - ${object.label}");
-    final onObjectBooked = (SeatsioObject object) => print("object booked - ${object.label}");
+    final onObjectStatusChanged = (SeatsioSelectedObject object) => print("object status changed - ${object.label}");
+    final onObjectBooked = (SeatsioSelectedObject object) => print("object booked - ${object.label}");
     final onSessionInitialized =
         (HoldToken token) => print("session initialized - ${token.token} - ${token.expiresAt}");
     final onHoldCallsInProgress = () => print("hold calls in progress");
     final onHoldCallsComplete = () => print("hold calls complete");
-    final onHoldSucceeded = (List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes) =>
+    final onHoldSucceeded = (List<SeatsioSelectedObject> objects, List<SelectedTicketType>? ticketTypes) =>
         print("hold succeeded - ${objects.map((e) => e.label)} - ${ticketTypes?.map((e) => e.price)}");
-    final onHoldFailed = (List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes) =>
+    final onHoldFailed = (List<SeatsioSelectedObject> objects, List<SelectedTicketType>? ticketTypes) =>
         print("hold failed - ${objects.map((e) => e.label)} - ${ticketTypes?.map((e) => e.price)}");
     final onHoldTokenExpired = () => print("hold token expired");
-    final onReleaseHoldSucceeded = (List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes) =>
+    final onReleaseHoldSucceeded = (List<SeatsioSelectedObject> objects, List<SelectedTicketType>? ticketTypes) =>
         print("release hold succeeded - ${objects.map((e) => e.label)} - ${ticketTypes?.map((e) => e.price)}");
-    final onReleaseHoldFailed = (List<SeatsioObject> objects, List<SelectedTicketType>? ticketTypes) =>
+    final onReleaseHoldFailed = (List<SeatsioSelectedObject> objects, List<SelectedTicketType>? ticketTypes) =>
         print("release hold failed - ${objects.map((e) => e.label)} - ${ticketTypes?.map((e) => e.price)}");
     final onSelectionValid = () => print("selection valid");
     final onSelectionInvalid = (List<String> violations) => print("selection invalid: ${violations}");
