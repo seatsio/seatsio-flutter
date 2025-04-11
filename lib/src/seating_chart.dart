@@ -336,9 +336,9 @@ class SeatsioSeatingChartState extends State<SeatsioSeatingChart> {
     return completer.future;
   }
 
-  Future<List<Category>> listCategories() async {
+  Future<List<SeatsioCategory>> listCategories() async {
     final String promiseId = DateTime.now().millisecondsSinceEpoch.toString();
-    final Completer<List<Category>> completer = Completer();
+    final Completer<List<SeatsioCategory>> completer = Completer();
 
     _pendingPromises[promiseId] = completer;
 
@@ -547,12 +547,12 @@ class SeatsioSeatingChartState extends State<SeatsioSeatingChart> {
     final String status = data["status"];
 
     final completer = _pendingPromises.remove(promiseId)
-        as Completer<List<Category>>?;
+        as Completer<List<SeatsioCategory>>?;
     if (completer != null) {
       if (status == "resolved") {
         var categoriesData = data["categories"] as List<dynamic>;
         final categories = categoriesData
-            .map((obj) => Category.fromJson(obj))
+            .map((obj) => SeatsioCategory.fromJson(obj))
             .toList();
         completer.complete(categories);
       } else {

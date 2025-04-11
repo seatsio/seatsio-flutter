@@ -1,9 +1,9 @@
 import 'dart:convert';
 
+import 'package:seatsio/seatsio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:seatsio/seatsio.dart';
 import 'package:seatsio/src/ui/seatsio_web_view_controller.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -155,7 +155,7 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
   void onObjectClicked(JavaScriptMessage message) {
     if (widget._config.onObjectClicked != null) {
       final Map<String, dynamic> data = jsonDecode(message.message);
-      final SeatsioObject object = SeatsioObject(label: data["object"]["label"]);
+      final SeatsioObject object = SeatsioObject.fromJson(data["object"]);
       widget._config.onObjectClicked!(object);
     }
   }
@@ -163,7 +163,7 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
   void onObjectSelected(JavaScriptMessage message) {
     if (widget._config.onObjectSelected != null) {
       final Map<String, dynamic> data = jsonDecode(message.message);
-      final SeatsioObject object = SeatsioObject(label: data["object"]["label"]);
+      final SeatsioObject object = SeatsioObject.fromJson(data["object"]);
       final SelectedTicketType? ticketType = SelectedTicketType.fromJson(data["ticketType"]);
       widget._config.onObjectSelected!(object, ticketType);
     }
@@ -180,7 +180,7 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
   void onObjectDeselected(JavaScriptMessage message) {
     if (widget._config.onObjectDeselected != null) {
       final Map<String, dynamic> data = jsonDecode(message.message);
-      final SeatsioObject object = SeatsioObject(label: data["object"]["label"]);
+      final SeatsioObject object = SeatsioObject.fromJson(data["object"]);
       final SelectedTicketType? ticketType = SelectedTicketType.fromJson(data["ticketType"]);
       widget._config.onObjectDeselected!(object, ticketType);
     }
@@ -189,7 +189,7 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
   void onObjectStatusChanged(JavaScriptMessage message) {
     if (widget._config.onObjectStatusChanged != null) {
       final Map<String, dynamic> data = jsonDecode(message.message);
-      final SeatsioObject object = SeatsioObject(label: data["object"]["label"]);
+      final SeatsioObject object = SeatsioObject.fromJson(data["object"]);
       widget._config.onObjectStatusChanged!(object);
     }
   }
@@ -197,7 +197,7 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
   void onObjectBooked(JavaScriptMessage message) {
     if (widget._config.onObjectBooked != null) {
       final Map<String, dynamic> data = jsonDecode(message.message);
-      final SeatsioObject object = SeatsioObject(label: data["object"]["label"]);
+      final SeatsioObject object = SeatsioObject.fromJson(data["object"]);
       widget._config.onObjectBooked!(object);
     }
   }
@@ -281,15 +281,15 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
   void onFilteredCategoriesChanged(JavaScriptMessage message) {
     if (widget._config.onFilteredCategoriesChanged != null) {
       final Map<String, dynamic> data = jsonDecode(message.message);
-      final List<Category> categories =
-          (data["categories"] as List<dynamic>).map((category) => Category.fromJson(category)).toList();
+      final List<SeatsioCategory> categories =
+          (data["categories"] as List<dynamic>).map((category) => SeatsioCategory.fromJson(category)).toList();
       widget._config.onFilteredCategoriesChanged!(categories);
     }
   }
 
   List<SeatsioObject> _toObjectsList(objectsData) {
     final List<SeatsioObject> objects =
-        (objectsData as List).map((obj) => SeatsioObject(label: obj["label"] as String)).toList();
+        (objectsData as List).map((obj) => SeatsioObject.fromJson(obj)).toList();
     return objects;
   }
 

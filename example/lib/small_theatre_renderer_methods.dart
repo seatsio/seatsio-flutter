@@ -147,7 +147,7 @@ class _SmallTheatreRendererMethodsState extends State<SmallTheatreRendererMethod
       if (objects != null) {
         print("Selected objects:");
         for (var obj in objects) {
-          print("Label: ${obj.label}, Status: ${obj.labels?.own}, Category: ${obj.category?.label}");
+          print("Label: ${obj.label}, Status: ${obj.status}, Category: ${obj.category?.label}");
         }
       }
     } catch (e) {

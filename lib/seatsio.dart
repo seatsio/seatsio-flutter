@@ -17,7 +17,7 @@ export 'src/models/color_scheme.dart';
 export 'src/models/colors.dart';
 export 'src/models/selected_ticket_type.dart';
 export 'src/models/hold_token.dart';
-export 'src/models/category.dart';
+export 'src/models/seatsio_category.dart';
 export 'src/models/seatsio_object.dart';
 export 'src/models/seating_chart_config_change.dart';
 export 'src/models/floor.dart';

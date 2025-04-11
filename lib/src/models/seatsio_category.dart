@@ -1,4 +1,4 @@
-class Category {
+class SeatsioCategory {
   final bool? accessible;
   final String? color;
   final int? key;
@@ -6,7 +6,7 @@ class Category {
   final PricingInfo? pricing;
   final bool? hasSelectableObjects;
 
-  Category({
+  SeatsioCategory({
     this.accessible,
     this.color,
     this.key,
@@ -15,8 +15,8 @@ class Category {
     this.hasSelectableObjects,
   });
 
-  factory Category.fromJson(Map<String, dynamic> json) {
-    return Category(
+  factory SeatsioCategory.fromJson(Map<String, dynamic> json) {
+    return SeatsioCategory(
       accessible: json['accessible'] as bool?,
       color: json['color'] as String?,
       key: json['key'] as int?,

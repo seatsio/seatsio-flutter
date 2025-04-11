@@ -666,7 +666,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   final Function(List<String> violations)? onSelectionInvalid;
   @override
-  final Function(List<Category>)? onFilteredCategoriesChanged;
+  final Function(List<SeatsioCategory>)? onFilteredCategoriesChanged;
   @override
   final Function(Floor? floor)? onFloorChanged;
 
@@ -1354,11 +1354,11 @@ class SeatingChartConfigBuilder
           Function(List<String> violations)? onSelectionInvalid) =>
       _$this._onSelectionInvalid = onSelectionInvalid;
 
-  Function(List<Category>)? _onFilteredCategoriesChanged;
-  Function(List<Category>)? get onFilteredCategoriesChanged =>
+  Function(List<SeatsioCategory>)? _onFilteredCategoriesChanged;
+  Function(List<SeatsioCategory>)? get onFilteredCategoriesChanged =>
       _$this._onFilteredCategoriesChanged;
   set onFilteredCategoriesChanged(
-          Function(List<Category>)? onFilteredCategoriesChanged) =>
+          Function(List<SeatsioCategory>)? onFilteredCategoriesChanged) =>
       _$this._onFilteredCategoriesChanged = onFilteredCategoriesChanged;
 
   Function(Floor? floor)? _onFloorChanged;
