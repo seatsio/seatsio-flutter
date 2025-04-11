@@ -31,7 +31,3 @@ jobs:
         env:
           VERSION_TO_BUMP: ${{ inputs.versionToBump }}
           GH_TOKEN: ${{ github.token }}
-      - uses: dart-lang/setup-dart@v1
-      - uses: subosito/flutter-action@v2
-      - run: dart pub get
-      - run: dart pub publish --force
