@@ -28,7 +28,7 @@ class SeatsioObject {
   });
 
   factory SeatsioObject.fromJson(Map<String, dynamic> json) {
-    return Seats_ioObject(
+    return SeatsioObject(
       label: json['label'] as String?,
       labels: json['labels'] != null ? LabelComponents.fromJson(json['labels']) : null,
       inSelectableChannel: json['inSelectableChannel'] as bool?,
