@@ -1,4 +1,4 @@
-import 'package:seatsio/seatsio.dart';
+import 'package:seatsio_flutter/seatsio.dart';
 
 class Floor {
   final String name;

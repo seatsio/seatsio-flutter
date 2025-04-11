@@ -1,4 +1,4 @@
-import 'package:seatsio/seatsio.dart';
+import 'package:seatsio_flutter/seatsio.dart';
 import 'package:flutter/material.dart';
 
 class LargeTheatreMaximal extends StatelessWidget {

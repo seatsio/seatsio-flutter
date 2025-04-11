@@ -2,9 +2,9 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:seatsio/seatsio.dart';
-import 'package:seatsio/src/ui/seatsio_web_view_controller.dart';
-import 'package:seatsio/src/ui/seatsio_webview.dart';
+import 'package:seatsio_flutter/seatsio.dart';
+import 'package:seatsio_flutter/src/ui/seatsio_web_view_controller.dart';
+import 'package:seatsio_flutter/src/ui/seatsio_webview.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class SeatsioSeatingChart extends StatefulWidget {

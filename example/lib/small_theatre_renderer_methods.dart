@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:seatsio/seatsio.dart';
+import 'package:seatsio_flutter/seatsio.dart';
 
 class SmallTheatreRendererMethods extends StatefulWidget {
   @override

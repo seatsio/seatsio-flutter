@@ -1,7 +1,7 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
-import 'package:seatsio/src/models/pricing_for_channel.dart';
+import 'package:seatsio_flutter/src/models/pricing_for_channel.dart';
 
 import '../util/serializers.dart';
 import 'category_key.dart';

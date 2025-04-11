@@ -10,7 +10,7 @@ seatsio-flutter allows rendering [seats.io](https://www.seats.io) seating charts
 
 ```dart
 import 'package:flutter/material.dart';
-import 'package:seatsio/seatsio.dart';
+import 'package:seatsio_flutter/seatsio.dart';
 
 class SmallTheatreMinimal extends StatelessWidget {
   @override
