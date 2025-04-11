@@ -25,7 +25,6 @@ await pullLastVersion()
     .then(bumpVersionInFiles)
     .then(commitAndPush)
     .then(release)
-    .then(checkout)
 
 function getVersionToBump() {
     if (!argv.v || !(argv.v === 'minor' || argv.v === 'major')) {
@@ -88,10 +87,4 @@ async function release() {
         console.error('something went wrong while creating the release. Please revert the version change!')
         throw error
     })
-}
-
-async function checkout() {
-    const newTag = 'v' + nextVersion
-    await $`git fetch --tags`
-    await $`git checkout ${newTag}`
 }
