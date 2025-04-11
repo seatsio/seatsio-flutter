@@ -68,8 +68,8 @@ async function replaceInFile(filename, latestVersion, nextVersion) {
 }
 
 async function pullLastVersion() {
-    await $`git checkout master`
-    await $`git pull origin master`
+    await $`git checkout main`
+    await $`git pull origin main`
 }
 
 async function gitAdd(filename) {
@@ -78,7 +78,7 @@ async function gitAdd(filename) {
 
 async function commitAndPush() {
     await $`git commit -m "version bump"`
-    await $`git push origin master`
+    await $`git push origin main`
 }
 
 async function release() {
