@@ -53,9 +53,9 @@ class SeatsioSeatingChartState extends State<SeatsioSeatingChart> {
     return completer.future;
   }
 
-  Future<List<SeatsioSelectedObject>> listSelectedObjects() async {
+  Future<List<SeatsioObject>> listSelectedObjects() async {
     final String promiseId = DateTime.now().millisecondsSinceEpoch.toString();
-    final Completer<List<SeatsioSelectedObject>> completer = Completer();
+    final Completer<List<SeatsioObject>> completer = Completer();
 
     _pendingPromises[promiseId] = completer;
 
@@ -307,9 +307,9 @@ class SeatsioSeatingChartState extends State<SeatsioSeatingChart> {
     return completer.future;
   }
 
-  Future<SeatsioSelectedObject> findObject(String objectLabel) async {
+  Future<SeatsioObject> findObject(String objectLabel) async {
     final String promiseId = DateTime.now().millisecondsSinceEpoch.toString();
-    final Completer<SeatsioSelectedObject> completer = Completer();
+    final Completer<SeatsioObject> completer = Completer();
 
     _pendingPromises[promiseId] = completer;
 
@@ -526,12 +526,12 @@ class SeatsioSeatingChartState extends State<SeatsioSeatingChart> {
     final String status = data["status"];
 
     final completer = _pendingPromises.remove(promiseId)
-        as Completer<List<SeatsioSelectedObject>>?;
+        as Completer<List<SeatsioObject>>?;
     if (completer != null) {
       if (status == "resolved") {
         var objectsData = data["objects"] as List<dynamic>;
         final objects = objectsData
-            .map((obj) => SeatsioSelectedObject.fromJson(obj))
+            .map((obj) => SeatsioObject.fromJson(obj))
             .toList();
         completer.complete(objects);
       } else {
@@ -586,11 +586,11 @@ class SeatsioSeatingChartState extends State<SeatsioSeatingChart> {
     final String status = data["status"];
 
     final completer =
-        _pendingPromises.remove(promiseId) as Completer<SeatsioSelectedObject>?;
+        _pendingPromises.remove(promiseId) as Completer<SeatsioObject>?;
     if (completer != null) {
       if (status == "resolved") {
         var objectData = data["object"] as dynamic;
-        final object = SeatsioSelectedObject.fromJson(objectData);
+        final object = SeatsioObject.fromJson(objectData);
         completer.complete(object);
       } else {
         completer.completeError(

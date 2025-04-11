@@ -1,6 +1,6 @@
 import 'package:seatsio/seatsio.dart';
 
-class SeatsioSelectedObject {
+class SeatsioObject {
   final String? label;
   final LabelComponents? labels;
   final bool? inSelectableChannel;
@@ -13,7 +13,7 @@ class SeatsioSelectedObject {
   final SeatsioCategory? category;
   final bool? forSale;
 
-  SeatsioSelectedObject({
+  SeatsioObject({
     this.label,
     this.labels,
     this.inSelectableChannel,
@@ -27,8 +27,8 @@ class SeatsioSelectedObject {
     this.forSale
   });
 
-  factory SeatsioSelectedObject.fromJson(Map<String, dynamic> json) {
-    return SeatsioSelectedObject(
+  factory SeatsioObject.fromJson(Map<String, dynamic> json) {
+    return SeatsioObject(
       label: json['label'] as String?,
       labels: json['labels'] != null ? LabelComponents.fromJson(json['labels']) : null,
       inSelectableChannel: json['inSelectableChannel'] as bool?,
