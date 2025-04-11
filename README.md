@@ -55,4 +55,8 @@ flutter run -d <device_id>
 ```
 
 ### Running the example on flutter-Web
-Not supported 
+Not supported
+
+## Credits
+
+This SDK was inspired by This was inspired by https://github.com/SongJiaqiang/seatsio-flutter.
