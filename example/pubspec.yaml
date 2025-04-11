@@ -12,8 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  # seatsio: ^0.1.1
-  seatsio:
+  seatsio_flutter:
     path: ../
   built_collection: ^5.1.1
 
