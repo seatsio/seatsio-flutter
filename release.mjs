@@ -51,7 +51,7 @@ async function determineNextVersionNumber(previous) {
 }
 
 async function bumpVersionInFiles() {
-    await replaceInFile("pubspec.yaml", `version: ${latestVersion},`, `version: ${nextVersion},`)
+    await replaceInFile("pubspec.yaml", `version: ${latestVersion}`, `version: ${nextVersion}`)
 }
 
 async function replaceInFile(filename, latestVersion, nextVersion) {
