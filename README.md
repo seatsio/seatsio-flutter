@@ -61,7 +61,7 @@ flutter run -d <device_id>
 ### Running the example on flutter-Web
 Not supported
 
-### Releasing
+## Releasing
 
 1. Run https://github.com/seatsio/seatsio-flutter/actions/workflows/bumpVersion.yml
 2. Run https://github.com/seatsio/seatsio-flutter/actions/workflows/publish.yml on the tag that was just created
