@@ -59,4 +59,4 @@ Not supported
 
 ## Credits
 
-This SDK was inspired by This was inspired by https://github.com/SongJiaqiang/seatsio-flutter.
+This SDK was inspired by https://github.com/SongJiaqiang/seatsio-flutter.
