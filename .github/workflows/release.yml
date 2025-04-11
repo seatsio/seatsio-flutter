@@ -17,8 +17,10 @@ on:
           - minor
           - major
 jobs:
-  tag:
+  release:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
     steps:
       - uses: actions/checkout@v4
       - uses: fregante/setup-git-user@v2
@@ -31,8 +33,7 @@ jobs:
         env:
           VERSION_TO_BUMP: ${{ inputs.versionToBump }}
           GH_TOKEN: ${{ github.token }}
-  publish:
-    needs: tag
-    permissions:
-      id-token: write
-    uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
+      - uses: dart-lang/setup-dart@v1
+      - uses: subosito/flutter-action@v2
+      - run: dart pub get
+      - run: dart pub publish --force
