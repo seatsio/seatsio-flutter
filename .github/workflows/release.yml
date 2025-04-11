@@ -33,5 +33,5 @@ jobs:
           GH_TOKEN: ${{ github.token }}
       - uses: dart-lang/setup-dart@v1
       - uses: subosito/flutter-action@v2
-      - run: flutter pub get
-      - run: flutter pub publish --force
+      - run: dart pub get
+      - run: dart pub publish --force
