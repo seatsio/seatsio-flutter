@@ -14,3 +14,13 @@ jobs:
       - uses: subosito/flutter-action@v2
       - run: dart pub get
       - run: dart pub publish --force
+
+
+  notify-slack-failure:
+    runs-on: ubuntu-latest
+    needs: [ publish ]
+    if: failure()
+    steps:
+      - uses: seatsio/seatsio-github-actions/slack-notify-clientlib-release-failure@v1
+        with:
+          webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
