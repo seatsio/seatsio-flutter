@@ -29,7 +29,7 @@ class Example extends StatelessWidget {
 }
 ```
 
-### Useing sessions
+### Using sessions
 
 ```dart
 import 'package:flutter/material.dart';
