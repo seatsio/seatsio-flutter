@@ -16,7 +16,7 @@ Add `seatsio_flutter` as a dependency in your pubspec.yaml file.
 import 'package:flutter/material.dart';
 import 'package:seatsio_flutter/seatsio_flutter.dart';
 
-class SmallTheatreMinimal extends StatelessWidget {
+class Example extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,6 +25,93 @@ class SmallTheatreMinimal extends StatelessWidget {
             config: SeatingChartConfig((b) => b
               ..workspaceKey = "<your workspace key>"
               ..event = "<your event key>")));
+  }
+}
+```
+
+### Useing sessions
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:seatsio_flutter/seatsio_flutter.dart';
+
+class Example extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final onSessionInitialized =
+        (HoldToken token) => print("session initialized - ${token.token} - ${token.expiresAt}");
+    
+    return Scaffold(
+        appBar: AppBar(title: Text("Minimal example")),
+        body: SeatsioSeatingChart(
+            config: SeatingChartConfig((b) => b
+              ..workspaceKey = "<your workspace key>"
+              ..event = "<your event key>"
+              ..session = Session.cont
+              ..onSessionInitialized = onSessionInitialized
+            )));
+  }
+}
+```
+
+### `onObjectSelected` and `onObjectDeselected`
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:seatsio_flutter/seatsio_flutter.dart';
+
+class Example extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final onObjectSelected = (SeatsioObject object, SelectedTicketType? ticketType) =>
+        print("object selected - ${object.label}");
+    final onObjectDeselected = (SeatsioObject object, SelectedTicketType? deselectedTicketType) =>
+        print("object deselected - ${object.label}");
+    
+    return Scaffold(
+        appBar: AppBar(title: Text("Minimal example")),
+        body: SeatsioSeatingChart(
+            config: SeatingChartConfig((b) => b
+              ..workspaceKey = "<your workspace key>"
+              ..event = "<your event key>"
+              ..onObjectSelected = onObjectSelected
+              ..onObjectDeselected = onObjectDeselected
+            )));
+  }
+}
+```
+
+### Pricing
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:seatsio_flutter/seatsio_flutter.dart';
+
+class Example extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final priceFormatter = (num price) => "€${price.toStringAsFixed(2)}";
+    final pricing = [
+      Pricing(
+        category: "Stalls",
+        ticketTypes: [
+          TicketType(ticketType: "adult", price: 40),
+          TicketType(ticketType: "child", price: 30, label: "For children"),
+          TicketType(ticketType: "65+", price: 25, label: "For senior citizens"),
+        ],
+      ),
+      Pricing(category: "Belcony", price: 50),
+    ];
+    
+    return Scaffold(
+        appBar: AppBar(title: Text("Minimal example")),
+        body: SeatsioSeatingChart(
+            config: SeatingChartConfig((b) => b
+              ..workspaceKey = "<your workspace key>"
+              ..event = "<your event key>"
+              ..pricing = pricing
+              ..priceFormatter = priceFormatter
+            )));
   }
 }
 ```
