@@ -9,15 +9,6 @@ updates:
         update-types:
           - minor
           - patch
-  - package-ecosystem: pub
-    directory: "/example"
-    schedule:
-      interval: monthly
-    groups:
-      minor-and-patch-version-updates:
-        update-types:
-          - minor
-          - patch
   - package-ecosystem: github-actions
     directory: "/"
     schedule:
