@@ -125,8 +125,6 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
 
   // Advanced
 
-  bool? get unifiedObjectPropertiesInCallbacks;
-
   @BuiltValueField(serialize: false)
   Function()? get onChartRendered;
 
@@ -272,7 +270,7 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
       if (lockActiveFloor != null) "lockActiveFloor": lockActiveFloor,
       if (showFloorElevator != null) "showFloorElevator": showFloorElevator,
       // advanced
-      if (unifiedObjectPropertiesInCallbacks != null) "unifiedObjectPropertiesInCallbacks": unifiedObjectPropertiesInCallbacks,
+      "unifiedObjectPropertiesInCallbacks": true,
     };
   }
 }

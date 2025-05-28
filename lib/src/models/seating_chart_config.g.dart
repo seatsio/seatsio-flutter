@@ -301,13 +301,6 @@ class _$SeatingChartConfigSerializer
         ..add(
             serializers.serialize(value, specifiedType: const FullType(bool)));
     }
-    value = object.unifiedObjectPropertiesInCallbacks;
-    if (value != null) {
-      result
-        ..add('unifiedObjectPropertiesInCallbacks')
-        ..add(
-            serializers.serialize(value, specifiedType: const FullType(bool)));
-    }
     return result;
   }
 
@@ -511,10 +504,6 @@ class _$SeatingChartConfigSerializer
           result.showFloorElevator = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool?;
           break;
-        case 'unifiedObjectPropertiesInCallbacks':
-          result.unifiedObjectPropertiesInCallbacks = serializers
-              .deserialize(value, specifiedType: const FullType(bool)) as bool?;
-          break;
       }
     }
 
@@ -618,8 +607,6 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   final bool? showFloorElevator;
   @override
-  final bool? unifiedObjectPropertiesInCallbacks;
-  @override
   final Function()? onChartRendered;
   @override
   final Function()? onChartRenderingFailed;
@@ -722,7 +709,6 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       this.activeFloor,
       this.lockActiveFloor,
       this.showFloorElevator,
-      this.unifiedObjectPropertiesInCallbacks,
       this.onChartRendered,
       this.onChartRenderingFailed,
       this.onChartRerenderingStarted,
@@ -815,8 +801,6 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         activeFloor == other.activeFloor &&
         lockActiveFloor == other.lockActiveFloor &&
         showFloorElevator == other.showFloorElevator &&
-        unifiedObjectPropertiesInCallbacks ==
-            other.unifiedObjectPropertiesInCallbacks &&
         onChartRendered == _$dynamicOther.onChartRendered &&
         onChartRenderingFailed == _$dynamicOther.onChartRenderingFailed &&
         onChartRerenderingStarted == _$dynamicOther.onChartRerenderingStarted &&
@@ -890,7 +874,6 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     _$hash = $jc(_$hash, activeFloor.hashCode);
     _$hash = $jc(_$hash, lockActiveFloor.hashCode);
     _$hash = $jc(_$hash, showFloorElevator.hashCode);
-    _$hash = $jc(_$hash, unifiedObjectPropertiesInCallbacks.hashCode);
     _$hash = $jc(_$hash, onChartRendered.hashCode);
     _$hash = $jc(_$hash, onChartRenderingFailed.hashCode);
     _$hash = $jc(_$hash, onChartRerenderingStarted.hashCode);
@@ -967,8 +950,6 @@ class _$SeatingChartConfig extends SeatingChartConfig {
           ..add('activeFloor', activeFloor)
           ..add('lockActiveFloor', lockActiveFloor)
           ..add('showFloorElevator', showFloorElevator)
-          ..add('unifiedObjectPropertiesInCallbacks',
-              unifiedObjectPropertiesInCallbacks)
           ..add('onChartRendered', onChartRendered)
           ..add('onChartRenderingFailed', onChartRenderingFailed)
           ..add('onChartRerenderingStarted', onChartRerenderingStarted)
@@ -1221,14 +1202,6 @@ class SeatingChartConfigBuilder
   set showFloorElevator(bool? showFloorElevator) =>
       _$this._showFloorElevator = showFloorElevator;
 
-  bool? _unifiedObjectPropertiesInCallbacks;
-  bool? get unifiedObjectPropertiesInCallbacks =>
-      _$this._unifiedObjectPropertiesInCallbacks;
-  set unifiedObjectPropertiesInCallbacks(
-          bool? unifiedObjectPropertiesInCallbacks) =>
-      _$this._unifiedObjectPropertiesInCallbacks =
-          unifiedObjectPropertiesInCallbacks;
-
   Function()? _onChartRendered;
   Function()? get onChartRendered => _$this._onChartRendered;
   set onChartRendered(Function()? onChartRendered) =>
@@ -1420,8 +1393,6 @@ class SeatingChartConfigBuilder
       _activeFloor = $v.activeFloor;
       _lockActiveFloor = $v.lockActiveFloor;
       _showFloorElevator = $v.showFloorElevator;
-      _unifiedObjectPropertiesInCallbacks =
-          $v.unifiedObjectPropertiesInCallbacks;
       _onChartRendered = $v.onChartRendered;
       _onChartRenderingFailed = $v.onChartRenderingFailed;
       _onChartRerenderingStarted = $v.onChartRerenderingStarted;
@@ -1516,8 +1487,6 @@ class SeatingChartConfigBuilder
             activeFloor: activeFloor,
             lockActiveFloor: lockActiveFloor,
             showFloorElevator: showFloorElevator,
-            unifiedObjectPropertiesInCallbacks:
-                unifiedObjectPropertiesInCallbacks,
             onChartRendered: onChartRendered,
             onChartRenderingFailed: onChartRenderingFailed,
             onChartRerenderingStarted: onChartRerenderingStarted,
