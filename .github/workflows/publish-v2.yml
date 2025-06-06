@@ -1,4 +1,4 @@
-name: Publish to pub.dev
+name: Publish to pub.dev (single step)
 
 on:
   workflow_dispatch:
@@ -40,10 +40,8 @@ jobs:
     needs: tag
     steps:
       - uses: actions/checkout@v4
-        env:
-          TAG_NAME: ${{needs.tag.outputs.tagToRelease}}
         with:
-          ref: $TAG_NAME
+          ref: ${{needs.tag.outputs.tagToRelease}}
       - uses: dart-lang/setup-dart@v1
       - uses: subosito/flutter-action@v2
       - run: dart pub get
