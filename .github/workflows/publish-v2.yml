@@ -1,0 +1,60 @@
+name: Publish to pub.dev
+
+on:
+  workflow_dispatch:
+    inputs:
+      versionToBump:
+        description: 'The version to bump. Major for incompatible API changes, minor for adding BC features'
+        required: true
+        type: choice
+        options:
+          - minor
+          - major
+
+jobs:
+  tag:
+    runs-on: ubuntu-latest
+    outputs:
+      tagToRelease: ${{steps.doVersionBump.outputs.tagName}}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: fregante/setup-git-user@v2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: https://registry.npmjs.org/
+      - run: yarn add -D -E zx@8.1.4 semver@7.6.3
+      - id: doVersionBump
+        run: yarn zx ./release.mjs -v $VERSION_TO_BUMP
+        env:
+          VERSION_TO_BUMP: ${{ inputs.versionToBump }}
+          GH_TOKEN: ${{ github.token }}
+      - id: exposeTagName
+        run: echo "tagName=`cat tagToRelease.txt`" >> "$GITHUB_OUTPUT"
+      - id: deleteTagNameFile
+        run: rm tagToRelease.txt
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+    needs: tag
+    steps:
+      - uses: actions/checkout@v4
+        env:
+          TAG_NAME: ${{needs.tag.outputs.tagToRelease}}
+        with:
+          ref: $TAG_NAME
+      - uses: dart-lang/setup-dart@v1
+      - uses: subosito/flutter-action@v2
+      - run: dart pub get
+      - run: dart pub publish --force
+
+
+  notify-slack-failure:
+    runs-on: ubuntu-latest
+    needs: [ publish ]
+    if: failure()
+    steps:
+      - uses: seatsio/seatsio-github-actions/slack-notify-clientlib-release-failure@v1
+        with:
+          webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}

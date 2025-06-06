@@ -25,6 +25,7 @@ await pullLastVersion()
     .then(bumpVersionInFiles)
     .then(commitAndPush)
     .then(release)
+fs.writeFileSync('tagToRelease.txt', `v${nextVersion}`)
 
 function getVersionToBump() {
     if (!argv.v || !(argv.v === 'minor' || argv.v === 'major')) {
