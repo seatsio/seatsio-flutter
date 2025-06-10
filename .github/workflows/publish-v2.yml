@@ -15,7 +15,7 @@ jobs:
   tag:
     runs-on: ubuntu-latest
     outputs:
-      tagToRelease: ${{steps.doVersionBump.outputs.tagName}}
+      tagToRelease: ${{steps.exposeTagName.outputs.tagName}}
     steps:
       - uses: actions/checkout@v4
       - uses: fregante/setup-git-user@v2
