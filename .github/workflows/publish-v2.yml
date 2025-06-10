@@ -40,8 +40,10 @@ jobs:
     needs: tag
     steps:
       - uses: actions/checkout@v4
+        env:
+          TAG_NAME: ${{needs.tag.outputs.tagToRelease}}
         with:
-          ref: ${{needs.tag.outputs.tagToRelease}}
+          ref: ${{TAG_NAME}}
       - uses: dart-lang/setup-dart@v1
       - uses: subosito/flutter-action@v2
       - run: dart pub get
