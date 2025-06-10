@@ -43,7 +43,7 @@ jobs:
         env:
           TAG_NAME: ${{needs.tag.outputs.tagToRelease}}
         with:
-          ref: ${{TAG_NAME}}
+          ref: ${{env.TAG_NAME}}
       - uses: dart-lang/setup-dart@v1
       - uses: subosito/flutter-action@v2
       - run: dart pub get
