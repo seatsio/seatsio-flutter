@@ -125,6 +125,8 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
 
   // Advanced
 
+  String? get ticketBuyerId;
+
   @BuiltValueField(serialize: false)
   Function()? get onChartRendered;
 
@@ -270,6 +272,7 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
       if (lockActiveFloor != null) "lockActiveFloor": lockActiveFloor,
       if (showFloorElevator != null) "showFloorElevator": showFloorElevator,
       // advanced
+      if (ticketBuyerId != null) "ticketBuyerId": ticketBuyerId,
       "unifiedObjectPropertiesInCallbacks": true,
     };
   }
