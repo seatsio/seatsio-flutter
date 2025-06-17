@@ -301,6 +301,13 @@ class _$SeatingChartConfigSerializer
         ..add(
             serializers.serialize(value, specifiedType: const FullType(bool)));
     }
+    value = object.ticketBuyerId;
+    if (value != null) {
+      result
+        ..add('ticketBuyerId')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     return result;
   }
 
@@ -504,6 +511,10 @@ class _$SeatingChartConfigSerializer
           result.showFloorElevator = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool?;
           break;
+        case 'ticketBuyerId':
+          result.ticketBuyerId = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
       }
     }
 
@@ -607,6 +618,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   final bool? showFloorElevator;
   @override
+  final String? ticketBuyerId;
+  @override
   final Function()? onChartRendered;
   @override
   final Function()? onChartRenderingFailed;
@@ -709,6 +722,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       this.activeFloor,
       this.lockActiveFloor,
       this.showFloorElevator,
+      this.ticketBuyerId,
       this.onChartRendered,
       this.onChartRenderingFailed,
       this.onChartRerenderingStarted,
@@ -801,6 +815,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         activeFloor == other.activeFloor &&
         lockActiveFloor == other.lockActiveFloor &&
         showFloorElevator == other.showFloorElevator &&
+        ticketBuyerId == other.ticketBuyerId &&
         onChartRendered == _$dynamicOther.onChartRendered &&
         onChartRenderingFailed == _$dynamicOther.onChartRenderingFailed &&
         onChartRerenderingStarted == _$dynamicOther.onChartRerenderingStarted &&
@@ -874,6 +889,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     _$hash = $jc(_$hash, activeFloor.hashCode);
     _$hash = $jc(_$hash, lockActiveFloor.hashCode);
     _$hash = $jc(_$hash, showFloorElevator.hashCode);
+    _$hash = $jc(_$hash, ticketBuyerId.hashCode);
     _$hash = $jc(_$hash, onChartRendered.hashCode);
     _$hash = $jc(_$hash, onChartRenderingFailed.hashCode);
     _$hash = $jc(_$hash, onChartRerenderingStarted.hashCode);
@@ -950,6 +966,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
           ..add('activeFloor', activeFloor)
           ..add('lockActiveFloor', lockActiveFloor)
           ..add('showFloorElevator', showFloorElevator)
+          ..add('ticketBuyerId', ticketBuyerId)
           ..add('onChartRendered', onChartRendered)
           ..add('onChartRenderingFailed', onChartRenderingFailed)
           ..add('onChartRerenderingStarted', onChartRerenderingStarted)
@@ -1202,6 +1219,11 @@ class SeatingChartConfigBuilder
   set showFloorElevator(bool? showFloorElevator) =>
       _$this._showFloorElevator = showFloorElevator;
 
+  String? _ticketBuyerId;
+  String? get ticketBuyerId => _$this._ticketBuyerId;
+  set ticketBuyerId(String? ticketBuyerId) =>
+      _$this._ticketBuyerId = ticketBuyerId;
+
   Function()? _onChartRendered;
   Function()? get onChartRendered => _$this._onChartRendered;
   set onChartRendered(Function()? onChartRendered) =>
@@ -1393,6 +1415,7 @@ class SeatingChartConfigBuilder
       _activeFloor = $v.activeFloor;
       _lockActiveFloor = $v.lockActiveFloor;
       _showFloorElevator = $v.showFloorElevator;
+      _ticketBuyerId = $v.ticketBuyerId;
       _onChartRendered = $v.onChartRendered;
       _onChartRenderingFailed = $v.onChartRenderingFailed;
       _onChartRerenderingStarted = $v.onChartRerenderingStarted;
@@ -1487,6 +1510,7 @@ class SeatingChartConfigBuilder
             activeFloor: activeFloor,
             lockActiveFloor: lockActiveFloor,
             showFloorElevator: showFloorElevator,
+            ticketBuyerId: ticketBuyerId,
             onChartRendered: onChartRendered,
             onChartRenderingFailed: onChartRenderingFailed,
             onChartRerenderingStarted: onChartRerenderingStarted,
