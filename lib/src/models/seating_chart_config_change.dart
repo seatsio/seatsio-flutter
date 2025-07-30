@@ -28,6 +28,8 @@ abstract class SeatingChartConfigChange implements Built<SeatingChartConfigChang
 
   Map<String, dynamic>? get extraConfig;
 
+  SeatsioColorScheme? get colorScheme;
+
   SeatingChartConfigChange._();
 
   factory SeatingChartConfigChange([void Function(SeatingChartConfigChangeBuilder)? updates]) {
@@ -46,6 +48,7 @@ abstract class SeatingChartConfigChange implements Built<SeatingChartConfigChang
       if (pricing != null) "pricing": pricing!.map((p) => p.toJson()).toList(),
       if (channels != null) "channels": channels,
       if (extraConfig != null) "extraConfig": extraConfig,
+      if (colorScheme != null) "colorScheme": colorScheme!.toJson(),
     };
   }
 
