@@ -30,7 +30,7 @@ class _$SeatingChartConfigChange extends SeatingChartConfigChange {
 
   factory _$SeatingChartConfigChange(
           [void Function(SeatingChartConfigChangeBuilder)? updates]) =>
-      (new SeatingChartConfigChangeBuilder()..update(updates))._build();
+      (SeatingChartConfigChangeBuilder()..update(updates))._build();
 
   _$SeatingChartConfigChange._(
       {this.objectColor,
@@ -44,7 +44,6 @@ class _$SeatingChartConfigChange extends SeatingChartConfigChange {
       this.channels,
       this.extraConfig})
       : super._();
-
   @override
   SeatingChartConfigChange rebuild(
           void Function(SeatingChartConfigChangeBuilder) updates) =>
@@ -52,7 +51,7 @@ class _$SeatingChartConfigChange extends SeatingChartConfigChange {
 
   @override
   SeatingChartConfigChangeBuilder toBuilder() =>
-      new SeatingChartConfigChangeBuilder()..replace(this);
+      SeatingChartConfigChangeBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -177,7 +176,6 @@ class SeatingChartConfigChangeBuilder
 
   @override
   void replace(SeatingChartConfigChange other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$SeatingChartConfigChange;
   }
 
@@ -191,7 +189,7 @@ class SeatingChartConfigChangeBuilder
 
   _$SeatingChartConfigChange _build() {
     final _$result = _$v ??
-        new _$SeatingChartConfigChange._(
+        _$SeatingChartConfigChange._(
           objectColor: objectColor,
           objectLabel: objectLabel,
           numberOfPlacesToSelect: numberOfPlacesToSelect,

@@ -22,18 +22,18 @@ Region _$valueOf(String name) {
     case 'oc':
       return _$oc;
     default:
-      throw new ArgumentError(name);
+      throw ArgumentError(name);
   }
 }
 
-final BuiltSet<Region> _$values = new BuiltSet<Region>(const <Region>[
+final BuiltSet<Region> _$values = BuiltSet<Region>(const <Region>[
   _$eu,
   _$na,
   _$sa,
   _$oc,
 ]);
 
-Serializer<Region> _$regionSerializer = new _$RegionSerializer();
+Serializer<Region> _$regionSerializer = _$RegionSerializer();
 
 class _$RegionSerializer implements PrimitiveSerializer<Region> {
   @override

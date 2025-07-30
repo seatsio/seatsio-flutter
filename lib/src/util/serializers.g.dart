@@ -6,7 +6,7 @@ part of 'serializers.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializers _$serializers = (new Serializers().toBuilder()
+Serializers _$serializers = (Serializers().toBuilder()
       ..add(CategoryKey.serializer)
       ..add(Pricing.serializer)
       ..add(PricingForChannel.serializer)
@@ -15,16 +15,16 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(TicketType.serializer)
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(String)]),
-          () => new ListBuilder<String>())
+          () => ListBuilder<String>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(TicketType)]),
-          () => new ListBuilder<TicketType>())
+          () => ListBuilder<TicketType>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(PricingForChannel)]),
-          () => new ListBuilder<PricingForChannel>())
+          () => ListBuilder<PricingForChannel>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(TicketType)]),
-          () => new ListBuilder<TicketType>()))
+          () => ListBuilder<TicketType>()))
     .build();
 
 // ignore_for_file: deprecated_member_use_from_same_package,type=lint
