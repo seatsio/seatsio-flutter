@@ -51,5 +51,4 @@ abstract class SeatingChartConfigChange implements Built<SeatingChartConfigChang
       if (colorScheme != null) "colorScheme": colorScheme!.toJson(),
     };
   }
-
 }
