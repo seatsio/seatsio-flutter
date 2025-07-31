@@ -122,6 +122,12 @@ class LargeTheatreMaximal extends StatelessWidget {
             //..loading = "<div style=\"width: 100%; height: 100%; background-color: red;\">Loading...</div>"
             ..showLegend = true
             ..colorScheme = SeatsioColorScheme.dark
+            // ..colors.replace(SeatsioColors((b) => b
+            //   ..colorSelected = ""
+            //   ..colorTitle = ""
+            //   ..availableObjectColor = ""
+            //   ..selectedObjectColor = null
+            //   ..errorColor = ""))
             ..legendConfig.replace(LegendConfig((b) => b
               ..hideNonSelectableCategories = true
               ..hideUnavailableLegendItems = true
