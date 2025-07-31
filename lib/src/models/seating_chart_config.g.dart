@@ -238,6 +238,13 @@ class _$SeatingChartConfigSerializer
         ..add(
             serializers.serialize(value, specifiedType: const FullType(bool)));
     }
+    value = object.showFullScreenButton;
+    if (value != null) {
+      result
+        ..add('showFullScreenButton')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(bool)));
+    }
     value = object.showLegend;
     if (value != null) {
       result
@@ -474,6 +481,10 @@ class _$SeatingChartConfigSerializer
           result.showMinimap = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool?;
           break;
+        case 'showFullScreenButton':
+          result.showFullScreenButton = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool?;
+          break;
         case 'showLegend':
           result.showLegend = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool?;
@@ -600,6 +611,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   final bool? showMinimap;
   @override
+  final bool? showFullScreenButton;
+  @override
   final bool? showLegend;
   @override
   final LegendConfig? legendConfig;
@@ -713,6 +726,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       this.holdToken,
       this.holdOnSelectForGAs,
       this.showMinimap,
+      this.showFullScreenButton,
       this.showLegend,
       this.legendConfig,
       this.showZoomOutButtonOnMobile,
@@ -798,6 +812,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         holdToken == other.holdToken &&
         holdOnSelectForGAs == other.holdOnSelectForGAs &&
         showMinimap == other.showMinimap &&
+        showFullScreenButton == other.showFullScreenButton &&
         showLegend == other.showLegend &&
         legendConfig == other.legendConfig &&
         showZoomOutButtonOnMobile == other.showZoomOutButtonOnMobile &&
@@ -872,6 +887,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     _$hash = $jc(_$hash, holdToken.hashCode);
     _$hash = $jc(_$hash, holdOnSelectForGAs.hashCode);
     _$hash = $jc(_$hash, showMinimap.hashCode);
+    _$hash = $jc(_$hash, showFullScreenButton.hashCode);
     _$hash = $jc(_$hash, showLegend.hashCode);
     _$hash = $jc(_$hash, legendConfig.hashCode);
     _$hash = $jc(_$hash, showZoomOutButtonOnMobile.hashCode);
@@ -949,6 +965,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
           ..add('holdToken', holdToken)
           ..add('holdOnSelectForGAs', holdOnSelectForGAs)
           ..add('showMinimap', showMinimap)
+          ..add('showFullScreenButton', showFullScreenButton)
           ..add('showLegend', showLegend)
           ..add('legendConfig', legendConfig)
           ..add('showZoomOutButtonOnMobile', showZoomOutButtonOnMobile)
@@ -1167,6 +1184,11 @@ class SeatingChartConfigBuilder
   bool? _showMinimap;
   bool? get showMinimap => _$this._showMinimap;
   set showMinimap(bool? showMinimap) => _$this._showMinimap = showMinimap;
+
+  bool? _showFullScreenButton;
+  bool? get showFullScreenButton => _$this._showFullScreenButton;
+  set showFullScreenButton(bool? showFullScreenButton) =>
+      _$this._showFullScreenButton = showFullScreenButton;
 
   bool? _showLegend;
   bool? get showLegend => _$this._showLegend;
@@ -1397,6 +1419,7 @@ class SeatingChartConfigBuilder
       _holdToken = $v.holdToken;
       _holdOnSelectForGAs = $v.holdOnSelectForGAs;
       _showMinimap = $v.showMinimap;
+      _showFullScreenButton = $v.showFullScreenButton;
       _showLegend = $v.showLegend;
       _legendConfig = $v.legendConfig?.toBuilder();
       _showZoomOutButtonOnMobile = $v.showZoomOutButtonOnMobile;
@@ -1491,6 +1514,7 @@ class SeatingChartConfigBuilder
             holdToken: holdToken,
             holdOnSelectForGAs: holdOnSelectForGAs,
             showMinimap: showMinimap,
+            showFullScreenButton: showFullScreenButton,
             showLegend: showLegend,
             legendConfig: _legendConfig?.build(),
             showZoomOutButtonOnMobile: showZoomOutButtonOnMobile,

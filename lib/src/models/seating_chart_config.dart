@@ -99,6 +99,8 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
   // UI Customization
   bool? get showMinimap;
 
+  bool? get showFullScreenButton;
+
   bool? get showLegend;
 
   LegendConfig? get legendConfig;
@@ -260,6 +262,7 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
       if (holdOnSelectForGAs != null) "holdOnSelectForGAs": holdOnSelectForGAs,
       // UI customization
       if (showMinimap != null) "showMinimap": showMinimap,
+      if (showFullScreenButton != null) "showFullScreenButton": showFullScreenButton,
       if (showLegend != null) "showLegend": showLegend,
       if (legendConfig != null) "legendConfig": legendConfig!.toJson(),
       if (showZoomOutButtonOnMobile != null) "showZoomOutButtonOnMobile": showZoomOutButtonOnMobile,
