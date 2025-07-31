@@ -114,6 +114,8 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
 
   SeatsioColors? get colors;
 
+  SeatsioStyle? get style;
+
   // Floors
   String? get activeFloor;
 
@@ -270,6 +272,7 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
       // styling
       if (colorScheme != null) "colorScheme": colorScheme!.toJson(),
       if (colors != null) "colors": colors!.toJson(),
+      if (style != null) "style": style!.toJson(),
       // floors
       if (activeFloor != null) "activeFloor": activeFloor,
       if (lockActiveFloor != null) "lockActiveFloor": lockActiveFloor,

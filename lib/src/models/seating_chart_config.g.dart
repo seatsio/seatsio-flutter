@@ -287,6 +287,13 @@ class _$SeatingChartConfigSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(SeatsioColors)));
     }
+    value = object.style;
+    if (value != null) {
+      result
+        ..add('style')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(SeatsioStyle)));
+    }
     value = object.activeFloor;
     if (value != null) {
       result
@@ -510,6 +517,10 @@ class _$SeatingChartConfigSerializer
           result.colors.replace(serializers.deserialize(value,
               specifiedType: const FullType(SeatsioColors))! as SeatsioColors);
           break;
+        case 'style':
+          result.style.replace(serializers.deserialize(value,
+              specifiedType: const FullType(SeatsioStyle))! as SeatsioStyle);
+          break;
         case 'activeFloor':
           result.activeFloor = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
@@ -625,6 +636,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   final SeatsioColors? colors;
   @override
+  final SeatsioStyle? style;
+  @override
   final String? activeFloor;
   @override
   final bool? lockActiveFloor;
@@ -733,6 +746,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       this.loading,
       this.colorScheme,
       this.colors,
+      this.style,
       this.activeFloor,
       this.lockActiveFloor,
       this.showFloorElevator,
@@ -819,6 +833,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         loading == other.loading &&
         colorScheme == other.colorScheme &&
         colors == other.colors &&
+        style == other.style &&
         activeFloor == other.activeFloor &&
         lockActiveFloor == other.lockActiveFloor &&
         showFloorElevator == other.showFloorElevator &&
@@ -894,6 +909,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     _$hash = $jc(_$hash, loading.hashCode);
     _$hash = $jc(_$hash, colorScheme.hashCode);
     _$hash = $jc(_$hash, colors.hashCode);
+    _$hash = $jc(_$hash, style.hashCode);
     _$hash = $jc(_$hash, activeFloor.hashCode);
     _$hash = $jc(_$hash, lockActiveFloor.hashCode);
     _$hash = $jc(_$hash, showFloorElevator.hashCode);
@@ -972,6 +988,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
           ..add('loading', loading)
           ..add('colorScheme', colorScheme)
           ..add('colors', colors)
+          ..add('style', style)
           ..add('activeFloor', activeFloor)
           ..add('lockActiveFloor', lockActiveFloor)
           ..add('showFloorElevator', showFloorElevator)
@@ -1218,6 +1235,10 @@ class SeatingChartConfigBuilder
   SeatsioColorsBuilder get colors => _$this._colors ??= SeatsioColorsBuilder();
   set colors(SeatsioColorsBuilder? colors) => _$this._colors = colors;
 
+  SeatsioStyleBuilder? _style;
+  SeatsioStyleBuilder get style => _$this._style ??= SeatsioStyleBuilder();
+  set style(SeatsioStyleBuilder? style) => _$this._style = style;
+
   String? _activeFloor;
   String? get activeFloor => _$this._activeFloor;
   set activeFloor(String? activeFloor) => _$this._activeFloor = activeFloor;
@@ -1426,6 +1447,7 @@ class SeatingChartConfigBuilder
       _loading = $v.loading;
       _colorScheme = $v.colorScheme;
       _colors = $v.colors?.toBuilder();
+      _style = $v.style?.toBuilder();
       _activeFloor = $v.activeFloor;
       _lockActiveFloor = $v.lockActiveFloor;
       _showFloorElevator = $v.showFloorElevator;
@@ -1521,6 +1543,7 @@ class SeatingChartConfigBuilder
             loading: loading,
             colorScheme: colorScheme,
             colors: _colors?.build(),
+            style: _style?.build(),
             activeFloor: activeFloor,
             lockActiveFloor: lockActiveFloor,
             showFloorElevator: showFloorElevator,
@@ -1560,6 +1583,8 @@ class SeatingChartConfigBuilder
 
         _$failedField = 'colors';
         _colors?.build();
+        _$failedField = 'style';
+        _style?.build();
       } catch (e) {
         throw BuiltValueNestedFieldError(
             r'SeatingChartConfig', _$failedField, e.toString());

@@ -123,6 +123,10 @@ class LargeTheatreMaximal extends StatelessWidget {
             //..loading = "<div style=\"width: 100%; height: 100%; background-color: red;\">Loading...</div>"
             ..showLegend = true
             ..colorScheme = SeatsioColorScheme.dark
+            ..style.replace(SeatsioStyle((b) => b
+              ..font = SeatsioStyleFont.inter
+              ..cornerRadius = SeatsioStyleCornerRadius.round
+              ..buttonShape = SeatsioStyleButtonShape.round))
             // ..colors.replace(SeatsioColors((b) => b
             //   ..colorSelected = ""
             //   ..colorTitle = ""
