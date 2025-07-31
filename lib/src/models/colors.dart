@@ -15,7 +15,7 @@ abstract class SeatsioColors implements Built<SeatsioColors, SeatsioColorsBuilde
 
   SeatsioColors._();
 
-  factory SeatsioColors([void Function(SeatsioColorsBuilder) updates]) = _$SeatsioColors;
+  factory SeatsioColors([void Function(SeatsioColorsBuilder b) updates]) = _$SeatsioColors;
 
   static void _initializeBuilder(SeatsioColorsBuilder b) {}
 
