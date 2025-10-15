@@ -6,9 +6,11 @@ class SmallTheatreMinimal extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(title: Text("Small Theatre - Minimal Config")),
+        backgroundColor: Color.fromRGBO(0, 0, 0, 1),
         body: SeatsioSeatingChart(
             config: SeatingChartConfig((b) => b
               ..workspaceKey = "publicDemoKey"
-              ..event = "smallTheatreEvent2")));
+              ..event = "smallTheatreEvent2"
+              ..colorScheme = SeatsioColorScheme.dark)));
   }
 }

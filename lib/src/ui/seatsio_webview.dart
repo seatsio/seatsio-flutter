@@ -128,7 +128,8 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
       ..addJavaScriptChannel("zoomToFilteredCategoriesJsChannel", onMessageReceived: widget.onVoidPromiseCompleted)
       ..addJavaScriptChannel("zoomToSectionJsChannel", onMessageReceived: widget.onVoidPromiseCompleted)
       ..addJavaScriptChannel("goToAllFloorsViewJsChannel", onMessageReceived: widget.onVoidPromiseCompleted)
-      ..addJavaScriptChannel("goToFloorJsChannel", onMessageReceived: widget.onVoidPromiseCompleted);
+      ..addJavaScriptChannel("goToFloorJsChannel", onMessageReceived: widget.onVoidPromiseCompleted)
+      ..setBackgroundColor(Color.from(alpha: 0, red: 255, green: 255, blue: 255));
 
     _seatsioController = SeatsioWebViewController(webViewController: _webViewController);
     widget._onWebViewCreated?.call(_seatsioController);
