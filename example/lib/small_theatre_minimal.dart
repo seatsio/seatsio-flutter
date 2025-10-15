@@ -11,6 +11,6 @@ class SmallTheatreMinimal extends StatelessWidget {
             config: SeatingChartConfig((b) => b
               ..workspaceKey = "publicDemoKey"
               ..event = "smallTheatreEvent2"
-              ..colorScheme = SeatsioColorScheme.light)));
+              ..colorScheme = SeatsioColorScheme.dark)));
   }
 }
