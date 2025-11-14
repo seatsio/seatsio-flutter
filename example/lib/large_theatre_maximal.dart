@@ -23,13 +23,11 @@ class LargeTheatreMaximal extends StatelessWidget {
       Pricing(category: "3", price: 50),
     ];
 
-    /*
     final simplePricing = [
       Pricing(category: 1, price: 30, originalPrice: 40),
       Pricing(category: "2", price: 40),
       Pricing(category: "3", price: 50),
     ];
-     */
 
     final priceFormatter = (num price) => "€${price.toStringAsFixed(2)}";
 
