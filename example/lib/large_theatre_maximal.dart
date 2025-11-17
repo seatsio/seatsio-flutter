@@ -66,7 +66,7 @@ class LargeTheatreMaximal extends StatelessWidget {
           config: SeatingChartConfig((b) => b
             ..workspaceKey = "publicDemoKey"
             ..events = ["largeTheatreEvent"]
-            ..pricing = multiLevelPricing
+            ..pricing = simplePricing
             ..priceFormatter = priceFormatter
             ..showSectionPricingOverlay = true
             // ..selectedObjects = ['Circle P-1-12', 'Circle P-1-11', 'Circle P-1-10']
