@@ -34,7 +34,7 @@ class _SmallTheatreRendererMethodsState extends State<SmallTheatreRendererMethod
   ];
   */
 
-  final simplePricing = Pricing2(
+  final simplePricing = Pricing2( // TODO bver add pricing
     /*prices: [
           Price.priceForCategory(category: 1, price: 30, originalPrice: 40),
           Price.priceForCategory(category: "2", price: 40),
