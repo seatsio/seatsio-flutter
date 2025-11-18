@@ -6,7 +6,7 @@ part of 'pricing.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializer<Pricing> _$pricingSerializer = new _$PricingSerializer();
+Serializer<Pricing> _$pricingSerializer = _$PricingSerializer();
 
 class _$PricingSerializer implements StructuredSerializer<Pricing> {
   @override
@@ -70,7 +70,7 @@ class _$PricingSerializer implements StructuredSerializer<Pricing> {
   @override
   Pricing deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new PricingBuilder();
+    final result = PricingBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -130,7 +130,7 @@ class _$Pricing extends Pricing {
   final BuiltList<PricingForChannel>? channels;
 
   factory _$Pricing([void Function(PricingBuilder)? updates]) =>
-      (new PricingBuilder()..update(updates))._build();
+      (PricingBuilder()..update(updates))._build();
 
   _$Pricing._(
       {this.category,
@@ -140,13 +140,12 @@ class _$Pricing extends Pricing {
       this.ticketTypes,
       this.channels})
       : super._();
-
   @override
   Pricing rebuild(void Function(PricingBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  PricingBuilder toBuilder() => new PricingBuilder()..replace(this);
+  PricingBuilder toBuilder() => PricingBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -190,13 +189,11 @@ class PricingBuilder implements Builder<Pricing, PricingBuilder> {
   _$Pricing? _$v;
 
   CategoryKeyBuilder? _category;
-  CategoryKeyBuilder get category =>
-      _$this._category ??= new CategoryKeyBuilder();
+  CategoryKeyBuilder get category => _$this._category ??= CategoryKeyBuilder();
   set category(CategoryKeyBuilder? category) => _$this._category = category;
 
   ListBuilder<String>? _objects;
-  ListBuilder<String> get objects =>
-      _$this._objects ??= new ListBuilder<String>();
+  ListBuilder<String> get objects => _$this._objects ??= ListBuilder<String>();
   set objects(ListBuilder<String>? objects) => _$this._objects = objects;
 
   double? _price;
@@ -210,13 +207,13 @@ class PricingBuilder implements Builder<Pricing, PricingBuilder> {
 
   ListBuilder<TicketType>? _ticketTypes;
   ListBuilder<TicketType> get ticketTypes =>
-      _$this._ticketTypes ??= new ListBuilder<TicketType>();
+      _$this._ticketTypes ??= ListBuilder<TicketType>();
   set ticketTypes(ListBuilder<TicketType>? ticketTypes) =>
       _$this._ticketTypes = ticketTypes;
 
   ListBuilder<PricingForChannel>? _channels;
   ListBuilder<PricingForChannel> get channels =>
-      _$this._channels ??= new ListBuilder<PricingForChannel>();
+      _$this._channels ??= ListBuilder<PricingForChannel>();
   set channels(ListBuilder<PricingForChannel>? channels) =>
       _$this._channels = channels;
 
@@ -238,7 +235,6 @@ class PricingBuilder implements Builder<Pricing, PricingBuilder> {
 
   @override
   void replace(Pricing other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$Pricing;
   }
 
@@ -254,7 +250,7 @@ class PricingBuilder implements Builder<Pricing, PricingBuilder> {
     _$Pricing _$result;
     try {
       _$result = _$v ??
-          new _$Pricing._(
+          _$Pricing._(
             category: _category?.build(),
             objects: _objects?.build(),
             price: price,
@@ -275,7 +271,7 @@ class PricingBuilder implements Builder<Pricing, PricingBuilder> {
         _$failedField = 'channels';
         _channels?.build();
       } catch (e) {
-        throw new BuiltValueNestedFieldError(
+        throw BuiltValueNestedFieldError(
             r'Pricing', _$failedField, e.toString());
       }
       rethrow;

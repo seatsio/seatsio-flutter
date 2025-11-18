@@ -7,7 +7,7 @@ part of 'seating_chart_config.dart';
 // **************************************************************************
 
 Serializer<SeatingChartConfig> _$seatingChartConfigSerializer =
-    new _$SeatingChartConfigSerializer();
+    _$SeatingChartConfigSerializer();
 
 class _$SeatingChartConfigSerializer
     implements StructuredSerializer<SeatingChartConfig> {
@@ -68,8 +68,7 @@ class _$SeatingChartConfigSerializer
       result
         ..add('pricing')
         ..add(serializers.serialize(value,
-            specifiedType:
-                const FullType(List, const [const FullType(Pricing)])));
+            specifiedType: const FullType(Pricing2)));
     }
     value = object.showSectionPricingOverlay;
     if (value != null) {
@@ -315,7 +314,7 @@ class _$SeatingChartConfigSerializer
   SeatingChartConfig deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new SeatingChartConfigBuilder();
+    final result = SeatingChartConfigBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -353,10 +352,8 @@ class _$SeatingChartConfigSerializer
               ])) as Map<String, dynamic>?;
           break;
         case 'pricing':
-          result.pricing = serializers.deserialize(value,
-                  specifiedType:
-                      const FullType(List, const [const FullType(Pricing)]))
-              as List<Pricing>?;
+          result.pricing.replace(serializers.deserialize(value,
+              specifiedType: const FullType(Pricing2))! as Pricing2);
           break;
         case 'showSectionPricingOverlay':
           result.showSectionPricingOverlay = serializers.deserialize(value,
@@ -536,7 +533,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   final Map<String, dynamic>? extraConfig;
   @override
-  final List<Pricing>? pricing;
+  final Pricing2? pricing;
   @override
   final Function(num price)? priceFormatter;
   @override
@@ -672,7 +669,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
 
   factory _$SeatingChartConfig(
           [void Function(SeatingChartConfigBuilder)? updates]) =>
-      (new SeatingChartConfigBuilder()..update(updates))._build();
+      (SeatingChartConfigBuilder()..update(updates))._build();
 
   _$SeatingChartConfig._(
       {required this.workspaceKey,
@@ -743,15 +740,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       this.onSelectionInvalid,
       this.onFilteredCategoriesChanged,
       this.onFloorChanged})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(
-        workspaceKey, r'SeatingChartConfig', 'workspaceKey');
-    BuiltValueNullFieldError.checkNotNull(
-        region, r'SeatingChartConfig', 'region');
-    BuiltValueNullFieldError.checkNotNull(
-        messages, r'SeatingChartConfig', 'messages');
-  }
-
+      : super._();
   @override
   SeatingChartConfig rebuild(
           void Function(SeatingChartConfigBuilder) updates) =>
@@ -759,7 +748,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
 
   @override
   SeatingChartConfigBuilder toBuilder() =>
-      new SeatingChartConfigBuilder()..replace(this);
+      SeatingChartConfigBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -1020,9 +1009,9 @@ class SeatingChartConfigBuilder
   set extraConfig(Map<String, dynamic>? extraConfig) =>
       _$this._extraConfig = extraConfig;
 
-  List<Pricing>? _pricing;
-  List<Pricing>? get pricing => _$this._pricing;
-  set pricing(List<Pricing>? pricing) => _$this._pricing = pricing;
+  Pricing2Builder? _pricing;
+  Pricing2Builder get pricing => _$this._pricing ??= Pricing2Builder();
+  set pricing(Pricing2Builder? pricing) => _$this._pricing = pricing;
 
   Function(num price)? _priceFormatter;
   Function(num price)? get priceFormatter => _$this._priceFormatter;
@@ -1073,7 +1062,7 @@ class SeatingChartConfigBuilder
 
   ObjectPopoverBuilder? _objectPopover;
   ObjectPopoverBuilder get objectPopover =>
-      _$this._objectPopover ??= new ObjectPopoverBuilder();
+      _$this._objectPopover ??= ObjectPopoverBuilder();
   set objectPopover(ObjectPopoverBuilder? objectPopover) =>
       _$this._objectPopover = objectPopover;
 
@@ -1100,7 +1089,7 @@ class SeatingChartConfigBuilder
 
   CategoryFilterBuilder? _categoryFilter;
   CategoryFilterBuilder get categoryFilter =>
-      _$this._categoryFilter ??= new CategoryFilterBuilder();
+      _$this._categoryFilter ??= CategoryFilterBuilder();
   set categoryFilter(CategoryFilterBuilder? categoryFilter) =>
       _$this._categoryFilter = categoryFilter;
 
@@ -1182,7 +1171,7 @@ class SeatingChartConfigBuilder
 
   LegendConfigBuilder? _legendConfig;
   LegendConfigBuilder get legendConfig =>
-      _$this._legendConfig ??= new LegendConfigBuilder();
+      _$this._legendConfig ??= LegendConfigBuilder();
   set legendConfig(LegendConfigBuilder? legendConfig) =>
       _$this._legendConfig = legendConfig;
 
@@ -1201,8 +1190,7 @@ class SeatingChartConfigBuilder
       _$this._colorScheme = colorScheme;
 
   SeatsioColorsBuilder? _colors;
-  SeatsioColorsBuilder get colors =>
-      _$this._colors ??= new SeatsioColorsBuilder();
+  SeatsioColorsBuilder get colors => _$this._colors ??= SeatsioColorsBuilder();
   set colors(SeatsioColorsBuilder? colors) => _$this._colors = colors;
 
   String? _activeFloor;
@@ -1374,7 +1362,7 @@ class SeatingChartConfigBuilder
       _events = $v.events;
       _mode = $v.mode;
       _extraConfig = $v.extraConfig;
-      _pricing = $v.pricing;
+      _pricing = $v.pricing?.toBuilder();
       _priceFormatter = $v.priceFormatter;
       _showSectionPricingOverlay = $v.showSectionPricingOverlay;
       _selectedObjects = $v.selectedObjects;
@@ -1443,7 +1431,6 @@ class SeatingChartConfigBuilder
 
   @override
   void replace(SeatingChartConfig other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$SeatingChartConfig;
   }
 
@@ -1459,7 +1446,7 @@ class SeatingChartConfigBuilder
     _$SeatingChartConfig _$result;
     try {
       _$result = _$v ??
-          new _$SeatingChartConfig._(
+          _$SeatingChartConfig._(
             workspaceKey: BuiltValueNullFieldError.checkNotNull(
                 workspaceKey, r'SeatingChartConfig', 'workspaceKey'),
             region: BuiltValueNullFieldError.checkNotNull(
@@ -1468,7 +1455,7 @@ class SeatingChartConfigBuilder
             events: events,
             mode: mode,
             extraConfig: extraConfig,
-            pricing: pricing,
+            pricing: _pricing?.build(),
             priceFormatter: priceFormatter,
             showSectionPricingOverlay: showSectionPricingOverlay,
             selectedObjects: selectedObjects,
@@ -1535,6 +1522,9 @@ class SeatingChartConfigBuilder
     } catch (_) {
       late String _$failedField;
       try {
+        _$failedField = 'pricing';
+        _pricing?.build();
+
         _$failedField = 'objectPopover';
         _objectPopover?.build();
 
@@ -1547,7 +1537,7 @@ class SeatingChartConfigBuilder
         _$failedField = 'colors';
         _colors?.build();
       } catch (e) {
-        throw new BuiltValueNestedFieldError(
+        throw BuiltValueNestedFieldError(
             r'SeatingChartConfig', _$failedField, e.toString());
       }
       rethrow;

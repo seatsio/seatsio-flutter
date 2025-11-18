@@ -6,7 +6,7 @@ part of 'ticket_type.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializer<TicketType> _$ticketTypeSerializer = new _$TicketTypeSerializer();
+Serializer<TicketType> _$ticketTypeSerializer = _$TicketTypeSerializer();
 
 class _$TicketTypeSerializer implements StructuredSerializer<TicketType> {
   @override
@@ -53,7 +53,7 @@ class _$TicketTypeSerializer implements StructuredSerializer<TicketType> {
   @override
   TicketType deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new TicketTypeBuilder();
+    final result = TicketTypeBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -101,7 +101,7 @@ class _$TicketType extends TicketType {
   final String? description;
 
   factory _$TicketType([void Function(TicketTypeBuilder)? updates]) =>
-      (new TicketTypeBuilder()..update(updates))._build();
+      (TicketTypeBuilder()..update(updates))._build();
 
   _$TicketType._(
       {required this.ticketType,
@@ -109,18 +109,13 @@ class _$TicketType extends TicketType {
       this.originalPrice,
       this.label,
       this.description})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(
-        ticketType, r'TicketType', 'ticketType');
-    BuiltValueNullFieldError.checkNotNull(price, r'TicketType', 'price');
-  }
-
+      : super._();
   @override
   TicketType rebuild(void Function(TicketTypeBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  TicketTypeBuilder toBuilder() => new TicketTypeBuilder()..replace(this);
+  TicketTypeBuilder toBuilder() => TicketTypeBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -198,7 +193,6 @@ class TicketTypeBuilder implements Builder<TicketType, TicketTypeBuilder> {
 
   @override
   void replace(TicketType other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$TicketType;
   }
 
@@ -212,7 +206,7 @@ class TicketTypeBuilder implements Builder<TicketType, TicketTypeBuilder> {
 
   _$TicketType _build() {
     final _$result = _$v ??
-        new _$TicketType._(
+        _$TicketType._(
           ticketType: BuiltValueNullFieldError.checkNotNull(
               ticketType, r'TicketType', 'ticketType'),
           price: BuiltValueNullFieldError.checkNotNull(

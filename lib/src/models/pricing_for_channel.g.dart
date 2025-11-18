@@ -7,7 +7,7 @@ part of 'pricing_for_channel.dart';
 // **************************************************************************
 
 Serializer<PricingForChannel> _$pricingForChannelSerializer =
-    new _$PricingForChannelSerializer();
+    _$PricingForChannelSerializer();
 
 class _$PricingForChannelSerializer
     implements StructuredSerializer<PricingForChannel> {
@@ -54,7 +54,7 @@ class _$PricingForChannelSerializer
   PricingForChannel deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new PricingForChannelBuilder();
+    final result = PricingForChannelBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -99,22 +99,18 @@ class _$PricingForChannel extends PricingForChannel {
 
   factory _$PricingForChannel(
           [void Function(PricingForChannelBuilder)? updates]) =>
-      (new PricingForChannelBuilder()..update(updates))._build();
+      (PricingForChannelBuilder()..update(updates))._build();
 
   _$PricingForChannel._(
       {required this.channel, this.price, this.originalPrice, this.ticketTypes})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(
-        channel, r'PricingForChannel', 'channel');
-  }
-
+      : super._();
   @override
   PricingForChannel rebuild(void Function(PricingForChannelBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
   PricingForChannelBuilder toBuilder() =>
-      new PricingForChannelBuilder()..replace(this);
+      PricingForChannelBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -167,7 +163,7 @@ class PricingForChannelBuilder
 
   ListBuilder<TicketType>? _ticketTypes;
   ListBuilder<TicketType> get ticketTypes =>
-      _$this._ticketTypes ??= new ListBuilder<TicketType>();
+      _$this._ticketTypes ??= ListBuilder<TicketType>();
   set ticketTypes(ListBuilder<TicketType>? ticketTypes) =>
       _$this._ticketTypes = ticketTypes;
 
@@ -187,7 +183,6 @@ class PricingForChannelBuilder
 
   @override
   void replace(PricingForChannel other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$PricingForChannel;
   }
 
@@ -203,7 +198,7 @@ class PricingForChannelBuilder
     _$PricingForChannel _$result;
     try {
       _$result = _$v ??
-          new _$PricingForChannel._(
+          _$PricingForChannel._(
             channel: BuiltValueNullFieldError.checkNotNull(
                 channel, r'PricingForChannel', 'channel'),
             price: price,
@@ -216,7 +211,7 @@ class PricingForChannelBuilder
         _$failedField = 'ticketTypes';
         _ticketTypes?.build();
       } catch (e) {
-        throw new BuiltValueNestedFieldError(
+        throw BuiltValueNestedFieldError(
             r'PricingForChannel', _$failedField, e.toString());
       }
       rethrow;

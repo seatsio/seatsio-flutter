@@ -22,7 +22,7 @@ class _$SeatingChartConfigChange extends SeatingChartConfigChange {
   @override
   final List<String>? filteredCategories;
   @override
-  final List<Pricing>? pricing;
+  final Pricing2? pricing;
   @override
   final List<String>? channels;
   @override
@@ -30,7 +30,7 @@ class _$SeatingChartConfigChange extends SeatingChartConfigChange {
 
   factory _$SeatingChartConfigChange(
           [void Function(SeatingChartConfigChangeBuilder)? updates]) =>
-      (new SeatingChartConfigChangeBuilder()..update(updates))._build();
+      (SeatingChartConfigChangeBuilder()..update(updates))._build();
 
   _$SeatingChartConfigChange._(
       {this.objectColor,
@@ -44,7 +44,6 @@ class _$SeatingChartConfigChange extends SeatingChartConfigChange {
       this.channels,
       this.extraConfig})
       : super._();
-
   @override
   SeatingChartConfigChange rebuild(
           void Function(SeatingChartConfigChangeBuilder) updates) =>
@@ -52,7 +51,7 @@ class _$SeatingChartConfigChange extends SeatingChartConfigChange {
 
   @override
   SeatingChartConfigChangeBuilder toBuilder() =>
-      new SeatingChartConfigChangeBuilder()..replace(this);
+      SeatingChartConfigChangeBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -142,9 +141,9 @@ class SeatingChartConfigChangeBuilder
   set filteredCategories(List<String>? filteredCategories) =>
       _$this._filteredCategories = filteredCategories;
 
-  List<Pricing>? _pricing;
-  List<Pricing>? get pricing => _$this._pricing;
-  set pricing(List<Pricing>? pricing) => _$this._pricing = pricing;
+  Pricing2Builder? _pricing;
+  Pricing2Builder get pricing => _$this._pricing ??= Pricing2Builder();
+  set pricing(Pricing2Builder? pricing) => _$this._pricing = pricing;
 
   List<String>? _channels;
   List<String>? get channels => _$this._channels;
@@ -167,7 +166,7 @@ class SeatingChartConfigChangeBuilder
       _availableCategories = $v.availableCategories;
       _unavailableCategories = $v.unavailableCategories;
       _filteredCategories = $v.filteredCategories;
-      _pricing = $v.pricing;
+      _pricing = $v.pricing?.toBuilder();
       _channels = $v.channels;
       _extraConfig = $v.extraConfig;
       _$v = null;
@@ -177,7 +176,6 @@ class SeatingChartConfigChangeBuilder
 
   @override
   void replace(SeatingChartConfigChange other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$SeatingChartConfigChange;
   }
 
@@ -190,19 +188,32 @@ class SeatingChartConfigChangeBuilder
   SeatingChartConfigChange build() => _build();
 
   _$SeatingChartConfigChange _build() {
-    final _$result = _$v ??
-        new _$SeatingChartConfigChange._(
-          objectColor: objectColor,
-          objectLabel: objectLabel,
-          numberOfPlacesToSelect: numberOfPlacesToSelect,
-          maxSelectedObjects: maxSelectedObjects,
-          availableCategories: availableCategories,
-          unavailableCategories: unavailableCategories,
-          filteredCategories: filteredCategories,
-          pricing: pricing,
-          channels: channels,
-          extraConfig: extraConfig,
-        );
+    _$SeatingChartConfigChange _$result;
+    try {
+      _$result = _$v ??
+          _$SeatingChartConfigChange._(
+            objectColor: objectColor,
+            objectLabel: objectLabel,
+            numberOfPlacesToSelect: numberOfPlacesToSelect,
+            maxSelectedObjects: maxSelectedObjects,
+            availableCategories: availableCategories,
+            unavailableCategories: unavailableCategories,
+            filteredCategories: filteredCategories,
+            pricing: _pricing?.build(),
+            channels: channels,
+            extraConfig: extraConfig,
+          );
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'pricing';
+        _pricing?.build();
+      } catch (e) {
+        throw BuiltValueNestedFieldError(
+            r'SeatingChartConfigChange', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

@@ -13,6 +13,7 @@ class _SmallTheatreRendererMethodsState extends State<SmallTheatreRendererMethod
 
   final Map<String, Future<void>? Function()> _actions = {};
 
+  /* TODO bver remove
   final multiLevelPricing = [
     Pricing(
       category: 1,
@@ -31,12 +32,27 @@ class _SmallTheatreRendererMethodsState extends State<SmallTheatreRendererMethod
     ),
     Pricing(category: "3", price: 50),
   ];
+  */
 
+  final simplePricing = Pricing2(
+    /*prices: [
+          Price.priceForCategory(category: 1, price: 30, originalPrice: 40),
+          Price.priceForCategory(category: "2", price: 40),
+          Price.priceForCategory(category: "3", price: 50),
+        ],
+         */
+    allFeesIncluded: false,
+    /*priceFormatter: (num price) => "€${price.toStringAsFixed(2)}"
+         */
+  );
+
+  /* TODO bver remove
   final simplePricing = [
     Pricing(category: 1, price: 30, originalPrice: 40),
     Pricing(category: "2", price: 40),
     Pricing(category: "3", price: 50),
   ];
+   */
 
   @override
   void initState() {
@@ -61,7 +77,7 @@ class _SmallTheatreRendererMethodsState extends State<SmallTheatreRendererMethod
           // ..availableCategories = ["Stalls"]
           // ..unavailableCategories = ["Stalls"]
           // ..filteredCategories = ["Stalls"]
-          ..pricing = simplePricing
+          ..pricing.replace(simplePricing)
           // ..channels = ["channel1", "channel2"]
           //..extraConfig = { "foo": "green" },
           )),
@@ -133,7 +149,8 @@ class _SmallTheatreRendererMethodsState extends State<SmallTheatreRendererMethod
               config: SeatingChartConfig((b) => b
                 ..workspaceKey = "publicDemoKey"
                 ..event = "smallTheatreEvent2"
-                ..pricing = multiLevelPricing),
+                ..pricing.replace(simplePricing)
+              ),
             ),
           ),
         ],
