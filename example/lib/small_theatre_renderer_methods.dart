@@ -34,25 +34,16 @@ class _SmallTheatreRendererMethodsState extends State<SmallTheatreRendererMethod
   ];
   */
 
-  final simplePricing = Pricing2( // TODO bver add pricing
-    /*prices: [
-          Price.priceForCategory(category: 1, price: 30, originalPrice: 40),
-          Price.priceForCategory(category: "2", price: 40),
-          Price.priceForCategory(category: "3", price: 50),
+  final simplePricing = Pricing2( // TODO bver add more fields, and Price.forObject
+    prices: [
+          Price.forCategory(category: 1, price: 30, originalPrice: 40),
+          Price.forCategory(category: "2", price: 40),
+          Price.forCategory(category: "3", price: 50),
         ],
-         */
     allFeesIncluded: false,
     /*priceFormatter: (num price) => "€${price.toStringAsFixed(2)}"
          */
   );
-
-  /* TODO bver remove
-  final simplePricing = [
-    Pricing(category: 1, price: 30, originalPrice: 40),
-    Pricing(category: "2", price: 40),
-    Pricing(category: "3", price: 50),
-  ];
-   */
 
   @override
   void initState() {

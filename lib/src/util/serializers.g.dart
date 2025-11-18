@@ -8,11 +8,16 @@ part of 'serializers.dart';
 
 Serializers _$serializers = (Serializers().toBuilder()
       ..add(CategoryKey.serializer)
+      ..add(Price.serializer)
       ..add(Pricing.serializer)
+      ..add(Pricing2.serializer)
       ..add(PricingForChannel.serializer)
       ..add(Region.serializer)
       ..add(SeatingChartConfig.serializer)
       ..add(TicketType.serializer)
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(Price)]),
+          () => ListBuilder<Price>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(String)]),
           () => ListBuilder<String>())
