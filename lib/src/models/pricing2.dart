@@ -1,7 +1,6 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
-import 'package:flutter/foundation.dart';
 import 'package:seatsio_flutter/src/models/price.dart';
 
 import '../util/serializers.dart';
