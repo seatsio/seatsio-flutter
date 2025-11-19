@@ -29,6 +29,9 @@ Serializers _$serializers = (Serializers().toBuilder()
           () => ListBuilder<PricingForChannel>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(TicketType)]),
+          () => ListBuilder<TicketType>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(TicketType)]),
           () => ListBuilder<TicketType>()))
     .build();
 

@@ -1,5 +1,7 @@
+import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
+import 'package:seatsio_flutter/src/models/ticket_type.dart';
 
 import '../util/serializers.dart';
 import 'category_key.dart';
@@ -13,6 +15,7 @@ abstract class Price implements Built<Price, PriceBuilder> {
   CategoryKey? get category;
   double? get price;
   double? get originalPrice;
+  BuiltList<TicketType>? get ticketTypes;
 
   Price._();
 
@@ -22,12 +25,16 @@ abstract class Price implements Built<Price, PriceBuilder> {
     required dynamic category,
     double? price,
     double? originalPrice,
+    List<TicketType>? ticketTypes,
   }) {
     return Price((b) {
       b
         ..category.replace(CategoryKey.from(category))
         ..price = price
-        ..originalPrice = originalPrice;
+        ..originalPrice = originalPrice
+        ..ticketTypes = ticketTypes != null
+          ? ListBuilder<TicketType>(ticketTypes)
+          : null;
     });
   }
 
