@@ -36,9 +36,8 @@ abstract class Pricing2 implements Built<Pricing2, Pricing2Builder> {
   Map<String, dynamic> toJson() {
     var serialized = serializers.serializeWith(Pricing2.serializer, this) as Map<String, dynamic>;
     if (priceFormatter != null) {
-      serialized.putIfAbsent("%priceFormatterPlaceholder%", () => true);
+      serialized['hasPriceFormatter'] = true;
     }
-    debugPrint("Pricing2 serialized: $serialized");
     return serialized;
   }
 }
