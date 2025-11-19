@@ -53,9 +53,12 @@ class SeatsioWebViewController {
   }
 
   String _injectConfigInHtml(SeatingChartConfig chartConfig, String chartConfigJson) {
-    return seatsioHTML
+    var bla = seatsioHTML
         .replaceFirst("%region%", chartConfig.region.name)
-        .replaceFirst("%configAsJs%", chartConfigJson);
+        .replaceFirst("%configAsJs%", chartConfigJson)
+        .replaceFirst("\"%priceFormatterPlaceholder%\":true", "priceFormatter: (price) => price + '\$'"); // TODO bver fix: make it use the actual implementation
+    debugPrint("Injected HTML: $bla");
+    return bla; // TODO bver inline bla variable
   }
 
   Future<void> evaluateJavascript(String javascriptString) => _webViewController.runJavaScript(javascriptString);

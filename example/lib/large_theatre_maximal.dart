@@ -31,6 +31,8 @@ class LargeTheatreMaximal extends StatelessWidget {
     ];
     */
 
+    final priceFormatter = (num price) => "€${price.toStringAsFixed(2)}";
+
     final simplePricing = Pricing2(
         /*prices: [
           Price.priceForCategory(category: 1, price: 30, originalPrice: 40),
@@ -39,11 +41,8 @@ class LargeTheatreMaximal extends StatelessWidget {
         ],
          */
         allFeesIncluded: false,
-        /*priceFormatter: (num price) => "€${price.toStringAsFixed(2)}"
-         */
+        priceFormatter: priceFormatter
     );
-
-    final priceFormatter = (num price) => "€${price.toStringAsFixed(2)}";
 
     final popoverInfo = (SeatsioObject object) => "something [b]something[/b] ${object.label}";
 
@@ -83,7 +82,6 @@ class LargeTheatreMaximal extends StatelessWidget {
             ..workspaceKey = "publicDemoKey"
             ..events = ["largeTheatreEvent"]
             ..pricing.replace(simplePricing)
-            ..priceFormatter = priceFormatter
             ..showSectionPricingOverlay = true
           // ..selectedObjects = ['Circle P-1-12', 'Circle P-1-11', 'Circle P-1-10']
             ..selectionValidators = [

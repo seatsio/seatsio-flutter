@@ -70,11 +70,14 @@ class _$Pricing2 extends Pricing2 {
   final BuiltList<Price>? prices;
   @override
   final bool? allFeesIncluded;
+  @override
+  final Function(num price)? priceFormatter;
 
   factory _$Pricing2([void Function(Pricing2Builder)? updates]) =>
       (Pricing2Builder()..update(updates))._build();
 
-  _$Pricing2._({this.prices, this.allFeesIncluded}) : super._();
+  _$Pricing2._({this.prices, this.allFeesIncluded, this.priceFormatter})
+      : super._();
   @override
   Pricing2 rebuild(void Function(Pricing2Builder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -85,9 +88,11 @@ class _$Pricing2 extends Pricing2 {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
+    final dynamic _$dynamicOther = other;
     return other is Pricing2 &&
         prices == other.prices &&
-        allFeesIncluded == other.allFeesIncluded;
+        allFeesIncluded == other.allFeesIncluded &&
+        priceFormatter == _$dynamicOther.priceFormatter;
   }
 
   @override
@@ -95,6 +100,7 @@ class _$Pricing2 extends Pricing2 {
     var _$hash = 0;
     _$hash = $jc(_$hash, prices.hashCode);
     _$hash = $jc(_$hash, allFeesIncluded.hashCode);
+    _$hash = $jc(_$hash, priceFormatter.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -103,7 +109,8 @@ class _$Pricing2 extends Pricing2 {
   String toString() {
     return (newBuiltValueToStringHelper(r'Pricing2')
           ..add('prices', prices)
-          ..add('allFeesIncluded', allFeesIncluded))
+          ..add('allFeesIncluded', allFeesIncluded)
+          ..add('priceFormatter', priceFormatter))
         .toString();
   }
 }
@@ -120,6 +127,11 @@ class Pricing2Builder implements Builder<Pricing2, Pricing2Builder> {
   set allFeesIncluded(bool? allFeesIncluded) =>
       _$this._allFeesIncluded = allFeesIncluded;
 
+  Function(num price)? _priceFormatter;
+  Function(num price)? get priceFormatter => _$this._priceFormatter;
+  set priceFormatter(Function(num price)? priceFormatter) =>
+      _$this._priceFormatter = priceFormatter;
+
   Pricing2Builder();
 
   Pricing2Builder get _$this {
@@ -127,6 +139,7 @@ class Pricing2Builder implements Builder<Pricing2, Pricing2Builder> {
     if ($v != null) {
       _prices = $v.prices?.toBuilder();
       _allFeesIncluded = $v.allFeesIncluded;
+      _priceFormatter = $v.priceFormatter;
       _$v = null;
     }
     return this;
@@ -152,6 +165,7 @@ class Pricing2Builder implements Builder<Pricing2, Pricing2Builder> {
           _$Pricing2._(
             prices: _prices?.build(),
             allFeesIncluded: allFeesIncluded,
+            priceFormatter: priceFormatter,
           );
     } catch (_) {
       late String _$failedField;

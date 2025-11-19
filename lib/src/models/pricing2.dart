@@ -1,6 +1,7 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
+import 'package:flutter/foundation.dart';
 import 'package:seatsio_flutter/src/models/price.dart';
 
 import '../util/serializers.dart';
@@ -12,15 +13,20 @@ abstract class Pricing2 implements Built<Pricing2, Pricing2Builder> {
   BuiltList<Price>? get prices;
   bool? get allFeesIncluded;
 
+  @BuiltValueField(serialize: false)
+  Function(num price)? get priceFormatter;
+
   Pricing2._();
 
   factory Pricing2({
     List<Price>? prices,
     bool? allFeesIncluded,
+    String Function(num price)? priceFormatter,
   }) {
     return _$Pricing2._(
       prices: prices != null ? BuiltList<Price>(prices) : null,
       allFeesIncluded: allFeesIncluded,
+      priceFormatter: priceFormatter,
     );
   }
 
@@ -28,7 +34,11 @@ abstract class Pricing2 implements Built<Pricing2, Pricing2Builder> {
       _$pricing2Serializer;
 
   Map<String, dynamic> toJson() {
-    return serializers.serializeWith(Pricing2.serializer, this)
-    as Map<String, dynamic>;
+    var serialized = serializers.serializeWith(Pricing2.serializer, this) as Map<String, dynamic>;
+    if (priceFormatter != null) {
+      serialized.putIfAbsent("%priceFormatterPlaceholder%", () => true);
+    }
+    debugPrint("Pricing2 serialized: $serialized");
+    return serialized;
   }
 }

@@ -535,8 +535,6 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   final Pricing2? pricing;
   @override
-  final Function(num price)? priceFormatter;
-  @override
   final bool? showSectionPricingOverlay;
   @override
   final List<String>? selectedObjects;
@@ -679,7 +677,6 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       this.mode,
       this.extraConfig,
       this.pricing,
-      this.priceFormatter,
       this.showSectionPricingOverlay,
       this.selectedObjects,
       this.selectableObjects,
@@ -762,7 +759,6 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         mode == other.mode &&
         extraConfig == other.extraConfig &&
         pricing == other.pricing &&
-        priceFormatter == _$dynamicOther.priceFormatter &&
         showSectionPricingOverlay == other.showSectionPricingOverlay &&
         selectedObjects == other.selectedObjects &&
         selectableObjects == other.selectableObjects &&
@@ -838,7 +834,6 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     _$hash = $jc(_$hash, mode.hashCode);
     _$hash = $jc(_$hash, extraConfig.hashCode);
     _$hash = $jc(_$hash, pricing.hashCode);
-    _$hash = $jc(_$hash, priceFormatter.hashCode);
     _$hash = $jc(_$hash, showSectionPricingOverlay.hashCode);
     _$hash = $jc(_$hash, selectedObjects.hashCode);
     _$hash = $jc(_$hash, selectableObjects.hashCode);
@@ -913,7 +908,6 @@ class _$SeatingChartConfig extends SeatingChartConfig {
           ..add('mode', mode)
           ..add('extraConfig', extraConfig)
           ..add('pricing', pricing)
-          ..add('priceFormatter', priceFormatter)
           ..add('showSectionPricingOverlay', showSectionPricingOverlay)
           ..add('selectedObjects', selectedObjects)
           ..add('selectableObjects', selectableObjects)
@@ -1012,11 +1006,6 @@ class SeatingChartConfigBuilder
   Pricing2Builder? _pricing;
   Pricing2Builder get pricing => _$this._pricing ??= Pricing2Builder();
   set pricing(Pricing2Builder? pricing) => _$this._pricing = pricing;
-
-  Function(num price)? _priceFormatter;
-  Function(num price)? get priceFormatter => _$this._priceFormatter;
-  set priceFormatter(Function(num price)? priceFormatter) =>
-      _$this._priceFormatter = priceFormatter;
 
   bool? _showSectionPricingOverlay;
   bool? get showSectionPricingOverlay => _$this._showSectionPricingOverlay;
@@ -1363,7 +1352,6 @@ class SeatingChartConfigBuilder
       _mode = $v.mode;
       _extraConfig = $v.extraConfig;
       _pricing = $v.pricing?.toBuilder();
-      _priceFormatter = $v.priceFormatter;
       _showSectionPricingOverlay = $v.showSectionPricingOverlay;
       _selectedObjects = $v.selectedObjects;
       _selectableObjects = $v.selectableObjects;
@@ -1456,7 +1444,6 @@ class SeatingChartConfigBuilder
             mode: mode,
             extraConfig: extraConfig,
             pricing: _pricing?.build(),
-            priceFormatter: priceFormatter,
             showSectionPricingOverlay: showSectionPricingOverlay,
             selectedObjects: selectedObjects,
             selectableObjects: selectableObjects,

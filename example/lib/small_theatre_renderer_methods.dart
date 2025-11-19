@@ -41,8 +41,7 @@ class _SmallTheatreRendererMethodsState extends State<SmallTheatreRendererMethod
           Price.forCategory(category: "3", price: 50),
         ],
     allFeesIncluded: false,
-    /*priceFormatter: (num price) => "€${price.toStringAsFixed(2)}"
-         */
+    priceFormatter: (num price) => "€${price.toStringAsFixed(2)}"
   );
 
   @override

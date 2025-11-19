@@ -21,10 +21,7 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
   // Pricing
   Pricing2? get pricing;
 
-  @BuiltValueField(serialize: false)
-  Function(num price)? get priceFormatter;
-
-  bool? get showSectionPricingOverlay;
+  bool? get showSectionPricingOverlay; // TODO bver move to pricing2
 
   // Selection
   List<String>? get selectedObjects;
