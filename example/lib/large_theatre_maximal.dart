@@ -4,7 +4,15 @@ import 'package:flutter/material.dart';
 class LargeTheatreMaximal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final multiLevelPricing = [
+
+    final priceFormatter = (num price) => "€${price.toStringAsFixed(2)}";
+
+    final multiLevelPricing = Pricing2 (
+      showSectionPricingOverlay: true
+          // TODO bver add more fields and prices with ticket types here
+    );
+
+    /*[
       Pricing(
         objects: ["Arena-1-11", "Arena-1-12"],
         ticketTypes: [
@@ -22,24 +30,15 @@ class LargeTheatreMaximal extends StatelessWidget {
       ),
       Pricing(category: "3", price: 50),
     ];
+*/
 
-    /*
-    final simplePricing = [
-      Pricing(category: 1, price: 30, originalPrice: 40),
-      Pricing(category: "2", price: 40),
-      Pricing(category: "3", price: 50),
-    ];
-    */
-
-    final priceFormatter = (num price) => "€${price.toStringAsFixed(2)}";
 
     final simplePricing = Pricing2(
-        /*prices: [
-          Price.priceForCategory(category: 1, price: 30, originalPrice: 40),
-          Price.priceForCategory(category: "2", price: 40),
-          Price.priceForCategory(category: "3", price: 50),
+        prices: [
+          Price.forCategory(category: 1, price: 30, originalPrice: 40),
+          Price.forCategory(category: "2", price: 40),
+          Price.forCategory(category: "3", price: 50),
         ],
-         */
         allFeesIncluded: false,
         priceFormatter: priceFormatter
     );
@@ -82,7 +81,6 @@ class LargeTheatreMaximal extends StatelessWidget {
             ..workspaceKey = "publicDemoKey"
             ..events = ["largeTheatreEvent"]
             ..pricing.replace(simplePricing)
-            ..showSectionPricingOverlay = true
           // ..selectedObjects = ['Circle P-1-12', 'Circle P-1-11', 'Circle P-1-10']
             ..selectionValidators = [
               NoOrphanSeats(ignoreCategories: true, mode: NoOrphanSeatsMode.strict, highlight: true),

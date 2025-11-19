@@ -70,13 +70,6 @@ class _$SeatingChartConfigSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(Pricing2)));
     }
-    value = object.showSectionPricingOverlay;
-    if (value != null) {
-      result
-        ..add('showSectionPricingOverlay')
-        ..add(
-            serializers.serialize(value, specifiedType: const FullType(bool)));
-    }
     value = object.selectedObjects;
     if (value != null) {
       result
@@ -355,10 +348,6 @@ class _$SeatingChartConfigSerializer
           result.pricing.replace(serializers.deserialize(value,
               specifiedType: const FullType(Pricing2))! as Pricing2);
           break;
-        case 'showSectionPricingOverlay':
-          result.showSectionPricingOverlay = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool?;
-          break;
         case 'selectedObjects':
           result.selectedObjects = serializers.deserialize(value,
                   specifiedType:
@@ -535,8 +524,6 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   final Pricing2? pricing;
   @override
-  final bool? showSectionPricingOverlay;
-  @override
   final List<String>? selectedObjects;
   @override
   final List<String>? selectableObjects;
@@ -677,7 +664,6 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       this.mode,
       this.extraConfig,
       this.pricing,
-      this.showSectionPricingOverlay,
       this.selectedObjects,
       this.selectableObjects,
       this.selectionValidators,
@@ -759,7 +745,6 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         mode == other.mode &&
         extraConfig == other.extraConfig &&
         pricing == other.pricing &&
-        showSectionPricingOverlay == other.showSectionPricingOverlay &&
         selectedObjects == other.selectedObjects &&
         selectableObjects == other.selectableObjects &&
         selectionValidators == other.selectionValidators &&
@@ -834,7 +819,6 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     _$hash = $jc(_$hash, mode.hashCode);
     _$hash = $jc(_$hash, extraConfig.hashCode);
     _$hash = $jc(_$hash, pricing.hashCode);
-    _$hash = $jc(_$hash, showSectionPricingOverlay.hashCode);
     _$hash = $jc(_$hash, selectedObjects.hashCode);
     _$hash = $jc(_$hash, selectableObjects.hashCode);
     _$hash = $jc(_$hash, selectionValidators.hashCode);
@@ -908,7 +892,6 @@ class _$SeatingChartConfig extends SeatingChartConfig {
           ..add('mode', mode)
           ..add('extraConfig', extraConfig)
           ..add('pricing', pricing)
-          ..add('showSectionPricingOverlay', showSectionPricingOverlay)
           ..add('selectedObjects', selectedObjects)
           ..add('selectableObjects', selectableObjects)
           ..add('selectionValidators', selectionValidators)
@@ -1006,11 +989,6 @@ class SeatingChartConfigBuilder
   Pricing2Builder? _pricing;
   Pricing2Builder get pricing => _$this._pricing ??= Pricing2Builder();
   set pricing(Pricing2Builder? pricing) => _$this._pricing = pricing;
-
-  bool? _showSectionPricingOverlay;
-  bool? get showSectionPricingOverlay => _$this._showSectionPricingOverlay;
-  set showSectionPricingOverlay(bool? showSectionPricingOverlay) =>
-      _$this._showSectionPricingOverlay = showSectionPricingOverlay;
 
   List<String>? _selectedObjects;
   List<String>? get selectedObjects => _$this._selectedObjects;
@@ -1352,7 +1330,6 @@ class SeatingChartConfigBuilder
       _mode = $v.mode;
       _extraConfig = $v.extraConfig;
       _pricing = $v.pricing?.toBuilder();
-      _showSectionPricingOverlay = $v.showSectionPricingOverlay;
       _selectedObjects = $v.selectedObjects;
       _selectableObjects = $v.selectableObjects;
       _selectionValidators = $v.selectionValidators;
@@ -1444,7 +1421,6 @@ class SeatingChartConfigBuilder
             mode: mode,
             extraConfig: extraConfig,
             pricing: _pricing?.build(),
-            showSectionPricingOverlay: showSectionPricingOverlay,
             selectedObjects: selectedObjects,
             selectableObjects: selectableObjects,
             selectionValidators: selectionValidators,

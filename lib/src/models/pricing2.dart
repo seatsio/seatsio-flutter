@@ -12,6 +12,7 @@ abstract class Pricing2 implements Built<Pricing2, Pricing2Builder> {
 
   BuiltList<Price>? get prices;
   bool? get allFeesIncluded;
+  bool? get showSectionPricingOverlay;
 
   @BuiltValueField(serialize: false)
   Function(num price)? get priceFormatter;
@@ -22,11 +23,13 @@ abstract class Pricing2 implements Built<Pricing2, Pricing2Builder> {
     List<Price>? prices,
     bool? allFeesIncluded,
     String Function(num price)? priceFormatter,
+    bool? showSectionPricingOverlay
   }) {
     return _$Pricing2._(
       prices: prices != null ? BuiltList<Price>(prices) : null,
       allFeesIncluded: allFeesIncluded,
       priceFormatter: priceFormatter,
+      showSectionPricingOverlay: showSectionPricingOverlay
     );
   }
 

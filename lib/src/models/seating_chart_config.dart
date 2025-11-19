@@ -21,8 +21,6 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
   // Pricing
   Pricing2? get pricing;
 
-  bool? get showSectionPricingOverlay; // TODO bver move to pricing2
-
   // Selection
   List<String>? get selectedObjects;
 
@@ -218,7 +216,6 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
       if (extraConfig != null) "extraConfig": extraConfig,
       // pricing
       if (pricing != null) "pricing": pricing!.toJson(),
-      if (showSectionPricingOverlay != null) "showSectionPricingOverlay": showSectionPricingOverlay,
       // selection
       if (selectedObjects != null) "selectedObjects": selectedObjects,
       if (selectableObjects != null) "selectableObjects": selectableObjects,
