@@ -13,27 +13,34 @@ class _SmallTheatreRendererMethodsState extends State<SmallTheatreRendererMethod
 
   final Map<String, Future<void>? Function()> _actions = {};
 
-  final multiLevelPricing = Pricing2(prices: [
-    Price.forCategory(
-      category: 1,
-      ticketTypes: [
-        TicketType(ticketType: "adult", price: 30, originalPrice: 50),
-        TicketType(ticketType: "child", price: 20, label: "For children"),
+  final multiLevelPricing = Pricing2(
+      prices: [
+        Price.forCategory(
+          category: 1,
+          fee: 10,
+          ticketTypes: [
+            TicketType(ticketType: "adult", price: 30, originalPrice: 50, fee: 1),
+            TicketType(ticketType: "child", price: 20, label: "For children", fee: 1),
+          ],
+        ),
+        Price.forCategory(category: 2,
+            fee: 20,
+            ticketTypes: [
+          TicketType(ticketType: "adult", price: 40, fee: 2),
+          TicketType(ticketType: "child", price: 30, fee: 2, label: "For children"),
+          TicketType(ticketType: "65+", price: 25, fee: 2, label: "For senior citizens"),
+        ]),
+        Price.forCategory(category: "3", price: 50, fee: 3),
       ],
-    ),
-    Price.forCategory(category: 2, ticketTypes: [
-      TicketType(ticketType: "adult", price: 40),
-      TicketType(ticketType: "child", price: 30, label: "For children"),
-      TicketType(ticketType: "65+", price: 25, label: "For senior citizens"),
-    ]),
-    Price.forCategory(category: "3", price: 50),
-  ], priceFormatter: (num price) => "${price.toStringAsFixed(2)} EUR");
+      priceFormatter: (num price) => "${price.toStringAsFixed(2)} EUR",
+      allFeesIncluded: false
+  );
 
   final simplePricing = Pricing2(// TODO bver Price.forObject
       prices: [
-    Price.forCategory(category: 1, price: 30, originalPrice: 40),
-    Price.forCategory(category: "2", price: 40),
-    Price.forCategory(category: "3", price: 50),
+    Price.forCategory(category: 1, price: 30, originalPrice: 40, fee: 2),
+    Price.forCategory(category: "2", price: 40, fee: 2),
+    Price.forCategory(category: "3", price: 50, fee: 2),
   ], allFeesIncluded: false, priceFormatter: (num price) => "${price.toStringAsFixed(2)} EUR");
 
   @override

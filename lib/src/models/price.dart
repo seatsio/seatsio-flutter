@@ -10,11 +10,12 @@ part 'price.g.dart';
 
 abstract class Price implements Built<Price, PriceBuilder> {
 
-  // TODO bver add fee, ticketTypes and channels
+  // TODO bver add fee, channels
 
   CategoryKey? get category;
   double? get price;
   double? get originalPrice;
+  double? get fee;
   BuiltList<TicketType>? get ticketTypes;
 
   Price._();
@@ -25,6 +26,7 @@ abstract class Price implements Built<Price, PriceBuilder> {
     required dynamic category,
     double? price,
     double? originalPrice,
+    double? fee,
     List<TicketType>? ticketTypes,
   }) {
     return Price((b) {
@@ -32,6 +34,7 @@ abstract class Price implements Built<Price, PriceBuilder> {
         ..category.replace(CategoryKey.from(category))
         ..price = price
         ..originalPrice = originalPrice
+        ..fee = fee
         ..ticketTypes = ticketTypes != null
           ? ListBuilder<TicketType>(ticketTypes)
           : null;

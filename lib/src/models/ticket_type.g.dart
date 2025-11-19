@@ -33,6 +33,13 @@ class _$TicketTypeSerializer implements StructuredSerializer<TicketType> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(double)));
     }
+    value = object.fee;
+    if (value != null) {
+      result
+        ..add('fee')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(double)));
+    }
     value = object.label;
     if (value != null) {
       result
@@ -73,6 +80,10 @@ class _$TicketTypeSerializer implements StructuredSerializer<TicketType> {
           result.originalPrice = serializers.deserialize(value,
               specifiedType: const FullType(double)) as double?;
           break;
+        case 'fee':
+          result.fee = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double?;
+          break;
         case 'label':
           result.label = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
@@ -96,6 +107,8 @@ class _$TicketType extends TicketType {
   @override
   final double? originalPrice;
   @override
+  final double? fee;
+  @override
   final String? label;
   @override
   final String? description;
@@ -107,6 +120,7 @@ class _$TicketType extends TicketType {
       {required this.ticketType,
       required this.price,
       this.originalPrice,
+      this.fee,
       this.label,
       this.description})
       : super._();
@@ -124,6 +138,7 @@ class _$TicketType extends TicketType {
         ticketType == other.ticketType &&
         price == other.price &&
         originalPrice == other.originalPrice &&
+        fee == other.fee &&
         label == other.label &&
         description == other.description;
   }
@@ -134,6 +149,7 @@ class _$TicketType extends TicketType {
     _$hash = $jc(_$hash, ticketType.hashCode);
     _$hash = $jc(_$hash, price.hashCode);
     _$hash = $jc(_$hash, originalPrice.hashCode);
+    _$hash = $jc(_$hash, fee.hashCode);
     _$hash = $jc(_$hash, label.hashCode);
     _$hash = $jc(_$hash, description.hashCode);
     _$hash = $jf(_$hash);
@@ -146,6 +162,7 @@ class _$TicketType extends TicketType {
           ..add('ticketType', ticketType)
           ..add('price', price)
           ..add('originalPrice', originalPrice)
+          ..add('fee', fee)
           ..add('label', label)
           ..add('description', description))
         .toString();
@@ -168,6 +185,10 @@ class TicketTypeBuilder implements Builder<TicketType, TicketTypeBuilder> {
   set originalPrice(double? originalPrice) =>
       _$this._originalPrice = originalPrice;
 
+  double? _fee;
+  double? get fee => _$this._fee;
+  set fee(double? fee) => _$this._fee = fee;
+
   String? _label;
   String? get label => _$this._label;
   set label(String? label) => _$this._label = label;
@@ -184,6 +205,7 @@ class TicketTypeBuilder implements Builder<TicketType, TicketTypeBuilder> {
       _ticketType = $v.ticketType;
       _price = $v.price;
       _originalPrice = $v.originalPrice;
+      _fee = $v.fee;
       _label = $v.label;
       _description = $v.description;
       _$v = null;
@@ -212,6 +234,7 @@ class TicketTypeBuilder implements Builder<TicketType, TicketTypeBuilder> {
           price: BuiltValueNullFieldError.checkNotNull(
               price, r'TicketType', 'price'),
           originalPrice: originalPrice,
+          fee: fee,
           label: label,
           description: description,
         );

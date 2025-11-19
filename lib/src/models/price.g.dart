@@ -40,6 +40,13 @@ class _$PriceSerializer implements StructuredSerializer<Price> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(double)));
     }
+    value = object.fee;
+    if (value != null) {
+      result
+        ..add('fee')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(double)));
+    }
     value = object.ticketTypes;
     if (value != null) {
       result
@@ -74,6 +81,10 @@ class _$PriceSerializer implements StructuredSerializer<Price> {
           result.originalPrice = serializers.deserialize(value,
               specifiedType: const FullType(double)) as double?;
           break;
+        case 'fee':
+          result.fee = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double?;
+          break;
         case 'ticketTypes':
           result.ticketTypes.replace(serializers.deserialize(value,
                   specifiedType: const FullType(
@@ -95,12 +106,19 @@ class _$Price extends Price {
   @override
   final double? originalPrice;
   @override
+  final double? fee;
+  @override
   final BuiltList<TicketType>? ticketTypes;
 
   factory _$Price([void Function(PriceBuilder)? updates]) =>
       (PriceBuilder()..update(updates))._build();
 
-  _$Price._({this.category, this.price, this.originalPrice, this.ticketTypes})
+  _$Price._(
+      {this.category,
+      this.price,
+      this.originalPrice,
+      this.fee,
+      this.ticketTypes})
       : super._();
   @override
   Price rebuild(void Function(PriceBuilder) updates) =>
@@ -116,6 +134,7 @@ class _$Price extends Price {
         category == other.category &&
         price == other.price &&
         originalPrice == other.originalPrice &&
+        fee == other.fee &&
         ticketTypes == other.ticketTypes;
   }
 
@@ -125,6 +144,7 @@ class _$Price extends Price {
     _$hash = $jc(_$hash, category.hashCode);
     _$hash = $jc(_$hash, price.hashCode);
     _$hash = $jc(_$hash, originalPrice.hashCode);
+    _$hash = $jc(_$hash, fee.hashCode);
     _$hash = $jc(_$hash, ticketTypes.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -136,6 +156,7 @@ class _$Price extends Price {
           ..add('category', category)
           ..add('price', price)
           ..add('originalPrice', originalPrice)
+          ..add('fee', fee)
           ..add('ticketTypes', ticketTypes))
         .toString();
   }
@@ -157,6 +178,10 @@ class PriceBuilder implements Builder<Price, PriceBuilder> {
   set originalPrice(double? originalPrice) =>
       _$this._originalPrice = originalPrice;
 
+  double? _fee;
+  double? get fee => _$this._fee;
+  set fee(double? fee) => _$this._fee = fee;
+
   ListBuilder<TicketType>? _ticketTypes;
   ListBuilder<TicketType> get ticketTypes =>
       _$this._ticketTypes ??= ListBuilder<TicketType>();
@@ -171,6 +196,7 @@ class PriceBuilder implements Builder<Price, PriceBuilder> {
       _category = $v.category?.toBuilder();
       _price = $v.price;
       _originalPrice = $v.originalPrice;
+      _fee = $v.fee;
       _ticketTypes = $v.ticketTypes?.toBuilder();
       _$v = null;
     }
@@ -198,6 +224,7 @@ class PriceBuilder implements Builder<Price, PriceBuilder> {
             category: _category?.build(),
             price: price,
             originalPrice: originalPrice,
+            fee: fee,
             ticketTypes: _ticketTypes?.build(),
           );
     } catch (_) {
