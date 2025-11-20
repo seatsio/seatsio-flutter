@@ -7,6 +7,7 @@ class LargeTheatreMaximal extends StatelessWidget {
 
     final priceFormatter = (num price) => "€${price.toStringAsFixed(2)}";
 
+    // ignore: unused_local_variable
     final multiLevelPricing = Pricing (
       prices: [
 
