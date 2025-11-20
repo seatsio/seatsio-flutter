@@ -5,9 +5,9 @@ import 'package:seatsio_flutter/src/models/price.dart';
 
 import '../util/serializers.dart';
 
-part 'pricing2.g.dart';
+part 'pricing.g.dart';
 
-abstract class Pricing2 implements Built<Pricing2, Pricing2Builder> {
+abstract class Pricing implements Built<Pricing, PricingBuilder> {
 
   BuiltList<Price>? get prices;
   bool? get allFeesIncluded;
@@ -16,15 +16,15 @@ abstract class Pricing2 implements Built<Pricing2, Pricing2Builder> {
   @BuiltValueField(serialize: false)
   Function(num price)? get priceFormatter;
 
-  Pricing2._();
+  Pricing._();
 
-  factory Pricing2({
+  factory Pricing({
     List<Price>? prices,
     bool? allFeesIncluded,
     String Function(num price)? priceFormatter,
     bool? showSectionPricingOverlay
   }) {
-    return _$Pricing2._(
+    return _$Pricing._(
       prices: prices != null ? BuiltList<Price>(prices) : null,
       allFeesIncluded: allFeesIncluded,
       priceFormatter: priceFormatter,
@@ -32,11 +32,11 @@ abstract class Pricing2 implements Built<Pricing2, Pricing2Builder> {
     );
   }
 
-  static Serializer<Pricing2> get serializer =>
-      _$pricing2Serializer;
+  static Serializer<Pricing> get serializer =>
+      _$pricingSerializer;
 
   Map<String, dynamic> toJson() {
-    var serialized = serializers.serializeWith(Pricing2.serializer, this) as Map<String, dynamic>;
+    var serialized = serializers.serializeWith(Pricing.serializer, this) as Map<String, dynamic>;
     if (priceFormatter != null) {
       serialized['hasPriceFormatter'] = true;
     }

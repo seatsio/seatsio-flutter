@@ -7,7 +7,7 @@ class LargeTheatreMaximal extends StatelessWidget {
 
     final priceFormatter = (num price) => "€${price.toStringAsFixed(2)}";
 
-    final multiLevelPricing = Pricing2 (
+    final multiLevelPricing = Pricing (
       prices: [
 
         Price.forObjects(
@@ -30,7 +30,7 @@ class LargeTheatreMaximal extends StatelessWidget {
       showSectionPricingOverlay: true
     );
 
-    final simplePricing = Pricing2(
+    final simplePricing = Pricing(
         prices: [
           Price.forCategory(category: 1, price: 30, originalPrice: 40),
           Price.forCategory(category: "2", price: 40),

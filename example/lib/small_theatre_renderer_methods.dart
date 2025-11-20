@@ -13,7 +13,7 @@ class _SmallTheatreRendererMethodsState extends State<SmallTheatreRendererMethod
 
   final Map<String, Future<void>? Function()> _actions = {};
 
-  final multiLevelPricing = Pricing2(
+  final multiLevelPricing = Pricing(
       prices: [
         Price.forCategory(
           category: 1,
@@ -36,7 +36,7 @@ class _SmallTheatreRendererMethodsState extends State<SmallTheatreRendererMethod
       allFeesIncluded: false
   );
 
-  final simplePricing = Pricing2(
+  final simplePricing = Pricing(
       prices: [
         Price.forCategory(
             category: 1,

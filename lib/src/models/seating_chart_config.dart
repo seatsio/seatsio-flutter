@@ -19,7 +19,7 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
   Map<String, dynamic>? get extraConfig;
 
   // Pricing
-  Pricing2? get pricing;
+  Pricing? get pricing;
 
   // Selection
   List<String>? get selectedObjects;

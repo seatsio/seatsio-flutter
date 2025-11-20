@@ -9,7 +9,7 @@ part of 'serializers.dart';
 Serializers _$serializers = (Serializers().toBuilder()
       ..add(CategoryKey.serializer)
       ..add(Price.serializer)
-      ..add(Pricing2.serializer)
+      ..add(Pricing.serializer)
       ..add(PricingForChannel.serializer)
       ..add(Region.serializer)
       ..add(SeatingChartConfig.serializer)

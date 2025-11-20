@@ -1,21 +1,21 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'pricing2.dart';
+part of 'pricing.dart';
 
 // **************************************************************************
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializer<Pricing2> _$pricing2Serializer = _$Pricing2Serializer();
+Serializer<Pricing> _$pricingSerializer = _$PricingSerializer();
 
-class _$Pricing2Serializer implements StructuredSerializer<Pricing2> {
+class _$PricingSerializer implements StructuredSerializer<Pricing> {
   @override
-  final Iterable<Type> types = const [Pricing2, _$Pricing2];
+  final Iterable<Type> types = const [Pricing, _$Pricing];
   @override
-  final String wireName = 'Pricing2';
+  final String wireName = 'Pricing';
 
   @override
-  Iterable<Object?> serialize(Serializers serializers, Pricing2 object,
+  Iterable<Object?> serialize(Serializers serializers, Pricing object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[];
     Object? value;
@@ -45,9 +45,9 @@ class _$Pricing2Serializer implements StructuredSerializer<Pricing2> {
   }
 
   @override
-  Pricing2 deserialize(Serializers serializers, Iterable<Object?> serialized,
+  Pricing deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = Pricing2Builder();
+    final result = PricingBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -76,7 +76,7 @@ class _$Pricing2Serializer implements StructuredSerializer<Pricing2> {
   }
 }
 
-class _$Pricing2 extends Pricing2 {
+class _$Pricing extends Pricing {
   @override
   final BuiltList<Price>? prices;
   @override
@@ -86,27 +86,27 @@ class _$Pricing2 extends Pricing2 {
   @override
   final Function(num price)? priceFormatter;
 
-  factory _$Pricing2([void Function(Pricing2Builder)? updates]) =>
-      (Pricing2Builder()..update(updates))._build();
+  factory _$Pricing([void Function(PricingBuilder)? updates]) =>
+      (PricingBuilder()..update(updates))._build();
 
-  _$Pricing2._(
+  _$Pricing._(
       {this.prices,
       this.allFeesIncluded,
       this.showSectionPricingOverlay,
       this.priceFormatter})
       : super._();
   @override
-  Pricing2 rebuild(void Function(Pricing2Builder) updates) =>
+  Pricing rebuild(void Function(PricingBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  Pricing2Builder toBuilder() => Pricing2Builder()..replace(this);
+  PricingBuilder toBuilder() => PricingBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     final dynamic _$dynamicOther = other;
-    return other is Pricing2 &&
+    return other is Pricing &&
         prices == other.prices &&
         allFeesIncluded == other.allFeesIncluded &&
         showSectionPricingOverlay == other.showSectionPricingOverlay &&
@@ -126,7 +126,7 @@ class _$Pricing2 extends Pricing2 {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper(r'Pricing2')
+    return (newBuiltValueToStringHelper(r'Pricing')
           ..add('prices', prices)
           ..add('allFeesIncluded', allFeesIncluded)
           ..add('showSectionPricingOverlay', showSectionPricingOverlay)
@@ -135,8 +135,8 @@ class _$Pricing2 extends Pricing2 {
   }
 }
 
-class Pricing2Builder implements Builder<Pricing2, Pricing2Builder> {
-  _$Pricing2? _$v;
+class PricingBuilder implements Builder<Pricing, PricingBuilder> {
+  _$Pricing? _$v;
 
   ListBuilder<Price>? _prices;
   ListBuilder<Price> get prices => _$this._prices ??= ListBuilder<Price>();
@@ -157,9 +157,9 @@ class Pricing2Builder implements Builder<Pricing2, Pricing2Builder> {
   set priceFormatter(Function(num price)? priceFormatter) =>
       _$this._priceFormatter = priceFormatter;
 
-  Pricing2Builder();
+  PricingBuilder();
 
-  Pricing2Builder get _$this {
+  PricingBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _prices = $v.prices?.toBuilder();
@@ -172,23 +172,23 @@ class Pricing2Builder implements Builder<Pricing2, Pricing2Builder> {
   }
 
   @override
-  void replace(Pricing2 other) {
-    _$v = other as _$Pricing2;
+  void replace(Pricing other) {
+    _$v = other as _$Pricing;
   }
 
   @override
-  void update(void Function(Pricing2Builder)? updates) {
+  void update(void Function(PricingBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  Pricing2 build() => _build();
+  Pricing build() => _build();
 
-  _$Pricing2 _build() {
-    _$Pricing2 _$result;
+  _$Pricing _build() {
+    _$Pricing _$result;
     try {
       _$result = _$v ??
-          _$Pricing2._(
+          _$Pricing._(
             prices: _prices?.build(),
             allFeesIncluded: allFeesIncluded,
             showSectionPricingOverlay: showSectionPricingOverlay,
@@ -201,7 +201,7 @@ class Pricing2Builder implements Builder<Pricing2, Pricing2Builder> {
         _prices?.build();
       } catch (e) {
         throw BuiltValueNestedFieldError(
-            r'Pricing2', _$failedField, e.toString());
+            r'Pricing', _$failedField, e.toString());
       }
       rethrow;
     }

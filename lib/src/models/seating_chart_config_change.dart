@@ -21,7 +21,7 @@ abstract class SeatingChartConfigChange implements Built<SeatingChartConfigChang
 
   List<String>? get filteredCategories;
 
-  Pricing2? get pricing;
+  Pricing? get pricing;
 
   List<String>? get channels;
 

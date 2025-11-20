@@ -68,7 +68,7 @@ class _$SeatingChartConfigSerializer
       result
         ..add('pricing')
         ..add(serializers.serialize(value,
-            specifiedType: const FullType(Pricing2)));
+            specifiedType: const FullType(Pricing)));
     }
     value = object.selectedObjects;
     if (value != null) {
@@ -346,7 +346,7 @@ class _$SeatingChartConfigSerializer
           break;
         case 'pricing':
           result.pricing.replace(serializers.deserialize(value,
-              specifiedType: const FullType(Pricing2))! as Pricing2);
+              specifiedType: const FullType(Pricing))! as Pricing);
           break;
         case 'selectedObjects':
           result.selectedObjects = serializers.deserialize(value,
@@ -522,7 +522,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   final Map<String, dynamic>? extraConfig;
   @override
-  final Pricing2? pricing;
+  final Pricing? pricing;
   @override
   final List<String>? selectedObjects;
   @override
@@ -986,9 +986,9 @@ class SeatingChartConfigBuilder
   set extraConfig(Map<String, dynamic>? extraConfig) =>
       _$this._extraConfig = extraConfig;
 
-  Pricing2Builder? _pricing;
-  Pricing2Builder get pricing => _$this._pricing ??= Pricing2Builder();
-  set pricing(Pricing2Builder? pricing) => _$this._pricing = pricing;
+  PricingBuilder? _pricing;
+  PricingBuilder get pricing => _$this._pricing ??= PricingBuilder();
+  set pricing(PricingBuilder? pricing) => _$this._pricing = pricing;
 
   List<String>? _selectedObjects;
   List<String>? get selectedObjects => _$this._selectedObjects;
