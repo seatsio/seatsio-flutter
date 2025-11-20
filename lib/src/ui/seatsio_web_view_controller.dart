@@ -53,7 +53,6 @@ class SeatsioWebViewController {
   }
 
   String _injectConfigInHtml(SeatingChartConfig chartConfig, String chartConfigJson) {
-    debugPrint("Injecting config: $chartConfigJson");
     return seatsioHTML
         .replaceFirst("%region%", chartConfig.region.name)
         .replaceFirst("%configAsJs%", chartConfigJson);
