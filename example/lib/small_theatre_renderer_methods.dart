@@ -38,20 +38,16 @@ class _SmallTheatreRendererMethodsState extends State<SmallTheatreRendererMethod
 
   final simplePricing = Pricing(
       prices: [
-        Price.forCategory(
-            category: 1,
-            price: 30,
-            originalPrice: 40,
-            fee: 2,
-            channels: [
-              PricingForChannel(channel: "b1a016ae-ab44-cd0b-c6f8-f94c96981db1", price: 2500),
-            ]
-
-        ),
         Price.forCategory(category: "2", price: 40, fee: 2),
         Price.forCategory(category: "3", price: 50, fee: 2),
-        Price.forObjects(objects: ["A-12", "A-10"], price: 20, fee: 1),
   ], allFeesIncluded: false, priceFormatter: (num price) => "${price.toStringAsFixed(2)} EUR");
+
+  final objectPricing = Pricing(
+    prices: [
+    Price.forCategory(category: "2", price: 40),
+    Price.forObjects(objects: ["A-12", "A-10"], price: 20),
+    ]
+  );
 
   @override
   void initState() {
