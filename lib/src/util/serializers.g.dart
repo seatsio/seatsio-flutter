@@ -32,7 +32,10 @@ Serializers _$serializers = (Serializers().toBuilder()
           () => ListBuilder<TicketType>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(TicketType)]),
-          () => ListBuilder<TicketType>()))
+          () => ListBuilder<TicketType>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(String)]),
+          () => ListBuilder<String>()))
     .build();
 
 // ignore_for_file: deprecated_member_use_from_same_package,type=lint

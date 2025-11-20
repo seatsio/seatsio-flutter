@@ -17,6 +17,7 @@ abstract class Price implements Built<Price, PriceBuilder> {
   double? get originalPrice;
   double? get fee;
   BuiltList<TicketType>? get ticketTypes;
+  BuiltList<String>? get objects;
 
   Price._();
 
@@ -36,8 +37,27 @@ abstract class Price implements Built<Price, PriceBuilder> {
         ..originalPrice = originalPrice
         ..fee = fee
         ..ticketTypes = ticketTypes != null
-          ? ListBuilder<TicketType>(ticketTypes)
-          : null;
+            ? ListBuilder<TicketType>(ticketTypes)
+            : null;
+    });
+  }
+
+  factory Price.forObjects({
+    required List<String> objects,
+    double? price,
+    double? originalPrice,
+    double? fee,
+    List<TicketType>? ticketTypes,
+  }) {
+    return Price((b) {
+      b
+        ..objects = ListBuilder<String>(objects)
+        ..price = price
+        ..originalPrice = originalPrice
+        ..fee = fee
+        ..ticketTypes = ticketTypes != null
+            ? ListBuilder<TicketType>(ticketTypes)
+            : null;
     });
   }
 

@@ -36,11 +36,12 @@ class _SmallTheatreRendererMethodsState extends State<SmallTheatreRendererMethod
       allFeesIncluded: false
   );
 
-  final simplePricing = Pricing2(// TODO bver Price.forObject
+  final simplePricing = Pricing2(
       prices: [
-    Price.forCategory(category: 1, price: 30, originalPrice: 40, fee: 2),
-    Price.forCategory(category: "2", price: 40, fee: 2),
-    Price.forCategory(category: "3", price: 50, fee: 2),
+        Price.forCategory(category: 1, price: 30, originalPrice: 40, fee: 2),
+        Price.forCategory(category: "2", price: 40, fee: 2),
+        Price.forCategory(category: "3", price: 50, fee: 2),
+        Price.forObjects(objects: ["A-12", "A-10"], price: 20, fee: 1),
   ], allFeesIncluded: false, priceFormatter: (num price) => "${price.toStringAsFixed(2)} EUR");
 
   @override
@@ -138,7 +139,7 @@ class _SmallTheatreRendererMethodsState extends State<SmallTheatreRendererMethod
               config: SeatingChartConfig((b) => b
                 ..workspaceKey = "publicDemoKey"
                 ..event = "smallTheatreEvent2"
-                ..pricing.replace(multiLevelPricing)),
+                ..pricing.replace(simplePricing)),
             ),
           ),
         ],
