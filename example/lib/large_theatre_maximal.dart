@@ -8,30 +8,27 @@ class LargeTheatreMaximal extends StatelessWidget {
     final priceFormatter = (num price) => "€${price.toStringAsFixed(2)}";
 
     final multiLevelPricing = Pricing2 (
+      prices: [
+
+        Price.forObjects(
+          objects: ["Arena-1-11", "Arena-1-12"],
+          ticketTypes: [
+            TicketType(ticketType: "adult", price: 30, originalPrice: 50),
+            TicketType(ticketType: "child", price: 20, label: "For children"),
+          ],
+        ),
+        Price.forCategory(
+          category: "Stalls",
+          ticketTypes: [
+            TicketType(ticketType: "adult", price: 40),
+            TicketType(ticketType: "child", price: 30, label: "For children"),
+            TicketType(ticketType: "65+", price: 25, label: "For senior citizens"),
+          ],
+        ),
+        Price.forCategory(category: "3", price: 50),
+      ],
       showSectionPricingOverlay: true
-          // TODO bver add more fields and prices with ticket types here
     );
-
-    /*[
-      Pricing(
-        objects: ["Arena-1-11", "Arena-1-12"],
-        ticketTypes: [
-          TicketType(ticketType: "adult", price: 30, originalPrice: 50),
-          TicketType(ticketType: "child", price: 20, label: "For children"),
-        ],
-      ),
-      Pricing(
-        category: "Stalls",
-        ticketTypes: [
-          TicketType(ticketType: "adult", price: 40),
-          TicketType(ticketType: "child", price: 30, label: "For children"),
-          TicketType(ticketType: "65+", price: 25, label: "For senior citizens"),
-        ],
-      ),
-      Pricing(category: "3", price: 50),
-    ];
-*/
-
 
     final simplePricing = Pricing2(
         prices: [
