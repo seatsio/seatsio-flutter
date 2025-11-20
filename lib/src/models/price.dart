@@ -10,7 +10,7 @@ part 'price.g.dart';
 
 abstract class Price implements Built<Price, PriceBuilder> {
 
-  // TODO bver add fee, channels
+  // TODO bver add channels
 
   CategoryKey? get category;
   double? get price;
