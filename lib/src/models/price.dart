@@ -1,6 +1,7 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
+import 'package:seatsio_flutter/src/models/pricing_for_channel.dart';
 import 'package:seatsio_flutter/src/models/ticket_type.dart';
 
 import '../util/serializers.dart';
@@ -18,6 +19,7 @@ abstract class Price implements Built<Price, PriceBuilder> {
   double? get fee;
   BuiltList<TicketType>? get ticketTypes;
   BuiltList<String>? get objects;
+  BuiltList<PricingForChannel>? get channels;
 
   Price._();
 
@@ -29,6 +31,7 @@ abstract class Price implements Built<Price, PriceBuilder> {
     double? originalPrice,
     double? fee,
     List<TicketType>? ticketTypes,
+    List<PricingForChannel>? channels
   }) {
     return Price((b) {
       b
@@ -38,7 +41,10 @@ abstract class Price implements Built<Price, PriceBuilder> {
         ..fee = fee
         ..ticketTypes = ticketTypes != null
             ? ListBuilder<TicketType>(ticketTypes)
-            : null;
+            : null
+        ..channels = channels != null
+          ? ListBuilder<PricingForChannel>(channels)
+          : null;
     });
   }
 

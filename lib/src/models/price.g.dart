@@ -63,6 +63,14 @@ class _$PriceSerializer implements StructuredSerializer<Price> {
             specifiedType:
                 const FullType(BuiltList, const [const FullType(String)])));
     }
+    value = object.channels;
+    if (value != null) {
+      result
+        ..add('channels')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(
+                BuiltList, const [const FullType(PricingForChannel)])));
+    }
     return result;
   }
 
@@ -105,6 +113,12 @@ class _$PriceSerializer implements StructuredSerializer<Price> {
                       BuiltList, const [const FullType(String)]))!
               as BuiltList<Object?>);
           break;
+        case 'channels':
+          result.channels.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType(PricingForChannel)]))!
+              as BuiltList<Object?>);
+          break;
       }
     }
 
@@ -125,6 +139,8 @@ class _$Price extends Price {
   final BuiltList<TicketType>? ticketTypes;
   @override
   final BuiltList<String>? objects;
+  @override
+  final BuiltList<PricingForChannel>? channels;
 
   factory _$Price([void Function(PriceBuilder)? updates]) =>
       (PriceBuilder()..update(updates))._build();
@@ -135,7 +151,8 @@ class _$Price extends Price {
       this.originalPrice,
       this.fee,
       this.ticketTypes,
-      this.objects})
+      this.objects,
+      this.channels})
       : super._();
   @override
   Price rebuild(void Function(PriceBuilder) updates) =>
@@ -153,7 +170,8 @@ class _$Price extends Price {
         originalPrice == other.originalPrice &&
         fee == other.fee &&
         ticketTypes == other.ticketTypes &&
-        objects == other.objects;
+        objects == other.objects &&
+        channels == other.channels;
   }
 
   @override
@@ -165,6 +183,7 @@ class _$Price extends Price {
     _$hash = $jc(_$hash, fee.hashCode);
     _$hash = $jc(_$hash, ticketTypes.hashCode);
     _$hash = $jc(_$hash, objects.hashCode);
+    _$hash = $jc(_$hash, channels.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -177,7 +196,8 @@ class _$Price extends Price {
           ..add('originalPrice', originalPrice)
           ..add('fee', fee)
           ..add('ticketTypes', ticketTypes)
-          ..add('objects', objects))
+          ..add('objects', objects)
+          ..add('channels', channels))
         .toString();
   }
 }
@@ -212,6 +232,12 @@ class PriceBuilder implements Builder<Price, PriceBuilder> {
   ListBuilder<String> get objects => _$this._objects ??= ListBuilder<String>();
   set objects(ListBuilder<String>? objects) => _$this._objects = objects;
 
+  ListBuilder<PricingForChannel>? _channels;
+  ListBuilder<PricingForChannel> get channels =>
+      _$this._channels ??= ListBuilder<PricingForChannel>();
+  set channels(ListBuilder<PricingForChannel>? channels) =>
+      _$this._channels = channels;
+
   PriceBuilder();
 
   PriceBuilder get _$this {
@@ -223,6 +249,7 @@ class PriceBuilder implements Builder<Price, PriceBuilder> {
       _fee = $v.fee;
       _ticketTypes = $v.ticketTypes?.toBuilder();
       _objects = $v.objects?.toBuilder();
+      _channels = $v.channels?.toBuilder();
       _$v = null;
     }
     return this;
@@ -252,6 +279,7 @@ class PriceBuilder implements Builder<Price, PriceBuilder> {
             fee: fee,
             ticketTypes: _ticketTypes?.build(),
             objects: _objects?.build(),
+            channels: _channels?.build(),
           );
     } catch (_) {
       late String _$failedField;
@@ -263,6 +291,8 @@ class PriceBuilder implements Builder<Price, PriceBuilder> {
         _ticketTypes?.build();
         _$failedField = 'objects';
         _objects?.build();
+        _$failedField = 'channels';
+        _channels?.build();
       } catch (e) {
         throw BuiltValueNestedFieldError(r'Price', _$failedField, e.toString());
       }
