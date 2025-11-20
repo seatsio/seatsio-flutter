@@ -12,7 +12,6 @@ part 'serializers.g.dart';
   Region,
   Pricing2,
   Price,
-  Pricing,
   TicketType,
   CategoryKey,
 ])
