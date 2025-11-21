@@ -1,40 +1,34 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
-import 'package:seatsio_flutter/src/models/pricing_for_channel.dart';
+import 'package:seatsio_flutter/src/models/price.dart';
 
 import '../util/serializers.dart';
-import 'category_key.dart';
-import 'ticket_type.dart';
 
 part 'pricing.g.dart';
 
-abstract class Pricing
-    implements Built<Pricing, PricingBuilder> {
-  CategoryKey? get category;
-  BuiltList<String>? get objects;
-  double? get price;
-  double? get originalPrice;
-  BuiltList<TicketType>? get ticketTypes;
-  BuiltList<PricingForChannel>? get channels;
+abstract class Pricing implements Built<Pricing, PricingBuilder> {
+
+  BuiltList<Price>? get prices;
+  bool? get allFeesIncluded;
+  bool? get showSectionPricingOverlay;
+
+  @BuiltValueField(serialize: false)
+  Function(num price)? get priceFormatter;
 
   Pricing._();
 
   factory Pricing({
-    dynamic category,
-    List<String>? objects,
-    double? price,
-    double? originalPrice,
-    List<TicketType>? ticketTypes,
-    List<PricingForChannel>? channels,
+    List<Price>? prices,
+    bool? allFeesIncluded,
+    String Function(num price)? priceFormatter,
+    bool? showSectionPricingOverlay
   }) {
     return _$Pricing._(
-      category: category != null ? CategoryKey.from(category) : null,
-      objects: objects != null ? BuiltList(objects) : null,
-      price: price,
-      originalPrice: originalPrice,
-      ticketTypes: ticketTypes != null ? BuiltList(ticketTypes) : null,
-      channels: channels != null ? BuiltList(channels) : null,
+      prices: prices != null ? BuiltList<Price>(prices) : null,
+      allFeesIncluded: allFeesIncluded,
+      priceFormatter: priceFormatter,
+      showSectionPricingOverlay: showSectionPricingOverlay
     );
   }
 
@@ -42,7 +36,10 @@ abstract class Pricing
       _$pricingSerializer;
 
   Map<String, dynamic> toJson() {
-    return serializers.serializeWith(Pricing.serializer, this)
-        as Map<String, dynamic>;
+    var serialized = serializers.serializeWith(Pricing.serializer, this) as Map<String, dynamic>;
+    if (priceFormatter != null) {
+      serialized['hasPriceFormatter'] = true;
+    }
+    return serialized;
   }
 }

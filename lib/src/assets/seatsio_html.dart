@@ -25,7 +25,27 @@ final String seatsioHTML = """
         const resolvePromise = (promiseId, data) => {
             promises[promiseId](data)
         }
-        let chart = new seatsio.SeatingChart(%configAsJs%).render()
+        
+        const config = %configAsJs%
+        
+        if (config.pricing && config.pricing.hasPriceFormatter) {
+            config.pricing.priceFormatter = (price) => { 
+              promiseCounter++;
+              window.callbackChannel.postMessage(JSON.stringify({
+                type: "priceFormatterRequested",
+                data: {
+                  promiseId: promiseCounter,
+                  price: price
+                }
+              }));
+              return new Promise((resolve) => {
+                promises[promiseCounter] = resolve;
+              });
+            } 
+            delete config.pricing.hasPriceFormatter;
+        }
+        
+        let chart = new seatsio.SeatingChart(config).render()
       </script>
   </body>
 </html>

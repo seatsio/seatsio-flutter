@@ -7,6 +7,7 @@ abstract class TicketType implements Built<TicketType, TicketTypeBuilder> {
   String get ticketType;
   double get price;
   double? get originalPrice;
+  double? get fee;
   String? get label;
   String? get description;
 
@@ -16,6 +17,7 @@ abstract class TicketType implements Built<TicketType, TicketTypeBuilder> {
     required String ticketType,
     required double price,
     double? originalPrice,
+    double? fee,
     String? label,
     String? description,
   }) {
@@ -23,6 +25,7 @@ abstract class TicketType implements Built<TicketType, TicketTypeBuilder> {
       ticketType: ticketType,
       price: price,
       originalPrice: originalPrice,
+      fee: fee,
       label: label,
       description: description,
     );

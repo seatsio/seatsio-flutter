@@ -6,7 +6,7 @@ part of 'category_key.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializer<CategoryKey> _$categoryKeySerializer = new _$CategoryKeySerializer();
+Serializer<CategoryKey> _$categoryKeySerializer = _$CategoryKeySerializer();
 
 class _$CategoryKeySerializer implements StructuredSerializer<CategoryKey> {
   @override
@@ -29,7 +29,7 @@ class _$CategoryKeySerializer implements StructuredSerializer<CategoryKey> {
   @override
   CategoryKey deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new CategoryKeyBuilder();
+    final result = CategoryKeyBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -53,18 +53,15 @@ class _$CategoryKey extends CategoryKey {
   final String value;
 
   factory _$CategoryKey([void Function(CategoryKeyBuilder)? updates]) =>
-      (new CategoryKeyBuilder()..update(updates))._build();
+      (CategoryKeyBuilder()..update(updates))._build();
 
-  _$CategoryKey._({required this.value}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(value, r'CategoryKey', 'value');
-  }
-
+  _$CategoryKey._({required this.value}) : super._();
   @override
   CategoryKey rebuild(void Function(CategoryKeyBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  CategoryKeyBuilder toBuilder() => new CategoryKeyBuilder()..replace(this);
+  CategoryKeyBuilder toBuilder() => CategoryKeyBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -107,7 +104,6 @@ class CategoryKeyBuilder implements Builder<CategoryKey, CategoryKeyBuilder> {
 
   @override
   void replace(CategoryKey other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$CategoryKey;
   }
 
@@ -121,7 +117,7 @@ class CategoryKeyBuilder implements Builder<CategoryKey, CategoryKeyBuilder> {
 
   _$CategoryKey _build() {
     final _$result = _$v ??
-        new _$CategoryKey._(
+        _$CategoryKey._(
           value: BuiltValueNullFieldError.checkNotNull(
               value, r'CategoryKey', 'value'),
         );

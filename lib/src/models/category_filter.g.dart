@@ -17,19 +17,17 @@ class _$CategoryFilter extends CategoryFilter {
   final CategoryFilterSortBy? sortBy;
 
   factory _$CategoryFilter([void Function(CategoryFilterBuilder)? updates]) =>
-      (new CategoryFilterBuilder()..update(updates))._build();
+      (CategoryFilterBuilder()..update(updates))._build();
 
   _$CategoryFilter._(
       {this.enabled, this.multiSelect, this.zoomOnSelect, this.sortBy})
       : super._();
-
   @override
   CategoryFilter rebuild(void Function(CategoryFilterBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  CategoryFilterBuilder toBuilder() =>
-      new CategoryFilterBuilder()..replace(this);
+  CategoryFilterBuilder toBuilder() => CategoryFilterBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -101,7 +99,6 @@ class CategoryFilterBuilder
 
   @override
   void replace(CategoryFilter other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$CategoryFilter;
   }
 
@@ -115,7 +112,7 @@ class CategoryFilterBuilder
 
   _$CategoryFilter _build() {
     final _$result = _$v ??
-        new _$CategoryFilter._(
+        _$CategoryFilter._(
           enabled: enabled,
           multiSelect: multiSelect,
           zoomOnSelect: zoomOnSelect,

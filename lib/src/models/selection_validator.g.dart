@@ -15,17 +15,16 @@ class _$NoOrphanSeats extends NoOrphanSeats {
   final bool? highlight;
 
   factory _$NoOrphanSeats([void Function(NoOrphanSeatsBuilder)? updates]) =>
-      (new NoOrphanSeatsBuilder()..update(updates))._build();
+      (NoOrphanSeatsBuilder()..update(updates))._build();
 
   _$NoOrphanSeats._({this.mode, this.ignoreCategories, this.highlight})
       : super._();
-
   @override
   NoOrphanSeats rebuild(void Function(NoOrphanSeatsBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  NoOrphanSeatsBuilder toBuilder() => new NoOrphanSeatsBuilder()..replace(this);
+  NoOrphanSeatsBuilder toBuilder() => NoOrphanSeatsBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -88,7 +87,6 @@ class NoOrphanSeatsBuilder
 
   @override
   void replace(NoOrphanSeats other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$NoOrphanSeats;
   }
 
@@ -102,7 +100,7 @@ class NoOrphanSeatsBuilder
 
   _$NoOrphanSeats _build() {
     final _$result = _$v ??
-        new _$NoOrphanSeats._(
+        _$NoOrphanSeats._(
           mode: mode,
           ignoreCategories: ignoreCategories,
           highlight: highlight,
@@ -115,17 +113,16 @@ class NoOrphanSeatsBuilder
 class _$ConsecutiveSeats extends ConsecutiveSeats {
   factory _$ConsecutiveSeats(
           [void Function(ConsecutiveSeatsBuilder)? updates]) =>
-      (new ConsecutiveSeatsBuilder()..update(updates))._build();
+      (ConsecutiveSeatsBuilder()..update(updates))._build();
 
   _$ConsecutiveSeats._() : super._();
-
   @override
   ConsecutiveSeats rebuild(void Function(ConsecutiveSeatsBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
   ConsecutiveSeatsBuilder toBuilder() =>
-      new ConsecutiveSeatsBuilder()..replace(this);
+      ConsecutiveSeatsBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -152,7 +149,6 @@ class ConsecutiveSeatsBuilder
 
   @override
   void replace(ConsecutiveSeats other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ConsecutiveSeats;
   }
 
@@ -165,7 +161,7 @@ class ConsecutiveSeatsBuilder
   ConsecutiveSeats build() => _build();
 
   _$ConsecutiveSeats _build() {
-    final _$result = _$v ?? new _$ConsecutiveSeats._();
+    final _$result = _$v ?? _$ConsecutiveSeats._();
     replace(_$result);
     return _$result;
   }
@@ -177,13 +173,9 @@ class _$MinimumSelectedPlaces extends MinimumSelectedPlaces {
 
   factory _$MinimumSelectedPlaces(
           [void Function(MinimumSelectedPlacesBuilder)? updates]) =>
-      (new MinimumSelectedPlacesBuilder()..update(updates))._build();
+      (MinimumSelectedPlacesBuilder()..update(updates))._build();
 
-  _$MinimumSelectedPlaces._({required this.minimum}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(
-        minimum, r'MinimumSelectedPlaces', 'minimum');
-  }
-
+  _$MinimumSelectedPlaces._({required this.minimum}) : super._();
   @override
   MinimumSelectedPlaces rebuild(
           void Function(MinimumSelectedPlacesBuilder) updates) =>
@@ -191,7 +183,7 @@ class _$MinimumSelectedPlaces extends MinimumSelectedPlaces {
 
   @override
   MinimumSelectedPlacesBuilder toBuilder() =>
-      new MinimumSelectedPlacesBuilder()..replace(this);
+      MinimumSelectedPlacesBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -236,7 +228,6 @@ class MinimumSelectedPlacesBuilder
 
   @override
   void replace(MinimumSelectedPlaces other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$MinimumSelectedPlaces;
   }
 
@@ -250,7 +241,7 @@ class MinimumSelectedPlacesBuilder
 
   _$MinimumSelectedPlaces _build() {
     final _$result = _$v ??
-        new _$MinimumSelectedPlaces._(
+        _$MinimumSelectedPlaces._(
           minimum: BuiltValueNullFieldError.checkNotNull(
               minimum, r'MinimumSelectedPlaces', 'minimum'),
         );

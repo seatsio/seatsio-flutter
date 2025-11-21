@@ -19,7 +19,7 @@ class _$SeatsioColors extends SeatsioColors {
   final String? errorColor;
 
   factory _$SeatsioColors([void Function(SeatsioColorsBuilder)? updates]) =>
-      (new SeatsioColorsBuilder()..update(updates))._build();
+      (SeatsioColorsBuilder()..update(updates))._build();
 
   _$SeatsioColors._(
       {this.colorSelected,
@@ -28,13 +28,12 @@ class _$SeatsioColors extends SeatsioColors {
       this.selectedObjectColor,
       this.errorColor})
       : super._();
-
   @override
   SeatsioColors rebuild(void Function(SeatsioColorsBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  SeatsioColorsBuilder toBuilder() => new SeatsioColorsBuilder()..replace(this);
+  SeatsioColorsBuilder toBuilder() => SeatsioColorsBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -117,7 +116,6 @@ class SeatsioColorsBuilder
 
   @override
   void replace(SeatsioColors other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$SeatsioColors;
   }
 
@@ -131,7 +129,7 @@ class SeatsioColorsBuilder
 
   _$SeatsioColors _build() {
     final _$result = _$v ??
-        new _$SeatsioColors._(
+        _$SeatsioColors._(
           colorSelected: colorSelected,
           colorTitle: colorTitle,
           availableObjectColor: availableObjectColor,

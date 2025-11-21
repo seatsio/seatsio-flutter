@@ -17,7 +17,7 @@ class _$LegendConfig extends LegendConfig {
   final bool? hideCategoryName;
 
   factory _$LegendConfig([void Function(LegendConfigBuilder)? updates]) =>
-      (new LegendConfigBuilder()..update(updates))._build();
+      (LegendConfigBuilder()..update(updates))._build();
 
   _$LegendConfig._(
       {this.hideNonSelectableCategories,
@@ -25,13 +25,12 @@ class _$LegendConfig extends LegendConfig {
       this.hidePricing,
       this.hideCategoryName})
       : super._();
-
   @override
   LegendConfig rebuild(void Function(LegendConfigBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  LegendConfigBuilder toBuilder() => new LegendConfigBuilder()..replace(this);
+  LegendConfigBuilder toBuilder() => LegendConfigBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -106,7 +105,6 @@ class LegendConfigBuilder
 
   @override
   void replace(LegendConfig other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$LegendConfig;
   }
 
@@ -120,7 +118,7 @@ class LegendConfigBuilder
 
   _$LegendConfig _build() {
     final _$result = _$v ??
-        new _$LegendConfig._(
+        _$LegendConfig._(
           hideNonSelectableCategories: hideNonSelectableCategories,
           hideUnavailableLegendItems: hideUnavailableLegendItems,
           hidePricing: hidePricing,
