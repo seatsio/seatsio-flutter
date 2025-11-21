@@ -72,7 +72,7 @@ class LargeTheatreMaximal extends StatelessWidget {
         print("filtered categories changed: ${categories.map((c) => c.label)}");
 
     return Scaffold(
-        appBar: AppBar(title: Text("Small Theatre - Minimal Config")),
+        appBar: AppBar(title: Text("Large Theatre - plenty of config")),
         body: SeatsioSeatingChart(
           config: SeatingChartConfig((b) =>
           b
