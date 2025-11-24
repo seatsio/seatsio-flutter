@@ -6,7 +6,7 @@ part of 'ticket_type.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializer<TicketType> _$ticketTypeSerializer = new _$TicketTypeSerializer();
+Serializer<TicketType> _$ticketTypeSerializer = _$TicketTypeSerializer();
 
 class _$TicketTypeSerializer implements StructuredSerializer<TicketType> {
   @override
@@ -33,6 +33,13 @@ class _$TicketTypeSerializer implements StructuredSerializer<TicketType> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(double)));
     }
+    value = object.fee;
+    if (value != null) {
+      result
+        ..add('fee')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(double)));
+    }
     value = object.label;
     if (value != null) {
       result
@@ -53,7 +60,7 @@ class _$TicketTypeSerializer implements StructuredSerializer<TicketType> {
   @override
   TicketType deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new TicketTypeBuilder();
+    final result = TicketTypeBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -71,6 +78,10 @@ class _$TicketTypeSerializer implements StructuredSerializer<TicketType> {
           break;
         case 'originalPrice':
           result.originalPrice = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double?;
+          break;
+        case 'fee':
+          result.fee = serializers.deserialize(value,
               specifiedType: const FullType(double)) as double?;
           break;
         case 'label':
@@ -96,31 +107,29 @@ class _$TicketType extends TicketType {
   @override
   final double? originalPrice;
   @override
+  final double? fee;
+  @override
   final String? label;
   @override
   final String? description;
 
   factory _$TicketType([void Function(TicketTypeBuilder)? updates]) =>
-      (new TicketTypeBuilder()..update(updates))._build();
+      (TicketTypeBuilder()..update(updates))._build();
 
   _$TicketType._(
       {required this.ticketType,
       required this.price,
       this.originalPrice,
+      this.fee,
       this.label,
       this.description})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(
-        ticketType, r'TicketType', 'ticketType');
-    BuiltValueNullFieldError.checkNotNull(price, r'TicketType', 'price');
-  }
-
+      : super._();
   @override
   TicketType rebuild(void Function(TicketTypeBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  TicketTypeBuilder toBuilder() => new TicketTypeBuilder()..replace(this);
+  TicketTypeBuilder toBuilder() => TicketTypeBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -129,6 +138,7 @@ class _$TicketType extends TicketType {
         ticketType == other.ticketType &&
         price == other.price &&
         originalPrice == other.originalPrice &&
+        fee == other.fee &&
         label == other.label &&
         description == other.description;
   }
@@ -139,6 +149,7 @@ class _$TicketType extends TicketType {
     _$hash = $jc(_$hash, ticketType.hashCode);
     _$hash = $jc(_$hash, price.hashCode);
     _$hash = $jc(_$hash, originalPrice.hashCode);
+    _$hash = $jc(_$hash, fee.hashCode);
     _$hash = $jc(_$hash, label.hashCode);
     _$hash = $jc(_$hash, description.hashCode);
     _$hash = $jf(_$hash);
@@ -151,6 +162,7 @@ class _$TicketType extends TicketType {
           ..add('ticketType', ticketType)
           ..add('price', price)
           ..add('originalPrice', originalPrice)
+          ..add('fee', fee)
           ..add('label', label)
           ..add('description', description))
         .toString();
@@ -173,6 +185,10 @@ class TicketTypeBuilder implements Builder<TicketType, TicketTypeBuilder> {
   set originalPrice(double? originalPrice) =>
       _$this._originalPrice = originalPrice;
 
+  double? _fee;
+  double? get fee => _$this._fee;
+  set fee(double? fee) => _$this._fee = fee;
+
   String? _label;
   String? get label => _$this._label;
   set label(String? label) => _$this._label = label;
@@ -189,6 +205,7 @@ class TicketTypeBuilder implements Builder<TicketType, TicketTypeBuilder> {
       _ticketType = $v.ticketType;
       _price = $v.price;
       _originalPrice = $v.originalPrice;
+      _fee = $v.fee;
       _label = $v.label;
       _description = $v.description;
       _$v = null;
@@ -198,7 +215,6 @@ class TicketTypeBuilder implements Builder<TicketType, TicketTypeBuilder> {
 
   @override
   void replace(TicketType other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$TicketType;
   }
 
@@ -212,12 +228,13 @@ class TicketTypeBuilder implements Builder<TicketType, TicketTypeBuilder> {
 
   _$TicketType _build() {
     final _$result = _$v ??
-        new _$TicketType._(
+        _$TicketType._(
           ticketType: BuiltValueNullFieldError.checkNotNull(
               ticketType, r'TicketType', 'ticketType'),
           price: BuiltValueNullFieldError.checkNotNull(
               price, r'TicketType', 'price'),
           originalPrice: originalPrice,
+          fee: fee,
           label: label,
           description: description,
         );

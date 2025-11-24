@@ -19,12 +19,7 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
   Map<String, dynamic>? get extraConfig;
 
   // Pricing
-  List<Pricing>? get pricing;
-
-  @BuiltValueField(serialize: false)
-  Function(num price)? get priceFormatter;
-
-  bool? get showSectionPricingOverlay;
+  Pricing? get pricing;
 
   // Selection
   List<String>? get selectedObjects;
@@ -220,8 +215,7 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
       if (mode != null) "mode": mode,
       if (extraConfig != null) "extraConfig": extraConfig,
       // pricing
-      if (pricing != null) "pricing": pricing!.map((p) => p.toJson()).toList(),
-      if (showSectionPricingOverlay != null) "showSectionPricingOverlay": showSectionPricingOverlay,
+      if (pricing != null) "pricing": pricing!.toJson(),
       // selection
       if (selectedObjects != null) "selectedObjects": selectedObjects,
       if (selectableObjects != null) "selectableObjects": selectableObjects,

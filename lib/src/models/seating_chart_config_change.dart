@@ -1,7 +1,6 @@
 import 'package:built_value/built_value.dart';
 
 import '../../seatsio_flutter.dart';
-
 part 'seating_chart_config_change.g.dart';
 
 abstract class SeatingChartConfigChange implements Built<SeatingChartConfigChange, SeatingChartConfigChangeBuilder> {
@@ -22,7 +21,7 @@ abstract class SeatingChartConfigChange implements Built<SeatingChartConfigChang
 
   List<String>? get filteredCategories;
 
-  List<Pricing>? get pricing;
+  Pricing? get pricing;
 
   List<String>? get channels;
 
@@ -43,7 +42,7 @@ abstract class SeatingChartConfigChange implements Built<SeatingChartConfigChang
       if (availableCategories != null) "availableCategories": availableCategories,
       if (unavailableCategories != null) "unavailableCategories": unavailableCategories,
       if (filteredCategories != null) "filteredCategories": filteredCategories,
-      if (pricing != null) "pricing": pricing!.map((p) => p.toJson()).toList(),
+      if (pricing != null) "pricing": pricing!.toJson(),
       if (channels != null) "channels": channels,
       if (extraConfig != null) "extraConfig": extraConfig,
     };

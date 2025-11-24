@@ -11,10 +11,15 @@ part 'serializers.g.dart';
   SeatingChartConfig,
   Region,
   Pricing,
+  Price,
   TicketType,
   CategoryKey,
 ])
 final Serializers serializers = (_$serializers.toBuilder()
       ..add(CategoryKeySerializer())
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(Price)]),
+        () => ListBuilder<Price>(),
+      )
       ..addPlugin(StandardJsonPlugin()))
     .build();

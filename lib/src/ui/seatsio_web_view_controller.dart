@@ -53,7 +53,9 @@ class SeatsioWebViewController {
   }
 
   String _injectConfigInHtml(SeatingChartConfig chartConfig, String chartConfigJson) {
-    return seatsioHTML.replaceFirst("%region%", chartConfig.region.name).replaceFirst("%configAsJs%", chartConfigJson);
+    return seatsioHTML
+        .replaceFirst("%region%", chartConfig.region.name)
+        .replaceFirst("%configAsJs%", chartConfigJson);
   }
 
   Future<void> evaluateJavascript(String javascriptString) => _webViewController.runJavaScript(javascriptString);

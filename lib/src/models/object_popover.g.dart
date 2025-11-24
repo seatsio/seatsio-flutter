@@ -25,7 +25,7 @@ class _$ObjectPopover extends ObjectPopover {
   final bool? confirmTicketTypeSelection;
 
   factory _$ObjectPopover([void Function(ObjectPopoverBuilder)? updates]) =>
-      (new ObjectPopoverBuilder()..update(updates))._build();
+      (ObjectPopoverBuilder()..update(updates))._build();
 
   _$ObjectPopover._(
       {this.showAvailability,
@@ -37,13 +37,12 @@ class _$ObjectPopover extends ObjectPopover {
       this.confirmSelection,
       this.confirmTicketTypeSelection})
       : super._();
-
   @override
   ObjectPopover rebuild(void Function(ObjectPopoverBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  ObjectPopoverBuilder toBuilder() => new ObjectPopoverBuilder()..replace(this);
+  ObjectPopoverBuilder toBuilder() => ObjectPopoverBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -152,7 +151,6 @@ class ObjectPopoverBuilder
 
   @override
   void replace(ObjectPopover other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ObjectPopover;
   }
 
@@ -166,7 +164,7 @@ class ObjectPopoverBuilder
 
   _$ObjectPopover _build() {
     final _$result = _$v ??
-        new _$ObjectPopover._(
+        _$ObjectPopover._(
           showAvailability: showAvailability,
           showCategory: showCategory,
           showLabel: showLabel,

@@ -69,8 +69,8 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
         try {
           Map<String, dynamic> parsedMessage = jsonDecode(message.message);
           var messageType = parsedMessage["type"];
-          if (messageType == "priceFormatterRequested" && this.widget._config.priceFormatter != null) {
-            var formattedPrice = this.widget._config.priceFormatter?.call(parsedMessage["data"]["price"]);
+          if (messageType == "priceFormatterRequested" && this.widget._config.pricing?.priceFormatter != null) {
+            var formattedPrice = this.widget._config.pricing?.priceFormatter?.call(parsedMessage["data"]["price"]);
             this
                 ._seatsioController
                 .evaluateJavascript('resolvePromise(${parsedMessage["data"]["promiseId"]}, "${formattedPrice}")');

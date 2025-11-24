@@ -6,25 +6,29 @@ part of 'serializers.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializers _$serializers = (new Serializers().toBuilder()
+Serializers _$serializers = (Serializers().toBuilder()
       ..add(CategoryKey.serializer)
+      ..add(Price.serializer)
       ..add(Pricing.serializer)
       ..add(PricingForChannel.serializer)
       ..add(Region.serializer)
       ..add(SeatingChartConfig.serializer)
       ..add(TicketType.serializer)
       ..addBuilderFactory(
-          const FullType(BuiltList, const [const FullType(String)]),
-          () => new ListBuilder<String>())
+          const FullType(BuiltList, const [const FullType(Price)]),
+          () => ListBuilder<Price>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(TicketType)]),
-          () => new ListBuilder<TicketType>())
+          () => ListBuilder<TicketType>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(TicketType)]),
+          () => ListBuilder<TicketType>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(String)]),
+          () => ListBuilder<String>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(PricingForChannel)]),
-          () => new ListBuilder<PricingForChannel>())
-      ..addBuilderFactory(
-          const FullType(BuiltList, const [const FullType(TicketType)]),
-          () => new ListBuilder<TicketType>()))
+          () => ListBuilder<PricingForChannel>()))
     .build();
 
 // ignore_for_file: deprecated_member_use_from_same_package,type=lint

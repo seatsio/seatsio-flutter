@@ -13,30 +13,41 @@ class _SmallTheatreRendererMethodsState extends State<SmallTheatreRendererMethod
 
   final Map<String, Future<void>? Function()> _actions = {};
 
-  final multiLevelPricing = [
-    Pricing(
-      category: 1,
-      ticketTypes: [
-        TicketType(ticketType: "adult", price: 30, originalPrice: 50),
-        TicketType(ticketType: "child", price: 20, label: "For children"),
+  final multiLevelPricing = Pricing(
+      prices: [
+        Price.forCategory(
+          category: 1,
+          fee: 10,
+          ticketTypes: [
+            TicketType(ticketType: "adult", price: 30, originalPrice: 50, fee: 1),
+            TicketType(ticketType: "child", price: 20, label: "For children", fee: 1),
+          ],
+        ),
+        Price.forCategory(category: 2,
+            fee: 20,
+            ticketTypes: [
+          TicketType(ticketType: "adult", price: 40, fee: 2),
+          TicketType(ticketType: "child", price: 30, fee: 2, label: "For children"),
+          TicketType(ticketType: "65+", price: 25, fee: 2, label: "For senior citizens"),
+        ]),
+        Price.forCategory(category: "3", price: 50, fee: 3),
       ],
-    ),
-    Pricing(
-      category: 2,
-      ticketTypes: [
-        TicketType(ticketType: "adult", price: 40),
-        TicketType(ticketType: "child", price: 30, label: "For children"),
-        TicketType(ticketType: "65+", price: 25, label: "For senior citizens"),
-      ],
-    ),
-    Pricing(category: "3", price: 50),
-  ];
+      priceFormatter: (num price) => "${price.toStringAsFixed(2)} EUR",
+      allFeesIncluded: false
+  );
 
-  final simplePricing = [
-    Pricing(category: 1, price: 30, originalPrice: 40),
-    Pricing(category: "2", price: 40),
-    Pricing(category: "3", price: 50),
-  ];
+  final simplePricing = Pricing(
+      prices: [
+        Price.forCategory(category: "2", price: 40, fee: 2),
+        Price.forCategory(category: "3", price: 50, fee: 2),
+  ], allFeesIncluded: false, priceFormatter: (num price) => "${price.toStringAsFixed(2)} EUR");
+
+  final objectPricing = Pricing(
+    prices: [
+    Price.forCategory(category: "2", price: 40),
+    Price.forObjects(objects: ["A-12", "A-10"], price: 20),
+    ]
+  );
 
   @override
   void initState() {
@@ -54,33 +65,33 @@ class _SmallTheatreRendererMethodsState extends State<SmallTheatreRendererMethod
       'selectCategories': () => _chart.currentState?.selectCategories(["1"]),
       'deselectCategories': () => _chart.currentState?.deselectCategories(["1"]),
       'changeConfig': () => _chart.currentState?.changeConfig(SeatingChartConfigChange((b) => b
-          // ..objectColor = "function(object, defaultColor, extraConfig) { return object.label.startsWith('A') ? 'green' : 'blue'; }"
-          // ..objectLabel = "function(object, defaultLabel, extraConfig) { return object.label + ' (' + object.status + ')'; }")),
-          // ..numberOfPlacesToSelect = 2
-          // ..maxSelectedObjects = MaxSelectedObjects.total(4)
-          // ..availableCategories = ["Stalls"]
-          // ..unavailableCategories = ["Stalls"]
-          // ..filteredCategories = ["Stalls"]
-          ..pricing = simplePricing
+            // ..objectColor = "function(object, defaultColor, extraConfig) { return object.label.startsWith('A') ? 'green' : 'blue'; }"
+            // ..objectLabel = "function(object, defaultLabel, extraConfig) { return object.label + ' (' + object.status + ')'; }")),
+            // ..numberOfPlacesToSelect = 2
+            // ..maxSelectedObjects = MaxSelectedObjects.total(4)
+            // ..availableCategories = ["Stalls"]
+            // ..unavailableCategories = ["Stalls"]
+            // ..filteredCategories = ["Stalls"]
+            ..pricing.replace(simplePricing)
           // ..channels = ["channel1", "channel2"]
           //..extraConfig = { "foo": "green" },
           )),
       'findObject': () => findAndPrintObject("A-12"),
       'listCategories': () => _chart.currentState?.listCategories().then((categories) {
-        print("Categories:");
-        for (var category in categories) {
-          print("Category: ${category.key}");
-        }
-      }),
+            print("Categories:");
+            for (var category in categories) {
+              print("Category: ${category.key}");
+            }
+          }),
       'zoomToObjects': () => _chart.currentState?.zoomToObjects(["A-12", "A-10"]),
       'zoomToSelectedObjects': () => _chart.currentState?.zoomToSelectedObjects(),
       'zoomToFilteredCategories': () => _chart.currentState?.zoomToFilteredCategories(),
       'zoomToSection': () => _chart.currentState?.zoomToSection("West Choir").then((_) {
-        print("Zoomed to section.");
-      }),
+            print("Zoomed to section.");
+          }),
       'getReportBySelectability': () => _chart.currentState?.getReportBySelectability().then((report) {
-          print("Report: ${report}");
-      }),
+            print("Report: ${report}");
+          }),
       'setSpotlightObjects': () => _chart.currentState?.setSpotlightObjects(["A-12", "A-10"]),
       'setSpotlightOnSelection': () => _chart.currentState?.setSpotlightOnSelection(),
       'clearSpotlightObjects': () => _chart.currentState?.clearSpotlightObjects(),
@@ -132,8 +143,9 @@ class _SmallTheatreRendererMethodsState extends State<SmallTheatreRendererMethod
               key: _chart,
               config: SeatingChartConfig((b) => b
                 ..workspaceKey = "publicDemoKey"
-                ..event = "smallTheatreEvent2"
-                ..pricing = multiLevelPricing),
+                ..event = "smallTheatreWithGAEvent"
+                ..channels = ["b1a016ae-ab44-cd0b-c6f8-f94c96981db1"]
+                ..pricing.replace(simplePricing)),
             ),
           ),
         ],
@@ -165,6 +177,5 @@ class _SmallTheatreRendererMethodsState extends State<SmallTheatreRendererMethod
     } catch (e) {
       print("Error fetching object: $e");
     }
-
   }
 }
