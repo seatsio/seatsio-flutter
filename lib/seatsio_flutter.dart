@@ -22,3 +22,4 @@ export 'src/models/seatsio_category.dart';
 export 'src/models/seatsio_object.dart';
 export 'src/models/seating_chart_config_change.dart';
 export 'src/models/floor.dart';
+export 'src/models/wheelchair_space_type.dart';

@@ -10,6 +10,7 @@ class SeatsioObject {
   final bool? liftUpArmrests;
   final bool? companionSeat;
   final bool? semiAmbulatorySeat;
+  final WheelchairSpaceType? wheelchairSpaceType;
   final SeatsioCategory? category;
   final bool? forSale;
   final bool? selectable;
@@ -50,6 +51,7 @@ class SeatsioObject {
       this.liftUpArmrests,
       this.companionSeat,
       this.semiAmbulatorySeat,
+      this.wheelchairSpaceType,
       this.category,
       this.forSale,
       this.selectable,
@@ -87,6 +89,7 @@ class SeatsioObject {
         liftUpArmrests: json['liftUpArmrests'],
         companionSeat: json['companionSeat'],
         semiAmbulatorySeat: json['semiAmbulatorySeat'],
+        wheelchairSpaceType: WheelchairSpaceType.fromJson(json['wheelchairSpaceType']),
         category: json['category'] != null
             ? SeatsioCategory.fromJson(json['category'])
             : null,
