@@ -19,6 +19,7 @@ class SeatsioWebView extends StatefulWidget {
   final void Function(JavaScriptMessage) onFindObjectCompleted;
   final void Function(JavaScriptMessage) onListCategoriesCompleted;
   final void Function(JavaScriptMessage) onGetReportBySelectabilityCompleted;
+  final void Function(JavaScriptMessage) onHoldBestAvailableCompleted;
 
   const SeatsioWebView({
     super.key,
@@ -29,7 +30,8 @@ class SeatsioWebView extends StatefulWidget {
     required this.onListSelectedObjectsCompleted,
     required this.onFindObjectCompleted,
     required this.onListCategoriesCompleted,
-    required this.onGetReportBySelectabilityCompleted
+    required this.onGetReportBySelectabilityCompleted,
+    required this.onHoldBestAvailableCompleted
   })  : this._onWebViewCreated = onWebViewCreated,
         this._config = config,
         this._gestureRecognizers = gestureRecognizers;
@@ -106,6 +108,8 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
       ..addJavaScriptChannel('onSelectionInvalidJsChannel', onMessageReceived: onSelectionInvalid)
       ..addJavaScriptChannel('onFilteredCategoriesChangedJsChannel', onMessageReceived: onFilteredCategoriesChanged)
       ..addJavaScriptChannel('onFloorChangedJsChannel', onMessageReceived: onFloorChanged)
+      ..addJavaScriptChannel('onBestAvailableHeldJsChannel', onMessageReceived: _onBestAvailableHeld)
+      ..addJavaScriptChannel('onBestAvailableHoldFailedJsChannel', onMessageReceived: _onBestAvailableHoldFailed)
       // renderer methods
       ..addJavaScriptChannel("resetViewJsChannel", onMessageReceived: widget.onVoidPromiseCompleted)
       ..addJavaScriptChannel("startNewSessionJsChannel", onMessageReceived: widget.onVoidPromiseCompleted)
@@ -129,6 +133,7 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
       ..addJavaScriptChannel("zoomToSectionJsChannel", onMessageReceived: widget.onVoidPromiseCompleted)
       ..addJavaScriptChannel("goToAllFloorsViewJsChannel", onMessageReceived: widget.onVoidPromiseCompleted)
       ..addJavaScriptChannel("goToFloorJsChannel", onMessageReceived: widget.onVoidPromiseCompleted)
+      ..addJavaScriptChannel("holdBestAvailableJsChannel", onMessageReceived: widget.onHoldBestAvailableCompleted)
       ..setBackgroundColor(Color.from(alpha: 0, red: 255, green: 255, blue: 255));
 
     _seatsioController = SeatsioWebViewController(webViewController: _webViewController);
@@ -285,6 +290,22 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
       final List<SeatsioCategory> categories =
           (data["categories"] as List<dynamic>).map((category) => SeatsioCategory.fromJson(category)).toList();
       widget._config.onFilteredCategoriesChanged!(categories);
+    }
+  }
+
+  void _onBestAvailableHeld(JavaScriptMessage message) {
+    if (widget._config.onBestAvailableHeld != null) {
+      final Map<String, dynamic> data = jsonDecode(message.message);
+      final objects = List<String>.from(data['objects']);
+      final nextToEachOther = data['nextToEachOther'] as bool?;
+      widget._config.onBestAvailableHeld!(objects, nextToEachOther);
+    }
+  }
+
+  void _onBestAvailableHoldFailed(JavaScriptMessage message) {
+    if (widget._config.onBestAvailableHoldFailed != null) {
+      final Map<String, dynamic> data = jsonDecode(message.message);
+      widget._config.onBestAvailableHoldFailed!(data['message'] as String);
     }
   }
 

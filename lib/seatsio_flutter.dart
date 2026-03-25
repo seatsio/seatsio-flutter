@@ -23,3 +23,5 @@ export 'src/models/seatsio_object.dart';
 export 'src/models/seating_chart_config_change.dart';
 export 'src/models/floor.dart';
 export 'src/models/wheelchair_space_type.dart';
+export 'src/models/best_available_for_holding.dart';
+export 'src/models/best_available_held_result.dart';

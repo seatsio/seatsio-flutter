@@ -507,6 +507,48 @@ class SeatsioSeatingChartState extends State<SeatsioSeatingChart> {
     return completer.future;
   }
 
+  Future<BestAvailableHeldResult> holdBestAvailable(BestAvailableForHolding config) async {
+    final String promiseId = DateTime.now().millisecondsSinceEpoch.toString();
+    final Completer<BestAvailableHeldResult> completer = Completer();
+
+    _pendingPromises[promiseId] = completer;
+
+    await _controller.evaluateJavascript('''
+      chart.holdBestAvailable(${jsonEncode(config.toJson())})
+        .then(result => window.holdBestAvailableJsChannel.postMessage(JSON.stringify({
+          "id": "$promiseId",
+          "status": "resolved",
+          "result": result
+        })))
+        .catch(error => window.holdBestAvailableJsChannel.postMessage(JSON.stringify({
+          "id": "$promiseId",
+          "status": "error",
+          "message": error.message || error.toString()
+        })));
+    ''');
+
+    return completer.future;
+  }
+
+  void _handleHoldBestAvailableCompleted(JavaScriptMessage message) {
+    final Map<String, dynamic> data = jsonDecode(message.message);
+    final String promiseId = data["id"];
+    final String status = data["status"];
+
+    final completer = _pendingPromises.remove(promiseId)
+        as Completer<BestAvailableHeldResult>?;
+    if (completer != null) {
+      if (status == "resolved") {
+        final result = BestAvailableHeldResult.fromJson(
+            data["result"] as Map<String, dynamic>);
+        completer.complete(result);
+      } else {
+        completer.completeError(
+            "Error holding best available: ${data["message"]}");
+      }
+    }
+  }
+
   void _handleVoidPromiseCompleted(JavaScriptMessage message) {
     final Map<String, dynamic> promiseResult = jsonDecode(message.message);
     final completer = _pendingPromises.remove(promiseResult["id"]);
@@ -611,7 +653,8 @@ class SeatsioSeatingChartState extends State<SeatsioSeatingChart> {
       onListSelectedObjectsCompleted: _handleListSelectedObjectsCompleted,
       onFindObjectCompleted: _handleFindObjectCompleted,
       onListCategoriesCompleted: _handleListCategoriesCompleted,
-      onGetReportBySelectabilityCompleted: _handleGetReportBySelectabilityCompleted
+      onGetReportBySelectabilityCompleted: _handleGetReportBySelectabilityCompleted,
+      onHoldBestAvailableCompleted: _handleHoldBestAvailableCompleted
     );
   }
 }

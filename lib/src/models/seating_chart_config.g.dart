@@ -651,6 +651,11 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   final Function(List<SeatsioCategory>)? onFilteredCategoriesChanged;
   @override
   final Function(Floor? floor)? onFloorChanged;
+  @override
+  final Function(List<String> objects, bool? nextToEachOther)?
+      onBestAvailableHeld;
+  @override
+  final Function(String message)? onBestAvailableHoldFailed;
 
   factory _$SeatingChartConfig(
           [void Function(SeatingChartConfigBuilder)? updates]) =>
@@ -722,7 +727,9 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       this.onSelectionValid,
       this.onSelectionInvalid,
       this.onFilteredCategoriesChanged,
-      this.onFloorChanged})
+      this.onFloorChanged,
+      this.onBestAvailableHeld,
+      this.onBestAvailableHoldFailed})
       : super._();
   @override
   SeatingChartConfig rebuild(
@@ -736,7 +743,6 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    final dynamic _$dynamicOther = other;
     return other is SeatingChartConfig &&
         workspaceKey == other.workspaceKey &&
         region == other.region &&
@@ -754,7 +760,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         objectsWithoutPricingSelectable ==
             other.objectsWithoutPricingSelectable &&
         objectPopover == other.objectPopover &&
-        popoverInfo == _$dynamicOther.popoverInfo &&
+        popoverInfo == other.popoverInfo &&
         showActiveSectionTooltipOnMobile ==
             other.showActiveSectionTooltipOnMobile &&
         language == other.language &&
@@ -786,27 +792,28 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         lockActiveFloor == other.lockActiveFloor &&
         showFloorElevator == other.showFloorElevator &&
         ticketBuyerId == other.ticketBuyerId &&
-        onChartRendered == _$dynamicOther.onChartRendered &&
-        onChartRenderingFailed == _$dynamicOther.onChartRenderingFailed &&
-        onChartRerenderingStarted == _$dynamicOther.onChartRerenderingStarted &&
-        onObjectClicked == _$dynamicOther.onObjectClicked &&
-        onObjectSelected == _$dynamicOther.onObjectSelected &&
-        onObjectDeselected == _$dynamicOther.onObjectDeselected &&
-        onObjectStatusChanged == _$dynamicOther.onObjectStatusChanged &&
-        onObjectBooked == _$dynamicOther.onObjectBooked &&
-        onSessionInitialized == _$dynamicOther.onSessionInitialized &&
-        onHoldCallsInProgress == _$dynamicOther.onHoldCallsInProgress &&
-        onHoldCallsComplete == _$dynamicOther.onHoldCallsComplete &&
-        onHoldSucceeded == _$dynamicOther.onHoldSucceeded &&
-        onHoldFailed == _$dynamicOther.onHoldFailed &&
-        onHoldTokenExpired == _$dynamicOther.onHoldTokenExpired &&
-        onReleaseHoldSucceeded == _$dynamicOther.onReleaseHoldSucceeded &&
-        onReleaseHoldFailed == _$dynamicOther.onReleaseHoldFailed &&
-        onSelectionValid == _$dynamicOther.onSelectionValid &&
-        onSelectionInvalid == _$dynamicOther.onSelectionInvalid &&
-        onFilteredCategoriesChanged ==
-            _$dynamicOther.onFilteredCategoriesChanged &&
-        onFloorChanged == _$dynamicOther.onFloorChanged;
+        onChartRendered == other.onChartRendered &&
+        onChartRenderingFailed == other.onChartRenderingFailed &&
+        onChartRerenderingStarted == other.onChartRerenderingStarted &&
+        onObjectClicked == other.onObjectClicked &&
+        onObjectSelected == other.onObjectSelected &&
+        onObjectDeselected == other.onObjectDeselected &&
+        onObjectStatusChanged == other.onObjectStatusChanged &&
+        onObjectBooked == other.onObjectBooked &&
+        onSessionInitialized == other.onSessionInitialized &&
+        onHoldCallsInProgress == other.onHoldCallsInProgress &&
+        onHoldCallsComplete == other.onHoldCallsComplete &&
+        onHoldSucceeded == other.onHoldSucceeded &&
+        onHoldFailed == other.onHoldFailed &&
+        onHoldTokenExpired == other.onHoldTokenExpired &&
+        onReleaseHoldSucceeded == other.onReleaseHoldSucceeded &&
+        onReleaseHoldFailed == other.onReleaseHoldFailed &&
+        onSelectionValid == other.onSelectionValid &&
+        onSelectionInvalid == other.onSelectionInvalid &&
+        onFilteredCategoriesChanged == other.onFilteredCategoriesChanged &&
+        onFloorChanged == other.onFloorChanged &&
+        onBestAvailableHeld == other.onBestAvailableHeld &&
+        onBestAvailableHoldFailed == other.onBestAvailableHoldFailed;
   }
 
   @override
@@ -878,6 +885,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     _$hash = $jc(_$hash, onSelectionInvalid.hashCode);
     _$hash = $jc(_$hash, onFilteredCategoriesChanged.hashCode);
     _$hash = $jc(_$hash, onFloorChanged.hashCode);
+    _$hash = $jc(_$hash, onBestAvailableHeld.hashCode);
+    _$hash = $jc(_$hash, onBestAvailableHoldFailed.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -952,7 +961,9 @@ class _$SeatingChartConfig extends SeatingChartConfig {
           ..add('onSelectionValid', onSelectionValid)
           ..add('onSelectionInvalid', onSelectionInvalid)
           ..add('onFilteredCategoriesChanged', onFilteredCategoriesChanged)
-          ..add('onFloorChanged', onFloorChanged))
+          ..add('onFloorChanged', onFloorChanged)
+          ..add('onBestAvailableHeld', onBestAvailableHeld)
+          ..add('onBestAvailableHoldFailed', onBestAvailableHoldFailed))
         .toString();
   }
 }
@@ -1316,6 +1327,21 @@ class SeatingChartConfigBuilder
   set onFloorChanged(Function(Floor? floor)? onFloorChanged) =>
       _$this._onFloorChanged = onFloorChanged;
 
+  Function(List<String> objects, bool? nextToEachOther)? _onBestAvailableHeld;
+  Function(List<String> objects, bool? nextToEachOther)?
+      get onBestAvailableHeld => _$this._onBestAvailableHeld;
+  set onBestAvailableHeld(
+          Function(List<String> objects, bool? nextToEachOther)?
+              onBestAvailableHeld) =>
+      _$this._onBestAvailableHeld = onBestAvailableHeld;
+
+  Function(String message)? _onBestAvailableHoldFailed;
+  Function(String message)? get onBestAvailableHoldFailed =>
+      _$this._onBestAvailableHoldFailed;
+  set onBestAvailableHoldFailed(
+          Function(String message)? onBestAvailableHoldFailed) =>
+      _$this._onBestAvailableHoldFailed = onBestAvailableHoldFailed;
+
   SeatingChartConfigBuilder() {
     SeatingChartConfig._initializeBuilder(this);
   }
@@ -1389,6 +1415,8 @@ class SeatingChartConfigBuilder
       _onSelectionInvalid = $v.onSelectionInvalid;
       _onFilteredCategoriesChanged = $v.onFilteredCategoriesChanged;
       _onFloorChanged = $v.onFloorChanged;
+      _onBestAvailableHeld = $v.onBestAvailableHeld;
+      _onBestAvailableHoldFailed = $v.onBestAvailableHoldFailed;
       _$v = null;
     }
     return this;
@@ -1481,6 +1509,8 @@ class SeatingChartConfigBuilder
             onSelectionInvalid: onSelectionInvalid,
             onFilteredCategoriesChanged: onFilteredCategoriesChanged,
             onFloorChanged: onFloorChanged,
+            onBestAvailableHeld: onBestAvailableHeld,
+            onBestAvailableHoldFailed: onBestAvailableHoldFailed,
           );
     } catch (_) {
       late String _$failedField;
