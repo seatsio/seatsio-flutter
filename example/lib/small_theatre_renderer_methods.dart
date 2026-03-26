@@ -96,7 +96,14 @@ class _SmallTheatreRendererMethodsState extends State<SmallTheatreRendererMethod
       'setSpotlightOnSelection': () => _chart.currentState?.setSpotlightOnSelection(),
       'clearSpotlightObjects': () => _chart.currentState?.clearSpotlightObjects(),
       'goToFloor': () => _chart.currentState?.goToFloor('2'),
-      'goToAllFloorsView': () => _chart.currentState?.goToAllFloorsView()
+      'goToAllFloorsView': () => _chart.currentState?.goToAllFloorsView(),
+      'holdBestAvailable': () => _chart.currentState?.holdBestAvailable(
+        BestAvailableForHolding(number: 2),
+      ).then((result) {
+        print("Hold best available succeeded: ${result.objects}, nextToEachOther=${result.nextToEachOther}");
+      }).catchError((e) {
+        print("Hold best available failed: $e");
+      }),
     });
   }
 
@@ -144,8 +151,15 @@ class _SmallTheatreRendererMethodsState extends State<SmallTheatreRendererMethod
               config: SeatingChartConfig((b) => b
                 ..workspaceKey = "publicDemoKey"
                 ..event = "smallTheatreWithGAEvent"
+                ..session = Session.start
                 ..channels = ["b1a016ae-ab44-cd0b-c6f8-f94c96981db1"]
-                ..pricing.replace(simplePricing)),
+                ..pricing.replace(simplePricing)
+                ..onBestAvailableHeld = (objects, nextToEachOther) {
+                    print("Best available held: $objects, nextToEachOther=$nextToEachOther");
+                  }
+                ..onBestAvailableHoldFailed = (message) {
+                    print("Best available hold failed: $message");
+                  }),
             ),
           ),
         ],
