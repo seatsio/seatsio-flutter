@@ -19,6 +19,7 @@ class SeatsioWebView extends StatefulWidget {
   final void Function(JavaScriptMessage) onFindObjectCompleted;
   final void Function(JavaScriptMessage) onListCategoriesCompleted;
   final void Function(JavaScriptMessage) onGetReportBySelectabilityCompleted;
+  final void Function(JavaScriptMessage) onHoldBestAvailableCompleted;
 
   const SeatsioWebView({
     super.key,
@@ -29,7 +30,8 @@ class SeatsioWebView extends StatefulWidget {
     required this.onListSelectedObjectsCompleted,
     required this.onFindObjectCompleted,
     required this.onListCategoriesCompleted,
-    required this.onGetReportBySelectabilityCompleted
+    required this.onGetReportBySelectabilityCompleted,
+    required this.onHoldBestAvailableCompleted
   })  : this._onWebViewCreated = onWebViewCreated,
         this._config = config,
         this._gestureRecognizers = gestureRecognizers;
@@ -129,6 +131,7 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
       ..addJavaScriptChannel("zoomToSectionJsChannel", onMessageReceived: widget.onVoidPromiseCompleted)
       ..addJavaScriptChannel("goToAllFloorsViewJsChannel", onMessageReceived: widget.onVoidPromiseCompleted)
       ..addJavaScriptChannel("goToFloorJsChannel", onMessageReceived: widget.onVoidPromiseCompleted)
+      ..addJavaScriptChannel("holdBestAvailableJsChannel", onMessageReceived: widget.onHoldBestAvailableCompleted)
       ..setBackgroundColor(Color.from(alpha: 0, red: 255, green: 255, blue: 255));
 
     _seatsioController = SeatsioWebViewController(webViewController: _webViewController);

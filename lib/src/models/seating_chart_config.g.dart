@@ -736,7 +736,6 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    final dynamic _$dynamicOther = other;
     return other is SeatingChartConfig &&
         workspaceKey == other.workspaceKey &&
         region == other.region &&
@@ -754,7 +753,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         objectsWithoutPricingSelectable ==
             other.objectsWithoutPricingSelectable &&
         objectPopover == other.objectPopover &&
-        popoverInfo == _$dynamicOther.popoverInfo &&
+        popoverInfo == other.popoverInfo &&
         showActiveSectionTooltipOnMobile ==
             other.showActiveSectionTooltipOnMobile &&
         language == other.language &&
@@ -786,27 +785,26 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         lockActiveFloor == other.lockActiveFloor &&
         showFloorElevator == other.showFloorElevator &&
         ticketBuyerId == other.ticketBuyerId &&
-        onChartRendered == _$dynamicOther.onChartRendered &&
-        onChartRenderingFailed == _$dynamicOther.onChartRenderingFailed &&
-        onChartRerenderingStarted == _$dynamicOther.onChartRerenderingStarted &&
-        onObjectClicked == _$dynamicOther.onObjectClicked &&
-        onObjectSelected == _$dynamicOther.onObjectSelected &&
-        onObjectDeselected == _$dynamicOther.onObjectDeselected &&
-        onObjectStatusChanged == _$dynamicOther.onObjectStatusChanged &&
-        onObjectBooked == _$dynamicOther.onObjectBooked &&
-        onSessionInitialized == _$dynamicOther.onSessionInitialized &&
-        onHoldCallsInProgress == _$dynamicOther.onHoldCallsInProgress &&
-        onHoldCallsComplete == _$dynamicOther.onHoldCallsComplete &&
-        onHoldSucceeded == _$dynamicOther.onHoldSucceeded &&
-        onHoldFailed == _$dynamicOther.onHoldFailed &&
-        onHoldTokenExpired == _$dynamicOther.onHoldTokenExpired &&
-        onReleaseHoldSucceeded == _$dynamicOther.onReleaseHoldSucceeded &&
-        onReleaseHoldFailed == _$dynamicOther.onReleaseHoldFailed &&
-        onSelectionValid == _$dynamicOther.onSelectionValid &&
-        onSelectionInvalid == _$dynamicOther.onSelectionInvalid &&
-        onFilteredCategoriesChanged ==
-            _$dynamicOther.onFilteredCategoriesChanged &&
-        onFloorChanged == _$dynamicOther.onFloorChanged;
+        onChartRendered == other.onChartRendered &&
+        onChartRenderingFailed == other.onChartRenderingFailed &&
+        onChartRerenderingStarted == other.onChartRerenderingStarted &&
+        onObjectClicked == other.onObjectClicked &&
+        onObjectSelected == other.onObjectSelected &&
+        onObjectDeselected == other.onObjectDeselected &&
+        onObjectStatusChanged == other.onObjectStatusChanged &&
+        onObjectBooked == other.onObjectBooked &&
+        onSessionInitialized == other.onSessionInitialized &&
+        onHoldCallsInProgress == other.onHoldCallsInProgress &&
+        onHoldCallsComplete == other.onHoldCallsComplete &&
+        onHoldSucceeded == other.onHoldSucceeded &&
+        onHoldFailed == other.onHoldFailed &&
+        onHoldTokenExpired == other.onHoldTokenExpired &&
+        onReleaseHoldSucceeded == other.onReleaseHoldSucceeded &&
+        onReleaseHoldFailed == other.onReleaseHoldFailed &&
+        onSelectionValid == other.onSelectionValid &&
+        onSelectionInvalid == other.onSelectionInvalid &&
+        onFilteredCategoriesChanged == other.onFilteredCategoriesChanged &&
+        onFloorChanged == other.onFloorChanged;
   }
 
   @override
