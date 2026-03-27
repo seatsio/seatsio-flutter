@@ -182,12 +182,6 @@ abstract class SeatingChartConfig implements Built<SeatingChartConfig, SeatingCh
   @BuiltValueField(serialize: false)
   Function(Floor? floor)? get onFloorChanged;
 
-  @BuiltValueField(serialize: false)
-  Function(List<String> objects, bool? nextToEachOther)? get onBestAvailableHeld;
-
-  @BuiltValueField(serialize: false)
-  Function(String message)? get onBestAvailableHoldFailed;
-
   SeatingChartConfig._();
 
   factory SeatingChartConfig([void Function(SeatingChartConfigBuilder)? updates]) {

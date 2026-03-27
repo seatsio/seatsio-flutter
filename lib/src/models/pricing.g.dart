@@ -105,12 +105,11 @@ class _$Pricing extends Pricing {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    final dynamic _$dynamicOther = other;
     return other is Pricing &&
         prices == other.prices &&
         allFeesIncluded == other.allFeesIncluded &&
         showSectionPricingOverlay == other.showSectionPricingOverlay &&
-        priceFormatter == _$dynamicOther.priceFormatter;
+        priceFormatter == other.priceFormatter;
   }
 
   @override

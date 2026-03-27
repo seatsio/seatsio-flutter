@@ -108,8 +108,6 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
       ..addJavaScriptChannel('onSelectionInvalidJsChannel', onMessageReceived: onSelectionInvalid)
       ..addJavaScriptChannel('onFilteredCategoriesChangedJsChannel', onMessageReceived: onFilteredCategoriesChanged)
       ..addJavaScriptChannel('onFloorChangedJsChannel', onMessageReceived: onFloorChanged)
-      ..addJavaScriptChannel('onBestAvailableHeldJsChannel', onMessageReceived: _onBestAvailableHeld)
-      ..addJavaScriptChannel('onBestAvailableHoldFailedJsChannel', onMessageReceived: _onBestAvailableHoldFailed)
       // renderer methods
       ..addJavaScriptChannel("resetViewJsChannel", onMessageReceived: widget.onVoidPromiseCompleted)
       ..addJavaScriptChannel("startNewSessionJsChannel", onMessageReceived: widget.onVoidPromiseCompleted)
@@ -290,22 +288,6 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
       final List<SeatsioCategory> categories =
           (data["categories"] as List<dynamic>).map((category) => SeatsioCategory.fromJson(category)).toList();
       widget._config.onFilteredCategoriesChanged!(categories);
-    }
-  }
-
-  void _onBestAvailableHeld(JavaScriptMessage message) {
-    if (widget._config.onBestAvailableHeld != null) {
-      final Map<String, dynamic> data = jsonDecode(message.message);
-      final objects = List<String>.from(data['objects']);
-      final nextToEachOther = data['nextToEachOther'] as bool?;
-      widget._config.onBestAvailableHeld!(objects, nextToEachOther);
-    }
-  }
-
-  void _onBestAvailableHoldFailed(JavaScriptMessage message) {
-    if (widget._config.onBestAvailableHoldFailed != null) {
-      final Map<String, dynamic> data = jsonDecode(message.message);
-      widget._config.onBestAvailableHoldFailed!(data['message'] as String);
     }
   }
 

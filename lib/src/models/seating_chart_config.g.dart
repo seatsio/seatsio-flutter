@@ -651,11 +651,6 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   final Function(List<SeatsioCategory>)? onFilteredCategoriesChanged;
   @override
   final Function(Floor? floor)? onFloorChanged;
-  @override
-  final Function(List<String> objects, bool? nextToEachOther)?
-      onBestAvailableHeld;
-  @override
-  final Function(String message)? onBestAvailableHoldFailed;
 
   factory _$SeatingChartConfig(
           [void Function(SeatingChartConfigBuilder)? updates]) =>
@@ -727,9 +722,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       this.onSelectionValid,
       this.onSelectionInvalid,
       this.onFilteredCategoriesChanged,
-      this.onFloorChanged,
-      this.onBestAvailableHeld,
-      this.onBestAvailableHoldFailed})
+      this.onFloorChanged})
       : super._();
   @override
   SeatingChartConfig rebuild(
@@ -811,9 +804,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         onSelectionValid == other.onSelectionValid &&
         onSelectionInvalid == other.onSelectionInvalid &&
         onFilteredCategoriesChanged == other.onFilteredCategoriesChanged &&
-        onFloorChanged == other.onFloorChanged &&
-        onBestAvailableHeld == other.onBestAvailableHeld &&
-        onBestAvailableHoldFailed == other.onBestAvailableHoldFailed;
+        onFloorChanged == other.onFloorChanged;
   }
 
   @override
@@ -885,8 +876,6 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     _$hash = $jc(_$hash, onSelectionInvalid.hashCode);
     _$hash = $jc(_$hash, onFilteredCategoriesChanged.hashCode);
     _$hash = $jc(_$hash, onFloorChanged.hashCode);
-    _$hash = $jc(_$hash, onBestAvailableHeld.hashCode);
-    _$hash = $jc(_$hash, onBestAvailableHoldFailed.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -961,9 +950,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
           ..add('onSelectionValid', onSelectionValid)
           ..add('onSelectionInvalid', onSelectionInvalid)
           ..add('onFilteredCategoriesChanged', onFilteredCategoriesChanged)
-          ..add('onFloorChanged', onFloorChanged)
-          ..add('onBestAvailableHeld', onBestAvailableHeld)
-          ..add('onBestAvailableHoldFailed', onBestAvailableHoldFailed))
+          ..add('onFloorChanged', onFloorChanged))
         .toString();
   }
 }
@@ -1327,21 +1314,6 @@ class SeatingChartConfigBuilder
   set onFloorChanged(Function(Floor? floor)? onFloorChanged) =>
       _$this._onFloorChanged = onFloorChanged;
 
-  Function(List<String> objects, bool? nextToEachOther)? _onBestAvailableHeld;
-  Function(List<String> objects, bool? nextToEachOther)?
-      get onBestAvailableHeld => _$this._onBestAvailableHeld;
-  set onBestAvailableHeld(
-          Function(List<String> objects, bool? nextToEachOther)?
-              onBestAvailableHeld) =>
-      _$this._onBestAvailableHeld = onBestAvailableHeld;
-
-  Function(String message)? _onBestAvailableHoldFailed;
-  Function(String message)? get onBestAvailableHoldFailed =>
-      _$this._onBestAvailableHoldFailed;
-  set onBestAvailableHoldFailed(
-          Function(String message)? onBestAvailableHoldFailed) =>
-      _$this._onBestAvailableHoldFailed = onBestAvailableHoldFailed;
-
   SeatingChartConfigBuilder() {
     SeatingChartConfig._initializeBuilder(this);
   }
@@ -1415,8 +1387,6 @@ class SeatingChartConfigBuilder
       _onSelectionInvalid = $v.onSelectionInvalid;
       _onFilteredCategoriesChanged = $v.onFilteredCategoriesChanged;
       _onFloorChanged = $v.onFloorChanged;
-      _onBestAvailableHeld = $v.onBestAvailableHeld;
-      _onBestAvailableHoldFailed = $v.onBestAvailableHoldFailed;
       _$v = null;
     }
     return this;
@@ -1509,8 +1479,6 @@ class SeatingChartConfigBuilder
             onSelectionInvalid: onSelectionInvalid,
             onFilteredCategoriesChanged: onFilteredCategoriesChanged,
             onFloorChanged: onFloorChanged,
-            onBestAvailableHeld: onBestAvailableHeld,
-            onBestAvailableHoldFailed: onBestAvailableHoldFailed,
           );
     } catch (_) {
       late String _$failedField;

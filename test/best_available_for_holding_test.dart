@@ -52,20 +52,28 @@ void main() {
   group('BestAvailableHeldResult', () {
     test('fromJson with all fields', () {
       final result = BestAvailableHeldResult.fromJson({
-        'objects': ['A-1', 'A-2', 'A-3'],
+        'objects': [
+          {'objectType': 'seat', 'label': 'A-1', 'labels': {'own': '1', 'parent': 'A'}},
+          {'objectType': 'seat', 'label': 'A-2', 'labels': {'own': '2', 'parent': 'A'}},
+        ],
         'nextToEachOther': true,
       });
 
-      expect(result.objects, ['A-1', 'A-2', 'A-3']);
+      expect(result.objects.length, 2);
+      expect(result.objects[0].label, 'A-1');
+      expect(result.objects[1].label, 'A-2');
       expect(result.nextToEachOther, true);
     });
 
     test('fromJson without nextToEachOther', () {
       final result = BestAvailableHeldResult.fromJson({
-        'objects': ['A-1'],
+        'objects': [
+          {'objectType': 'seat', 'label': 'A-1', 'labels': {'own': '1', 'parent': 'A'}},
+        ],
       });
 
-      expect(result.objects, ['A-1']);
+      expect(result.objects.length, 1);
+      expect(result.objects[0].label, 'A-1');
       expect(result.nextToEachOther, isNull);
     });
   });

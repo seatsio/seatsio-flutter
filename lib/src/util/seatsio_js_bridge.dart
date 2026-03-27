@@ -222,22 +222,6 @@ class SeatsioJsBridge {
       """);
     }
 
-    if (chartConfig.onBestAvailableHeld != null) {
-      callbacks.add("""
-        "onBestAvailableHeld": (result) => {
-          window.onBestAvailableHeldJsChannel.postMessage(JSON.stringify(result));
-        }
-      """);
-    }
-
-    if (chartConfig.onBestAvailableHoldFailed != null) {
-      callbacks.add("""
-        "onBestAvailableHoldFailed": (error) => {
-          window.onBestAvailableHoldFailedJsChannel.postMessage(JSON.stringify(error));
-        }
-      """);
-    }
-
     return callbacks;
   }
 }
