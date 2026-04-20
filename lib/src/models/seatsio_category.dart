@@ -45,9 +45,10 @@ class PricingInfo {
   PricingInfo({this.price, this.formattedPrice});
 
   factory PricingInfo.fromJson(Map<String, dynamic> json) {
+    final dynamic rawFormatted = json['formattedPrice'];
     return PricingInfo(
       price: (json['price'] as num?)?.toDouble(),
-      formattedPrice: json['formattedPrice'] as String?,
+      formattedPrice: rawFormatted == null ? null : rawFormatted.toString(),
     );
   }
 
