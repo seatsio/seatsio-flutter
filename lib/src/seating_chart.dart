@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:seatsio_flutter/seatsio_flutter.dart';
 import 'package:seatsio_flutter/src/ui/seatsio_web_view_controller.dart';
@@ -9,10 +11,12 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 class SeatsioSeatingChart extends StatefulWidget {
   final SeatingChartConfig config;
+  final Set<Factory<OneSequenceGestureRecognizer>> gestureRecognizers;
 
   const SeatsioSeatingChart({
     Key? key,
     required this.config,
+    this.gestureRecognizers = const <Factory<OneSequenceGestureRecognizer>>{},
   }) : super(key: key);
 
   @override
@@ -649,6 +653,7 @@ class SeatsioSeatingChartState extends State<SeatsioSeatingChart> {
         _controller.reload(widget.config);
       },
       config: widget.config,
+      gestureRecognizers: widget.gestureRecognizers,
       onVoidPromiseCompleted: _handleVoidPromiseCompleted,
       onListSelectedObjectsCompleted: _handleListSelectedObjectsCompleted,
       onFindObjectCompleted: _handleFindObjectCompleted,
